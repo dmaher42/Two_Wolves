@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Portfolios - Two Wolves</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --success-color: #2ecc71;
+            --warning-color: #f39c12;
+            --danger-color: #e74c3c;
+            --info-color: #3498db;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: var(--dark-color);
+            background-color: #f8f9fa;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            font-size: 2rem;
+            margin-right: 10px;
+            color: var(--secondary-color);
+        }
+        
+        .logo h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1.8rem;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 5px 0;
+            border-bottom: 2px solid transparent;
+        }
+        
+        nav ul li a:hover, nav ul li a.active {
+            color: var(--secondary-color);
+            border-bottom: 2px solid var(--secondary-color);
+        }
+        
+        /* Section Styles */
+        section {
+            padding: 60px 0;
+        }
+        
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--primary-color);
+        }
+        
+        /* Portfolio Section */
+        .portfolio {
+            background-color: white;
+        }
+        
+        .portfolio-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .portfolio-content p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+        }
+        
+        .student-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+        
+        .student-card {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+            text-align: center;
+        }
+        
+        .student-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .student-card h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+        
+        .student-card p {
+            margin-bottom: 15px;
+            color: #666;
+        }
+        
+        .access-form {
+            margin-top: 15px;
+        }
+        
+        .code-input {
+            width: 100%;
+            padding: 10px;
+            font-size: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            text-align: center;
+            letter-spacing: 2px;
+        }
+        
+        .code-input:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: var(--secondary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 500;
+            transition: background-color 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        
+        .btn:hover {
+            background-color: #2980b9;
+        }
+        
+        .btn-teacher {
+            background-color: var(--warning-color);
+            margin-top: 30px;
+        }
+        
+        .btn-teacher:hover {
+            background-color: #e67e22;
+        }
+        
+        .error-message {
+            color: var(--danger-color);
+            font-size: 0.9rem;
+            margin-top: 10px;
+            display: none;
+        }
+        
+        .success-message {
+            color: var(--success-color);
+            font-size: 0.9rem;
+            margin-top: 10px;
+            display: none;
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+        
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+        }
+        
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .close:hover {
+            color: black;
+        }
+        
+        .codes-list {
+            text-align: left;
+            max-height: 400px;
+            overflow-y: auto;
+            margin: 20px 0;
+        }
+        
+        .code-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .code-item:last-child {
+            border-bottom: none;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 40px 0 20px;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        
+        .footer-section {
+            flex-basis: 30%;
+            margin-bottom: 30px;
+        }
+        
+        .footer-section h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-section h3:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--secondary-color);
+        }
+        
+        .footer-section p, .footer-section ul {
+            margin-bottom: 15px;
+        }
+        
+        .footer-section ul {
+            list-style-type: none;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 8px;
+        }
+        
+        .footer-section ul li a {
+            color: #bbb;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-section ul li a:hover {
+            color: white;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            margin-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #bbb;
+        }
+        
+        /* Responsive Styles */
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+            }
+            
+            .logo {
+                margin-bottom: 15px;
+            }
+            
+            nav {
+                width: 100%;
+            }
+            
+            nav ul {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            nav ul li {
+                margin: 5px 10px;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+            }
+            
+            .footer-section {
+                flex-basis: 100%;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .mobile-menu {
+                display: block;
+            }
+            
+            nav {
+                display: none;
+            }
+            
+            nav.active {
+                display: block;
+                width: 100%;
+                margin-top: 15px;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav ul li {
+                margin: 10px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-book-open"></i>
+                    <h1>Two Wolves</h1>
+                </div>
+                <div class="mobile-menu">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#overview">Unit Overview</a></li>
+                        <li><a href="index.html#lessons">Weekly Lessons</a></li>
+                        <li><a href="index.html#resources">Resources</a></li>
+                        <li><a href="secure-portfolios.html" class="active">Student Portfolios</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="portfolio">
+        <div class="container">
+            <h2 class="section-title">Student Portfolios</h2>
+            <div class="portfolio-content">
+                <p>Welcome to your personal portfolio page! Find your name below and enter your access code to open your portfolio. Your access code was provided by your teacher.</p>
+                
+                <div class="student-grid" id="studentGrid">
+                    <!-- Student cards will be populated here -->
+                </div>
+                
+                <button id="teacherAccess" class="btn btn-teacher">Teacher Access</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Teacher Access Modal -->
+    <div id="teacherModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Teacher Access - Student Codes</h2>
+            <p>Here are all the student access codes:</p>
+            <div class="codes-list" id="codesList">
+                <!-- Codes will be populated here -->
+            </div>
+            <button class="btn" onclick="downloadCodes()">Download Codes</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>About</h3>
+                    <p>This website supports the Year 7 English unit on Tristan Bancks' novel Two Wolves. All student work is automatically saved to their individual Google Drive portfolios.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#overview">Unit Overview</a></li>
+                        <li><a href="index.html#lessons">Weekly Lessons</a></li>
+                        <li><a href="index.html#resources">Resources</a></li>
+                        <li><a href="secure-portfolios.html">Student Portfolios</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p>For questions about this unit or website, please contact your English teacher.</p>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> english@school.edu</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 Year 7 English - Two Wolves Unit. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Student data with generated access codes
+        const students = [
+            { firstName: "Kate", lastName: "", class: "English", folderUrl: "https://drive.google.com/drive/folders/1e1JokmqFyJ93yqMaXmt8dqnEFI5DMxMM", accessCode: "7429" },
+            { firstName: "Bella", lastName: "", class: "English", folderUrl: "https://drive.google.com/drive/folders/11lMhkq6Ctx_eEI1kzHI0-mcAKdMvw_au", accessCode: "3816" },
+            { firstName: "Madi", lastName: "", class: "English", folderUrl: "https://drive.google.com/drive/folders/1MEPAqyusbRJzHxZ881iCXoTHChq6h8NK", accessCode: "5924" },
+            { firstName: "Dylan", lastName: "", class: "English", folderUrl: "https://drive.google.com/drive/folders/1NU44ZAEXmntzpFUh0pF7f65qHmqjeG5F", accessCode: "8157" },
+            { firstName: "Avah", lastName: "", class: "English", folderUrl: "https://drive.google.com/drive/folders/1bhs2bPDrTl5-R8ZGLy3TA0xLwY-rl858", accessCode: "2638" },
+            { firstName: "Chloe", lastName: "", class: "English", folderUrl: "https://drive.google.com/drive/folders/1gSLv9oBmKPjfTiRT6UjMdv0gmymcr_95", accessCode: "9472" },
+            { firstName: "Kyas", lastName: "", class: "English", folderUrl: "https://drive.google.com/drive/folders/1JWja9W-_JMcvtAEqdKt1LEDlXp4yHLn_", accessCode: "6183" },
+            { firstName: "Damen", lastName: "", class: "English", folderUrl: "https://drive.google.com/drive/folders/1pfu7epIsg-Ffq2jsxplEsB6aMe4wJ-w9", accessCode: "7391" },
+            { firstName: "Jai", lastName: "", class: "English", folderUrl: "https://drive.google.com/drive/folders/1kXq6v2ZvLwm6CtD9Y4S8YYhCh6I4IG2u", accessCode: "4526" },
+            { firstName: "Xyfranz", lastName: "", class: "English", folderUrl: "https://drive.google.com/drive/folders/1rtYM2afk-9Gr8WCMm_V0cgnimYPDnCtS", accessCode: "8294" },
+            { firstName: "Zali", lastName: "", class: "English", folderUrl: "https://drive.google.com/drive/folders/15fDMkWd9QFQT0SUZ2BMph2VYAj35-XgX", accessCode: "3751" },
+            { firstName: "Caitlin", lastName: "", class: "English", folderUrl: "https://drive.google.com/drive/folders/1lDauwoXYtEw8GzLF1_vIeK73MdTGq8we", accessCode: "6482" },
+            { firstName: "Ethan", lastName: "", class: "English", folderUrl: "https://drive.google.com/drive/folders/1Yz73fAQNXBnYbpS-kj5Ea6Db5NNxeZxP", accessCode: "1957" },
+            { firstName: "Hanna", lastName: "", class: "English", folderUrl: "https://drive.google.com/drive/folders/1gm2XXBoxBi2s7qEJO4DuheGCKi3zUV-B", accessCode: "5239" },
+            { firstName: "Cohen", lastName: "", class: "English", folderUrl: "https://drive.google.com/drive/folders/1xRd3f8ya1Ger1YwiGgh8tnkkoj1kwx4Z", accessCode: "7864" },
+            { firstName: "William", lastName: "", class: "English", folderUrl: "https://drive.google.com/drive/folders/1M_j6MgqZs00UzU4szHvjIjrI7CrxUfwQ", accessCode: "4128" },
+            { firstName: "Blaze", lastName: "", class: "English", folderUrl: "https://drive.google.com/drive/folders/1o4xffpjKHuUczhYloUXEpiHenXBwLzyy", accessCode: "9375" },
+            { firstName: "Poppy", lastName: "", class: "English", folderUrl: "https://drive.google.com/drive/folders/1h_oQSeraePQgOGaADKzX9u-22XYshHKO", accessCode: "2461" },
+            { firstName: "Jesse", lastName: "", class: "English", folderUrl: "https://drive.google.com/drive/folders/1-ATKDHnHo2snqqpdHWZhGXlkSSY6rS49", accessCode: "6839" }
+        ];
+
+        // Populate student grid
+        const studentGrid = document.getElementById('studentGrid');
+        students.forEach((student, index) => {
+            const card = document.createElement('div');
+            card.className = 'student-card';
+            card.innerHTML = `
+                <h3>${student.firstName} ${student.lastName}</h3>
+                <p>Class: ${student.class}</p>
+                <div class="access-form">
+                    <input type="text" class="code-input" id="code-${index}" placeholder="Enter 4-digit code" maxlength="4">
+                    <button class="btn" onclick="checkAccess(${index})">Access Portfolio</button>
+                    <div class="error-message" id="error-${index}">Incorrect code. Please try again.</div>
+                    <div class="success-message" id="success-${index}">Access granted! Opening your portfolio...</div>
+                </div>
+            `;
+            studentGrid.appendChild(card);
+        });
+
+        // Check access code
+        function checkAccess(studentIndex) {
+            const input = document.getElementById(`code-${studentIndex}`);
+            const errorMsg = document.getElementById(`error-${studentIndex}`);
+            const successMsg = document.getElementById(`success-${studentIndex}`);
+            const student = students[studentIndex];
+            
+            if (input.value === student.accessCode) {
+                errorMsg.style.display = 'none';
+                successMsg.style.display = 'block';
+                
+                // Open portfolio after a short delay
+                setTimeout(() => {
+                    window.open(student.folderUrl, '_blank');
+                    successMsg.style.display = 'none';
+                    input.value = '';
+                }, 1500);
+            } else {
+                errorMsg.style.display = 'block';
+                successMsg.style.display = 'none';
+                input.value = '';
+                input.focus();
+            }
+        }
+
+        // Teacher access modal
+        const modal = document.getElementById('teacherModal');
+        const teacherBtn = document.getElementById('teacherAccess');
+        const closeBtn = document.getElementsByClassName('close')[0];
+
+        teacherBtn.onclick = function() {
+            // Simple password protection for teacher access
+            const password = prompt('Enter teacher password:');
+            if (password === 'teacher123') {
+                populateCodesList();
+                modal.style.display = 'block';
+            } else if (password !== null) {
+                alert('Incorrect password');
+            }
+        }
+
+        closeBtn.onclick = function() {
+            modal.style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        // Populate codes list for teacher
+        function populateCodesList() {
+            const codesList = document.getElementById('codesList');
+            codesList.innerHTML = '';
+            
+            students.forEach(student => {
+                const codeItem = document.createElement('div');
+                codeItem.className = 'code-item';
+                codeItem.innerHTML = `
+                    <span><strong>${student.firstName} ${student.lastName}</strong></span>
+                    <span>${student.accessCode}</span>
+                `;
+                codesList.appendChild(codeItem);
+            });
+        }
+
+        // Download codes as text file
+        function downloadCodes() {
+            let text = 'Student Name\tAccess Code\tPortfolio Link\n';
+            students.forEach(student => {
+                text += `${student.firstName} ${student.lastName}\t${student.accessCode}\t${student.folderUrl}\n`;
+            });
+            
+            const blob = new Blob([text], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'student-access-codes.txt';
+            a.click();
+            window.URL.revokeObjectURL(url);
+        }
+
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            document.querySelector('nav').classList.toggle('active');
+        });
+
+        // Allow Enter key to submit code
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && e.target.classList.contains('code-input')) {
+                const studentIndex = e.target.id.split('-')[1];
+                checkAccess(studentIndex);
+            }
+        });
+    </script>
+</body>
+</html>
