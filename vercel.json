@@ -1,6 +1,4 @@
-{
-  "buildCommand": "npm run build"
-}
+
 const path = require('path');
 
 module.exports = {
