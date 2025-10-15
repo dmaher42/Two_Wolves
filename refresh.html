@@ -4,6 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Two Wolves – Chapters 1–5 Review</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
     /* Light theme to match the main site */
     :root{
@@ -18,6 +20,8 @@
       --warn:#9a6700;            /* amber */
       --ok:#1a7f37;              /* green */
       --error:#d1242f;           /* red */
+      --primary-color:#0b3d91;   /* site navy */
+      --secondary-color:#3498db; /* accent blue */
     }
     *{box-sizing:border-box}
     html,body{height:100%}
@@ -26,6 +30,17 @@
       background: var(--bg); color: var(--text); line-height:1.6;
     }
     .container{max-width:980px; margin:0 auto; padding:24px}
+    .site-header{background:var(--primary-color);color:#fff;padding:1rem 0;position:sticky;top:0;z-index:100;box-shadow:0 2px 10px rgba(0,0,0,0.1)}
+    .header-content{display:flex;justify-content:space-between;align-items:center}
+    .logo{display:flex;align-items:center}
+    .logo i{font-size:2rem;margin-right:10px;color:var(--secondary-color)}
+    .logo h1{font-family:'Montserrat',sans-serif;font-weight:700;font-size:1.8rem}
+    nav ul{display:flex;list-style:none;margin:0;padding:0}
+    nav ul li{margin-left:20px}
+    nav ul li:first-child{margin-left:0}
+    nav ul li a{color:#fff;text-decoration:none;font-weight:500;transition:color .3s;padding:5px 0;border-bottom:2px solid transparent}
+    nav ul li a:hover,nav ul li a.active{color:var(--secondary-color);border-bottom:2px solid var(--secondary-color)}
+    .mobile-menu{display:none;font-size:1.6rem;cursor:pointer}
     header h1{margin:0 0 4px 0; font-size:clamp(1.4rem, 2.4vw, 2rem)}
     header p{margin:0; color:var(--muted)}
     .grid{display:grid; grid-template-columns:1fr; gap:16px}
@@ -55,11 +70,47 @@
     .small{font-size:.95rem}
     a{color:var(--link); text-decoration:none}
     a:hover{text-decoration:underline}
+    @media(max-width:992px){
+      .header-content{flex-direction:column;align-items:flex-start}
+      nav ul{flex-wrap:wrap;justify-content:center;width:100%;margin-top:10px}
+      nav ul li{margin:5px 10px}
+    }
+    @media(max-width:576px){
+      .mobile-menu{display:block}
+      nav{display:none}
+      nav.active{display:block;width:100%;margin-top:15px}
+      nav ul{flex-direction:column;align-items:center}
+      nav ul li{margin:10px 0}
+    }
   </style>
 </head>
 <body>
-  <div class="container">
-    <header style="margin-bottom:12px">
+  <header class="site-header">
+    <div class="container">
+      <div class="header-content">
+        <div class="logo">
+          <i class="fas fa-book-open"></i>
+          <h1>Two Wolves</h1>
+        </div>
+        <div class="mobile-menu">
+          <i class="fas fa-bars"></i>
+        </div>
+        <nav>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#overview">Unit Overview</a></li>
+            <li><a href="index.html#lessons">Weekly Lessons</a></li>
+            <li><a href="index.html#resources">Resources</a></li>
+            <li><a href="secure-portfolios.html">Student Portfolios</a></li>
+            <li><a href="refresh.html" class="active">Chapter 1-5 Refresher</a></li>
+            <li><a href="conflict.html">Conflict</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+  <main class="container content">
+    <header class="page-header" style="margin-bottom:12px">
       <div class="pill">Chapter 1–5 Review</div>
       <h1>Let’s get back into <em>Two Wolves</em> 🐺</h1>
       <p class="muted">Short recap • quick questions • a bit of writing • all saved on this device</p>
@@ -369,7 +420,7 @@
     </section>
 
     <p class="muted small">Tip: If a box turns <span style="color:var(--ok); font-weight:700">green</span>, you got it right on an auto‑check. <span style="color:var(--error); font-weight:700">Red</span> means try again.</p>
-  </div>
+  </main>
 
 <script>
   // ======= Simple localStorage autosave/restore =======
@@ -380,6 +431,15 @@
   function clearAll(){ if(confirm('Clear all saved answers on this device?')){ localStorage.removeItem(KEY); fields().forEach(el=>el.value=''); document.querySelectorAll('.q').forEach(q=>q.classList.remove('correct','incorrect')); document.getElementById('cResult').textContent=''; document.getElementById('eResult').textContent=''; const c2R=document.getElementById('c2Result'); if(c2R) c2R.textContent=''; updateProgress(); }}
   function exportJSON(){ const data = {}; fields().forEach(el=>data[el.id]=el.value); const blob = new Blob([JSON.stringify({exported:new Date().toISOString(), data}, null, 2)], {type:'application/json'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='two_wolves_ch1-5_answers.json'; a.click(); }
   document.addEventListener('input', e=>{ if(['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName)) save(); });
+
+  const menuToggle = document.querySelector('.mobile-menu');
+  const siteNav = document.querySelector('.site-header nav');
+  if(menuToggle && siteNav){
+    menuToggle.addEventListener('click', ()=> siteNav.classList.toggle('active'));
+    siteNav.querySelectorAll('a').forEach(link=>{
+      link.addEventListener('click', ()=> siteNav.classList.remove('active'));
+    });
+  }
 
   // Progress bar
   function updateProgress(){ const f = fields(); const filled = f.filter(el=>String(el.value).trim().length>0).length; const pct = Math.round((filled/f.length)*100); const bar = document.getElementById('progressBar'); if(bar) bar.style.width = pct + '%'; }
