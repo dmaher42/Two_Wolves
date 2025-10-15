@@ -64,12 +64,12 @@ export default function TeacherPage() {
         <h3 className="font-medium">New task</h3>
         <input className="mt-2 w-full rounded border p-2" placeholder="Title (e.g., TEEL: Quote Analysis)" value={title} onChange={e=>setTitle(e.target.value)} />
         <textarea className="mt-2 h-32 w-full rounded border p-2" placeholder="Student instructions…" value={content} onChange={e=>setContent(e.target.value)} />
-        <button onClick={createTask} className="mt-2 rounded bg-black px-3 py-2 text-white">Create task</button>
+        <button onClick={createTask} className="mt-2 rounded bg-[#0b3d91] px-3 py-2 text-white">Create task</button>
       </section>
 
       <div className="flex gap-2">
-        <button className={`rounded px-3 py-1 ${view===View.Tasks?'bg-black text-white':'border'}`} onClick={()=>setView(View.Tasks)}>Tasks</button>
-        <button className={`rounded px-3 py-1 ${view===View.Progress?'bg-black text-white':'border'}`} onClick={()=>setView(View.Progress)}>Progress</button>
+        <button className={`rounded px-3 py-1 ${view===View.Tasks?'bg-[#0b3d91] text-white':'border'}`} onClick={()=>setView(View.Tasks)}>Tasks</button>
+        <button className={`rounded px-3 py-1 ${view===View.Progress?'bg-[#0b3d91] text-white':'border'}`} onClick={()=>setView(View.Progress)}>Progress</button>
       </div>
 
       {view===View.Tasks ? (
