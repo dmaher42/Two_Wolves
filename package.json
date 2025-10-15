@@ -11,7 +11,6 @@
   "dependencies": {
     "@eslint/config-array": "^0.21.0",
     "@eslint/object-schema": "^2.1.6",
-    "@supabase/supabase-js": "^2.46.0",
     "clsx": "^2.1.1",
     "glob": "^11.0.3",
     "inflight": "^1.0.6",
