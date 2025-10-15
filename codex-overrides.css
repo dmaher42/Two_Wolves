@@ -1,0 +1,59 @@
+/* Overrides to align Codex-generated pages with the main site theme */
+
+header,
+.site-header,
+.hero,
+.banner,
+.hero-banner,
+.page-banner {
+  background-color: var(--primary-color) !important;
+  background-image: none !important;
+}
+
+button,
+.button,
+.btn,
+.cta-button,
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+.button-primary {
+  background-color: var(--secondary-color) !important;
+  border-color: var(--secondary-color) !important;
+  color: #fff !important;
+}
+
+button:hover,
+.button:hover,
+.btn:hover,
+.cta-button:hover,
+input[type="button"]:hover,
+input[type="submit"]:hover,
+input[type="reset"]:hover,
+.button-primary:hover {
+  filter: brightness(0.9) !important;
+}
+
+a,
+a:visited,
+a:hover,
+a:focus,
+a:active,
+.link,
+.accent,
+.highlight,
+.accent-color {
+  color: var(--secondary-color) !important;
+}
+
+.container,
+.wrapper,
+.site-container,
+.page-width,
+.main-content,
+.content-wrapper {
+  max-width: 1200px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  width: 100% !important;
+}
