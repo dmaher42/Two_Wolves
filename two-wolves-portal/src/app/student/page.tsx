@@ -32,7 +32,7 @@ export default function StudentHome() {
                 <div className="font-medium">{t.title}</div>
                 <p className="text-sm text-gray-600 whitespace-pre-wrap">{t.content || ''}</p>
               </div>
-              <a className="rounded bg-black px-3 py-1 text-white" href={`/task/${t.id}`}>Start</a>
+              <a className="rounded bg-[#0b3d91] px-3 py-1 text-white" href={`/task/${t.id}`}>Start</a>
             </div>
           </li>
         ))}

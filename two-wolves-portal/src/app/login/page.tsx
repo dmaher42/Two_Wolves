@@ -21,7 +21,7 @@ export default function LoginPage() {
       ) : (
         <form onSubmit={signIn} className="space-y-3">
           <input className="w-full rounded border p-2" placeholder="you@school.sa.edu.au" value={email} onChange={(e)=>setEmail(e.target.value)} />
-          <button className="rounded bg-black px-4 py-2 text-white">Send link</button>
+          <button className="rounded bg-[#0b3d91] px-4 py-2 text-white">Send link</button>
         </form>
       )}
     </main>
