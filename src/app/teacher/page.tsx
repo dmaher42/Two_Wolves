@@ -1,6 +1,6 @@
 
 'use client'
-import { supabase } from '@/lib/supabaseClient'
+import { supabase } from '../../../two-wolves-portal/src/lib/supabaseClient'
 import { useEffect, useState } from 'react'
 
 type Task = { id: string; title: string; content: string | null }
