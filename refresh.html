@@ -1,168 +1,153 @@
-  `<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Two Wolves – Refresher (Ch. 1–5)</title>
+  <title>Two Wolves – Chapters 1–5 Review</title>
   <style>
+    /* Light theme to match the main site */
     :root{
-      --bg:#0f172a;          /* slate-900 */
-      --panel:#111827;       /* gray-900 */
-      --muted:#94a3b8;       /* slate-400 */
-      --text:#e5e7eb;        /* gray-200 */
-      --accent:#22d3ee;      /* cyan-400 */
-      --accent-2:#34d399;    /* emerald-400 */
-      --warn:#f59e0b;        /* amber-500 */
-      --danger:#ef4444;      /* red-500 */
-      --ok:#10b981;          /* green-500 */
-      --card:#0b1224;        /* deeper panel */
+      --bg:#ffffff;
+      --panel:#f6f8fa;           /* GitHub-like light panel */
+      --border:#d0d7de;          /* light gray border */
+      --text:#24292f;            /* GitHub text */
+      --muted:#57606a;           /* secondary text */
+      --link:#0969da;            /* GitHub link blue */
+      --accent:#2da44e;          /* green button */
+      --accent-2:#bf3989;        /* pink accent for highlights */
+      --warn:#9a6700;            /* amber */
+      --ok:#1a7f37;              /* green */
+      --error:#d1242f;           /* red */
     }
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
-      margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
-      background: radial-gradient(1200px 800px at 70% -10%, #093a45 0%, var(--bg) 60%);
-      color:var(--text); line-height:1.5;
+      margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      background: var(--bg); color: var(--text); line-height:1.6;
     }
-    .container{max-width:1000px; margin:0 auto; padding:24px}
-    header{display:flex; gap:16px; align-items:center; justify-content:space-between; flex-wrap:wrap}
-    h1{font-size:clamp(1.4rem, 2.6vw, 2rem); margin:8px 0}
-    .tag{background:rgba(34,211,238,.15); color:var(--accent); border:1px solid rgba(34,211,238,.4); padding:4px 10px; border-radius:999px; font-size:.85rem}
-    .grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); gap:16px}
-    .card{background:linear-gradient(180deg, rgba(255,255,255,.03), transparent 60%), var(--panel); border:1px solid rgba(255,255,255,.06); border-radius:16px; padding:18px; box-shadow:0 10px 30px rgba(0,0,0,.25)}
-    .card h2{margin-top:0; font-size:1.15rem}
+    .container{max-width:980px; margin:0 auto; padding:24px}
+    header h1{margin:0 0 4px 0; font-size:clamp(1.4rem, 2.4vw, 2rem)}
+    header p{margin:0; color:var(--muted)}
+    .grid{display:grid; grid-template-columns:1fr; gap:16px}
+    .card{background:var(--panel); border:1px solid var(--border); border-radius:12px; padding:16px}
+    h2{margin-top:0; font-size:1.25rem}
     .muted{color:var(--muted)}
-    .pill{display:inline-block; font-size:.8rem; padding:2px 10px; border-radius:999px; border:1px solid rgba(255,255,255,.1); color:var(--muted)}
-    .btn{appearance:none; border:none; border-radius:10px; padding:10px 14px; font-weight:600; cursor:pointer; transition:.2s transform; color:#001510}
-    .btn:hover{transform:translateY(-1px)}
-    .btn-primary{background:linear-gradient(135deg, var(--accent), #60a5fa); color:#001510}
-    .btn-ghost{background:transparent; border:1px solid rgba(255,255,255,.15); color:var(--text)}
-    .btn-ok{background:linear-gradient(135deg, var(--accent-2), #86efac);}
-    details{border:1px dashed rgba(255,255,255,.15); border-radius:12px; padding:10px 12px; background:rgba(255,255,255,.03)}
-    summary{cursor:pointer; font-weight:700}
-    .cta-row{display:flex; gap:8px; flex-wrap:wrap}
-    .snippet{padding:12px; background:var(--card); border-radius:12px; border:1px solid rgba(255,255,255,.06); font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;}
-    .flex{display:flex; gap:12px; align-items:center; flex-wrap:wrap}
-    input[type="text"], textarea, select{
-      width:100%; border-radius:10px; padding:10px 12px; background:#0b1224; border:1px solid rgba(255,255,255,.12); color:var(--text)
-    }
+    .btn{appearance:none; border:1px solid var(--border); border-radius:8px; padding:10px 14px; font-weight:600; cursor:pointer; background:#fff}
+    .btn:hover{background:#f3f4f6}
+    .btn-primary{background:var(--accent); border-color:rgba(0,0,0,.05); color:#fff}
+    .btn-primary:hover{filter:brightness(.95)}
+    .btn-ghost{background:#fff}
+    .pill{display:inline-block; padding:2px 10px; border-radius:999px; border:1px solid var(--border); color:var(--muted); font-size:.85rem}
+    .snippet{padding:12px; background:#fff; border-radius:10px; border:1px dashed var(--border); font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;}
+    input[type="text"], textarea, select{width:100%; padding:10px 12px; border-radius:8px; border:1px solid var(--border); background:#fff; color:var(--text)}
     textarea{min-height:110px}
-    .q{margin:12px 0; padding:12px; border-radius:12px; background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.06)}
-    .q.correct{border-color:rgba(16,185,129,.6); box-shadow:0 0 0 2px rgba(16,185,129,.15) inset}
-    .q.incorrect{border-color:rgba(239,68,68,.6); box-shadow:0 0 0 2px rgba(239,68,68,.15) inset}
-    .q small{color:var(--muted)}
-    .label{font-size:.9rem; color:var(--muted)}
-    .badge{font-size:.75rem; padding:2px 8px; border-radius:999px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12); color:var(--muted)}
-    .hr{height:1px; background:linear-gradient(90deg, transparent, rgba(255,255,255,.2), transparent); margin:24px 0}
-    .footer{color:var(--muted); font-size:.85rem; text-align:center; margin-top:28px}
-    .kbar{position:sticky; top:0; backdrop-filter:saturate(140%) blur(10px); background:rgba(2,6,23,.6); border-bottom:1px solid rgba(255,255,255,.08); padding:10px 0; z-index:10}
-    .progress{height:6px; background:rgba(255,255,255,.06); border-radius:999px; overflow:hidden}
-    .progress > div{height:100%; width:0%; background:linear-gradient(90deg, var(--accent), #60a5fa); transition: width .3s}
+    .q{margin:12px 0; padding:12px; border-radius:10px; background:#fff; border:1px solid var(--border)}
+    .q.correct{border-color:rgba(26,127,55,.6); box-shadow:0 0 0 2px rgba(26,127,55,.15) inset}
+    .q.incorrect{border-color:rgba(209,36,47,.6); box-shadow:0 0 0 2px rgba(209,36,47,.15) inset}
+    .label{font-size:.95rem; color:var(--muted); margin-bottom:6px}
+    .hr{height:1px; background:var(--border); margin:24px 0}
     .two-col{display:grid; grid-template-columns:1fr; gap:12px}
-    @media(min-width:840px){ .two-col{grid-template-columns:1fr 1fr} }
-    .notice{background:rgba(245,158,11,.12); border:1px solid rgba(245,158,11,.4); color:#fde68a; padding:10px 12px; border-radius:12px}
-    .success{background:rgba(16,185,129,.12); border:1px solid rgba(16,185,129,.4); color:#bbf7d0; padding:10px 12px; border-radius:12px}
-    .token{background:rgba(34,197,94,.15); border:1px solid rgba(34,197,94,.45); color:#a7f3d0; padding:2px 8px; border-radius:8px; font-size:.8rem}
-    .small{font-size:.9rem}
-    .center{display:flex; align-items:center; justify-content:center}
+    @media(min-width:820px){ .two-col{grid-template-columns:1fr 1fr} }
+    .progress{height:6px; background:#eaeef2; border-radius:999px; overflow:hidden}
+    .progress > div{height:100%; width:0%; background:linear-gradient(90deg, var(--link), #54aeff); transition: width .3s}
+    .notice{background:#fffbe6; border:1px solid #eac54f; color:#9a6700; border-radius:8px; padding:10px 12px}
+    .success{background:#dafbe1; border:1px solid #4ac26b; color:#1a7f37; border-radius:8px; padding:10px 12px}
+    .small{font-size:.95rem}
+    a{color:var(--link); text-decoration:none}
+    a:hover{text-decoration:underline}
   </style>
 </head>
 <body>
-  <div class="kbar">
-    <div class="container">
-      <div class="flex" style="justify-content:space-between">
-        <div class="flex">
-          <span class="pill">Refresher</span>
-          <strong>Two Wolves · Chapters 1–5</strong>
-        </div>
-        <div class="progress" aria-label="progress"><div id="progressBar"></div></div>
-      </div>
-    </div>
-  </div>
-
   <div class="container">
-    <header>
-      <h1>Refresher Module · <span class="muted">Chapters 1–5</span></h1>
-      <span class="tag">Self‑paced · Auto‑save</span>
+    <header style="margin-bottom:12px">
+      <div class="pill">Chapter 1–5 Review</div>
+      <h1>Let’s get back into <em>Two Wolves</em> 🐺</h1>
+      <p class="muted">Short recap • quick questions • a bit of writing • all saved on this device</p>
+      <div class="progress" aria-label="progress" style="margin-top:10px"><div id="progressBar"></div></div>
     </header>
 
-      <div class="card">
-    <h1>How this works</h1>
-    <p>This refresher helps you remember the first five chapters of <em>Two Wolves</em>. You’ll work through short reading and thinking tasks. Your answers save automatically on this device, so you can take your time and come back later.</p>
-    <ul>
-      <li>1️⃣ Read the short text or question.</li>
-      <li>2️⃣ Answer quick questions or write a short response.</li>
-      <li>3️⃣ Move on when you’re ready – your answers will stay saved.</li>
-    </ul>
-    <p>You can press <strong>Ctrl / Cmd + S</strong> at any time to make sure your work is saved.</p>
-    <button class="btn" onclick="alert('Start learning! Scroll down to begin.')">Start Module</button>
-  </div>n class="btn btn-ok" onclick="exportJSON()">Export Answers</button>
-        </div>
-      </section>
+    <!-- Welcome / How it works -->
+    <section class="card">
+      <h2>How this page works</h2>
+      <ul class="muted">
+        <li>Read a short recap so your brain switches back on.</li>
+        <li>Answer quick questions. Some check themselves.</li>
+        <li>Write short, clear answers. Use examples from the book when you can.</li>
+      </ul>
+      <p class="notice small">Your work saves automatically on this computer. You can also click <strong>Download my answers</strong> at the end.</p>
+      <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:8px">
+        <button class="btn btn-primary" onclick="scrollToId('recap')">Start</button>
+        <button class="btn btn-ghost" onclick="clearAll()">Reset everything</button>
+        <button class="btn" onclick="exportJSON()">Download my answers</button>
+      </div>
+    </section>
 
-      <section class="card">
-        <h2>Learning goals</h2>
-        <ul>
-          <li>Recall key events and characters from Chapters 1–5.</li>
-          <li>Complete chapter‑specific checks (Ch. 1–5) to refresh key details.</li>
-          <li>Refresh vocabulary and <em>quote → meaning</em> micro‑analysis.</li>
-          <li>Update your <strong>predictions</strong> and questions for the next chapters.</li>
-        </ul>
-        <p class="muted small">Tip: Aim for <strong>evidence‑based</strong> answers (use short quotes where you can).</p>
-      </section>
-    </div>
-
-    <div class="hr"></div>
-
-    <!-- SECTION A: Memory Jog -->
-    <section class="card" data-section="A">
-      <h2>🧠 A · Memory jog</h2>
+    <!-- Recap (based on your chapter summaries) -->
+    <section class="card" id="recap">
+      <h2>Quick recap: Chapters 1–5</h2>
       <div class="two-col">
         <div>
-          <label class="label" for="a1">Character · Name one main character and one thing you remember about them.</label>
-          <input id="a1" type="text" placeholder="e.g., Ben – likes stop‑motion; curious; asks lots of questions" />
+          <p><strong>Ben</strong> is 13, loves making stop‑motion films, and asks lots of questions (his dad teases him by calling him “cop”).</p>
+          <p><strong>Olive</strong> is 7, brave and quick‑witted. She calls Dad “Maugrim” (the nasty wolf from Narnia).</p>
+          <p><strong>Mum (April)</strong> and <strong>Dad (Ray)</strong> rush the family off on a sudden “holiday”. No clothes packed. That’s sus.</p>
         </div>
         <div>
-          <label class="label" for="a2">Scene / image · Name one moment that stuck with you.</label>
-          <input id="a2" type="text" placeholder=" />
+          <p>The police had visited the house looking for Ben’s parents. On the road, Uncle Chris passes a bag to Ray.</p>
+          <p>The family drive to <strong>Pop’s old bush cabin</strong>. It’s creepy and run‑down. Nature feels dangerous to Ben.</p>
+          <p>Tension builds: a police stop, a sudden getaway, and lots of secrets. Ben starts watching and taking notes.</p>
+        </div>
+      </div>
+      <p class="muted small">(This recap is here to jog your memory. You’ll show what you remember and think in the questions below.)</p>
+    </section>
+
+    <!-- Memory jog -->
+    <section class="card" id="jog">
+      <h2>1) Warm‑up: What do you remember?</h2>
+      <div class="two-col">
+        <div>
+          <div class="label">Name a character and one thing about them.</div>
+          <input id="a1" type="text" placeholder="e.g., Ben — loves filming; asks lots of questions" />
+        </div>
+        <div>
+          <div class="label">Name a moment or image that stuck with you.</div>
+          <input id="a2" type="text" placeholder="e.g., police at the door; the ‘holiday’ without packing" />
         </div>
       </div>
       <div style="margin-top:12px">
-        <label class="label" for="a3">Question / wonder · What are you still wondering about?</label>
-        <textarea id="a3" placeholder="Write a question…"></textarea>
+        <div class="label">What are you still wondering about?</div>
+        <textarea id="a3" placeholder="Write your question here…"></textarea>
       </div>
     </section>
 
-    <!-- SECTION B: Snippet + Micro-analysis -->
-    <section class="card" data-section="B">
-      <h2>🧩 B · Snippet study (read · notice · infer)</h2>
-      <p class="muted">Read the snippet. Highlight (mentally) one word/phrase that creates <em>mood</em>. Answer the quick questions.</p>
+    <!-- Snippet study -->
+    <section class="card" id="snippet">
+      <h2>2) Read & think</h2>
+      <p class="muted">Read the line and answer the questions in your own words.</p>
       <div class="snippet">“For the first time ever, Ben did not ask a question.”</div>
       <div class="q" id="bq1">
-        <div class="label">B1 · What <em>mood</em> does the author create here?</div>
+        <div class="label">What is the feeling here?</div>
         <select id="b1">
           <option value="">Choose…</option>
-          <option>Calm / relaxed</option>
+          <option>Calm</option>
           <option>Fear / tension</option>
-          <option>Comedy</option>
+          <option>Funny</option>
         </select>
-        <small>Hint: Why might Ben stop asking questions?</small>
       </div>
       <div class="q" id="bq2">
-        <div class="label">B2 · Micro‑analysis: What does this line suggest about Ben <em>in this moment</em>?</div>
-        <textarea id="b2" placeholder="This suggests that…"></textarea>
+        <div class="label">What does this show about Ben in this moment?</div>
+        <textarea id="b2" placeholder="He usually asks questions, so…"></textarea>
       </div>
       <details>
-        <summary>Model ideas (peek)</summary>
-        <p class="muted small">Possible: A tense moment shuts Ben up; he’s usually curious but fear or shock overrides habit. We learn about character by contrast.</p>
+        <summary>Need a nudge?</summary>
+        <p class="muted small">Ben is normally curious. If he goes quiet, something feels serious or scary.</p>
       </details>
     </section>
 
-    <!-- SECTION C: Quick Quiz (auto-check) -->
-    <section class="card" data-section="C">
-      <h2>✅ C · Quick check (Ch. 1–5)</h2>
+    <!-- Quick quiz: facts from Ch1–5 -->
+    <section class="card" id="quiz">
+      <h2>3) Quick check: Chapters 1–5</h2>
       <div class="q" id="cq1">
-        <div class="label">C1 · Why do the police first come to the Silvers’ house?</div>
+        <div class="label">Why did the police first come to the Silvers’ house?</div>
         <select id="c1">
           <option value="">Choose…</option>
           <option value="a">Noise complaint</option>
@@ -171,7 +156,7 @@
         </select>
       </div>
       <div class="q" id="cq2">
-        <div class="label">C2 · On the drive, what nickname does Ray use for the car?</div>
+        <div class="label">On the drive, what nickname does Ray use for the car?</div>
         <select id="c2">
           <option value="">Choose…</option>
           <option value="a">The Green Machine</option>
@@ -180,7 +165,7 @@
         </select>
       </div>
       <div class="q" id="cq3">
-        <div class="label">C3 · Who hands Ray a bag during the trip?</div>
+        <div class="label">Who hands Ray a bag during the trip?</div>
         <select id="c3">
           <option value="">Choose…</option>
           <option value="a">Uncle Chris</option>
@@ -188,25 +173,23 @@
           <option value="c">A stranger at the servo</option>
         </select>
       </div>
-      <div class="cta-row">
-        <button class="btn btn-primary" onclick="gradeQuizC()">Check answers</button>
-      </div>
+      <button class="btn btn-primary" onclick="gradeQuizC()">Check my answers</button>
       <p id="cResult" class="muted"></p>
     </section>
 
-    <!-- SECTION C2: Chapter-specific checks (from Modified Activities) -->
-    <section class="card" data-section="C2">
-      <h2>📘 C2 · Chapter‑specific checks (Ch. 1–5)</h2>
-      <p class="muted small">These come from your Modified Activities booklet. Some are auto‑checked; others are short responses.</p>
+    <!-- Chapter-specific checks (from your booklet) -->
+    <section class="card" id="chapters">
+      <h2>4) Chapter checks</h2>
+      <p class="muted small">Short answers save on this device. Some questions auto‑check.</p>
 
-      <h3 class="muted">Chapter 1 – Cops (quick checks)</h3>
+      <h3>Chapter 1 — Cops</h3>
       <div class="two-col">
         <div class="q" id="c2q1">
-          <div class="label">C2.1 · Why do you think the police came to see the Silvers?</div>
-          <textarea id="c2_1" placeholder="Your idea… (short response)"></textarea>
+          <div class="label">Why do you think the police came to see the Silvers?</div>
+          <textarea id="c2_1" placeholder="Your idea…"></textarea>
         </div>
         <div class="q" id="c2q2">
-          <div class="label">C2.2 · Vocabulary: <em>overkill</em> means…</div>
+          <div class="label">Vocabulary: <em>overkill</em> means…</div>
           <select id="c2_2">
             <option value="">Choose…</option>
             <option value="a">plastic wrap</option>
@@ -217,14 +200,14 @@
         </div>
       </div>
 
-      <h3 class="muted">Chapter 2 – The Holiday</h3>
+      <h3>Chapter 2 — The Holiday</h3>
       <div class="two-col">
         <div class="q" id="c2q3">
-          <div class="label">C2.3 · Why does Dad call Ben a “cop”?</div>
-          <textarea id="c2_3" placeholder="Short response…"></textarea>
+          <div class="label">Why does Dad call Ben a “cop”?</div>
+          <textarea id="c2_3" placeholder="Short answer…"></textarea>
         </div>
         <div class="q" id="c2q4">
-          <div class="label">C2.4 · Who hands Ray a bag during the trip? (auto‑check)</div>
+          <div class="label">Who hands Ray a bag? (auto‑check)</div>
           <select id="c2_4">
             <option value="">Choose…</option>
             <option value="a">Uncle Chris</option>
@@ -234,22 +217,22 @@
         </div>
       </div>
 
-      <h3 class="muted">Chapter 3 – Holiday Haircuts</h3>
+      <h3>Chapter 3 — Holiday Haircuts</h3>
       <div class="two-col">
         <div class="q" id="c2q5">
-          <div class="label">C2.5 · Why is Ray angry that Ben brings his wallet?</div>
-          <textarea id="c2_5" placeholder="Short response…"></textarea>
+          <div class="label">Why is Dad angry that Ben brings his wallet?</div>
+          <textarea id="c2_5" placeholder="Short answer…"></textarea>
         </div>
         <div class="q" id="c2q6">
-          <div class="label">C2.6 · “Stick your bib in” means…</div>
-          <textarea id="c2_6" placeholder="Short response…"></textarea>
+          <div class="label">What does “stick your bib in” mean?</div>
+          <textarea id="c2_6" placeholder="Short answer…"></textarea>
         </div>
       </div>
 
-      <h3 class="muted">Chapter 4 – Chase</h3>
+      <h3>Chapter 4 — Chase</h3>
       <div class="two-col">
         <div class="q" id="c2q7">
-          <div class="label">C2.7 · Why did the police officer pull their car over? (auto‑check)</div>
+          <div class="label">Why did the police officer pull their car over? (auto‑check)</div>
           <select id="c2_7">
             <option value="">Choose…</option>
             <option value="a">speeding</option>
@@ -259,70 +242,68 @@
           </select>
         </div>
         <div class="q" id="c2q8">
-          <div class="label">C2.8 · “His heart pummelled in his chest.” What is Ben thinking/feeling?</div>
-          <textarea id="c2_8" placeholder="Infer the feeling + why…"></textarea>
+          <div class="label">“His heart pummelled in his chest.” What is Ben thinking/feeling?</div>
+          <textarea id="c2_8" placeholder="Explain the feeling + why…"></textarea>
         </div>
       </div>
 
-      <h3 class="muted">Chapter 5 – Within the Woods</h3>
+      <h3>Chapter 5 — Within the Woods</h3>
       <div class="two-col">
         <div class="q" id="c2q9">
-          <div class="label">C2.9 · Two reasons Ben’s body aches on arrival.</div>
-          <textarea id="c2_9" placeholder="List two reasons…"></textarea>
+          <div class="label">Give two reasons Ben’s body aches when they arrive.</div>
+          <textarea id="c2_9" placeholder="Two reasons…"></textarea>
         </div>
         <div class="q" id="c2q10">
-          <div class="label">C2.10 · Find three words that show the story is set in Australia.</div>
-          <textarea id="c2_10" placeholder="Three Aussie words…"></textarea>
+          <div class="label">Find three words that show the story is set in Australia.</div>
+          <textarea id="c2_10" placeholder="Three words…"></textarea>
         </div>
       </div>
 
-      <div class="cta-row">
-        <button class="btn btn-primary" onclick="gradeC2()">Check auto‑marked items</button>
-        <span id="c2Result" class="muted"></span>
-      </div>
+      <button class="btn" onclick="gradeC2()">Check the auto‑marked ones</button>
+      <span id="c2Result" class="muted"></span>
     </section>
 
-    <!-- SECTION D: Character / Setting quick map -->
-    <section class="card" data-section="D">
-      <h2>🗺️ D · Character & setting quick map</h2>
+    <!-- Character & setting maps -->
+    <section class="card" id="maps">
+      <h2>5) Characters & setting</h2>
       <div class="two-col">
         <div>
-          <div class="label">Ben (internal + external traits)</div>
-          <textarea id="d1" placeholder="e.g., curious, filmmaker, loyal; uneasy in bush, wants the truth…"></textarea>
+          <div class="label">Ben — what is he like? How is he changing?</div>
+          <textarea id="d1" placeholder="Traits, actions, changes…"></textarea>
         </div>
         <div>
-          <div class="label">Setting impressions (home → road → cabin / bush)</div>
-          <textarea id="d2" placeholder="How does each place feel? What changes?"></textarea>
+          <div class="label">Places — home → road → cabin/bush. How do these places feel?</div>
+          <textarea id="d2" placeholder="Mood, clues, danger, comfort…"></textarea>
         </div>
       </div>
     </section>
 
-    <!-- SECTION E: Vocabulary mini -->
-    <section class="card" data-section="E">
-      <h2>🔤 E · Vocabulary mini</h2>
-      <p class="muted small">Match the word to a quick definition. (Type the letter where shown, or choose from the menus.)</p>
+    <!-- Vocabulary -->
+    <section class="card" id="vocab">
+      <h2>6) Word practice</h2>
+      <p class="muted small">Type the letter or choose the meaning.</p>
       <div class="two-col">
         <div>
           <div class="q" id="eq1">
-            <div class="label">E1 · <strong>vanquishing</strong> → (a) plastic wrap (b) defeating (c) unpaid/delinquent</div>
+            <div class="label"><strong>vanquishing</strong> → (a) plastic wrap (b) defeating (c) unpaid/delinquent</div>
             <input id="e1" type="text" placeholder="a / b / c" />
           </div>
           <div class="q" id="eq2">
-            <div class="label">E2 · <strong>cellophane</strong> → (a) plastic wrap (b) defeating (c) unpaid/delinquent</div>
+            <div class="label"><strong>cellophane</strong> → (a) plastic wrap (b) defeating (c) unpaid/delinquent</div>
             <input id="e2" type="text" placeholder="a / b / c" />
           </div>
           <div class="q" id="eq5">
-            <div class="label">E3 · <strong>overkill</strong> → (a) plastic wrap (b) defeating (c) unpaid/irresponsible (d) way too much of something</div>
+            <div class="label"><strong>overkill</strong> → (a) plastic wrap (b) defeating (c) unpaid/irresponsible (d) way too much of something</div>
             <input id="e5" type="text" placeholder="a / b / c / d" />
           </div>
         </div>
         <div>
           <div class="q" id="eq3">
-            <div class="label">E4 · <strong>delinquent</strong> → (a) plastic wrap (b) defeating (c) unpaid/irresponsible</div>
+            <div class="label"><strong>delinquent</strong> → (a) plastic wrap (b) defeating (c) unpaid/irresponsible</div>
             <input id="e3" type="text" placeholder="a / b / c" />
           </div>
           <div class="q" id="eq6">
-            <div class="label">E5 · <strong>adrenaline</strong> →</div>
+            <div class="label"><strong>adrenaline</strong></div>
             <select id="e6">
               <option value="">Choose…</option>
               <option value="a">energy‑giving body chemical</option>
@@ -331,7 +312,7 @@
             </select>
           </div>
           <div class="q" id="eq7">
-            <div class="label">E6 · <strong>veered</strong> →</div>
+            <div class="label"><strong>veered</strong></div>
             <select id="e7">
               <option value="">Choose…</option>
               <option value="a">energy‑giving body chemical</option>
@@ -340,7 +321,7 @@
             </select>
           </div>
           <div class="q" id="eq8">
-            <div class="label">E7 · <strong>surliness</strong> →</div>
+            <div class="label"><strong>surliness</strong></div>
             <select id="e8">
               <option value="">Choose…</option>
               <option value="a">energy‑giving body chemical</option>
@@ -351,145 +332,91 @@
         </div>
       </div>
       <div class="q" id="eq4">
-        <div class="label">E8 · Use any one of the words in a <em>Two Wolves</em> sentence.</div>
+        <div class="label">Use one of the words in a <em>Two Wolves</em> sentence.</div>
         <input id="e4" type="text" placeholder="Your sentence…" />
       </div>
-      <div class="cta-row">
-        <button class="btn btn-primary" onclick="gradeVocab()">Check vocab</button>
-        <span id="eResult" class="muted"></span>
-      </div>
+      <button class="btn" onclick="gradeVocab()">Check my words</button>
+      <span id="eResult" class="muted"></span>
     </section>
 
-    <!-- SECTION F: Quote → meaning (mini TEEL) -->
-    <section class="card" data-section="F">
-      <h2>🧷 F · Quote → meaning (mini‑TEEL)</h2>
-      <p class="muted small">Use a short TEEL: <strong>T</strong>opic idea · <strong>E</strong>vidence (quote) · <strong>E</strong>xplain effect/meaning · <strong>L</strong>ink back.</p>
+    <!-- Mini-TEEL -->
+    <section class="card" id="teel">
+      <h2>7) Quote → meaning (mini‑TEEL)</h2>
+      <p class="muted small">Try a short TEEL: <strong>T</strong>opic idea • <strong>E</strong>vidence (quote) • <strong>E</strong>xplain • <strong>L</strong>ink.</p>
       <div class="snippet">“He needed to ‘man up,’ like Dad always said.”</div>
-      <textarea id="f1" placeholder="T: One idea is… E: The line ‘…’ shows… E: This suggests… L: Therefore…"></textarea>
-      <div class="cta-row">
-        <button class="btn btn-ok" onclick="showModelF()">Show model idea</button>
-      </div>
+      <textarea id="f1" placeholder="T: One idea is…  E: The line ‘…’ shows…  E: This suggests…  L: Therefore…"></textarea>
+      <div style="margin-top:8px"><button class="btn" onclick="showModelF()">Show a model idea</button></div>
       <div id="fModel" class="success" style="display:none; margin-top:10px">
-        <strong>Model idea:</strong> The line shows pressure to conform to a tough, ‘fearless’ version of masculinity. Ben measures himself against Dad’s rule, which creates tension/fear. Therefore, the novel links family influence to Ben’s choices.
+        <strong>Model idea:</strong> This line shows the pressure Ben feels to act “tough” like his dad wants. It creates stress and shapes his choices.
       </div>
     </section>
 
-    <!-- SECTION G: Prediction & exit ticket -->
-    <section class="card" data-section="G">
-      <h2>🎯 G · Prediction & exit ticket</h2>
+    <!-- Exit -->
+    <section class="card" id="exit">
+      <h2>8) Predictions & exit ticket</h2>
       <div class="two-col">
         <div>
-          <div class="label">Update your prediction(s) for the next chapters.</div>
-          <textarea id="g1" placeholder="I predict… because…"></textarea>
+          <div class="label">What do you think will happen next? Why?</div>
+          <textarea id="g1" placeholder="I think… because…"></textarea>
         </div>
         <div>
-          <div class="label">3–2–1 Reflection</div>
-          <textarea id="g2" placeholder="3 things I remember · 2 things I’d forgotten · 1 question I have"></textarea>
+          <div class="label">3–2–1: 3 things you remember • 2 things you forgot • 1 question you have</div>
+          <textarea id="g2" placeholder="3 – 2 – 1…"></textarea>
         </div>
       </div>
-      <div class="cta-row" style="margin-top:8px">
-        <button class="btn btn-primary" onclick="exportJSON()">Export Answers</button>
-        <button class="btn btn-ghost" onclick="clearAll()">Reset All</button>
+      <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:8px">
+        <button class="btn" onclick="exportJSON()">Download my answers</button>
+        <button class="btn btn-ghost" onclick="clearAll()">Reset everything</button>
       </div>
     </section>
 
-    <div class="footer">Built for classroom use • Saves locally (no login). Add this file to your site’s <code>public/</code> folder and link to <code>/refresher.html</code>.</div>
+    <p class="muted small">Tip: If a box turns <span style="color:var(--ok); font-weight:700">green</span>, you got it right on an auto‑check. <span style="color:var(--error); font-weight:700">Red</span> means try again.</p>
   </div>
 
 <script>
   // ======= Simple localStorage autosave/restore =======
-  const KEY = 'two_wolves_refresher_v1';
-  const inputs = [];
-  function collectInputs(){
-    return Array.from(document.querySelectorAll('input[type="text"], textarea, select'));
-  }
-  function save(){
-    const data = {};
-    collectInputs().forEach(el=>{ data[el.id] = el.value; });
-    localStorage.setItem(KEY, JSON.stringify(data));
-    updateProgress();
-  }
-  function load(){
-    const raw = localStorage.getItem(KEY);
-    if(!raw) return;
-    try{
-      const data = JSON.parse(raw);
-      collectInputs().forEach(el=>{ if(data[el.id]!==undefined) el.value = data[el.id]; });
-    }catch(e){ console.warn('No saved data'); }
-    updateProgress();
-  }
-  function clearAll(){
-    if(confirm('Clear all saved answers on this device?')){
-      localStorage.removeItem(KEY);
-      collectInputs().forEach(el=>{ el.value=''; });
-      document.querySelectorAll('.q').forEach(q=>q.classList.remove('correct','incorrect'));
-      document.getElementById('cResult').textContent='';
-      document.getElementById('eResult').textContent='';
-      updateProgress();
-    }
-  }
-  function exportJSON(){
-    const data = {};
-    collectInputs().forEach(el=>{ data[el.id] = el.value; });
-    const blob = new Blob([JSON.stringify({exported:new Date().toISOString(), data}, null, 2)], {type:'application/json'});
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = 'two_wolves_refresher_answers.json';
-    a.click();
-  }
+  const KEY = 'two_wolves_refresher_v2_light';
+  function fields(){return Array.from(document.querySelectorAll('input[type="text"], textarea, select'));}
+  function save(){const data = {}; fields().forEach(el=>data[el.id]=el.value); localStorage.setItem(KEY, JSON.stringify(data)); updateProgress();}
+  function load(){const raw = localStorage.getItem(KEY); if(!raw) return; try{const data = JSON.parse(raw); fields().forEach(el=>{ if(data[el.id]!==undefined) el.value = data[el.id]; });}catch(e){} updateProgress();}
+  function clearAll(){ if(confirm('Clear all saved answers on this device?')){ localStorage.removeItem(KEY); fields().forEach(el=>el.value=''); document.querySelectorAll('.q').forEach(q=>q.classList.remove('correct','incorrect')); document.getElementById('cResult').textContent=''; document.getElementById('eResult').textContent=''; const c2R=document.getElementById('c2Result'); if(c2R) c2R.textContent=''; updateProgress(); }}
+  function exportJSON(){ const data = {}; fields().forEach(el=>data[el.id]=el.value); const blob = new Blob([JSON.stringify({exported:new Date().toISOString(), data}, null, 2)], {type:'application/json'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='two_wolves_ch1-5_answers.json'; a.click(); }
+  document.addEventListener('input', e=>{ if(['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName)) save(); });
 
-  // Autosave on input
-  document.addEventListener('input', (e)=>{
-    if(['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName)) save();
-  });
-  document.addEventListener('keydown', (e)=>{
-    if((e.ctrlKey||e.metaKey) && e.key.toLowerCase()==='s'){
-      e.preventDefault(); save(); alert('Saved locally.');
-    }
-  });
+  // Progress bar
+  function updateProgress(){ const f = fields(); const filled = f.filter(el=>String(el.value).trim().length>0).length; const pct = Math.round((filled/f.length)*100); const bar = document.getElementById('progressBar'); if(bar) bar.style.width = pct + '%'; }
+  function scrollToId(id){ document.getElementById(id).scrollIntoView({behavior:'smooth'}); }
 
-  // ======= Progress Bar =======
-  function updateProgress(){
-    const fields = collectInputs();
-    const filled = fields.filter(el=>String(el.value).trim().length>0).length;
-    const pct = Math.round((filled/fields.length)*100);
-    const bar = document.getElementById('progressBar');
-    if(bar) bar.style.width = pct + '%';
-  }
+  // ======= Auto-marking helpers =======
+  function mark(el, ok){ const parent = el.closest('.q'); parent.classList.remove('correct','incorrect'); parent.classList.add(ok?'correct':'incorrect'); }
 
-  // ======= Quiz C grading =======
-  function mark(el, ok){
-    const parent = el.closest('.q');
-    parent.classList.remove('correct','incorrect');
-    parent.classList.add(ok?'correct':'incorrect');
-  }
+  // Quiz C
   function gradeQuizC(){
-    const a1 = document.getElementById('c1'); // correct: c
-    const a2 = document.getElementById('c2'); // correct: a
-    const a3 = document.getElementById('c3'); // correct: a
-    const resEl = document.getElementById('cResult');
+    const a1 = document.getElementById('c1'); // correct: c (parents)
+    const a2 = document.getElementById('c2'); // correct: a (Green Machine)
+    const a3 = document.getElementById('c3'); // correct: a (Uncle Chris)
     let score = 0;
     if(a1.value==='c'){score++; mark(a1,true)} else mark(a1,false);
     if(a2.value==='a'){score++; mark(a2,true)} else mark(a2,false);
     if(a3.value==='a'){score++; mark(a3,true)} else mark(a3,false);
-    resEl.textContent = `Score: ${score}/3`;
+    document.getElementById('cResult').textContent = `Score: ${score}/3`;
     save();
   }
 
-  // ======= Chapter‑specific auto‑checks =======
+  // Chapter checks auto-marked
   function gradeC2(){
     let score = 0, total = 3; // auto‑marked: c2_2, c2_4, c2_7
     const v1 = document.getElementById('c2_2'); // overkill -> d
-    const v2 = document.getElementById('c2_4'); // who hands bag -> a (Uncle Chris)
-    const v3 = document.getElementById('c2_7'); // pulled over -> a (speeding)
+    const v2 = document.getElementById('c2_4'); // who hands bag -> a
+    const v3 = document.getElementById('c2_7'); // pulled over -> a
     if(v1.value==='d'){score++; mark(v1,true)} else mark(v1,false);
     if(v2.value==='a'){score++; mark(v2,true)} else mark(v2,false);
     if(v3.value==='a'){score++; mark(v3,true)} else mark(v3,false);
-    document.getElementById('c2Result').textContent = `Auto‑checked: ${score}/${total}. Short responses save but are not auto‑marked.`;
+    document.getElementById('c2Result').textContent = `Auto‑checked: ${score}/${total}.`;
     save();
   }
 
-  // ======= Vocab grading =======
+  // Vocab grader
   function gradeVocab(){
     const e1 = document.getElementById('e1'); // vanquishing -> b
     const e2 = document.getElementById('e2'); // cellophane -> a
@@ -510,21 +437,13 @@
     mark(e1,ok1); mark(e2,ok2); mark(e3,ok3); mark(e5,ok5); mark(e6,ok6); mark(e7,ok7); mark(e8,ok8);
 
     const correctCount = [ok1,ok2,ok3,ok5,ok6,ok7,ok8].filter(Boolean).length;
-    const res = (correctCount===7) ? 'Vocab perfect: 7/7' : `Vocab: ${correctCount}/7 — check any red boxes.`;
+    const res = (correctCount===7) ? 'Nice! 7/7' : `Words correct: ${correctCount}/7 — check any red boxes.`;
     document.getElementById('eResult').textContent = res;
     save();
   }
 
-  // ======= Models =======
-  function showModelF(){
-    document.getElementById('fModel').style.display='block';
-  }
+  function showModelF(){ document.getElementById('fModel').style.display='block'; }
 
-  function startModule(){
-    document.querySelector('[data-section="A"]').scrollIntoView({behavior:'smooth'});
-  }
-
-  // Load saved answers on first paint
   window.addEventListener('DOMContentLoaded', load);
 </script>
 </body>
