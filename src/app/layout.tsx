@@ -1,6 +1,8 @@
 
-export const metadata = { title: process.env.NEXT_PUBLIC_SITE_NAME || 'Class Portal' }
 import './globals.css'
+import './codex-overrides.css'
+
+export const metadata = { title: process.env.NEXT_PUBLIC_SITE_NAME || 'Class Portal' }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
