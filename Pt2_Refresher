@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Two Wolves – Chapters 6–12 Review</title>
+  <style>
+    :root{
+      --bg:#ffffff;           /* match site */
+      --panel:#f6f8fa;        /* light card */
+      --border:#d0d7de;       /* border */
+      --text:#24292f;         /* text */
+      --muted:#57606a;        /* secondary */
+      --link:#0969da;         /* link blue */
+      --accent:#2da44e;       /* green */
+      --ok:#1a7f37;           /* green text */
+      --error:#d1242f;        /* red */
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; background:var(--bg); color:var(--text); line-height:1.6}
+    .container{max-width:980px; margin:0 auto; padding:24px}
+    header h1{margin:0 0 4px 0; font-size:clamp(1.4rem, 2.4vw, 2rem)}
+    header p{margin:0; color:var(--muted)}
+    .card{background:var(--panel); border:1px solid var(--border); border-radius:12px; padding:16px; margin-bottom:16px}
+    h2{margin-top:0; font-size:1.25rem}
+    .pill{display:inline-block; padding:2px 10px; border-radius:999px; border:1px solid var(--border); color:var(--muted); font-size:.85rem}
+    .muted{color:var(--muted)}
+    .btn{appearance:none; border:1px solid var(--border); border-radius:8px; padding:10px 14px; font-weight:600; cursor:pointer; background:#fff}
+    .btn:hover{background:#f3f4f6}
+    .btn-primary{background:var(--accent); border-color:rgba(0,0,0,.05); color:#fff}
+    .btn-primary:hover{filter:brightness(.95)}
+    .snippet{padding:12px; background:#fff; border-radius:10px; border:1px dashed var(--border); font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace}
+    input[type="text"], textarea, select{width:100%; padding:10px 12px; border-radius:8px; border:1px solid var(--border); background:#fff; color:var(--text)}
+    textarea{min-height:110px}
+    .q{margin:12px 0; padding:12px; border-radius:10px; background:#fff; border:1px solid var(--border)}
+    .q.correct{border-color:rgba(26,127,55,.6); box-shadow:0 0 0 2px rgba(26,127,55,.15) inset}
+    .q.incorrect{border-color:rgba(209,36,47,.6); box-shadow:0 0 0 2px rgba(209,36,47,.15) inset}
+    .label{font-size:.95rem; color:var(--muted); margin-bottom:6px}
+    .two-col{display:grid; grid-template-columns:1fr; gap:12px}
+    @media(min-width:820px){ .two-col{grid-template-columns:1fr 1fr} }
+    .progress{height:6px; background:#eaeef2; border-radius:999px; overflow:hidden; margin-top:10px}
+    .progress > div{height:100%; width:0%; background:linear-gradient(90deg, var(--link), #54aeff); transition: width .3s}
+    .notice{background:#fffbe6; border:1px solid #eac54f; color:#9a6700; border-radius:8px; padding:10px 12px}
+    .success{background:#dafbe1; border:1px solid #4ac26b; color:#1a7f37; border-radius:8px; padding:10px 12px}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="pill">Chapter 6–12 Review</div>
+      <h1>Back into <em>Two Wolves</em>: Ch. 6–12</h1>
+      <p class="muted">Short recap • quick questions • writing • saved on this device</p>
+      <div class="progress" aria-label="progress"><div id="progressBar"></div></div>
+    </header>
+
+    <!-- How it works -->
+    <section class="card">
+      <h2>How this page works</h2>
+      <ul class="muted">
+        <li>Read the recap for Chapters 6–12.</li>
+        <li>Answer the questions. Some check themselves.</li>
+        <li>Write in your own words and use examples from the book.</li>
+      </ul>
+      <p class="notice">Your work saves automatically on this computer. You can also download your answers at the end.</p>
+      <div style="display:flex; gap:8px; flex-wrap:wrap">
+        <button class="btn btn-primary" onclick="scrollToId('recap')">Start</button>
+        <button class="btn" onclick="exportJSON()">Download my answers</button>
+        <button class="btn" onclick="clearAll()">Reset everything</button>
+      </div>
+    </section>
+
+    <!-- Recap -->
+    <section class="card" id="recap">
+      <h2>Quick recap: Chapters 6–12</h2>
+      <div class="two-col">
+        <div>
+          <p><strong>At the cabin</strong>, Ben feels unsafe and hates the bush. Ray expects him to “man up”. The cabin is mouldy and gross. Ray hides a mysterious bag in the roof.</p>
+          <p><strong>Ben & Olive</strong> start to team up. They explore the creek, build a small raft, and share secrets. Olive turns 8 and shows courage (but also argues when things feel wrong).</p>
+          <p><strong>Family tension</strong>: Ray buys presents and a diamond ring for April after a campfire, and for a moment everyone is happy — but the lies are still there.</p>
+        </div>
+        <div>
+          <p><strong>Secrets & spying</strong>: Ben suspects the money is stolen. He listens in on April and Ray, writes notes, and decides to find the truth like a detective.</p>
+          <p><strong>Hunting & fear</strong>: Ray hunts a rabbit. Ben feels sick about it and more scared of his dad. He also can’t swim but still tests the raft.</p>
+          <p><strong>Plans to run</strong>: Ben hears talk of “papers” and maybe passports. He wonders if his parents have basically kidnapped him and Olive.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Memory jog -->
+    <section class="card" id="jog">
+      <h2>1) Warm‑up: What do you remember?</h2>
+      <div class="two-col">
+        <div>
+          <div class="label">Write one thing Ben does that shows he’s changing.</div>
+          <input id="a1" type="text" placeholder="e.g., spying like a detective; testing the raft…" />
+        </div>
+        <div>
+          <div class="label">Write one thing that shows Olive’s personality.</div>
+          <input id="a2" type="text" placeholder="e.g., brave; stands up for herself…" />
+        </div>
+      </div>
+      <div style="margin-top:12px">
+        <div class="label">What new questions do you have about Ray and April?</div>
+        <textarea id="a3" placeholder="Your question…"></textarea>
+      </div>
+    </section>
+
+    <!-- Snippet study -->
+    <section class="card" id="snippet">
+      <h2>2) Read & think</h2>
+      <p class="muted">Read the line and answer in your own words.</p>
+      <div class="snippet">“Like the fire, happiness had flickered and died.”</div>
+      <div class="q" id="bq1">
+        <div class="label">What does this line tell you about the family after the campfire gifts?</div>
+        <textarea id="b1" placeholder="Short answer…"></textarea>
+      </div>
+      <div class="q" id="bq2">
+        <div class="label">What feeling does the word “flickered” create?</div>
+        <select id="b2">
+          <option value="">Choose…</option>
+          <option value="a">Strong and lasting</option>
+          <option value="b">Brief and fragile</option>
+          <option value="c">Funny and silly</option>
+        </select>
+      </div>
+    </section>
+
+    <!-- Quick quiz MCQ -->
+    <section class="card" id="quiz">
+      <h2>3) Quick check</h2>
+      <div class="q">
+        <div class="label">Who hides a bag in the roof of the cabin?</div>
+        <select id="c1">
+          <option value="">Choose…</option>
+          <option value="a">Ben</option>
+          <option value="b">Ray</option>
+          <option value="c">Uncle Chris</option>
+        </select>
+      </div>
+      <div class="q">
+        <div class="label">What animal does Ray hunt for food?</div>
+        <select id="c2">
+          <option value="">Choose…</option>
+          <option value="a">Kangaroo</option>
+          <option value="b">Rabbit</option>
+          <option value="c">Possum</option>
+        </select>
+      </div>
+      <div class="q">
+        <div class="label">True or false: Ben is a strong swimmer.</div>
+        <select id="c3">
+          <option value="">Choose…</option>
+          <option value="a">True</option>
+          <option value="b">False</option>
+        </select>
+      </div>
+      <button class="btn btn-primary" onclick="gradeQuizC()">Check my answers</button>
+      <p id="cResult" class="muted"></p>
+    </section>
+
+    <!-- Chapter checks: short answers -->
+    <section class="card" id="chapters">
+      <h2>4) Chapter checks</h2>
+      <p class="muted">Short answers save on this device. Your teacher will check these.</p>
+      <h3>Ch. 6–8</h3>
+      <div class="two-col">
+        <div class="q">
+          <div class="label">Describe the cabin using 3 words Ben might choose.</div>
+          <input id="d6" type="text" placeholder="e.g., dark, mouldy, creepy…" />
+        </div>
+        <div class="q">
+          <div class="label">Why does Ben test the raft even though he can’t swim?</div>
+          <textarea id="d7" placeholder="Short answer…"></textarea>
+        </div>
+      </div>
+      <h3>Ch. 9–12</h3>
+      <div class="two-col">
+        <div class="q">
+          <div class="label">What gift makes April happy at the campfire and why is this important?</div>
+          <textarea id="d8" placeholder="Short answer…"></textarea>
+        </div>
+        <div class="q">
+          <div class="label">What clues make Ben suspect the money is stolen?</div>
+          <textarea id="d9" placeholder="List 2–3 clues…"></textarea>
+        </div>
+      </div>
+    </section>
+
+    <!-- Characters & Setting -->
+    <section class="card" id="maps">
+      <h2>5) Characters & setting</h2>
+      <div class="two-col">
+        <div>
+          <div class="label">Ben — how is he changing from Ch. 1–5 to Ch. 6–12?</div>
+          <textarea id="m1" placeholder="From curious kid → more brave / more suspicious / acting like a detective…"></textarea>
+        </div>
+        <div>
+          <div class="label">The bush — list two ways the setting creates fear or danger.</div>
+          <textarea id="m2" placeholder="Noises at night, snakes, cold creek, getting lost…"></textarea>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mini-TEEL -->
+    <section class="card" id="teel">
+      <h2>6) Quote → meaning (mini‑TEEL)</h2>
+      <p class="muted">Use TEEL: Topic • Evidence • Explain • Link.</p>
+      <div class="snippet">“Adults never told kids anything.”</div>
+      <textarea id="t1" placeholder="T: One idea is… E: The line ‘…’ shows… E: This suggests… L: Therefore…"></textarea>
+      <div style="margin-top:8px"><button class="btn" onclick="showModelF()">Show a model idea</button></div>
+      <div id="fModel" class="success" style="display:none; margin-top:10px">
+        <strong>Model idea:</strong> Ben feels shut out by the adults. This pushes him to investigate on his own and grows his independence.
+      </div>
+    </section>
+
+    <!-- Exit ticket -->
+    <section class="card" id="exit">
+      <h2>7) Predictions & exit ticket</h2>
+      <div class="two-col">
+        <div>
+          <div class="label">What do you think Ben will do next and why?</div>
+          <textarea id="x1" placeholder="I think Ben will… because…"></textarea>
+        </div>
+        <div>
+          <div class="label">3–2–1: 3 things you remember • 2 things you learned • 1 question you still have</div>
+          <textarea id="x2" placeholder="3 – 2 – 1…"></textarea>
+        </div>
+      </div>
+      <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:8px">
+        <button class="btn" onclick="exportJSON()">Download my answers</button>
+        <button class="btn" onclick="clearAll()">Reset everything</button>
+      </div>
+    </section>
+  </div>
+
+<script>
+  const KEY = 'two_wolves_review_ch6_12_v1';
+  function fields(){return Array.from(document.querySelectorAll('input[type="text"], textarea, select'));}
+  function save(){const data={}; fields().forEach(el=>data[el.id]=el.value); localStorage.setItem(KEY, JSON.stringify(data)); updateProgress();}
+  function load(){const raw=localStorage.getItem(KEY); if(!raw) return; try{const data=JSON.parse(raw); fields().forEach(el=>{if(data[el.id]!==undefined) el.value=data[el.id];});}catch(e){} updateProgress();}
+  function clearAll(){ if(confirm('Clear all saved answers on this device?')){ localStorage.removeItem(KEY); fields().forEach(el=>el.value=''); document.querySelectorAll('.q').forEach(q=>q.classList.remove('correct','incorrect')); document.getElementById('cResult').textContent=''; updateProgress(); } }
+  function exportJSON(){ const data={}; fields().forEach(el=>data[el.id]=el.value); const blob=new Blob([JSON.stringify({exported:new Date().toISOString(), data}, null, 2)], {type:'application/json'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='two_wolves_ch6-12_answers.json'; a.click(); }
+  document.addEventListener('input', e=>{ if(['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName)) save(); });
+  function updateProgress(){ const f=fields(); const filled=f.filter(el=>String(el.value).trim().length>0).length; const pct=Math.round((filled/f.length)*100); const bar=document.getElementById('progressBar'); if(bar) bar.style.width=pct+'%'; }
+  function scrollToId(id){ document.getElementById(id).scrollIntoView({behavior:'smooth'}); }
+
+  // Mark helpers
+  function mark(el, ok){ const parent=el.closest('.q'); parent.classList.remove('correct','incorrect'); parent.classList.add(ok?'correct':'incorrect'); }
+
+  // Auto-check quiz
+  function gradeQuizC(){
+    const q1=document.getElementById('c1'); // b Ray
+    const q2=document.getElementById('c2'); // b Rabbit
+    const q3=document.getElementById('c3'); // b False
+    let s=0;
+    if(q1.value==='b'){s++; mark(q1,true)} else mark(q1,false);
+    if(q2.value==='b'){s++; mark(q2,true)} else mark(q2,false);
+    if(q3.value==='b'){s++; mark(q3,true)} else mark(q3,false);
+    document.getElementById('cResult').textContent = `Score: ${s}/3`;
+    save();
+  }
+
+  function showModelF(){ document.getElementById('fModel').style.display='block'; }
+
+  window.addEventListener('DOMContentLoaded', load);
+</script>
+</body>
+</html>
