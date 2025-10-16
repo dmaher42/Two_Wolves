@@ -10,6 +10,9 @@
 # next.js
 /.next/
 /out/
+two-wolves-portal/.next/
+two-wolves-portal/out/
+two-wolves-portal/node_modules
 
 # production
 /build
