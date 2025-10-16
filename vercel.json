@@ -1,15 +1,7 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "two-wolves-portal/package.json",
-      "use": "@vercel/next"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/two-wolves-portal/$1"
-    }
-  ]
+  "buildCommand": "cd two-wolves-portal && npm run build",
+  "outputDirectory": "two-wolves-portal/.next",
+  "installCommand": "cd two-wolves-portal && npm install",
+  "framework": null
 }
