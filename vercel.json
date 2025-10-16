@@ -1,6 +1,4 @@
-cd /workspaces/Two_Wolves
 
-cat > vercel.json <<'JSON'
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "nextjs",
@@ -12,7 +10,4 @@ cat > vercel.json <<'JSON'
     }
   ]
 }
-JSON
 
-# sanity-check the file is complete (should show the full JSON above)
-cat vercel.json
