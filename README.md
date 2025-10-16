@@ -5,6 +5,7 @@ This portal prototype now runs completely client-side using browser storage. No 
 ## Getting started locally
 
 ```bash
+cd two-wolves-portal
 npm install
 npm run dev
 ```
