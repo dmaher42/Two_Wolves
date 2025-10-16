@@ -5,9 +5,7 @@
     {
       "src": "two-wolves-portal/package.json",
       "use": "@vercel/next",
-      "config": {
-        "outputDirectory": ".next"
-      }
+      "config": { "outputDirectory": ".next" }
     }
   ]
 }
