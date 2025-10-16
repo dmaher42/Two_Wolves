@@ -6,7 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "validate:public": "node scripts/validate-public.js",
+    "vercel:build": "next build",
+    "vercel:deploy": "vercel deploy --prebuilt",
+    "vercel:deploy:prod": "vercel deploy --prebuilt --prod"
   },
   "dependencies": {
     "clsx": "^2.1.1",
