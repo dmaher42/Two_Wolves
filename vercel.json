@@ -1,7 +1,0 @@
-{
-  "version": 2,
-  "buildCommand": "cd two-wolves-portal && npm run build",
-  "outputDirectory": "two-wolves-portal/.next",
-  "installCommand": "cd two-wolves-portal && npm install",
-  "framework": null
-}

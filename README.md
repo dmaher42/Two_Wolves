@@ -1,22 +1,20 @@
 # Two Wolves Portal
 
-This project provides a lightweight prototype of the Two Wolves learning portal. It now works entirely in the browser with local storage – no external services or Supabase setup required.
+This portal prototype now runs completely client-side using browser storage. No Supabase project or environment variables are required to deploy on Vercel.
 
-## Getting started
+## Getting started locally
 
-1. Install dependencies and run the development server:
+```bash
+npm install
+npm run dev
+```
 
-   ```bash
-   npm install
-   npm run dev
-   ```
+Visit `http://localhost:3000` to try it out.
 
-2. Visit `http://localhost:3000`.
+## Features
 
-## How it works
+- Email-based sign-in simulation – pick student or teacher mode after entering an address.
+- Teachers can draft new tasks and monitor student submissions. Data is saved to `localStorage`.
+- Students read published tasks, draft responses, and submit when they are ready.
 
-- Sign in with any school email and choose whether to act as a student or teacher. The choice is stored locally so you can swap roles quickly.
-- Teachers can create tasks and view student progress. Tasks and submissions are saved in `localStorage` so the prototype behaves consistently across refreshes on the same device.
-- Students see published tasks, open them to respond, and their work auto-saves.
-
-Because everything runs in the browser, deploying to Vercel no longer needs Supabase environment variables.
+Everything resets by clearing browser storage, making it easy to demo the experience.
