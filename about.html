@@ -3,205 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About the Novel – Two Wolves</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        :root {
-            --primary-color: #223046;
-            --secondary-color: #3498db;
-            --accent-color: #e74c3c;
-            --light-color: #ecf0f1;
-            --dark-color: #2c3e50;
-            --background-color: #f8f9fa;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Roboto', sans-serif;
-            line-height: 1.6;
-            color: var(--dark-color);
-            background-color: var(--background-color);
-        }
-
-        a {
-            color: inherit;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .site-header {
-            background-color: var(--primary-color);
-            color: #fff;
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
-        }
-
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .logo i {
-            font-size: 2rem;
-            color: var(--secondary-color);
-        }
-
-        .logo h1 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            gap: 20px;
-        }
-
-        nav ul li a {
-            color: #fff;
-            text-decoration: none;
-            font-weight: 500;
-            border-bottom: 2px solid transparent;
-            padding: 6px 0;
-            transition: color 0.3s ease, border-color 0.3s ease;
-        }
-
-        nav ul li a:hover,
-        nav ul li a.active {
-            color: var(--secondary-color);
-            border-color: var(--secondary-color);
-        }
-
-        main {
-            padding: 60px 0;
-        }
-
-        .page-intro {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .page-intro h1 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 2.75rem;
-            color: var(--primary-color);
-            margin-bottom: 12px;
-        }
-
-        .page-intro p {
-            max-width: 760px;
-            margin: 0 auto;
-            color: rgba(44, 62, 80, 0.8);
-            font-size: 1.05rem;
-        }
-
-        .video-section {
-            background-color: #fff;
-            border-radius: 16px;
-            box-shadow: 0 15px 45px rgba(34, 48, 70, 0.12);
-            padding: 32px;
-        }
-
-        .video-wrapper {
-            position: relative;
-            padding-top: 56.25%;
-            border-radius: 12px;
-            overflow: hidden;
-        }
-
-        .video-wrapper iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: 0;
-        }
-
-        @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 12px;
-            }
-
-            nav ul {
-                flex-wrap: wrap;
-                gap: 12px;
-            }
-
-            .page-intro h1 {
-                font-size: 2.2rem;
-            }
-
-            .video-section {
-                padding: 20px;
-            }
-        }
-    </style>
+    <title>About the Novel - Two Wolves</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header class="site-header">
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">
-                    <i class="fas fa-book-open" aria-hidden="true"></i>
-                    <h1>Two Wolves</h1>
-                </div>
-                <nav aria-label="Primary">
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="index.html#overview">Unit Overview</a></li>
-                        <li><a href="index.html#lessons">Weekly Lessons</a></li>
-                        <li><a href="index.html#resources">Resources</a></li>
-                        <li><a href="secure-portfolios.html">Student Portfolios</a></li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
+    <header>
+        <h1>Two Wolves</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About the Novel</a></li>
+                <li><a href="characters.html">Characters</a></li>
+                <li><a href="resources.html">Resources</a></li>
+                <li><a href="portfolio.html">Portfolio Tasks</a></li>
+            </ul>
+        </nav>
     </header>
 
-    <main>
-        <div class="container">
-            <section class="page-intro" aria-labelledby="central-parable-heading">
-                <h1 id="central-parable-heading">The Central Parable</h1>
-                <p>
-                    Discover how the parable of the two wolves shapes the heart of Ben Silver's story.
-                    Use this video to guide your reflections and class discussions as we delve into the
-                    themes of choice, responsibility, and inner conflict throughout the novel.
-                </p>
-            </section>
+    <main class="main-content">
+        <h2>About the Novel</h2>
+        <p>When a backpack containing hundreds of thousands of dollars is left on their doorstep, Ben Silver's family is thrown into turmoil. His parents are forced to go on the run, taking Ben and his younger sister Olive with them. As they journey into the wilderness, Ben is forced to confront the truth about his family and the "two wolves" that are fighting inside him.</p>
 
-            <section class="video-section" aria-label="Two Wolves central parable video">
-                <div class="video-wrapper">
-                    <h2>The Central Parable</h2>
-                    <iframe width="560" height="315" src="https://www.youtube.com/embed/JPABCn8NMU0?si=bNIkjP1JjqxrwfdG" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                </div>
-            </section>
+        <h2>The Central Parable</h2>
+        <div style="position:relative; padding-top:56.25%;">
+            <iframe src="https://www.youtube.com/embed/8sPf6aFg_2E" 
+                    style="position:absolute;top:0;left:0;width:100%;height:100%;" 
+                    title="YouTube video player" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+            </iframe>
         </div>
     </main>
+
+    <footer>
+        <p>&copy; 2024 Two Wolves Student Portfolio</p>
+    </footer>
 </body>
 </html>
