@@ -145,42 +145,7 @@
             background-color: white;
             color: var(--primary-color);
         }
-
-        .flight-indicator {
-            position: fixed;
-            top: 90px;
-            right: 20px;
-            background: rgba(34, 48, 70, 0.92);
-            color: white;
-            padding: 10px 14px;
-            border-radius: 8px;
-            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
-            font-weight: 500;
-            letter-spacing: 0.03em;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: opacity 0.25s ease, transform 0.25s ease;
-            opacity: 0.5;
-            transform: translateY(-8px);
-            z-index: 110;
-        }
-
-        .flight-indicator::before {
-            content: "✈";
-        }
-
-        .flight-indicator[data-active="true"] {
-            opacity: 1;
-            transform: translateY(0);
-            background: var(--secondary-color);
-            box-shadow: 0 10px 24px rgba(52, 152, 219, 0.35);
-        }
-
-        .flight-indicator span {
-            font-weight: 600;
-        }
-
+        
         /* Section Styles */
         section {
             padding: 60px 0;
@@ -686,10 +651,6 @@
             </div>
         </div>
     </header>
-
-    <div class="flight-indicator" role="status" aria-live="polite" data-active="false">
-        Flight mode <span data-flight-state>inactive</span>
-    </div>
 
     <!-- Hero Section -->
     <section id="home" class="hero">
@@ -1207,49 +1168,13 @@
                 }
             });
             
-        document.querySelectorAll('nav ul li a').forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href').slice(1) === current) {
-                link.classList.add('active');
-            }
+            document.querySelectorAll('nav ul li a').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').slice(1) === current) {
+                    link.classList.add('active');
+                }
+            });
         });
-    });
-
-        const flightIndicator = document.querySelector('.flight-indicator');
-        const flightState = flightIndicator?.querySelector('[data-flight-state]');
-        let flightModeActive = false;
-
-        function isEditableElement(element) {
-            if (!element) return false;
-            const tag = element.tagName;
-            return tag === 'INPUT' || tag === 'TEXTAREA' || element.isContentEditable;
-        }
-
-        function renderFlightState() {
-            if (!flightIndicator || !flightState) return;
-            flightIndicator.dataset.active = String(flightModeActive);
-            flightState.textContent = flightModeActive ? 'active' : 'inactive';
-            const label = flightModeActive ? 'Flight mode engaged' : 'Flight mode disengaged';
-            flightIndicator.setAttribute('aria-label', label);
-        }
-
-        function toggleFlightMode() {
-            flightModeActive = !flightModeActive;
-            renderFlightState();
-        }
-
-        const FLIGHT_KEY = 'f';
-
-        document.addEventListener('keydown', event => {
-            if (event.key.toLowerCase() !== FLIGHT_KEY) return;
-            if (isEditableElement(event.target)) return;
-
-            event.preventDefault();
-            event.stopPropagation();
-            toggleFlightMode();
-        }, { capture: true });
-
-        renderFlightState();
     </script>
 </body>
 </html>
