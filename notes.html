@@ -17,13 +17,85 @@
             line-height: 1.5;
             color: #263238;
             margin: 0;
-            padding: 20px;
+            padding: 0;
             background-color: #f5f7fa;
         }
-        
-        .container {
+
+        .main-nav {
+            background-color: #1a237e;
+            padding: 0 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
             max-width: 1000px;
             margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .nav-logo a {
+            font-family: 'Merriweather', serif;
+            font-size: 24px;
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-menu li {
+            margin-left: 25px;
+        }
+
+        .nav-menu li a {
+            color: #bbdefb;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            padding: 5px 0;
+            border-bottom: 2px solid transparent;
+        }
+
+        .nav-menu li a:hover {
+            color: white;
+        }
+
+        .nav-menu li a.active {
+            color: white;
+            border-bottom: 2px solid #bbdefb;
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .nav-menu {
+                margin-top: 10px;
+                flex-wrap: wrap;
+            }
+
+            .nav-menu li {
+                margin: 5px 15px 5px 0;
+            }
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 20px auto 0;
             background-color: white;
             padding: 20px;
             border-radius: 10px;
@@ -219,6 +291,22 @@
     </style>
 </head>
 <body>
+    <nav class="main-nav">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">🐺 Two Wolves</a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About the Novel</a></li>
+                <li><a href="characters.html">Characters</a></li>
+                <li><a href="resources.html">Resources</a></li>
+                <li><a href="portfolio.html">Portfolio Tasks</a></li>
+                <li><a href="notes.html" class="active">Cornell Notes</a></li>
+            </ul>
+        </div>
+    </nav>
+
     <div class="container">
         <div class="header">
             <h1>🐺 Two Wolves - Cornell Notes</h1>
