@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Two Wolves - Cornell Notes</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Roboto:wght@300;400;500;700&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles/header.css">
     <style>
         * {
             box-sizing: border-box;
@@ -19,78 +21,6 @@
             margin: 0;
             padding: 0;
             background-color: #f5f7fa;
-        }
-
-        .main-nav {
-            background-color: #1a237e;
-            padding: 0 20px;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        .nav-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 0;
-        }
-
-        .nav-logo a {
-            font-family: 'Merriweather', serif;
-            font-size: 24px;
-            color: white;
-            text-decoration: none;
-            font-weight: 700;
-        }
-
-        .nav-menu {
-            display: flex;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        .nav-menu li {
-            margin-left: 25px;
-        }
-
-        .nav-menu li a {
-            color: #bbdefb;
-            text-decoration: none;
-            font-size: 16px;
-            font-weight: 500;
-            transition: color 0.3s ease;
-            padding: 5px 0;
-            border-bottom: 2px solid transparent;
-        }
-
-        .nav-menu li a:hover {
-            color: white;
-        }
-
-        .nav-menu li a.active {
-            color: white;
-            border-bottom: 2px solid #bbdefb;
-        }
-
-        @media (max-width: 768px) {
-            .nav-container {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .nav-menu {
-                margin-top: 10px;
-                flex-wrap: wrap;
-            }
-
-            .nav-menu li {
-                margin: 5px 15px 5px 0;
-            }
         }
 
         .container {
@@ -291,22 +221,30 @@
     </style>
 </head>
 <body>
-    <nav class="main-nav">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <a href="index.html">🐺 Two Wolves</a>
+    <header class="site-header">
+        <div class="header-container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-book-open" aria-hidden="true"></i>
+                    <h1>Two Wolves</h1>
+                </div>
+                <div class="mobile-menu" aria-label="Toggle navigation" role="button" tabindex="0">
+                    <i class="fas fa-bars" aria-hidden="true"></i>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About the Novel</a></li>
+                        <li><a href="conflict.html">Conflict</a></li>
+                        <li><a class="active" href="notes.html">Book Notes</a></li>
+                        <li><a href="portfolios.html">Portfolio Tasks</a></li>
+                        <li><a href="refresh.html">Refresh</a></li>
+                        <li><a href="secure-portfolios.html">Secure Portfolios</a></li>
+                    </ul>
+                </nav>
             </div>
-            <ul class="nav-menu">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About the Novel</a></li>
-                <li><a href="conflict.html">Conflict</a></li>
-                <li><a class="active" href="notes.html">Book Notes</a></li>
-                <li><a href="portfolios.html">Portfolio Tasks</a></li>
-                <li><a href="refresh.html">Refresh</a></li>
-                <li><a href="secure-portfolios.html">Secure Portfolios</a></li>
-            </ul>
         </div>
-    </nav>
+    </header>
 
     <div class="container">
         <div class="header">
@@ -778,6 +716,22 @@
     </div>
     
     <script>
+    const notesMenuToggle = document.querySelector('.mobile-menu');
+    const notesSiteNav = document.querySelector('.site-header nav');
+    if (notesMenuToggle && notesSiteNav) {
+        const toggleNav = () => notesSiteNav.classList.toggle('active');
+        notesMenuToggle.addEventListener('click', toggleNav);
+        notesMenuToggle.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                toggleNav();
+            }
+        });
+        notesSiteNav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => notesSiteNav.classList.remove('active'));
+        });
+    }
+
     function showNotes(chapterId) {
         // Hide all notes sections
         const allNotes = document.querySelectorAll('.cornell-notes');
