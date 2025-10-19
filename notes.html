@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Two Wolves - Cornell Notes</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            font-size: 14px;
+            line-height: 1.5;
+            color: #263238;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f7fa;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+        
+        .header h1 {
+            font-family: 'Merriweather', serif;
+            font-size: 28px;
+            color: #1a237e;
+            margin-bottom: 10px;
+        }
+        
+        .chapter-selector {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .chapter-btn {
+            background-color: #e8eaf6;
+            border: 1px solid #c5cae9;
+            border-radius: 20px;
+            padding: 8px 16px;
+            font-size: 14px;
+            color: #3949ab;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .chapter-btn:hover {
+            background-color: #c5cae9;
+        }
+        
+        .chapter-btn.active {
+            background-color: #3949ab;
+            color: white;
+        }
+        
+        .cornell-notes {
+            display: none;
+            margin-bottom: 30px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            background-color: white;
+        }
+        
+        .cornell-notes.active {
+            display: block;
+        }
+        
+        .cornell-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 12px;
+            align-items: center;
+        }
+        
+        .cornell-title {
+            font-weight: 500;
+            font-size: 18px;
+            color: #1a237e;
+        }
+        
+        .cornell-input {
+            border: none;
+            border-bottom: 2px solid #e0e0e0;
+            font-size: 12px;
+            width: 130px;
+            padding: 5px;
+        }
+        
+        .section-title {
+            font-weight: 500;
+            font-size: 16px;
+            color: #1a237e;
+            margin: 20px 0 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title .material-icons {
+            margin-right: 8px;
+            color: #3949ab;
+        }
+        
+        .section-area {
+            min-height: 120px;
+            border: 2px solid #e0e0e0;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            width: 100%;
+            resize: vertical;
+        }
+        
+        .quotes-section {
+            margin-top: 20px;
+        }
+        
+        .quote-box {
+            border-left: 4px solid #3949ab;
+            padding: 15px;
+            margin: 15px 0;
+            background-color: #e8eaf6;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .quote-text {
+            font-family: 'Merriweather', serif;
+            font-style: italic;
+            margin-bottom: 8px;
+            font-size: 15px;
+            color: #283593;
+        }
+        
+        .quote-source {
+            font-size: 12px;
+            text-align: right;
+            color: #546e7a;
+            font-weight: 500;
+        }
+        
+        .quote-analysis {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: white;
+            border: 1px dashed #ccc;
+            border-radius: 5px;
+        }
+        
+        .save-btn {
+            background-color: #1a237e;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 20px;
+            display: block;
+            transition: all 0.3s ease;
+        }
+        
+        .save-btn:hover {
+            background-color: #3949ab;
+        }
+        
+        .instructions {
+            background-color: #e8eaf6;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-left: 5px solid #3949ab;
+        }
+        
+        .instructions h3 {
+            margin-top: 0;
+            color: #1a237e;
+        }
+        
+        .instructions ul {
+            margin-bottom: 0;
+        }
+        
+        .add-quote-btn {
+            background-color: #3949ab;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 6px 12px;
+            font-size: 12px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: all 0.2s ease;
+        }
+        
+        .add-quote-btn:hover {
+            background-color: #1a237e;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🐺 Two Wolves - Cornell Notes</h1>
+            <p>Use these templates to organize your notes while reading Two Wolves by Tristan Bancks</p>
+        </div>
+        
+        <div class="instructions">
+            <h3>How to Use Cornell Notes</h3>
+            <ul>
+                <li><strong>Characters:</strong> Record information about characters and their development</li>
+                <li><strong>Themes:</strong> Note down themes and how they're explored in the text</li>
+                <li><strong>Setting:</strong> Describe settings and how they affect the story</li>
+                <li><strong>Important Quotes:</strong> Collect significant quotes and analyze their meaning</li>
+                <li>Use these notes to help you plan your TEEL paragraphs and essays</li>
+            </ul>
+        </div>
+        
+        <div class="chapter-selector">
+            <button class="chapter-btn active" onclick="showNotes('ch1-4')">Chapters 1-4</button>
+            <button class="chapter-btn" onclick="showNotes('ch5-8')">Chapters 5-8</button>
+            <button class="chapter-btn" onclick="showNotes('ch9-12')">Chapters 9-12</button>
+            <button class="chapter-btn" onclick="showNotes('ch13-16')">Chapters 13-16</button>
+            <button class="chapter-btn" onclick="showNotes('ch17-21')">Chapters 17-21</button>
+            <button class="chapter-btn" onclick="showNotes('ch22-26')">Chapters 22-26</button>
+            <button class="chapter-btn" onclick="showNotes('ch27-31')">Chapters 27-31</button>
+            <button class="chapter-btn" onclick="showNotes('ch32-38')">Chapters 32-38</button>
+        </div>
+        
+        <!-- Chapters 1-4 -->
+        <div id="ch1-4" class="cornell-notes active">
+            <div class="cornell-header">
+                <div class="cornell-title">Chapters 1-4: Introduction</div>
+                <div>
+                    <input type="text" class="cornell-input" placeholder="Chapters: 1-4">
+                    <input type="text" class="cornell-input" placeholder="Pages:">
+                </div>
+            </div>
+            
+            <div class="section-title">
+                <i class="material-icons">people</i>
+                Characters
+            </div>
+            <textarea class="section-area" placeholder="Record information about characters and their development in these chapters..."></textarea>
+            
+            <div class="section-title">
+                <i class="material-icons">lightbulb</i>
+                Themes
+            </div>
+            <textarea class="section-area" placeholder="Note down themes and how they're explored in these chapters..."></textarea>
+            
+            <div class="section-title">
+                <i class="material-icons">landscape</i>
+                Setting
+            </div>
+            <textarea class="section-area" placeholder="Describe settings and how they affect the story in these chapters..."></textarea>
+            
+            <div class="section-title">
+                <i class="material-icons">format_quote</i>
+                Important Quotes
+            </div>
+            <div class="quotes-section" id="quotes-ch1-4">
+                <div class="quote-box">
+                    <div class="quote-text">"They weren't really one of those family-movie-night, camp-in-the-backyard, let's-discuss-this-and-get-everyone's-opinion kind of families."</div>
+                    <div class="quote-source">Page 10</div>
+                    <div class="quote-analysis">
+                        <textarea placeholder="Why is this quote important? What does it reveal about the family?"></textarea>
+                    </div>
+                </div>
+                
+                <div class="quote-box">
+                    <div class="quote-text">"The one you feed."</div>
+                    <div class="quote-source">Page 21</div>
+                    <div class="quote-analysis">
+                        <textarea placeholder="Why is this quote important? How does it connect to the novel's title?"></textarea>
+                    </div>
+                </div>
+                
+                <div class="quote-box">
+                    <div class="quote-text">"For the first time ever, Ben did not ask a question."</div>
+                    <div class="quote-source">Page 33</div>
+                    <div class="quote-analysis">
+                        <textarea placeholder="Why is this quote important? What does it reveal about Ben?"></textarea>
+                    </div>
+                </div>
+            </div>
+            <button class="add-quote-btn" onclick="addQuote('ch1-4')">+ Add Another Quote</button>
+            
+            <button class="save-btn" onclick="saveNotes('ch1-4')">Save Notes</button>
+        </div>
+        
+        <!-- Chapters 5-8 -->
+        <div id="ch5-8" class="cornell-notes">
+            <div class="cornell-header">
+                <div class="cornell-title">Chapters 5-8: The Holiday & The Chase</div>
+                <div>
+                    <input type="text" class="cornell-input" placeholder="Chapters: 5-8">
+                    <input type="text" class="cornell-input" placeholder="Pages:">
+                </div>
+            </div>
+            
+            <div class="section-title">
+                <i class="material-icons">people</i>
+                Characters
+            </div>
+            <textarea class="section-area" placeholder="Record information about characters and their development in these chapters..."></textarea>
+            
+            <div class="section-title">
+                <i class="material-icons">lightbulb</i>
+                Themes
+            </div>
+            <textarea class="section-area" placeholder="Note down themes and how they're explored in these chapters..."></textarea>
+            
+            <div class="section-title">
+                <i class="material-icons">landscape</i>
+                Setting
+            </div>
+            <textarea class="section-area" placeholder="Describe settings and how they affect the story in these chapters..."></textarea>
+            
+            <div class="section-title">
+                <i class="material-icons">format_quote</i>
+                Important Quotes
+            </div>
+            <div class="quotes-section" id="quotes-ch5-8">
+                <div class="quote-box">
+                    <div class="quote-text">"Big Girl. You're Scared."</div>
+                    <div class="quote-source">Page 40</div>
+                    <div class="quote-analysis">
+                        <textarea placeholder="Why is this quote important? What does it reveal about Ray's character?"></textarea>
+                    </div>
+                </div>
+                
+                <div class="quote-box">
+                    <div class="quote-text">"He scanned the ground for snakes, every cell in his body pleading to return to the car."</div>
+                    <div class="quote-source">Page 41</div>
+                    <div class="quote-analysis">
+                        <textarea placeholder="Why is this quote important? How does it show Ben's relationship with nature?"></textarea>
+                    </div>
+                </div>
+            </div>
+            <button class="add-quote-btn" onclick="addQuote('ch5-8')">+ Add Another Quote</button>
+            
+            <button class="save-btn" onclick="saveNotes('ch5-8')">Save Notes</button>
+        </div>
+        
+        <!-- Chapters 9-12 -->
+        <div id="ch9-12" class="cornell-notes">
+            <div class="cornell-header">
+                <div class="cornell-title">Chapters 9-12: The Cabin & The Secret</div>
+                <div>
+                    <input type="text" class="cornell-input" placeholder="Chapters: 9-12">
+                    <input type="text" class="cornell-input" placeholder="Pages:">
+                </div>
+            </div>
+            
+            <div class="section-title">
+                <i class="material-icons">people</i>
+                Characters
+            </div>
+            <textarea class="section-area" placeholder="Record information about characters and their development in these chapters..."></textarea>
+            
+            <div class="section-title">
+                <i class="material-icons">lightbulb</i>
+                Themes
+            </div>
+            <textarea class="section-area" placeholder="Note down themes and how they're explored in these chapters..."></textarea>
+            
+            <div class="section-title">
+                <i class="material-icons">landscape</i>
+                Setting
+            </div>
+            <textarea class="section-area" placeholder="Describe settings and how they affect the story in these chapters..."></textarea>
+            
+            <div class="section-title">
+                <i class="material-icons">format_quote</i>
+                Important Quotes
+            </div>
+            <div class="quotes-section" id="quotes-ch9-12">
+                <div class="quote-box">
+                    <div class="quote-text">"Nature was real and true and terrible."</div>
+                    <div class="quote-source">Page 67</div>
+                    <div class="quote-analysis">
+                        <textarea placeholder="Why is this quote important? How does it show Ben's perception of nature?"></textarea>
+                    </div>
+                </div>
+                
+                <div class="quote-box">
+                    <div class="quote-text">"Adults never told kids anything. Nothing worth hearing anyway."</div>
+                    <div class="quote-source">Page 71</div>
+                    <div class="quote-analysis">
+                        <textarea placeholder="Why is this quote important? What does it reveal about Ben's perspective?"></textarea>
+                    </div>
+                </div>
+            </div>
+            <button class="add-quote-btn" onclick="addQuote('ch9-12')">+ Add Another Quote</button>
+            
+            <button class="save-btn" onclick="saveNotes('ch9-12')">Save Notes</button>
+        </div>
+        
+        <!-- Chapters 13-16 -->
+        <div id="ch13-16" class="cornell-notes">
+            <div class="cornell-header">
+                <div class="cornell-title">Chapters 13-16: The Hunt & The Notebook</div>
+                <div>
+                    <input type="text" class="cornell-input" placeholder="Chapters: 13-16">
+                    <input type="text" class="cornell-input" placeholder="Pages:">
+                </div>
+            </div>
+            
+            <div class="section-title">
+                <i class="material-icons">people</i>
+                Characters
+            </div>
+            <textarea class="section-area" placeholder="Record information about characters and their development in these chapters..."></textarea>
+            
+            <div class="section-title">
+                <i class="material-icons">lightbulb</i>
+                Themes
+            </div>
+            <textarea class="section-area" placeholder="Note down themes and how they're explored in these chapters..."></textarea>
+            
+            <div class="section-title">
+                <i class="material-icons">landscape</i>
+                Setting
+            </div>
+            <textarea class="section-area" placeholder="Describe settings and how they affect the story in these chapters..."></textarea>
+            
+            <div class="section-title">
+                <i class="material-icons">format_quote</i>
+                Important Quotes
+            </div>
+            <div class="quotes-section" id="quotes-ch13-16">
+                <div class="quote-box">
+                    <div class="quote-text">"Dad poked the foot at him again and Ben looked into his father's eyes. They seemed less alive than the rabbits'."</div>
+                    <div class="quote-source">Page 112</div>
+                    <div class="quote-analysis">
+                        <textarea placeholder="Why is this quote important? What does it reveal about Ray?"></textarea>
+                    </div>
+                </div>
+                
+                <div class="quote-box">
+                    <div class="quote-text">"Can your own parents kidnap you? I think mine have. Help!"</div>
+                    <div class="quote-source">Page 115</div>
+                    <div class="quote-analysis">
+                        <textarea placeholder="Why is this quote important? How does it show Ben's feelings?"></textarea>
+                    </div>
+                </div>
+            </div>
+            <button class="add-quote-btn" onclick="addQuote('ch13-16')">+ Add Another Quote</button>
+            
+            <button class="save-btn" onclick="saveNotes('ch13-16')">Save Notes</button>
+        </div>
+        
+        <!-- Chapters 17-21 -->
+        <div id="ch17-21" class="cornell-notes">
+            <div class="cornell-header">
+                <div class="cornell-title">Chapters 17-21: Trappeddiv>
+                <div>
+                    < & The Hole</input type="text" class="cornell-input" placeholder="Chapters: 17-21">
+                    <input type="text" class="cornell-input" placeholder="Pages:">
+                </div>
+            </div>
+            
+            <div class="section-title">
+                <i class="material-icons">people</i>
+                Characters
+            </div>
+            <textarea class="section-area" placeholder="Record information about characters and their development in these chapters..."></textarea>
+            
+            <div class="section-title">
+                <i class="material-icons">lightbulb</i>
+                Themes
+            </div>
+            <textarea class="section-area" placeholder="Note down themes and how they're explored in these chapters..."></textarea>
+            
+            <div class="section-title">
+                <i class="material-icons">landscape</i>
+                Setting
+            </div>
+            <textarea class="section-area" placeholder="Describe settings and how they affect the story in these chapters..."></textarea>
+            
+            <div class="section-title">
+                <i class="material-icons">format_quote</i>
+                Important Quotes
+            </div>
+            <div class="quotes-section" id="quotes-ch17-21">
+                <div class="quote-box">
+                    <div class="quote-text">"Useless. Come back when you're a man."</div>
+                    <div class="quote-source">Page 155</div>
+                    <div class="quote-analysis">
+                        <textarea placeholder="Why is this quote important? What does it reveal about Ray's character?"></textarea>
+                    </div>
+                </div>
+                
+                <div class="quote-box">
+                    <div class="quote-text">"Dad was faster than him. He had leg-length. He could take Ben down like a wolf chasing a rabbit. Eat him alive."</div>
+                    <div class="quote-source">Page 159</div>
+                    <div class="quote-analysis">
+                        <textarea placeholder="Why is this quote important? How does it show Ben's fear?"></textarea>
+                    </div>
+                </div>
+            </div>
+            <button class="add-quote-btn" onclick="addQuote('ch17-21')">+ Add Another Quote</button>
+            
+            <button class="save-btn" onclick="saveNotes('ch17-21')">Save Notes</button>
+        </div>
+        
+        <!-- Chapters 22-26 -->
+        <div id="ch22-26" class="cornell-notes">
+            <div class="cornell-header">
+                <div class="cornell-title">Chapters 22-26: Into the Wild & Stuck</div>
+                <div>
+                    <input type="text" class="cornell-input" placeholder="Chapters: 22-26">
+                    <input type="text" class="cornell-input" placeholder="Pages:">
+                </div>
+            </div>
+            
+            <div class="section-title">
+                <i class="material-icons">people</i>
+                Characters
+            </div>
+            <textarea class="section-area" placeholder="Record information about characters and their development in these chapters..."></textarea>
+            
+            <div class="section-title">
+                <i class="material-icons">lightbulb</i>
+                Themes
+            </div>
+            <textarea class="section-area" placeholder="Note down themes and how they're explored in these chapters..."></textarea>
+            
+            <div class="section-title">
+                <i class="material-icons">landscape</i>
+                Setting
+            </div>
+            <textarea class="section-area" placeholder="Describe settings and how they affect the story in these chapters..."></textarea>
+            
+            <div class="section-title">
+                <i class="material-icons">format_quote</i>
+                Important Quotes
+            </div>
+            <div class="quotes-section" id="quotes-ch22-26">
+                <div class="quote-box">
+                    <div class="quote-text">"It would be so easy to go back. Easier than going forward."</div>
+                    <div class="quote-source">Page 165</div>
+                    <div class="quote-analysis">
+                        <textarea placeholder="Why is this quote important? What does it reveal about Ben's decision?"></textarea>
+                    </div>
+                </div>
+                
+                <div class="quote-box">
+                    <div class="quote-text">"Ben no longer knew if he was a detective or a thief."</div>
+                    <div class="quote-source">Page 172</div>
+                    <div class="quote-analysis">
+                        <textarea placeholder="Why is this quote important? How does it show Ben's internal conflict?"></textarea>
+                    </div>
+                </div>
+            </div>
+            <button class="add-quote-btn" onclick="addQuote('ch22-26')">+ Add Another Quote</button>
+            
+            <button class="save-btn" onclick="saveNotes('ch22-26')">Save Notes</button>
+        </div>
+        
+        <!-- Chapters 27-31 -->
+        <div id="ch27-31" class="cornell-notes">
+            <div class="cornell-header">
+                <div class="cornell-title">Chapters 27-31: Tempest & The Wreckers</div>
+                <div>
+                    <input type="text" class="cornell-input" placeholder="Chapters: 27-31">
+                    <input type="text" class="cornell-input" placeholder="Pages:">
+                </div>
+            </div>
+            
+            <div class="section-title">
+                <i class="material-icons">people</i>
+                Characters
+            </div>
+            <textarea class="section-area" placeholder="Record information about characters and their development in these chapters..."></textarea>
+            
+            <div class="section-title">
+                <i class="material-icons">lightbulb</i>
+                Themes
+            </div>
+            <textarea class="section-area" placeholder="Note down themes and how they're explored in these chapters..."></textarea>
+            
+            <div class="section-title">
+                <i class="material-icons">landscape</i>
+                Setting
+            </div>
+            <textarea class="section-area" placeholder="Describe settings and how they affect the story in these chapters..."></textarea>
+            
+            <div class="section-title">
+                <i class="material-icons">format_quote</i>
+                Important Quotes
+            </div>
+            <div class="quotes-section" id="quotes-ch27-31">
+                <div class="quote-box">
+                    <div class="quote-text">"Ben had once heard Mum telling Dad in an argument that 'money doesn't buy happiness'."</div>
+                    <div class="quote-source">Page 194</div>
+                    <div class="quote-analysis">
+                        <textarea placeholder="Why is this quote important? How does it connect to the novel's themes?"></textarea>
+                    </div>
+                </div>
+                
+                <div class="quote-box">
+                    <div class="quote-text">"Death could not be worse than this."</div>
+                    <div class="quote-source">Page 202</div>
+                    <div class="quote-analysis">
+                        <textarea placeholder="Why is this quote important? How does it show Ben's desperation?"></textarea>
+                    </div>
+                </div>
+            </div>
+            <button class="add-quote-btn" onclick="addQuote('ch27-31')">+ Add Another Quote</button>
+            
+            <button class="save-btn" onclick="saveNotes('ch27-31')">Save Notes</button>
+        </div>
+        
+        <!-- Chapters 32-38 -->
+        <div id="ch32-38" class="cornell-notes">
+            <div class="cornell-header">
+                <div class="cornell-title">Chapters 32-38: The Road & One Wolf</div>
+                <div>
+                    <input type="text" class="cornell-input" placeholder="Chapters: 32-38">
+                    <input type="text" class="cornell-input" placeholder="Pages:">
+                </div>
+            </div>
+            
+            <div class="section-title">
+                <i class="material-icons">people</i>
+                Characters
+            </div>
+            <textarea class="section-area" placeholder="Record information about characters and their development in these chapters..."></textarea>
+            
+            <div class="section-title">
+                <i class="material-icons">lightbulb</i>
+                Themes
+            </div>
+            <textarea class="section-area" placeholder="Note down themes and how they're explored in these chapters..."></textarea>
+            
+            <div class="section-title">
+                <i class="material-icons">landscape</i>
+                Setting
+            </div>
+            <textarea class="section-area" placeholder="Describe settings and how they affect the story in these chapters..."></textarea>
+            
+            <div class="section-title">
+                <i class="material-icons">format_quote</i>
+                Important Quotes
+            </div>
+            <div class="quotes-section" id="quotes-ch32-38">
+                <div class="quote-box">
+                    <div class="quote-text">"Ben watched her chopping onions, thinking how easy food seemed now."</div>
+                    <div class="quote-source">Page 241</div>
+                    <div class="quote-analysis">
+                        <textarea placeholder="Why is this quote important? How does it show Ben's perspective change?"></textarea>
+                    </div>
+                </div>
+                
+                <div class="quote-box">
+                    <div class="quote-text">"Do you think we have convict blood? Maybe we can't help it."</div>
+                    <div class="quote-source">Page 243</div>
+                    <div class="quote-analysis">
+                        <textarea placeholder="Why is this quote important? How does it connect to the novel's themes?"></textarea>
+                    </div>
+                </div>
+            </div>
+            <button class="add-quote-btn" onclick="addQuote('ch32-38')">+ Add Another Quote</button>
+            
+            <button class="save-btn" onclick="saveNotes('ch32-38')">Save Notes</button>
+        </div>
+    </div>
+    
+    <script>
+        function showNotes(chapterId) {
+            // Hide all notes sections
+            const allNotes = document.querySelectorAll('.cornell-notes');
+            allNotes.forEach(note => {
+                note.classList.remove('active');
+            });
+            
+            // Remove active class from all buttons
+            const allButtons = document.querySelectorAll('.chapter-btn');
+            allButtons.forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected notes section
+            document.getElementById(chapterId).classList.add('active');
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+        }
+        
+        function addQuote(chapterId) {
+            const quotesSection = document.getElementById('quotes-' + chapterId);
+            const newQuoteBox = document.createElement('div');
+            newQuoteBox.className = 'quote-box';
+            
+            const quoteText = document.createElement('div');
+            quoteText.className = 'quote-text';
+            quoteText.contentEditable = true;
+            quoteText.textContent = 'Enter quote text here...';
+            
+            const quoteSource = document.createElement('div');
+            quoteSource.className = 'quote-source';
+            quoteSource.contentEditable = true;
+            quoteSource.textContent = 'Page: ';
+            
+            const quoteAnalysis = document.createElement('div');
+            quoteAnalysis.className = 'quote-analysis';
+            
+            const analysisTextarea = document.createElement('textarea');
+            analysisTextarea.placeholder = 'Why is this quote important?';
+            
+            quoteAnalysis.appendChild(analysisTextarea);
+            
+            newQuoteBox.appendChild(quoteText);
+            newQuoteBox.appendChild(quoteSource);
+            newQuoteBox.appendChild(quoteAnalysis);
+            
+            quotesSection.appendChild(newQuoteBox);
+        }
+        
+        function saveNotes(chapterId) {
+            // This is a placeholder function for saving notes
+            // You'll need to implement the actual saving functionality
+            // based on your portfolio system (Google Drive, etc.)
+            
+            alert('Notes saved! (Note: You will need to implement the actual save functionality)');
+        }
+    </script>
+</body>
+</html>
