@@ -266,19 +266,42 @@
         .activity-item {
             display: flex;
             align-items: center;
+            gap: 12px;
             padding: 10px 0;
             border-bottom: 1px solid #eee;
         }
-        
+
         .activity-item:last-child {
             border-bottom: none;
         }
-        
-        .activity-item i {
-            margin-right: 10px;
+
+        .activity-checkbox {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            accent-color: var(--secondary-color);
+        }
+
+        .activity-content {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex: 1;
+        }
+
+        .activity-content i {
             color: var(--secondary-color);
         }
-        
+
+        .activity-item.completed .activity-content a,
+        .activity-item.completed .activity-content i {
+            color: #999;
+        }
+
+        .activity-item.completed .activity-content a {
+            text-decoration: line-through;
+        }
+
         .activity-item a {
             color: var(--secondary-color);
             text-decoration: none;
@@ -662,28 +685,46 @@
                     <div class="lesson-activities">
                         <h4>Activities:</h4>
                         <div class="activity-item">
-                            <i class="fas fa-file-alt"></i>
-                            <a href="https://docs.google.com/document/d/1abc123" target="_blank">Cover and blurb predictions</a>
+                            <input type="checkbox" id="week1-activity1" class="activity-checkbox" data-activity-id="week1-activity1" aria-label="Mark Cover and blurb predictions as complete">
+                            <div class="activity-content">
+                                <i class="fas fa-file-alt"></i>
+                                <a href="https://docs.google.com/document/d/1abc123" target="_blank">Cover and blurb predictions</a>
+                            </div>
                         </div>
                         <div class="activity-item">
-                            <i class="fas fa-file-alt"></i>
-                            <a href="refresh.html">Chapter 1-5 Refresher</a>
+                            <input type="checkbox" id="week1-activity2" class="activity-checkbox" data-activity-id="week1-activity2" aria-label="Mark Chapter 1-5 Refresher as complete">
+                            <div class="activity-content">
+                                <i class="fas fa-file-alt"></i>
+                                <a href="refresh.html">Chapter 1-5 Refresher</a>
+                            </div>
                         </div>
                         <div class="activity-item">
-                            <i class="fas fa-file-alt"></i>
-                            <a href="conflict.html">Conflict</a>
+                            <input type="checkbox" id="week1-activity3" class="activity-checkbox" data-activity-id="week1-activity3" aria-label="Mark Conflict as complete">
+                            <div class="activity-content">
+                                <i class="fas fa-file-alt"></i>
+                                <a href="conflict.html">Conflict</a>
+                            </div>
                         </div>
                         <div class="activity-item">
-                            <i class="fas fa-user"></i>
-                            <a href="https://docs.google.com/document/d/1def456" target="_blank">Character introduction: Ben</a>
+                            <input type="checkbox" id="week1-activity4" class="activity-checkbox" data-activity-id="week1-activity4" aria-label="Mark Character introduction: Ben as complete">
+                            <div class="activity-content">
+                                <i class="fas fa-user"></i>
+                                <a href="https://docs.google.com/document/d/1def456" target="_blank">Character introduction: Ben</a>
+                            </div>
                         </div>
                         <div class="activity-item">
-                            <i class="fas fa-book"></i>
-                            <a href="https://docs.google.com/document/d/1OSyd52FSxhwJYqPK4tMxwTwiUBBHg6qKnupLhaVyikY/edit?usp=sharing" target="_blank">Chapter Summaries</a>
+                            <input type="checkbox" id="week1-activity5" class="activity-checkbox" data-activity-id="week1-activity5" aria-label="Mark Chapter Summaries as complete">
+                            <div class="activity-content">
+                                <i class="fas fa-book"></i>
+                                <a href="https://docs.google.com/document/d/1OSyd52FSxhwJYqPK4tMxwTwiUBBHg6qKnupLhaVyikY/edit?usp=sharing" target="_blank">Chapter Summaries</a>
+                            </div>
                         </div>
                         <div class="activity-item">
-                            <i class="fas fa-question-circle"></i>
-                            <a href="https://forms.gle/abc123" target="_blank">Exit Ticket: Google Form Quiz</a>
+                            <input type="checkbox" id="week1-activity6" class="activity-checkbox" data-activity-id="week1-activity6" aria-label="Mark Exit Ticket: Google Form Quiz as complete">
+                            <div class="activity-content">
+                                <i class="fas fa-question-circle"></i>
+                                <a href="https://forms.gle/abc123" target="_blank">Exit Ticket: Google Form Quiz</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -703,20 +744,32 @@
                     <div class="lesson-activities">
                         <h4>Activities:</h4>
                         <div class="activity-item">
-                            <i class="fas fa-quote-right"></i>
-                            <a href="https://docs.google.com/document/d/1jkl012" target="_blank">How to use evidence in a text response essay</a>
+                            <input type="checkbox" id="week2-activity1" class="activity-checkbox" data-activity-id="week2-activity1" aria-label="Mark How to use evidence in a text response essay as complete">
+                            <div class="activity-content">
+                                <i class="fas fa-quote-right"></i>
+                                <a href="https://docs.google.com/document/d/1jkl012" target="_blank">How to use evidence in a text response essay</a>
+                            </div>
                         </div>
                         <div class="activity-item">
-                            <i class="fas fa-search"></i>
-                            <a href="https://docs.google.com/document/d/1mno345" target="_blank">Quote analysis practice</a>
+                            <input type="checkbox" id="week2-activity2" class="activity-checkbox" data-activity-id="week2-activity2" aria-label="Mark Quote analysis practice as complete">
+                            <div class="activity-content">
+                                <i class="fas fa-search"></i>
+                                <a href="https://docs.google.com/document/d/1mno345" target="_blank">Quote analysis practice</a>
+                            </div>
                         </div>
                         <div class="activity-item">
-                            <i class="fas fa-list-ol"></i>
-                            <a href="https://docs.google.com/document/d/1pqr678" target="_blank">TEEL paragraph introduction</a>
+                            <input type="checkbox" id="week2-activity3" class="activity-checkbox" data-activity-id="week2-activity3" aria-label="Mark TEEL paragraph introduction as complete">
+                            <div class="activity-content">
+                                <i class="fas fa-list-ol"></i>
+                                <a href="https://docs.google.com/document/d/1pqr678" target="_blank">TEEL paragraph introduction</a>
+                            </div>
                         </div>
                         <div class="activity-item">
-                            <i class="fas fa-question-circle"></i>
-                            <a href="https://forms.gle/def456" target="_blank">Exit Ticket: Google Form Quiz</a>
+                            <input type="checkbox" id="week2-activity4" class="activity-checkbox" data-activity-id="week2-activity4" aria-label="Mark Exit Ticket: Google Form Quiz as complete">
+                            <div class="activity-content">
+                                <i class="fas fa-question-circle"></i>
+                                <a href="https://forms.gle/def456" target="_blank">Exit Ticket: Google Form Quiz</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -736,20 +789,32 @@
                     <div class="lesson-activities">
                         <h4>Activities:</h4>
                         <div class="activity-item">
-                            <i class="fas fa-tree"></i>
-                            <a href="https://docs.google.com/document/d/1stu901" target="_blank">TEEL Paragraph: How does the author create nature as a challenging setting?</a>
+                            <input type="checkbox" id="week3-activity1" class="activity-checkbox" data-activity-id="week3-activity1" aria-label="Mark TEEL Paragraph: How does the author create nature as a challenging setting? as complete">
+                            <div class="activity-content">
+                                <i class="fas fa-tree"></i>
+                                <a href="https://docs.google.com/document/d/1stu901" target="_blank">TEEL Paragraph: How does the author create nature as a challenging setting?</a>
+                            </div>
                         </div>
                         <div class="activity-item">
-                            <i class="fas fa-home"></i>
-                            <a href="https://docs.google.com/document/d/1vwx234" target="_blank">Setting analysis: The cabin</a>
+                            <input type="checkbox" id="week3-activity2" class="activity-checkbox" data-activity-id="week3-activity2" aria-label="Mark Setting analysis: The cabin as complete">
+                            <div class="activity-content">
+                                <i class="fas fa-home"></i>
+                                <a href="https://docs.google.com/document/d/1vwx234" target="_blank">Setting analysis: The cabin</a>
+                            </div>
                         </div>
                         <div class="activity-item">
-                            <i class="fas fa-book"></i>
-                            <a href="https://docs.google.com/document/d/1yzd567" target="_blank">Chapter 5-6 reading and activities</a>
+                            <input type="checkbox" id="week3-activity3" class="activity-checkbox" data-activity-id="week3-activity3" aria-label="Mark Chapter 5-6 reading and activities as complete">
+                            <div class="activity-content">
+                                <i class="fas fa-book"></i>
+                                <a href="https://docs.google.com/document/d/1yzd567" target="_blank">Chapter 5-6 reading and activities</a>
+                            </div>
                         </div>
                         <div class="activity-item">
-                            <i class="fas fa-question-circle"></i>
-                            <a href="https://forms.gle/ghi789" target="_blank">Exit Ticket: Google Form Quiz</a>
+                            <input type="checkbox" id="week3-activity4" class="activity-checkbox" data-activity-id="week3-activity4" aria-label="Mark Exit Ticket: Google Form Quiz as complete">
+                            <div class="activity-content">
+                                <i class="fas fa-question-circle"></i>
+                                <a href="https://forms.gle/ghi789" target="_blank">Exit Ticket: Google Form Quiz</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -769,20 +834,32 @@
                     <div class="lesson-activities">
                         <h4>Activities:</h4>
                         <div class="activity-item">
-                            <i class="fas fa-home"></i>
-                            <a href="https://docs.google.com/document/d/1abc890" target="_blank">TEEL Paragraph: How does Ben find his home environment challenging?</a>
+                            <input type="checkbox" id="week4-activity1" class="activity-checkbox" data-activity-id="week4-activity1" aria-label="Mark TEEL Paragraph: How does Ben find his home environment challenging? as complete">
+                            <div class="activity-content">
+                                <i class="fas fa-home"></i>
+                                <a href="https://docs.google.com/document/d/1abc890" target="_blank">TEEL Paragraph: How does Ben find his home environment challenging?</a>
+                            </div>
                         </div>
                         <div class="activity-item">
-                            <i class="fas fa-users"></i>
-                            <a href="https://docs.google.com/document/d/1def123" target="_blank">Family dynamics analysis</a>
+                            <input type="checkbox" id="week4-activity2" class="activity-checkbox" data-activity-id="week4-activity2" aria-label="Mark Family dynamics analysis as complete">
+                            <div class="activity-content">
+                                <i class="fas fa-users"></i>
+                                <a href="https://docs.google.com/document/d/1def123" target="_blank">Family dynamics analysis</a>
+                            </div>
                         </div>
                         <div class="activity-item">
-                            <i class="fas fa-book"></i>
-                            <a href="https://docs.google.com/document/d/1ghi456" target="_blank">Chapter 7-9 reading and activities</a>
+                            <input type="checkbox" id="week4-activity3" class="activity-checkbox" data-activity-id="week4-activity3" aria-label="Mark Chapter 7-9 reading and activities as complete">
+                            <div class="activity-content">
+                                <i class="fas fa-book"></i>
+                                <a href="https://docs.google.com/document/d/1ghi456" target="_blank">Chapter 7-9 reading and activities</a>
+                            </div>
                         </div>
                         <div class="activity-item">
-                            <i class="fas fa-question-circle"></i>
-                            <a href="https://forms.gle/jkl012" target="_blank">Exit Ticket: Google Form Quiz</a>
+                            <input type="checkbox" id="week4-activity4" class="activity-checkbox" data-activity-id="week4-activity4" aria-label="Mark Exit Ticket: Google Form Quiz as complete">
+                            <div class="activity-content">
+                                <i class="fas fa-question-circle"></i>
+                                <a href="https://forms.gle/jkl012" target="_blank">Exit Ticket: Google Form Quiz</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -802,20 +879,32 @@
                     <div class="lesson-activities">
                         <h4>Activities:</h4>
                         <div class="activity-item">
-                            <i class="fas fa-user-friends"></i>
-                            <a href="https://docs.google.com/document/d/1mno789" target="_blank">TEEL Paragraph: What is a character that Ben finds difficult/challenging?</a>
+                            <input type="checkbox" id="week5-activity1" class="activity-checkbox" data-activity-id="week5-activity1" aria-label="Mark TEEL Paragraph: What is a character that Ben finds difficult/challenging? as complete">
+                            <div class="activity-content">
+                                <i class="fas fa-user-friends"></i>
+                                <a href="https://docs.google.com/document/d/1mno789" target="_blank">TEEL Paragraph: What is a character that Ben finds difficult/challenging?</a>
+                            </div>
                         </div>
                         <div class="activity-item">
-                            <i class="fas fa-project-diagram"></i>
-                            <a href="https://docs.google.com/document/d/1pqr012" target="_blank">Character relationship mapping</a>
+                            <input type="checkbox" id="week5-activity2" class="activity-checkbox" data-activity-id="week5-activity2" aria-label="Mark Character relationship mapping as complete">
+                            <div class="activity-content">
+                                <i class="fas fa-project-diagram"></i>
+                                <a href="https://docs.google.com/document/d/1pqr012" target="_blank">Character relationship mapping</a>
+                            </div>
                         </div>
                         <div class="activity-item">
-                            <i class="fas fa-book"></i>
-                            <a href="https://docs.google.com/document/d/1stu345" target="_blank">Chapter 10-12 reading and activities</a>
+                            <input type="checkbox" id="week5-activity3" class="activity-checkbox" data-activity-id="week5-activity3" aria-label="Mark Chapter 10-12 reading and activities as complete">
+                            <div class="activity-content">
+                                <i class="fas fa-book"></i>
+                                <a href="https://docs.google.com/document/d/1stu345" target="_blank">Chapter 10-12 reading and activities</a>
+                            </div>
                         </div>
                         <div class="activity-item">
-                            <i class="fas fa-question-circle"></i>
-                            <a href="https://forms.gle/vwx678" target="_blank">Exit Ticket: Google Form Quiz</a>
+                            <input type="checkbox" id="week5-activity4" class="activity-checkbox" data-activity-id="week5-activity4" aria-label="Mark Exit Ticket: Google Form Quiz as complete">
+                            <div class="activity-content">
+                                <i class="fas fa-question-circle"></i>
+                                <a href="https://forms.gle/vwx678" target="_blank">Exit Ticket: Google Form Quiz</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -835,20 +924,32 @@
                     <div class="lesson-activities">
                         <h4>Activities:</h4>
                         <div class="activity-item">
-                            <i class="fas fa-pen"></i>
-                            <a href="https://docs.google.com/document/d/1yzd901" target="_blank">Introduction writing scaffold</a>
+                            <input type="checkbox" id="week6-activity1" class="activity-checkbox" data-activity-id="week6-activity1" aria-label="Mark Introduction writing scaffold as complete">
+                            <div class="activity-content">
+                                <i class="fas fa-pen"></i>
+                                <a href="https://docs.google.com/document/d/1yzd901" target="_blank">Introduction writing scaffold</a>
+                            </div>
                         </div>
                         <div class="activity-item">
-                            <i class="fas fa-lightbulb"></i>
-                            <a href="https://docs.google.com/document/d/1abc234" target="_blank">Essay planning workshop</a>
+                            <input type="checkbox" id="week6-activity2" class="activity-checkbox" data-activity-id="week6-activity2" aria-label="Mark Essay planning workshop as complete">
+                            <div class="activity-content">
+                                <i class="fas fa-lightbulb"></i>
+                                <a href="https://docs.google.com/document/d/1abc234" target="_blank">Essay planning workshop</a>
+                            </div>
                         </div>
                         <div class="activity-item">
-                            <i class="fas fa-book"></i>
-                            <a href="https://docs.google.com/document/d/1def567" target="_blank">Chapter 13-15 reading and activities</a>
+                            <input type="checkbox" id="week6-activity3" class="activity-checkbox" data-activity-id="week6-activity3" aria-label="Mark Chapter 13-15 reading and activities as complete">
+                            <div class="activity-content">
+                                <i class="fas fa-book"></i>
+                                <a href="https://docs.google.com/document/d/1def567" target="_blank">Chapter 13-15 reading and activities</a>
+                            </div>
                         </div>
                         <div class="activity-item">
-                            <i class="fas fa-question-circle"></i>
-                            <a href="https://forms.gle/mno890" target="_blank">Exit Ticket: Google Form Quiz</a>
+                            <input type="checkbox" id="week6-activity4" class="activity-checkbox" data-activity-id="week6-activity4" aria-label="Mark Exit Ticket: Google Form Quiz as complete">
+                            <div class="activity-content">
+                                <i class="fas fa-question-circle"></i>
+                                <a href="https://forms.gle/mno890" target="_blank">Exit Ticket: Google Form Quiz</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -868,20 +969,32 @@
                     <div class="lesson-activities">
                         <h4>Activities:</h4>
                         <div class="activity-item">
-                            <i class="fas fa-edit"></i>
-                            <a href="https://docs.google.com/document/d/1pqr123" target="_blank">Essay drafting workshop</a>
+                            <input type="checkbox" id="week7-activity1" class="activity-checkbox" data-activity-id="week7-activity1" aria-label="Mark Essay drafting workshop as complete">
+                            <div class="activity-content">
+                                <i class="fas fa-edit"></i>
+                                <a href="https://docs.google.com/document/d/1pqr123" target="_blank">Essay drafting workshop</a>
+                            </div>
                         </div>
                         <div class="activity-item">
-                            <i class="fas fa-comments"></i>
-                            <a href="https://docs.google.com/document/d/1stu456" target="_blank">Peer review activity</a>
+                            <input type="checkbox" id="week7-activity2" class="activity-checkbox" data-activity-id="week7-activity2" aria-label="Mark Peer review activity as complete">
+                            <div class="activity-content">
+                                <i class="fas fa-comments"></i>
+                                <a href="https://docs.google.com/document/d/1stu456" target="_blank">Peer review activity</a>
+                            </div>
                         </div>
                         <div class="activity-item">
-                            <i class="fas fa-book"></i>
-                            <a href="https://docs.google.com/document/d/1vwx789" target="_blank">Chapter 16-18 reading and activities</a>
+                            <input type="checkbox" id="week7-activity3" class="activity-checkbox" data-activity-id="week7-activity3" aria-label="Mark Chapter 16-18 reading and activities as complete">
+                            <div class="activity-content">
+                                <i class="fas fa-book"></i>
+                                <a href="https://docs.google.com/document/d/1vwx789" target="_blank">Chapter 16-18 reading and activities</a>
+                            </div>
                         </div>
                         <div class="activity-item">
-                            <i class="fas fa-question-circle"></i>
-                            <a href="https://forms.gle/yzd012" target="_blank">Exit Ticket: Google Form Quiz</a>
+                            <input type="checkbox" id="week7-activity4" class="activity-checkbox" data-activity-id="week7-activity4" aria-label="Mark Exit Ticket: Google Form Quiz as complete">
+                            <div class="activity-content">
+                                <i class="fas fa-question-circle"></i>
+                                <a href="https://forms.gle/yzd012" target="_blank">Exit Ticket: Google Form Quiz</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -901,20 +1014,32 @@
                     <div class="lesson-activities">
                         <h4>Activities:</h4>
                         <div class="activity-item">
-                            <i class="fas fa-file-signature"></i>
-                            <a href="https://docs.google.com/document/d/1abc345" target="_blank">Essay finalization</a>
+                            <input type="checkbox" id="week8-activity1" class="activity-checkbox" data-activity-id="week8-activity1" aria-label="Mark Essay finalization as complete">
+                            <div class="activity-content">
+                                <i class="fas fa-file-signature"></i>
+                                <a href="https://docs.google.com/document/d/1abc345" target="_blank">Essay finalization</a>
+                            </div>
                         </div>
                         <div class="activity-item">
-                            <i class="fas fa-check-double"></i>
-                            <a href="https://docs.google.com/document/d/1def678" target="_blank">Self-assessment checklist</a>
+                            <input type="checkbox" id="week8-activity2" class="activity-checkbox" data-activity-id="week8-activity2" aria-label="Mark Self-assessment checklist as complete">
+                            <div class="activity-content">
+                                <i class="fas fa-check-double"></i>
+                                <a href="https://docs.google.com/document/d/1def678" target="_blank">Self-assessment checklist</a>
+                            </div>
                         </div>
                         <div class="activity-item">
-                            <i class="fas fa-book-reader"></i>
-                            <a href="https://docs.google.com/document/d/1ghi901" target="_blank">Novel conclusion activities</a>
+                            <input type="checkbox" id="week8-activity3" class="activity-checkbox" data-activity-id="week8-activity3" aria-label="Mark Novel conclusion activities as complete">
+                            <div class="activity-content">
+                                <i class="fas fa-book-reader"></i>
+                                <a href="https://docs.google.com/document/d/1ghi901" target="_blank">Novel conclusion activities</a>
+                            </div>
                         </div>
                         <div class="activity-item">
-                            <i class="fas fa-question-circle"></i>
-                            <a href="https://forms.gle/mno234" target="_blank">Exit Ticket: Google Form Quiz</a>
+                            <input type="checkbox" id="week8-activity4" class="activity-checkbox" data-activity-id="week8-activity4" aria-label="Mark Exit Ticket: Google Form Quiz as complete">
+                            <div class="activity-content">
+                                <i class="fas fa-question-circle"></i>
+                                <a href="https://forms.gle/mno234" target="_blank">Exit Ticket: Google Form Quiz</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1074,13 +1199,53 @@
                 // Remove active class from all tabs and contents
                 document.querySelectorAll('.lesson-tab').forEach(t => t.classList.remove('active'));
                 document.querySelectorAll('.lesson-content').forEach(c => c.classList.remove('active'));
-                
+
                 // Add active class to clicked tab and corresponding content
                 this.classList.add('active');
                 document.getElementById(this.dataset.week).classList.add('active');
             });
         });
-        
+
+        // Weekly lesson activity completion tracking
+        const activityStorageKey = 'two-wolves-lesson-activity-';
+        let canUseStorage = true;
+
+        try {
+            const storageTestKey = `${activityStorageKey}test`;
+            localStorage.setItem(storageTestKey, '1');
+            localStorage.removeItem(storageTestKey);
+        } catch (error) {
+            canUseStorage = false;
+        }
+
+        document.querySelectorAll('.activity-item').forEach(item => {
+            const checkbox = item.querySelector('.activity-checkbox');
+
+            if (!checkbox) {
+                return;
+            }
+
+            const activityId = checkbox.dataset.activityId || checkbox.id;
+
+            if (canUseStorage && activityId) {
+                const savedState = localStorage.getItem(activityStorageKey + activityId);
+                if (savedState === 'true') {
+                    checkbox.checked = true;
+                }
+            }
+
+            item.classList.toggle('completed', checkbox.checked);
+
+            checkbox.addEventListener('change', () => {
+                const isChecked = checkbox.checked;
+                item.classList.toggle('completed', isChecked);
+
+                if (canUseStorage && activityId) {
+                    localStorage.setItem(activityStorageKey + activityId, isChecked);
+                }
+            });
+        });
+
         // Update active nav link on scroll
         window.addEventListener('scroll', function() {
             let current = '';
