@@ -689,63 +689,144 @@
     </div>
     
     <script>
-        function showNotes(chapterId) {
-            // Hide all notes sections
-            const allNotes = document.querySelectorAll('.cornell-notes');
-            allNotes.forEach(note => {
-                note.classList.remove('active');
+<script>
+    function showNotes(chapterId) {
+        // Hide all notes sections
+        const allNotes = document.querySelectorAll('.cornell-notes');
+        allNotes.forEach(note => {
+            note.classList.remove('active');
+        });
+        
+        // Remove active class from all buttons
+        const allButtons = document.querySelectorAll('.chapter-btn');
+        allButtons.forEach(btn => {
+            btn.classList.remove('active');
+        });
+        
+        // Show selected notes section
+        document.getElementById(chapterId).classList.add('active');
+        
+        // Add active class to clicked button
+        event.target.classList.add('active');
+        
+        // Load saved notes for this section
+        loadNotes(chapterId);
+    }
+    
+    function addQuote(chapterId) {
+        const quotesSection = document.getElementById('quotes-' + chapterId);
+        const newQuoteBox = document.createElement('div');
+        newQuoteBox.className = 'quote-box';
+        
+        const quoteText = document.createElement('div');
+        quoteText.className = 'quote-text';
+        quoteText.contentEditable = true;
+        quoteText.textContent = 'Enter quote text here...';
+        
+        const quoteSource = document.createElement('div');
+        quoteSource.className = 'quote-source';
+        quoteSource.contentEditable = true;
+        quoteSource.textContent = 'Page: ';
+        
+        const quoteAnalysis = document.createElement('div');
+        quoteAnalysis.className = 'quote-analysis';
+        
+        const analysisTextarea = document.createElement('textarea');
+        analysisTextarea.placeholder = 'Why is this quote important?';
+        
+        quoteAnalysis.appendChild(analysisTextarea);
+        
+        newQuoteBox.appendChild(quoteText);
+        newQuoteBox.appendChild(quoteSource);
+        newQuoteBox.appendChild(quoteAnalysis);
+        
+        quotesSection.appendChild(newQuoteBox);
+    }
+    
+    function saveNotes(chapterId) {
+        // Get all the text areas in the active section
+        const activeSection = document.getElementById(chapterId);
+        const textAreas = activeSection.querySelectorAll('textarea');
+        
+        // Create an object to store the notes
+        const notes = {};
+        textAreas.forEach((area, index) => {
+            notes[`area_${index}`] = area.value;
+        });
+        
+        // Also save editable quote text
+        const quoteTexts = activeSection.querySelectorAll('.quote-text[contenteditable="true"]');
+        quoteTexts.forEach((quote, index) => {
+            notes[`quote_text_${index}`] = quote.textContent;
+        });
+        
+        // Also save editable quote sources
+        const quoteSources = activeSection.querySelectorAll('.quote-source[contentEditable="true"]');
+        quoteSources.forEach((source, index) => {
+            notes[`quote_source_${index}`] = source.textContent;
+        });
+        
+        // Save to localStorage
+        localStorage.setItem(`cornell-notes-${chapterId}`, JSON.stringify(notes));
+        
+        // Show success message
+        const successMessage = document.createElement('div');
+        successMessage.textContent = 'Notes saved successfully!';
+        successMessage.style.position = 'fixed';
+        successMessage.style.bottom = '20px';
+        successMessage.style.right = '20px';
+        successMessage.style.backgroundColor = '#4CAF50';
+        successMessage.style.color = 'white';
+        successMessage.style.padding = '10px 20px';
+        successMessage.style.borderRadius = '5px';
+        successMessage.style.zIndex = '1000';
+        
+        document.body.appendChild(successMessage);
+        
+        // Remove message after 3 seconds
+        setTimeout(() => {
+            document.body.removeChild(successMessage);
+        }, 3000);
+    }
+    
+    function loadNotes(chapterId) {
+        const savedNotes = localStorage.getItem(`cornell-notes-${chapterId}`);
+        if (savedNotes) {
+            const notes = JSON.parse(savedNotes);
+            const activeSection = document.getElementById(chapterId);
+            
+            // Load text areas
+            const textAreas = activeSection.querySelectorAll('textarea');
+            textAreas.forEach((area, index) => {
+                if (notes[`area_${index}`]) {
+                    area.value = notes[`area_${index}`];
+                }
             });
             
-            // Remove active class from all buttons
-            const allButtons = document.querySelectorAll('.chapter-btn');
-            allButtons.forEach(btn => {
-                btn.classList.remove('active');
+            // Load editable quote text
+            const quoteTexts = activeSection.querySelectorAll('.quote-text[contentEditable="true"]');
+            quoteTexts.forEach((quote, index) => {
+                if (notes[`quote_text_${index}`]) {
+                    quote.textContent = notes[`quote_text_${index}`];
+                }
             });
             
-            // Show selected notes section
-            document.getElementById(chapterId).classList.add('active');
-            
-            // Add active class to clicked button
-            event.target.classList.add('active');
+            // Load editable quote sources
+            const quoteSources = activeSection.querySelectorAll('.quote-source[contentEditable="true"]');
+            quoteSources.forEach((source, index) => {
+                if (notes[`quote_source_${index}`]) {
+                    source.textContent = notes[`quote_source_${index}`];
+                }
+            });
         }
-        
-        function addQuote(chapterId) {
-            const quotesSection = document.getElementById('quotes-' + chapterId);
-            const newQuoteBox = document.createElement('div');
-            newQuoteBox.className = 'quote-box';
-            
-            const quoteText = document.createElement('div');
-            quoteText.className = 'quote-text';
-            quoteText.contentEditable = true;
-            quoteText.textContent = 'Enter quote text here...';
-            
-            const quoteSource = document.createElement('div');
-            quoteSource.className = 'quote-source';
-            quoteSource.contentEditable = true;
-            quoteSource.textContent = 'Page: ';
-            
-            const quoteAnalysis = document.createElement('div');
-            quoteAnalysis.className = 'quote-analysis';
-            
-            const analysisTextarea = document.createElement('textarea');
-            analysisTextarea.placeholder = 'Why is this quote important?';
-            
-            quoteAnalysis.appendChild(analysisTextarea);
-            
-            newQuoteBox.appendChild(quoteText);
-            newQuoteBox.appendChild(quoteSource);
-            newQuoteBox.appendChild(quoteAnalysis);
-            
-            quotesSection.appendChild(newQuoteBox);
-        }
-        
-        function saveNotes(chapterId) {
-            // This is a placeholder function for saving notes
-            // You'll need to implement the actual saving functionality
-            // based on your portfolio system (Google Drive, etc.)
-            
-            alert('Notes saved! (Note: You will need to implement the actual save functionality)');
-        }
+    }
+    
+    // Load notes for the first visible section when page loads
+    window.addEventListener('load', () => {
+        loadNotes('ch1-4');
+    });
+</script>
+}
     </script>
 </body>
 </html>
