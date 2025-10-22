@@ -4,16 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Two Wolves – Cornell Notes</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="../styles/header.css">
     <style>
         :root {
-            --primary-color: #223046;
-            --secondary-color: #3498db;
-            --light-color: #f8f9fa;
-            --dark-color: #2c3e50;
-            --border-color: #dfe4ea;
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #e8eaf6;
+            --border: #dce1f5;
+            --bg: #f5f7fa;
+            --text: #263238;
         }
 
         * {
@@ -23,148 +25,277 @@
         body {
             margin: 0;
             font-family: 'Roboto', sans-serif;
-            color: var(--dark-color);
-            background: var(--light-color);
+            font-size: 14px;
+            line-height: 1.5;
+            color: var(--text);
+            background-color: var(--bg);
         }
 
         main {
-            padding: 2rem 1rem 3rem;
+            padding: 2.5rem 1rem 3rem;
         }
 
         .notes-wrapper {
-            max-width: 900px;
+            max-width: 1040px;
             margin: 0 auto;
-            background: #ffffff;
+            background-color: #fff;
             padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(34, 48, 70, 0.08);
+            border-radius: 18px;
+            box-shadow: 0 18px 40px rgba(26, 35, 126, 0.08);
         }
 
-        h1 {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            text-align: center;
-            color: var(--primary-color);
-        }
-
-        p.lead {
+        .notes-header {
             text-align: center;
             margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid var(--border);
         }
 
-        nav ul {
-            list-style: none;
-            display: flex;
-            gap: 1rem;
+        .notes-header h1 {
+            font-family: 'Merriweather', serif;
+            font-weight: 700;
+            font-size: 30px;
+            color: var(--primary);
+            margin: 0 0 0.5rem;
+        }
+
+        .notes-header p {
             margin: 0;
-            padding: 0;
+            color: rgba(38, 50, 56, 0.75);
         }
 
-        nav li {
-            position: relative;
-        }
-
-        .dropdown-content {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background: #fff;
-            border: 1px solid #ddd;
-            min-width: 220px;
-            display: none;
-            z-index: 1000;
-            padding: 0.5rem 0;
-            list-style: none;
-            margin: 0;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-        }
-
-        .dropdown-content a {
-            display: block;
-            padding: 0.5rem 0.75rem;
-            white-space: nowrap;
-            color: var(--dark-color);
-            text-decoration: none;
-        }
-
-        .dropdown-content a:hover,
-        .dropdown-content a:focus {
-            background: var(--light-color);
-        }
-
-        .dropdown:hover .dropdown-content,
-        .dropdown:focus-within .dropdown-content {
-            display: block;
-        }
-
-        .cornell-table {
-            width: 100%;
-            border-collapse: collapse;
-            border: 1px solid var(--border-color);
-            margin-bottom: 2rem;
-            table-layout: fixed;
-        }
-
-        .cornell-table thead th {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 600;
-            text-align: left;
-            padding: 0.75rem;
-            background: var(--light-color);
-            border-bottom: 2px solid var(--border-color);
-        }
-
-        .cornell-table tbody td {
-            border-top: 1px solid var(--border-color);
-            padding: 1.25rem 0.75rem;
-            height: 80px;
-            vertical-align: top;
-        }
-
-        .cornell-table thead th:first-child,
-        .cornell-table tbody td:first-child {
-            width: 35%;
-            border-right: 1px solid var(--border-color);
-        }
-
-        .summary-box {
-            border: 2px solid var(--border-color);
-            border-radius: 10px;
+        .instructions {
+            background-color: var(--accent);
+            border-radius: 16px;
             padding: 1.5rem;
+            margin-bottom: 2rem;
+            border-left: 6px solid var(--primary-light);
         }
 
-        .summary-box h2 {
+        .instructions h2 {
             margin-top: 0;
-            font-family: 'Montserrat', sans-serif;
-            margin-bottom: 0.75rem;
+            font-size: 20px;
+            color: var(--primary);
         }
 
-        .summary-box p {
+        .instructions ul {
             margin: 0;
-            min-height: 100px;
+            padding-left: 1.25rem;
+        }
+
+        .instructions li {
+            margin-bottom: 0.5rem;
+        }
+
+        .chapter-selector {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .chapter-btn {
+            background-color: var(--accent);
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            padding: 0.5rem 1.25rem;
+            font-size: 14px;
+            color: var(--primary-light);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .chapter-btn:hover,
+        .chapter-btn:focus {
+            background-color: var(--primary-light);
+            color: #fff;
+            outline: none;
+        }
+
+        .chapter-btn.active {
+            background-color: var(--primary);
+            color: #fff;
+            border-color: var(--primary);
+        }
+
+        .cornell-notes {
+            display: none;
+            border: 2px solid var(--border);
+            border-radius: 16px;
+            padding: 1.75rem;
+            background-color: #fff;
+            margin-bottom: 2rem;
+        }
+
+        .cornell-notes.active {
+            display: block;
+        }
+
+        .cornell-header {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 1rem;
+        }
+
+        .cornell-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .cornell-inputs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .cornell-input {
+            border: none;
+            border-bottom: 2px solid var(--border);
+            font-size: 13px;
+            padding: 0.5rem;
+            min-width: 140px;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--primary);
+            margin: 1.5rem 0 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title .material-icons {
+            color: var(--primary-light);
+        }
+
+        .section-area {
+            width: 100%;
+            min-height: 120px;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 1rem;
+            font-family: 'Roboto', sans-serif;
+            resize: vertical;
+            background-color: rgba(248, 249, 255, 0.6);
+        }
+
+        .quotes-section {
+            margin-top: 1rem;
+            display: grid;
+            gap: 1rem;
+        }
+
+        .quote-box {
+            border-left: 4px solid var(--primary-light);
+            background-color: var(--accent);
+            border-radius: 0 12px 12px 12px;
+            padding: 1rem 1rem 1.25rem;
+        }
+
+        .quote-text {
+            font-family: 'Merriweather', serif;
+            font-size: 15px;
+            font-style: italic;
+            color: var(--primary-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .quote-source {
+            font-size: 12px;
+            text-align: right;
+            font-weight: 600;
+            color: rgba(38, 50, 56, 0.7);
+        }
+
+        .quote-analysis {
+            margin-top: 0.75rem;
+            background-color: #fff;
+            border: 1px dashed var(--border);
+            border-radius: 8px;
+            padding: 0.75rem;
+        }
+
+        .quote-analysis textarea {
+            width: 100%;
+            border: none;
+            font-family: 'Roboto', sans-serif;
+            resize: vertical;
+            min-height: 70px;
+        }
+
+        .add-quote-btn {
+            margin-top: 1rem;
+            background-color: var(--primary-light);
+            color: #fff;
+            border: none;
+            border-radius: 999px;
+            padding: 0.5rem 1.25rem;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.2s ease;
+        }
+
+        .add-quote-btn:hover,
+        .add-quote-btn:focus {
+            background-color: var(--primary);
+            outline: none;
+        }
+
+        .save-btn {
+            margin-top: 1.5rem;
+            background-color: var(--primary);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            padding: 0.65rem 1.75rem;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .save-btn:hover,
+        .save-btn:focus {
+            background-color: var(--primary-light);
+            outline: none;
         }
 
         footer {
             text-align: center;
             padding: 2rem 1rem;
-            color: rgba(44, 62, 80, 0.75);
+            color: rgba(44, 62, 80, 0.7);
             font-size: 0.9rem;
         }
 
-        @media (max-width: 640px) {
+        @media (max-width: 720px) {
+            main {
+                padding: 2rem 1rem 2.5rem;
+            }
+
             .notes-wrapper {
                 padding: 1.5rem;
             }
 
-            .cornell-table tbody td {
-                padding: 1rem 0.5rem;
+            .cornell-notes {
+                padding: 1.25rem;
+            }
+
+            .cornell-inputs {
+                width: 100%;
             }
         }
 
         @media print {
             body {
-                background: #ffffff;
+                background: #fff;
             }
 
             .site-header,
@@ -180,11 +311,6 @@
                 box-shadow: none;
                 border-radius: 0;
                 padding: 0;
-            }
-
-            .summary-box p,
-            .cornell-table tbody td {
-                height: 120px;
             }
         }
     </style>
@@ -220,31 +346,350 @@
     </header>
     <main>
         <div class="notes-wrapper">
-            <h1>Two Wolves – Cornell Notes</h1>
-            <p class="lead">Use this template to organise your thinking while reading <em>Two Wolves</em>. Jot down key questions on the left and capture detailed notes on the right.</p>
-            <table class="cornell-table">
-                <thead>
-                    <tr>
-                        <th scope="col">Cues / Questions</th>
-                        <th scope="col">Notes</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td></td><td></td></tr>
-                    <tr><td></td><td></td></tr>
-                    <tr><td></td><td></td></tr>
-                    <tr><td></td><td></td></tr>
-                    <tr><td></td><td></td></tr>
-                    <tr><td></td><td></td></tr>
-                    <tr><td></td><td></td></tr>
-                    <tr><td></td><td></td></tr>
-                    <tr><td></td><td></td></tr>
-                    <tr><td></td><td></td></tr>
-                </tbody>
-            </table>
-            <section class="summary-box" aria-labelledby="summary-title">
-                <h2 id="summary-title">Summary</h2>
-                <p>Use this space to summarise the key ideas from your notes in 2-3 sentences.</p>
+            <div class="notes-header">
+                <h1>🐺 Two Wolves – Cornell Notes</h1>
+                <p>Organise your thinking while you read <em>Two Wolves</em> by Tristan Bancks.</p>
+            </div>
+
+            <section class="instructions" aria-labelledby="instructions-title">
+                <h2 id="instructions-title">How to Use These Notes</h2>
+                <ul>
+                    <li><strong>Characters:</strong> Track character development, motivations and relationships.</li>
+                    <li><strong>Themes:</strong> Capture the key themes explored within the chapters.</li>
+                    <li><strong>Setting:</strong> Describe how different settings influence events and mood.</li>
+                    <li><strong>Important Quotes:</strong> Collect significant quotes and explain their meaning or impact.</li>
+                    <li>Use your Cornell notes to plan TEEL paragraphs, essays and assessment responses.</li>
+                </ul>
+            </section>
+
+            <div class="chapter-selector" role="tablist" aria-label="Chapter notes selector">
+                <button class="chapter-btn active" role="tab" aria-selected="true" aria-controls="ch1-4" onclick="showNotes(event, 'ch1-4')">Chapters 1-4</button>
+                <button class="chapter-btn" role="tab" aria-selected="false" aria-controls="ch5-8" onclick="showNotes(event, 'ch5-8')">Chapters 5-8</button>
+                <button class="chapter-btn" role="tab" aria-selected="false" aria-controls="ch9-12" onclick="showNotes(event, 'ch9-12')">Chapters 9-12</button>
+                <button class="chapter-btn" role="tab" aria-selected="false" aria-controls="ch13-16" onclick="showNotes(event, 'ch13-16')">Chapters 13-16</button>
+                <button class="chapter-btn" role="tab" aria-selected="false" aria-controls="ch17-21" onclick="showNotes(event, 'ch17-21')">Chapters 17-21</button>
+                <button class="chapter-btn" role="tab" aria-selected="false" aria-controls="ch22-26" onclick="showNotes(event, 'ch22-26')">Chapters 22-26</button>
+                <button class="chapter-btn" role="tab" aria-selected="false" aria-controls="ch27-31" onclick="showNotes(event, 'ch27-31')">Chapters 27-31</button>
+                <button class="chapter-btn" role="tab" aria-selected="false" aria-controls="ch32-38" onclick="showNotes(event, 'ch32-38')">Chapters 32-38</button>
+            </div>
+
+            <section id="ch1-4" class="cornell-notes active" role="tabpanel" aria-labelledby="heading-ch1-4" aria-hidden="false">
+                <div class="cornell-header">
+                    <div class="cornell-title" id="heading-ch1-4">Chapters 1-4: Introduction</div>
+                    <div class="cornell-inputs">
+                        <input type="text" class="cornell-input" placeholder="Chapters: 1-4">
+                        <input type="text" class="cornell-input" placeholder="Pages:">
+                    </div>
+                </div>
+
+                <div class="section-title"><span class="material-icons" aria-hidden="true">people</span>Characters</div>
+                <textarea class="section-area" placeholder="Record information about characters and their development in these chapters..."></textarea>
+
+                <div class="section-title"><span class="material-icons" aria-hidden="true">lightbulb</span>Themes</div>
+                <textarea class="section-area" placeholder="Note down themes and how they're explored in these chapters..."></textarea>
+
+                <div class="section-title"><span class="material-icons" aria-hidden="true">landscape</span>Setting</div>
+                <textarea class="section-area" placeholder="Describe settings and how they affect the story in these chapters..."></textarea>
+
+                <div class="section-title"><span class="material-icons" aria-hidden="true">format_quote</span>Important Quotes</div>
+                <div class="quotes-section" id="quotes-ch1-4">
+                    <div class="quote-box">
+                        <div class="quote-text">"They weren't really one of those family-movie-night, camp-in-the-backyard, let's-discuss-this-and-get-everyone's-opinion kind of families."</div>
+                        <div class="quote-source">Page 10</div>
+                        <div class="quote-analysis">
+                            <textarea placeholder="Why is this quote important? What does it reveal about the family?"></textarea>
+                        </div>
+                    </div>
+                    <div class="quote-box">
+                        <div class="quote-text">"The one you feed."</div>
+                        <div class="quote-source">Page 21</div>
+                        <div class="quote-analysis">
+                            <textarea placeholder="Why is this quote important? How does it connect to the novel's title?"></textarea>
+                        </div>
+                    </div>
+                    <div class="quote-box">
+                        <div class="quote-text">"For the first time ever, Ben did not ask a question."</div>
+                        <div class="quote-source">Page 33</div>
+                        <div class="quote-analysis">
+                            <textarea placeholder="Why is this quote important? What does it reveal about Ben?"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <button class="add-quote-btn" onclick="addQuote('ch1-4')">+ Add Another Quote</button>
+                <button class="save-btn" onclick="saveNotes('ch1-4')">Save Notes</button>
+            </section>
+
+            <section id="ch5-8" class="cornell-notes" role="tabpanel" aria-labelledby="heading-ch5-8" aria-hidden="true">
+                <div class="cornell-header">
+                    <div class="cornell-title" id="heading-ch5-8">Chapters 5-8: The Holiday &amp; The Chase</div>
+                    <div class="cornell-inputs">
+                        <input type="text" class="cornell-input" placeholder="Chapters: 5-8">
+                        <input type="text" class="cornell-input" placeholder="Pages:">
+                    </div>
+                </div>
+
+                <div class="section-title"><span class="material-icons" aria-hidden="true">people</span>Characters</div>
+                <textarea class="section-area" placeholder="Record information about characters and their development in these chapters..."></textarea>
+
+                <div class="section-title"><span class="material-icons" aria-hidden="true">lightbulb</span>Themes</div>
+                <textarea class="section-area" placeholder="Note down themes and how they're explored in these chapters..."></textarea>
+
+                <div class="section-title"><span class="material-icons" aria-hidden="true">landscape</span>Setting</div>
+                <textarea class="section-area" placeholder="Describe settings and how they affect the story in these chapters..."></textarea>
+
+                <div class="section-title"><span class="material-icons" aria-hidden="true">format_quote</span>Important Quotes</div>
+                <div class="quotes-section" id="quotes-ch5-8">
+                    <div class="quote-box">
+                        <div class="quote-text">"Big Girl. You're scared."</div>
+                        <div class="quote-source">Page 40</div>
+                        <div class="quote-analysis">
+                            <textarea placeholder="Why is this quote important? What does it reveal about Ray's character?"></textarea>
+                        </div>
+                    </div>
+                    <div class="quote-box">
+                        <div class="quote-text">"He scanned the ground for snakes, every cell in his body pleading to return to the car."</div>
+                        <div class="quote-source">Page 41</div>
+                        <div class="quote-analysis">
+                            <textarea placeholder="Why is this quote important? How does it show Ben's relationship with nature?"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <button class="add-quote-btn" onclick="addQuote('ch5-8')">+ Add Another Quote</button>
+                <button class="save-btn" onclick="saveNotes('ch5-8')">Save Notes</button>
+            </section>
+
+            <section id="ch9-12" class="cornell-notes" role="tabpanel" aria-labelledby="heading-ch9-12" aria-hidden="true">
+                <div class="cornell-header">
+                    <div class="cornell-title" id="heading-ch9-12">Chapters 9-12: The Cabin &amp; The Secret</div>
+                    <div class="cornell-inputs">
+                        <input type="text" class="cornell-input" placeholder="Chapters: 9-12">
+                        <input type="text" class="cornell-input" placeholder="Pages:">
+                    </div>
+                </div>
+
+                <div class="section-title"><span class="material-icons" aria-hidden="true">people</span>Characters</div>
+                <textarea class="section-area" placeholder="Record information about characters and their development in these chapters..."></textarea>
+
+                <div class="section-title"><span class="material-icons" aria-hidden="true">lightbulb</span>Themes</div>
+                <textarea class="section-area" placeholder="Note down themes and how they're explored in these chapters..."></textarea>
+
+                <div class="section-title"><span class="material-icons" aria-hidden="true">landscape</span>Setting</div>
+                <textarea class="section-area" placeholder="Describe settings and how they affect the story in these chapters..."></textarea>
+
+                <div class="section-title"><span class="material-icons" aria-hidden="true">format_quote</span>Important Quotes</div>
+                <div class="quotes-section" id="quotes-ch9-12">
+                    <div class="quote-box">
+                        <div class="quote-text">"Nature was real and true and terrible."</div>
+                        <div class="quote-source">Page 67</div>
+                        <div class="quote-analysis">
+                            <textarea placeholder="Why is this quote important? How does it show Ben's perception of nature?"></textarea>
+                        </div>
+                    </div>
+                    <div class="quote-box">
+                        <div class="quote-text">"Adults never told kids anything. Nothing worth hearing anyway."</div>
+                        <div class="quote-source">Page 71</div>
+                        <div class="quote-analysis">
+                            <textarea placeholder="Why is this quote important? What does it reveal about Ben's perspective?"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <button class="add-quote-btn" onclick="addQuote('ch9-12')">+ Add Another Quote</button>
+                <button class="save-btn" onclick="saveNotes('ch9-12')">Save Notes</button>
+            </section>
+
+            <section id="ch13-16" class="cornell-notes" role="tabpanel" aria-labelledby="heading-ch13-16" aria-hidden="true">
+                <div class="cornell-header">
+                    <div class="cornell-title" id="heading-ch13-16">Chapters 13-16: The Hunt &amp; The Notebook</div>
+                    <div class="cornell-inputs">
+                        <input type="text" class="cornell-input" placeholder="Chapters: 13-16">
+                        <input type="text" class="cornell-input" placeholder="Pages:">
+                    </div>
+                </div>
+
+                <div class="section-title"><span class="material-icons" aria-hidden="true">people</span>Characters</div>
+                <textarea class="section-area" placeholder="Record information about characters and their development in these chapters..."></textarea>
+
+                <div class="section-title"><span class="material-icons" aria-hidden="true">lightbulb</span>Themes</div>
+                <textarea class="section-area" placeholder="Note down themes and how they're explored in these chapters..."></textarea>
+
+                <div class="section-title"><span class="material-icons" aria-hidden="true">landscape</span>Setting</div>
+                <textarea class="section-area" placeholder="Describe settings and how they affect the story in these chapters..."></textarea>
+
+                <div class="section-title"><span class="material-icons" aria-hidden="true">format_quote</span>Important Quotes</div>
+                <div class="quotes-section" id="quotes-ch13-16">
+                    <div class="quote-box">
+                        <div class="quote-text">"Dad poked the foot at him again and Ben looked into his father's eyes. They seemed less alive than the rabbits'."</div>
+                        <div class="quote-source">Page 112</div>
+                        <div class="quote-analysis">
+                            <textarea placeholder="Why is this quote important? What does it reveal about Ray?"></textarea>
+                        </div>
+                    </div>
+                    <div class="quote-box">
+                        <div class="quote-text">"Can your own parents kidnap you? I think mine have. Help!"</div>
+                        <div class="quote-source">Page 115</div>
+                        <div class="quote-analysis">
+                            <textarea placeholder="Why is this quote important? How does it show Ben's feelings?"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <button class="add-quote-btn" onclick="addQuote('ch13-16')">+ Add Another Quote</button>
+                <button class="save-btn" onclick="saveNotes('ch13-16')">Save Notes</button>
+            </section>
+
+            <section id="ch17-21" class="cornell-notes" role="tabpanel" aria-labelledby="heading-ch17-21" aria-hidden="true">
+                <div class="cornell-header">
+                    <div class="cornell-title" id="heading-ch17-21">Chapters 17-21: Trapped &amp; The Hole</div>
+                    <div class="cornell-inputs">
+                        <input type="text" class="cornell-input" placeholder="Chapters: 17-21">
+                        <input type="text" class="cornell-input" placeholder="Pages:">
+                    </div>
+                </div>
+
+                <div class="section-title"><span class="material-icons" aria-hidden="true">people</span>Characters</div>
+                <textarea class="section-area" placeholder="Record information about characters and their development in these chapters..."></textarea>
+
+                <div class="section-title"><span class="material-icons" aria-hidden="true">lightbulb</span>Themes</div>
+                <textarea class="section-area" placeholder="Note down themes and how they're explored in these chapters..."></textarea>
+
+                <div class="section-title"><span class="material-icons" aria-hidden="true">landscape</span>Setting</div>
+                <textarea class="section-area" placeholder="Describe settings and how they affect the story in these chapters..."></textarea>
+
+                <div class="section-title"><span class="material-icons" aria-hidden="true">format_quote</span>Important Quotes</div>
+                <div class="quotes-section" id="quotes-ch17-21">
+                    <div class="quote-box">
+                        <div class="quote-text">"Useless. Come back when you're a man."</div>
+                        <div class="quote-source">Page 155</div>
+                        <div class="quote-analysis">
+                            <textarea placeholder="Why is this quote important? What does it reveal about Ray's character?"></textarea>
+                        </div>
+                    </div>
+                    <div class="quote-box">
+                        <div class="quote-text">"She looked at Ben like he was something new and fragile."</div>
+                        <div class="quote-source">Page 162</div>
+                        <div class="quote-analysis">
+                            <textarea placeholder="Why is this quote important? What does it show about Ben and Olive's relationship?"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <button class="add-quote-btn" onclick="addQuote('ch17-21')">+ Add Another Quote</button>
+                <button class="save-btn" onclick="saveNotes('ch17-21')">Save Notes</button>
+            </section>
+
+            <section id="ch22-26" class="cornell-notes" role="tabpanel" aria-labelledby="heading-ch22-26" aria-hidden="true">
+                <div class="cornell-header">
+                    <div class="cornell-title" id="heading-ch22-26">Chapters 22-26: The Plan &amp; Apricots</div>
+                    <div class="cornell-inputs">
+                        <input type="text" class="cornell-input" placeholder="Chapters: 22-26">
+                        <input type="text" class="cornell-input" placeholder="Pages:">
+                    </div>
+                </div>
+
+                <div class="section-title"><span class="material-icons" aria-hidden="true">people</span>Characters</div>
+                <textarea class="section-area" placeholder="Record information about characters and their development in these chapters..."></textarea>
+
+                <div class="section-title"><span class="material-icons" aria-hidden="true">lightbulb</span>Themes</div>
+                <textarea class="section-area" placeholder="Note down themes and how they're explored in these chapters..."></textarea>
+
+                <div class="section-title"><span class="material-icons" aria-hidden="true">landscape</span>Setting</div>
+                <textarea class="section-area" placeholder="Describe settings and how they affect the story in these chapters..."></textarea>
+
+                <div class="section-title"><span class="material-icons" aria-hidden="true">format_quote</span>Important Quotes</div>
+                <div class="quotes-section" id="quotes-ch22-26">
+                    <div class="quote-box">
+                        <div class="quote-text">"Ben didn't want to be in charge. He wanted someone else to do it. Someone big and brave."</div>
+                        <div class="quote-source">Page 181</div>
+                        <div class="quote-analysis">
+                            <textarea placeholder="Why is this quote important? What does it show about Ben's internal conflict?"></textarea>
+                        </div>
+                    </div>
+                    <div class="quote-box">
+                        <div class="quote-text">"He realised the plan was like a set of dominoes and his job was to tip the first one."</div>
+                        <div class="quote-source">Page 188</div>
+                        <div class="quote-analysis">
+                            <textarea placeholder="Why is this quote important? How does it reveal the stakes of Ben's plan?"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <button class="add-quote-btn" onclick="addQuote('ch22-26')">+ Add Another Quote</button>
+                <button class="save-btn" onclick="saveNotes('ch22-26')">Save Notes</button>
+            </section>
+
+            <section id="ch27-31" class="cornell-notes" role="tabpanel" aria-labelledby="heading-ch27-31" aria-hidden="true">
+                <div class="cornell-header">
+                    <div class="cornell-title" id="heading-ch27-31">Chapters 27-31: Secrets &amp; Escape</div>
+                    <div class="cornell-inputs">
+                        <input type="text" class="cornell-input" placeholder="Chapters: 27-31">
+                        <input type="text" class="cornell-input" placeholder="Pages:">
+                    </div>
+                </div>
+
+                <div class="section-title"><span class="material-icons" aria-hidden="true">people</span>Characters</div>
+                <textarea class="section-area" placeholder="Record information about characters and their development in these chapters..."></textarea>
+
+                <div class="section-title"><span class="material-icons" aria-hidden="true">lightbulb</span>Themes</div>
+                <textarea class="section-area" placeholder="Note down themes and how they're explored in these chapters..."></textarea>
+
+                <div class="section-title"><span class="material-icons" aria-hidden="true">landscape</span>Setting</div>
+                <textarea class="section-area" placeholder="Describe settings and how they affect the story in these chapters..."></textarea>
+
+                <div class="section-title"><span class="material-icons" aria-hidden="true">format_quote</span>Important Quotes</div>
+                <div class="quotes-section" id="quotes-ch27-31">
+                    <div class="quote-box">
+                        <div class="quote-text">"Everything was moving fast now, like the whole story was getting ready for the end."</div>
+                        <div class="quote-source">Page 211</div>
+                        <div class="quote-analysis">
+                            <textarea placeholder="Why is this quote important? What mood does it create?"></textarea>
+                        </div>
+                    </div>
+                    <div class="quote-box">
+                        <div class="quote-text">"He felt a wolf inside him too. Maybe two."</div>
+                        <div class="quote-source">Page 217</div>
+                        <div class="quote-analysis">
+                            <textarea placeholder="Why is this quote important? How does it link to the title of the novel?"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <button class="add-quote-btn" onclick="addQuote('ch27-31')">+ Add Another Quote</button>
+                <button class="save-btn" onclick="saveNotes('ch27-31')">Save Notes</button>
+            </section>
+
+            <section id="ch32-38" class="cornell-notes" role="tabpanel" aria-labelledby="heading-ch32-38" aria-hidden="true">
+                <div class="cornell-header">
+                    <div class="cornell-title" id="heading-ch32-38">Chapters 32-38: The Road &amp; One Wolf</div>
+                    <div class="cornell-inputs">
+                        <input type="text" class="cornell-input" placeholder="Chapters: 32-38">
+                        <input type="text" class="cornell-input" placeholder="Pages:">
+                    </div>
+                </div>
+
+                <div class="section-title"><span class="material-icons" aria-hidden="true">people</span>Characters</div>
+                <textarea class="section-area" placeholder="Record information about characters and their development in these chapters..."></textarea>
+
+                <div class="section-title"><span class="material-icons" aria-hidden="true">lightbulb</span>Themes</div>
+                <textarea class="section-area" placeholder="Note down themes and how they're explored in these chapters..."></textarea>
+
+                <div class="section-title"><span class="material-icons" aria-hidden="true">landscape</span>Setting</div>
+                <textarea class="section-area" placeholder="Describe settings and how they affect the story in these chapters..."></textarea>
+
+                <div class="section-title"><span class="material-icons" aria-hidden="true">format_quote</span>Important Quotes</div>
+                <div class="quotes-section" id="quotes-ch32-38">
+                    <div class="quote-box">
+                        <div class="quote-text">"Ben watched her chopping onions, thinking how easy food seemed now."</div>
+                        <div class="quote-source">Page 241</div>
+                        <div class="quote-analysis">
+                            <textarea placeholder="Why is this quote important? How does it show Ben's perspective change?"></textarea>
+                        </div>
+                    </div>
+                    <div class="quote-box">
+                        <div class="quote-text">"Do you think we have convict blood? Maybe we can't help it."</div>
+                        <div class="quote-source">Page 243</div>
+                        <div class="quote-analysis">
+                            <textarea placeholder="Why is this quote important? How does it connect to the novel's themes?"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <button class="add-quote-btn" onclick="addQuote('ch32-38')">+ Add Another Quote</button>
+                <button class="save-btn" onclick="saveNotes('ch32-38')">Save Notes</button>
             </section>
         </div>
     </main>
@@ -267,6 +712,65 @@
             siteNav.querySelectorAll('a').forEach(link => {
                 link.addEventListener('click', () => siteNav.classList.remove('active'));
             });
+        }
+
+        function showNotes(event, chapterId) {
+            const allNotes = document.querySelectorAll('.cornell-notes');
+            allNotes.forEach(note => {
+                note.classList.remove('active');
+                note.setAttribute('aria-hidden', 'true');
+            });
+
+            const allButtons = document.querySelectorAll('.chapter-btn');
+            allButtons.forEach(btn => {
+                btn.classList.remove('active');
+                btn.setAttribute('aria-selected', 'false');
+            });
+
+            const selectedSection = document.getElementById(chapterId);
+            if (selectedSection) {
+                selectedSection.classList.add('active');
+                selectedSection.setAttribute('aria-hidden', 'false');
+            }
+
+            if (event && event.currentTarget) {
+                event.currentTarget.classList.add('active');
+                event.currentTarget.setAttribute('aria-selected', 'true');
+            }
+        }
+
+        function addQuote(chapterId) {
+            const quotesSection = document.getElementById('quotes-' + chapterId);
+            if (!quotesSection) return;
+
+            const newQuoteBox = document.createElement('div');
+            newQuoteBox.className = 'quote-box';
+
+            const quoteText = document.createElement('div');
+            quoteText.className = 'quote-text';
+            quoteText.contentEditable = true;
+            quoteText.textContent = 'Enter quote text here...';
+
+            const quoteSource = document.createElement('div');
+            quoteSource.className = 'quote-source';
+            quoteSource.contentEditable = true;
+            quoteSource.textContent = 'Page: ';
+
+            const quoteAnalysis = document.createElement('div');
+            quoteAnalysis.className = 'quote-analysis';
+
+            const analysisTextarea = document.createElement('textarea');
+            analysisTextarea.placeholder = 'Why is this quote important?';
+
+            quoteAnalysis.appendChild(analysisTextarea);
+            newQuoteBox.appendChild(quoteText);
+            newQuoteBox.appendChild(quoteSource);
+            newQuoteBox.appendChild(quoteAnalysis);
+            quotesSection.appendChild(newQuoteBox);
+        }
+
+        function saveNotes(chapterId) {
+            alert('Notes saved! (Reminder: Connect this button to your saving workflow.)');
         }
 
         document.getElementById('year').textContent = new Date().getFullYear();
