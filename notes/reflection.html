@@ -1,0 +1,775 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Two Wolves – Reflection Questions (Detective’s Journal)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <link rel="stylesheet" href="../styles/header.css" />
+  <style>
+    :root {
+      --tab-b: #e9ecef;
+      --tab-a: #fff;
+      --tab-border: #d0d7de;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background: #fff;
+      color: #222;
+    }
+
+    main {
+      padding: 2rem 1rem 3rem;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    .muted {
+      color: #555;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1rem;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav li {
+      position: relative;
+    }
+
+    .dropdown-content {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: #fff;
+      border: 1px solid #ddd;
+      min-width: 220px;
+      display: none;
+      z-index: 1000;
+      padding: 0.5rem 0;
+      list-style: none;
+      margin: 0;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    .dropdown-content a {
+      display: block;
+      padding: 0.5rem 0.75rem;
+      white-space: nowrap;
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .dropdown-content a:hover,
+    .dropdown-content a:focus {
+      background: #f6f8fa;
+    }
+
+    .dropdown:hover .dropdown-content,
+    .dropdown:focus-within .dropdown-content {
+      display: block;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Montserrat', sans-serif;
+      color: #223046;
+    }
+
+    h1 {
+      margin-bottom: 0.5rem;
+    }
+
+    details {
+      margin: 1rem 0 1.5rem;
+    }
+
+    details summary {
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 1.25rem 0 1.5rem;
+      padding: 0;
+    }
+
+    .tab-btn {
+      border: 1px solid var(--tab-border);
+      background: var(--tab-b);
+      padding: 0.45rem 0.75rem;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      font-size: 0.95rem;
+    }
+
+    .tab-btn[aria-selected="true"] {
+      background: var(--tab-a);
+      font-weight: 600;
+      outline: 2px solid transparent;
+      box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.05);
+    }
+
+    .tab-btn:focus-visible {
+      outline: 3px solid #3498db;
+      outline-offset: 2px;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      border: 0;
+    }
+
+    .chapter-panel {
+      display: none;
+      border: 1px solid var(--tab-border);
+      border-radius: 0.75rem;
+      padding: 1rem 1.25rem;
+      background: #fff;
+    }
+
+    .chapter-panel.active {
+      display: block;
+    }
+
+    .panel-meta {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin: 0.25rem 0 1rem;
+      color: #444;
+      font-size: 0.95rem;
+    }
+
+    .pill {
+      display: inline-block;
+      padding: 0.1rem 0.5rem;
+      border: 1px solid #d0d7de;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      background: #f8fafc;
+      margin-right: 0.35rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .chapter-panel h3 {
+      margin-top: 1.25rem;
+      margin-bottom: 0.5rem;
+      font-size: 1.05rem;
+    }
+
+    ul {
+      padding-left: 1.2rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0 1.5rem;
+    }
+
+    th, td {
+      border: 1px solid #d0d7de;
+      padding: 0.75rem;
+      vertical-align: top;
+    }
+
+    th {
+      background: #f7f9fb;
+      text-align: left;
+    }
+
+    .wrapup {
+      border: 1px solid #d0d7de;
+      min-height: 120px;
+      border-radius: 0.5rem;
+      background: #f9fbff;
+    }
+
+    .wrapup + p {
+      margin-top: 0.5rem;
+    }
+
+    .extras {
+      margin-top: 2.5rem;
+      border-top: 1px solid #e4e9ef;
+      padding-top: 2rem;
+    }
+
+    .extras section {
+      border: 1px solid #d0d7de;
+      border-radius: 0.75rem;
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+      background: #f8fbff;
+    }
+
+    .extras ul {
+      margin: 0;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      color: #4a5568;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 680px) {
+      .tabs {
+        gap: 0.35rem;
+      }
+
+      .tab-btn {
+        flex: 1 0 45%;
+        text-align: center;
+      }
+
+      th, td {
+        font-size: 0.95rem;
+      }
+    }
+
+    @media print {
+      body {
+        margin: 0;
+        color: #000;
+      }
+
+      .site-header,
+      nav,
+      .tabs,
+      .extras,
+      footer {
+        display: none !important;
+      }
+
+      .chapter-panel {
+        display: block !important;
+        border: none;
+        padding: 0;
+        box-shadow: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-container">
+      <div class="header-content">
+        <a href="../index.html" class="logo">
+          <i class="fas fa-book-open" aria-hidden="true"></i>
+          <h1>Two Wolves</h1>
+        </a>
+        <div class="mobile-menu" aria-label="Toggle navigation" role="button" tabindex="0">
+          <i class="fas fa-bars" aria-hidden="true"></i>
+        </div>
+        <nav>
+          <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../about.html">About the Novel</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropbtn active" aria-haspopup="true">Notes ▾</a>
+              <ul class="dropdown-content">
+                <li><a href="/notes/cornell.html">Cornell Notes</a></li>
+                <li><a class="active" aria-current="page" href="/notes/reflection.html">Reflection Questions</a></li>
+              </ul>
+            </li>
+            <li><a href="../portfolios.html">Portfolio Tasks</a></li>
+            <li><a href="../secure-portfolios.html">Secure Portfolios</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+  <main>
+    <div class="container">
+      <h1>Reflection Questions – Detective’s Double-Entry Journal</h1>
+      <p class="muted">Track <em>evidence</em> on the left and your <em>thinking</em> on the right—like Ben building a case.</p>
+
+      <details>
+        <summary>How to use (student-friendly)</summary>
+        <ol>
+          <li>Draw a line down the page: left = <strong>Evidence / Quotes</strong>, right = <strong>My Thinking</strong>.</li>
+          <li>Add the 5Ws header: Who / What / Where / When / Why (save “Why” until after reading).</li>
+          <li>Copy 3–5 short quotes or details into <strong>Evidence</strong>.</li>
+          <li>For each one, write an inference, question, connection, or prediction in <strong>My Thinking</strong>.</li>
+          <li>Finish with the wrap-up box: what changed in your thinking? what’s your next question?</li>
+        </ol>
+        <p><strong>Sentence starters:</strong> This might mean… · I’m confused about… · This connects to… · I predict… because…</p>
+        <p><strong>Quick check (CER):</strong> Claim ______; Evidence (quote + page) ______; Reason ______.</p>
+      </details>
+
+      <div role="tablist" aria-label="Chapters" class="tabs" id="chapter-tabs"></div>
+      <div id="chapter-panels"></div>
+
+      <div class="extras" aria-labelledby="extra-support">
+        <h2 id="extra-support">Need extra scaffolds?</h2>
+        <section aria-labelledby="starters-title">
+          <h3 id="starters-title">Sentence Starters</h3>
+          <ul>
+            <li>This might mean…</li>
+            <li>I’m confused about…</li>
+            <li>This connects to…</li>
+            <li>I predict… because…</li>
+            <li>Maybe the author is showing…</li>
+          </ul>
+        </section>
+        <section aria-labelledby="cer-title">
+          <h3 id="cer-title">Quick CER Check</h3>
+          <ul>
+            <li><strong>Claim:</strong> __________________________________________</li>
+            <li><strong>Evidence:</strong> “__________________” (p. ___)</li>
+            <li><strong>Reasoning:</strong> ______________________________________</li>
+          </ul>
+        </section>
+      </div>
+    </div>
+  </main>
+  <footer class="site-footer">
+    &copy; <span id="year">2024</span> Two Wolves English Unit
+  </footer>
+  <script>
+    function sectionHTML(title, items) {
+      if (!items || !items.length) return '';
+      return `<h3>${title}</h3><ul>` + items.map(t => `<li>${t}</li>`).join('') + `</ul>`;
+    }
+
+    const chapters = [
+      { id: "ch-1", label: "Ch. 1 – Cops", pages: "p. 2–5", focus: "Who/what do the police want and why is Ben unsettled?",
+        prompts: [
+          "What is the name of Ben’s seventh stop‑motion movie? (p. 2)",
+          "How old is Ben?",
+          "How old is Olive?",
+          "Why did the police come to see the Silvers? (p. 5)",
+          "Why do you think the police came to see the Silvers?",
+          "Matching: vanquishing / cellophane / delinquent / overkill — match to definitions (1–4)."
+        ]
+      },
+      { id: "ch-2", label: "Ch. 2 – The Holiday", pages: "p. 10–16", focus: "What do the parents’ choices suggest about the ‘holiday’?",
+        prompts: [
+          "Why does his father call Ben a cop?",
+          "Describe his father (p. 12).",
+          "Describe his mother (p. 12).",
+          "Why do you think Olive calls their father ‘Maugrin’? (p. 14)",
+          "Copy the difficult words and easy replacements: heaved; interpret."
+        ]
+      },
+      { id: "ch-3", label: "Ch. 3 – Holiday Haircuts", pages: "p. 17–20", focus: "What do the ‘holiday haircuts’ reveal about control?",
+        prompts: [
+          "Why is Ben’s father angry that he brings his wallet?",
+          "What does ‘stick your bib in’ mean?"
+        ]
+      },
+      { id: "ch-4", label: "Ch. 4 – Chase", pages: "p. 31–35", focus: "How does the car stop escalate into a chase?",
+        prompts: [
+          "Why did the police officer pull their car over?",
+          "‘His heart pummelled…’ / ‘For the first time ever…’ (p. 33): What is Ben thinking and feeling?",
+          "Vocabulary: adrenaline; veered; surliness — add easy replacements.",
+          "MCQ: What does Ben’s father call his car?",
+          "MCQ: Has Ben ever been to the family cabin before?",
+          "MCQ: Who does Olive call Maugrin?",
+          "MCQ: What colour is the bag Uncle Chris gives Dad?",
+          "MCQ: Who did the notebook belong to?",
+          "MCQ: Why did the officer pull them over?"
+        ]
+      },
+      { id: "ch-5", label: "Ch. 5 – Within the Woods", pages: "p. 36–41", focus: "How does setting shape Ben’s thoughts?",
+        prompts: [
+          "Why do Ben’s back/muscles ache and his neck hurt? Give two reasons.",
+          "What kind of thoughts does Ben often find himself thinking?",
+          "Find three words that show the story is set in Australia.",
+          "Does Ben like the cabin when he first sees it? How do you know?"
+        ]
+      },
+      { id: "ch-6", label: "Ch. 6 – The Dead of Night", pages: "p. 42–50", focus: "How does first night tension build?",
+        prompts: [
+          "Matching vocab: almighty / scuttled / stench / monstrous / discarded / muttered / scurried / destined / villainous / tentative — match to definitions (1–10)."
+        ]
+      },
+      { id: "ch-7", label: "Ch. 7 – The Bag", pages: "p. 51–59", focus: "What do father–son dynamics show here?",
+        prompts: [
+          "How would you describe the relationship between fathers and sons?",
+          "How would you describe Ben’s relationship with his father?",
+          "Define: stifled; rickety; vaguely."
+        ]
+      },
+      { id: "ch-8", label: "Ch. 8 – The Secret", pages: "p. 60–67", focus: "What’s the cost of knowing the secret?",
+        prompts: [
+          "MCQ set: Ben’s nickname; how Ray enters the cabin; who says ‘Dad has poo…’; Ben’s reaction to cleaning; title of Ben’s book; what’s in the roof bag; how much money; Dad’s favourite saying."
+        ]
+      },
+      { id: "ch-9", label: "Ch. 9 – In Which Ben Gets Caught", pages: "p. 68–70", focus: "How do lies complicate family trust?",
+        prompts: [
+          "Why was Ben’s father angry with him? (p. 60–61)",
+          "What did Ben lie about? (p. 61)",
+          "What did Ben’s Mum lie about? (p. 63)"
+        ]
+      },
+      { id: "ch-10", label: "Ch. 10 – Culpam poena premit comes", pages: "p. 68–71", focus: "What does the motto imply about guilt and fear?",
+        prompts: [
+          "What is Ben’s biggest fear in the wilderness?",
+          "What did Ben have in his back pocket? (p. 68–69) Describe it.",
+          "What does the Latin motto mean?",
+          "Matching: dodging / crevice / venomous / emerged — match to definitions."
+        ]
+      },
+      { id: "ch-11", label: "Ch. 11 – My Side of the Creek", pages: "p. 72–90", focus: "What do Ben’s promises reveal about him?",
+        prompts: [
+          "What two things did Olive want to know? (p. 74–75)",
+          "How does Ben feel about Olive? Cite evidence. (p. 75)",
+          "What does Ben show commitment/determination for? (p. 83)",
+          "Vocabulary bank: haul; plundering."
+        ]
+      },
+      { id: "ch-12", label: "Ch. 12 – Knife", pages: "p. 86–90", focus: "What does ‘gift‑giving’ hide or reveal?",
+        prompts: [
+          "Predict where the money came from.",
+          "Why was Ben suspicious? (p. 86)",
+          "How is Ben changing his mind about the money? Use evidence. (p. 90)",
+          "MCQ set: Why was Dad angry; where Mum says money came from; who gave Dad the bag; police motto; Ben helping Olive at creek; Ben’s bed‑time thought."
+        ]
+      },
+      { id: "ch-13", label: "Ch. 13 – Detective Ben Silver", pages: "p. 91–95", focus: "How does evidence‑gathering begin?",
+        prompts: [
+          "5Ws circle for Ch. 13.",
+          "Write one prediction about the recorded tape.",
+          "When parents were fighting, what did Ben plan to do?",
+          "How did Ben record the conversation? What did he use?",
+          "What do you think will happen next?"
+        ]
+      },
+      { id: "ch-14", label: "Ch. 14 – Evidence", pages: "p. 96–102", focus: "How does the recording change Ben’s theory?",
+        prompts: [
+          "5Ws circle for Ch. 14.",
+          "Was your Ch. 13 prediction correct? Why/why not?",
+          "What did Ben discover on the tape?",
+          "Why does Ben keep a notebook?",
+          "What happened on Ben’s attempted rafting trip?",
+          "What does Ben plan to do next?",
+          "Word Bank definitions: ‘hints that’; ‘tried to’; ‘throw questions at’; ‘events that prove something’."
+        ]
+      },
+      { id: "ch-15", label: "Ch. 15 – The Hunt", pages: "p. 103–110", focus: "What truths emerge during the hunt?",
+        prompts: [
+          "Matching: interrogate / suggests that / confronts / lurking.",
+          "5Ws circle (note: chapter number corrected to 15).",
+          "What does Ben interrogate his father about and how?",
+          "Is Dad lying or truthful? Use quotes."
+        ]
+      },
+      { id: "ch-16", label: "Ch. 16 – Notebook", pages: "p. 111–120", focus: "Why is the notebook such a flashpoint?",
+        prompts: [
+          "Why do Ben, Olive and Mum not want to eat the ‘charred’ rabbit?",
+          "How did Ben react when Dad took the notebook? Why?",
+          "Inference table: What do I think? Evidence (quote)? Pages?",
+          "True/False set for Ch. 13–16 recap."
+        ]
+      },
+      { id: "ch-17", label: "Ch. 17 – Trapped", pages: "p. 121–126", focus: "What does captivity reveal about the family?",
+        prompts: [
+          "Why is Olive angry at Mum?",
+          "Why does Ben think they are locked in?",
+          "What do we learn about TV’s role in the family?",
+          "How does Ben distract Olive?",
+          "Cloze summary activity (fill in the blanks)."
+        ]
+      },
+      { id: "ch-18", label: "Ch. 18 – HOLE", pages: "p. 127–132", focus: "What does leadership look like under fear?",
+        prompts: [
+          "How do Ben and Olive interact while locked in?",
+          "Why must the trapdoor be their secret?",
+          "When Ben hesitates, what does Olive call him and what does it reveal?",
+          "Define: jagged; darting."
+        ]
+      },
+      { id: "ch-19", label: "Ch. 19 – The Plan", pages: "p. 133–140", focus: "What pushes Ben from fear into research?",
+        prompts: [
+          "How does Ben feel toward his mother?",
+          "Why doesn’t his mother stand up to Ray?",
+          "What do you think the headline says?"
+        ]
+      },
+      { id: "ch-20", label: "Ch. 20 – Apricots", pages: "p. 141–146", focus: "What does confrontation cost Ben?",
+        prompts: [
+          "Why does Ben confront his parents?",
+          "What does Ray mean: ‘come back when you’re a man’?"
+        ]
+      },
+      { id: "ch-21", label: "Ch. 21 – Think I Better Run", pages: "p. 147–153", focus: "Is running away the right choice?",
+        prompts: [
+          "Did Ben’s parents do the right thing taking the money? Why/why not?",
+          "Is Ben right to run away?",
+          "T/F recap set for Ch. 17–21."
+        ]
+      },
+      { id: "ch-22", label: "Ch. 22 – Into the Wild", pages: "p. 154–160", focus: "What choice will Ben make at the threshold?",
+        prompts: [
+          "Why does Ben decide to run away?",
+          "Will he run or warn his family? Explain.",
+          "Cloze summary activity."
+        ]
+      },
+      { id: "ch-23", label: "Ch. 23 – Flesh and Blood", pages: "p. 161–170", focus: "Loyalty vs. law—what wins in Ben’s mind?",
+        prompts: [
+          "Why does Ben hesitate about joining his parents?",
+          "Does Ben still think he can be a police officer? Why/why not?",
+          "Vocab quiz (seek to find; abiding by; motto; hesitates)."
+        ]
+      },
+      { id: "ch-24", label: "Ch. 24 – The Fugitive", pages: "p. 171–178", focus: "How do stakes rise on the river?",
+        prompts: [
+          "Why doesn’t Ben run after his parents?",
+          "Why do he and Olive launch the raft?",
+          "What happens at the waterfall?",
+          "Cloze summary activity."
+        ]
+      },
+      { id: "ch-25", label: "Ch. 25 – Hope", pages: "p. 179–184", focus: "What does ‘hope’ require from Ben?",
+        prompts: [
+          "5Ws circle for Ch. 25.",
+          "Prediction: what happens after the helicopter leaves?",
+          "How does Ben get Olive to cooperate?"
+        ]
+      },
+      { id: "ch-26", label: "Ch. 26 – Stuck", pages: "p. 185–190", focus: "How do scarcity and choice shape the day?",
+        prompts: [
+          "Matching vocab: array / relentless / gnarled / savage / cawing.",
+          "Short answer: Why do they feel stuck? What next?"
+        ]
+      },
+      { id: "ch-27", label: "Ch. 27 – First Night", pages: "p. 191–196", focus: "How does the author build fear?",
+        prompts: [
+          "Find two sentences creating fear.",
+          "List three adjectives from p. 201 describing Ben’s physical state.",
+          "Compare Ben’s descriptions of life at home vs. cabin vs. wilderness."
+        ]
+      },
+      { id: "ch-28", label: "Ch. 28 – Tangled", pages: "p. 197–205", focus: "What does ‘upstream’ represent?",
+        prompts: [
+          "Why go upstream not downstream? (p. 204)",
+          "Do Ben/Olive think Uncle Chris knew about the scheme? Cite evidence.",
+          "Is Ben ‘dodgy’ like Dad/Uncle Chris? Explain.",
+          "Quiz: wilderness; contemplates; pool; resources; accidentally; terrified; journey; reprimands."
+        ]
+      },
+      { id: "ch-29", label: "Ch. 29 – Tempest", pages: "p. 206–212", focus: "What matters when the storm hits?",
+        prompts: [
+          "What happens when Ben drops the money?",
+          "How does Ben care for Olive?",
+          "Contrast Olive’s look vs. Ben’s feelings (p. 209).",
+          "Define: ominous; snarled; quake."
+        ]
+      },
+      { id: "ch-30", label: "Ch. 30 – The End", pages: "p. 213–220", focus: "Why doesn’t money equal happiness here?",
+        prompts: [
+          "Why isn’t Ben happy with so much money?",
+          "Find 10 words for physical state; 5 for mental state.",
+          "Infer: Why did Olive get very ill and Ben did not?",
+          "Prior knowledge: What kills first, thirst or hunger?"
+        ]
+      },
+      { id: "ch-31", label: "Ch. 31 – The Wreckers", pages: "p. 221–227", focus: "What does ‘no more bad choices’ mean?",
+        prompts: [
+          "Why is the pine tree a big deal? (p. 221)",
+          "‘He was a wrecker.’ Literal vs inferential meaning.",
+          "How is Ben changing? What is he fearful of?",
+          "Predict: Why did Ben take a shovel?",
+          "Cloze summary activity."
+        ]
+      },
+      { id: "ch-32", label: "Ch. 32 – The Road", pages: "p. 228–230", focus: "What does hitchhiking show about growth?",
+        prompts: [
+          "‘Things could not rattle him so easily’ (p. 228): what does this reveal?",
+          "Would the ‘old’ Ben have hitchhiked? Why/why not?"
+        ]
+      },
+      { id: "ch-33", label: "Ch. 33 – Dead or Alive", pages: "p. 231–238", focus: "How do care and caution coexist?",
+        prompts: [
+          "Locate two lines (p. 236) showing Olive is recovering.",
+          "‘Most of them looked broken in some way’ (p. 235): What does Ben mean?"
+        ]
+      },
+      { id: "ch-34", label: "Ch. 34 – Hide and Seek", pages: "p. 239–246", focus: "How does family history reshape the present?",
+        prompts: [
+          "Does Ben want his parents to return? Justify.",
+          "True/False recap set for events (Maccas, helicopter, cabin, car, phone, hospital, lost money, Pop a thief, excited to see parents)."
+        ]
+      },
+      { id: "ch-35", label: "Ch. 35 – Last Stand", pages: "p. 247–253", focus: "Which wolf does Ben feed?",
+        prompts: [
+          "Why has Ben ‘never loved and hated a hug so much’?",
+          "Who is Ben more afraid of?",
+          "Why does Ben hesitate to tell Dad about the money?"
+        ]
+      },
+      { id: "ch-36", label: "Ch. 36 – Life", pages: "p. 254–260", focus: "How does guilt push Ben toward truth?",
+        prompts: [
+          "What movie is Ben working on?",
+          "Why is he dismantling the shed? What does it represent?",
+          "What secret will Ben have to reveal if court goes badly?"
+        ]
+      },
+      { id: "ch-37", label: "Ch. 37 – Within the Woods", pages: "p. 261–268", focus: "Can Ben escape his legacy?",
+        prompts: [
+          "Why give the money back? Why consider keeping it?",
+          "Why is it important to return the money?",
+          "Who is the man holding the bag? What are the clues?"
+        ]
+      },
+      { id: "ch-38", label: "Ch. 38 – One Wolf", pages: "p. 269–276", focus: "What does the ‘one wolf’ ending mean?",
+        prompts: [
+          "How has Ben changed (physical and mental)?",
+          "How has Mum changed since Ray?",
+          "How has Ben released the wolf within from captivity?",
+          "Quiz: roadside vehicle; hospital choice; never a fear; year‑later thoughts; which trait he is not at the end."
+        ]
+      }
+    ];
+
+    const tabsEl = document.getElementById('chapter-tabs');
+    const panelsEl = document.getElementById('chapter-panels');
+
+    function activate(id, opts = { scroll: true }) {
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.setAttribute('aria-selected', btn.id === `tab-${id}` ? 'true' : 'false');
+        btn.tabIndex = btn.id === `tab-${id}` ? 0 : -1;
+      });
+      document.querySelectorAll('.chapter-panel').forEach(p => {
+        const isActive = p.id === `panel-${id}`;
+        p.classList.toggle('active', isActive);
+        p.toggleAttribute('hidden', !isActive);
+      });
+      history.replaceState(null, '', `#${id}`);
+      if (opts.scroll) {
+        const el = document.getElementById(id);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+    }
+
+    function onTabKeydown(e) {
+      const keys = ['ArrowRight', 'ArrowLeft', 'Home', 'End'];
+      if (!keys.includes(e.key)) return;
+      const buttons = Array.from(document.querySelectorAll('.tab-btn'));
+      const currentIndex = buttons.indexOf(e.currentTarget);
+      let nextIndex = currentIndex;
+      if (e.key === 'ArrowRight') nextIndex = (currentIndex + 1) % buttons.length;
+      if (e.key === 'ArrowLeft') nextIndex = (currentIndex - 1 + buttons.length) % buttons.length;
+      if (e.key === 'Home') nextIndex = 0;
+      if (e.key === 'End') nextIndex = buttons.length - 1;
+      buttons[nextIndex].focus();
+      buttons[nextIndex].click();
+    }
+
+    function render() {
+      chapters.forEach((chapter, index) => {
+        const button = document.createElement('button');
+        button.className = 'tab-btn';
+        button.type = 'button';
+        button.id = `tab-${chapter.id}`;
+        button.setAttribute('role', 'tab');
+        button.setAttribute('aria-controls', `panel-${chapter.id}`);
+        button.setAttribute('aria-selected', index === 0 ? 'true' : 'false');
+        button.tabIndex = index === 0 ? 0 : -1;
+        button.textContent = chapter.label;
+        button.addEventListener('click', () => activate(chapter.id));
+        button.addEventListener('keydown', onTabKeydown);
+        tabsEl.appendChild(button);
+      });
+
+      chapters.forEach((chapter, index) => {
+        const panel = document.createElement('section');
+        panel.className = `chapter-panel${index === 0 ? ' active' : ''}`;
+        panel.id = `panel-${chapter.id}`;
+        panel.setAttribute('role', 'tabpanel');
+        panel.setAttribute('aria-labelledby', `tab-${chapter.id}`);
+        if (index !== 0) {
+          panel.setAttribute('hidden', '');
+        }
+
+        const activities = sectionHTML('Prompts for this chapter', chapter.prompts);
+
+        panel.innerHTML = `
+          <h2 id="${chapter.id}">${chapter.label}</h2>
+          <div class="panel-meta">
+            <div><span class="pill">Pages</span> ${chapter.pages || '—'}</div>
+            <div><span class="pill">Focus</span> ${chapter.focus || '—'}</div>
+          </div>
+          ${activities}
+          <h3>Detective’s Double-Entry Journal</h3>
+          <p><strong>Header:</strong> Chapter ___ | pages ___–___ | Date ___</p>
+          <table>
+            <tr>
+              <th style="width:50%">Evidence / Quotes (with page #)</th>
+              <th style="width:50%">My Thinking (inference, question, connection, prediction)</th>
+            </tr>
+            <tr><td>“___________________” (p. __)</td><td>____________________________________________________________</td></tr>
+            <tr><td>“___________________” (p. __)</td><td>____________________________________________________________</td></tr>
+            <tr><td>“___________________” (p. __)</td><td>____________________________________________________________</td></tr>
+            <tr><td>“___________________” (p. __)</td><td>____________________________________________________________</td></tr>
+          </table>
+          <h3>Wrap-up (2–3 sentences)</h3>
+          <div class="wrapup"></div>
+        `;
+        panelsEl.appendChild(panel);
+      });
+
+      if (location.hash) {
+        const id = location.hash.substring(1);
+        if (chapters.some(ch => ch.id === id)) {
+          activate(id, { scroll: false });
+        }
+      }
+    }
+
+    render();
+
+    window.addEventListener('hashchange', () => {
+      const id = location.hash.substring(1);
+      if (chapters.some(ch => ch.id === id)) {
+        activate(id);
+      }
+    });
+
+    const menuToggle = document.querySelector('.mobile-menu');
+    const siteNav = document.querySelector('.site-header nav');
+
+    if (menuToggle && siteNav) {
+      const toggleNav = () => siteNav.classList.toggle('active');
+      menuToggle.addEventListener('click', toggleNav);
+      menuToggle.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          toggleNav();
+        }
+      });
+      siteNav.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => siteNav.classList.remove('active'));
+      });
+    }
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
