@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Two Wolves – Reflection Questions (Detective’s Journal)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../styles/header.css">
+    <style>
+        :root {
+            --primary-color: #223046;
+            --secondary-color: #3498db;
+            --light-color: #f8f9fa;
+            --dark-color: #2c3e50;
+            --border-color: #dfe4ea;
+            --tab-bg: #eef2f7;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            color: var(--dark-color);
+            background: var(--light-color);
+        }
+
+        main {
+            padding: 2rem 1rem 3rem;
+        }
+
+        .notes-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(34, 48, 70, 0.08);
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--primary-color);
+        }
+
+        h1 {
+            margin-bottom: 0.75rem;
+            text-align: center;
+        }
+
+        p.lead {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .tab-nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.75rem;
+            margin: 0 auto 2rem;
+            padding: 0;
+            list-style: none;
+        }
+
+        .tab-nav button {
+            appearance: none;
+            border: 1px solid var(--border-color);
+            background: #fff;
+            color: var(--primary-color);
+            padding: 0.5rem 1.25rem;
+            border-radius: 999px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+        }
+
+        .tab-nav button[aria-selected="true"] {
+            background: var(--tab-bg);
+            color: var(--primary-color);
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.15);
+        }
+
+        .tab-nav button:focus-visible {
+            outline: 3px solid var(--secondary-color);
+            outline-offset: 2px;
+        }
+
+        .tab-panel {
+            display: none;
+        }
+
+        .tab-panel.active {
+            display: block;
+        }
+
+        .chapter-intro {
+            margin-bottom: 1.5rem;
+            color: rgba(34, 48, 70, 0.85);
+        }
+
+        .question-section {
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            background: var(--light-color);
+            padding: 1.5rem;
+            margin-bottom: 1.75rem;
+        }
+
+        .question-section h3 {
+            margin-top: 0;
+            margin-bottom: 0.75rem;
+            font-size: 1.1rem;
+        }
+
+        .question-section ol {
+            margin: 0;
+            padding-left: 1.25rem;
+            display: grid;
+            gap: 0.75rem;
+        }
+
+        .question-section li {
+            color: var(--dark-color);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 1rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav li {
+            position: relative;
+        }
+
+        .dropdown-content {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #fff;
+            border: 1px solid #ddd;
+            min-width: 220px;
+            display: none;
+            z-index: 1000;
+            padding: 0.5rem 0;
+            list-style: none;
+            margin: 0;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 0.5rem 0.75rem;
+            white-space: nowrap;
+            color: var(--dark-color);
+            text-decoration: none;
+        }
+
+        .dropdown-content a:hover,
+        .dropdown-content a:focus {
+            background: var(--light-color);
+        }
+
+        .dropdown:hover .dropdown-content,
+        .dropdown:focus-within .dropdown-content {
+            display: block;
+        }
+
+        .how-to {
+            background: var(--light-color);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .how-to ol {
+            margin: 0;
+            padding-left: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .journal-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2rem;
+            table-layout: fixed;
+            border: 1px solid var(--border-color);
+        }
+
+        .journal-table caption {
+            text-align: left;
+            padding: 0 0 0.75rem;
+            font-weight: 600;
+        }
+
+        .journal-table th {
+            text-align: left;
+            padding: 0.75rem;
+            background: var(--light-color);
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .journal-table th:first-child,
+        .journal-table td:first-child {
+            border-right: 1px solid var(--border-color);
+            width: 45%;
+        }
+
+        .journal-table td {
+            padding: 1.25rem 0.75rem;
+            border-top: 1px solid var(--border-color);
+            height: 90px;
+            vertical-align: top;
+        }
+
+        .panel-wrap-up {
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 2rem;
+            background: #fff;
+        }
+
+        .panel-wrap-up h3 {
+            margin-top: 0;
+            margin-bottom: 0.75rem;
+            font-size: 1.05rem;
+        }
+
+        .panel-wrap-up p {
+            margin: 0;
+            color: rgba(34, 48, 70, 0.85);
+        }
+
+        .wrap-up,
+        .sentence-starters,
+        .cer-check {
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .wrap-up {
+            background: var(--light-color);
+        }
+
+        .sentence-starters ul,
+        .cer-check ul {
+            margin: 0;
+            padding-left: 1.25rem;
+            line-height: 1.7;
+        }
+
+        .cer-check ul {
+            list-style-type: square;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: rgba(44, 62, 80, 0.75);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 640px) {
+            .notes-wrapper {
+                padding: 1.75rem;
+            }
+
+            .journal-table td {
+                padding: 1rem 0.5rem;
+            }
+
+            .tab-nav {
+                justify-content: flex-start;
+            }
+
+            .tab-nav button {
+                flex: 1 0 45%;
+                text-align: center;
+            }
+        }
+
+        @media print {
+            body {
+                background: #ffffff;
+            }
+
+            .site-header,
+            footer {
+                display: none !important;
+            }
+
+            main {
+                padding: 0;
+            }
+
+            .notes-wrapper {
+                box-shadow: none;
+                border-radius: 0;
+                padding: 0;
+            }
+
+            .tab-nav {
+                display: none;
+            }
+
+            .tab-panel {
+                display: block !important;
+                page-break-inside: avoid;
+            }
+
+            .journal-table td {
+                height: 120px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-container">
+            <div class="header-content">
+                <a href="../index.html" class="logo">
+                    <i class="fas fa-book-open"></i>
+                    <h1>Two Wolves</h1>
+                </a>
+                <div class="mobile-menu" aria-label="Toggle navigation" role="button" tabindex="0">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="../about.html">About the Novel</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropbtn active" aria-haspopup="true">Notes ▾</a>
+                            <ul class="dropdown-content">
+                                <li><a href="/notes/cornell.html">Cornell Notes</a></li>
+                                <li><a class="active" aria-current="page" href="/notes/reflection.html">Reflection Questions</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="../portfolios.html">Portfolio Tasks</a></li>
+                        <li><a href="../secure-portfolios.html">Secure Portfolios</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="notes-wrapper">
+            <h1>Two Wolves – Reflection Questions</h1>
+            <p class="lead">Become a reading detective! Collect evidence from the text and analyse your thinking using this double-entry journal.</p>
+            <section class="how-to" aria-labelledby="how-to-title">
+                <h2 id="how-to-title">How to use this journal</h2>
+                <ol>
+                    <li>Preview the chapter and note any key questions you have.</li>
+                    <li>Read actively, marking important evidence or quotes with page numbers.</li>
+                    <li>Record the evidence in the left column and explain your thinking on the right.</li>
+                    <li>Look for patterns, surprises, and shifts in character motivations.</li>
+                    <li>Use the wrap-up section to prepare for class discussion or written responses.</li>
+                </ol>
+            </section>
+            <nav class="tab-nav" role="tablist" aria-label="Reflection chapters">
+                <button type="button" role="tab" id="tab-ch1-4" aria-controls="panel-ch1-4" aria-selected="true" tabindex="0" data-target="panel-ch1-4">Ch. 1–4</button>
+                <button type="button" role="tab" id="tab-ch5-8" aria-controls="panel-ch5-8" aria-selected="false" tabindex="-1" data-target="panel-ch5-8">Ch. 5–8</button>
+                <button type="button" role="tab" id="tab-ch9-12" aria-controls="panel-ch9-12" aria-selected="false" tabindex="-1" data-target="panel-ch9-12">Ch. 9–12</button>
+                <button type="button" role="tab" id="tab-ch13-16" aria-controls="panel-ch13-16" aria-selected="false" tabindex="-1" data-target="panel-ch13-16">Ch. 13–16</button>
+                <button type="button" role="tab" id="tab-ch17-21" aria-controls="panel-ch17-21" aria-selected="false" tabindex="-1" data-target="panel-ch17-21">Ch. 17–21</button>
+                <button type="button" role="tab" id="tab-ch22-26" aria-controls="panel-ch22-26" aria-selected="false" tabindex="-1" data-target="panel-ch22-26">Ch. 22–26</button>
+                <button type="button" role="tab" id="tab-ch27-31" aria-controls="panel-ch27-31" aria-selected="false" tabindex="-1" data-target="panel-ch27-31">Ch. 27–31</button>
+                <button type="button" role="tab" id="tab-ch32-38" aria-controls="panel-ch32-38" aria-selected="false" tabindex="-1" data-target="panel-ch32-38">Ch. 32–38</button>
+            </nav>
+
+            <section id="panel-ch1-4" class="tab-panel active" role="tabpanel" aria-labelledby="tab-ch1-4">
+                <h2>Chapters 1–4: Launching the Case</h2>
+                <p class="chapter-intro">Use these prompts to trace how the sudden getaway sets up the mystery and how Ben begins collecting clues.</p>
+                <section class="question-section" aria-label="Reflection questions for chapters 1 to 4">
+                    <h3>Guiding questions</h3>
+                    <ol>
+                        <li>Which details show that April and Ray are keeping secrets from Ben and Olive? Highlight the exact moments.</li>
+                        <li>How does Ben’s passion for detective work help him cope with the trip? Where does it fall short?</li>
+                        <li>What do Olive’s reactions on the drive reveal about her personality and her trust in the adults?</li>
+                        <li>Why does the “two wolves” story matter to Ben so early in the novel?</li>
+                        <li>Which events create the most tension before the family reaches Pop’s cabin?</li>
+                    </ol>
+                </section>
+                <table class="journal-table">
+                    <caption>Collect evidence and your thinking for Chapters 1–4.</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">Evidence / Quotes (with page #)</th>
+                            <th scope="col">My Thinking</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td></td><td></td></tr>
+                        <tr><td></td><td></td></tr>
+                        <tr><td></td><td></td></tr>
+                        <tr><td></td><td></td></tr>
+                        <tr><td></td><td></td></tr>
+                        <tr><td></td><td></td></tr>
+                        <tr><td></td><td></td></tr>
+                        <tr><td></td><td></td></tr>
+                    </tbody>
+                </table>
+                <div class="panel-wrap-up">
+                    <h3>Detective wrap-up</h3>
+                    <p>What clues matter most at this stage? Note how they point to the mystery you think Ben needs to solve.</p>
+                </div>
+            </section>
+
+            <section id="panel-ch5-8" class="tab-panel" role="tabpanel" aria-labelledby="tab-ch5-8" hidden>
+                <h2>Chapters 5–8: Survival School</h2>
+                <p class="chapter-intro">Focus on how the isolation at Pop’s cabin changes the family dynamic and the risks each character faces.</p>
+                <section class="question-section" aria-label="Reflection questions for chapters 5 to 8">
+                    <h3>Guiding questions</h3>
+                    <ol>
+                        <li>How does the bush setting test Ben’s courage? Where does he struggle to “feed” the brave wolf?</li>
+                        <li>What do Ray’s survival lessons reveal about his priorities and fears?</li>
+                        <li>Which moments show Olive handling the situation differently from Ben?</li>
+                        <li>What clues does Ben collect about the mystery of the duffel bag?</li>
+                        <li>Where do you see Ben choosing between loyalty to family and doing what is right?</li>
+                    </ol>
+                </section>
+                <table class="journal-table">
+                    <caption>Collect evidence and your thinking for Chapters 5–8.</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">Evidence / Quotes (with page #)</th>
+                            <th scope="col">My Thinking</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td></td><td></td></tr>
+                        <tr><td></td><td></td></tr>
+                        <tr><td></td><td></td></tr>
+                        <tr><td></td><td></td></tr>
+                        <tr><td></td><td></td></tr>
+                        <tr><td></td><td></td></tr>
+                        <tr><td></td><td></td></tr>
+                        <tr><td></td><td></td></tr>
+                    </tbody>
+                </table>
+                <div class="panel-wrap-up">
+                    <h3>Detective wrap-up</h3>
+                    <p>Summarise how the cabin’s challenges affect Ben’s trust in his parents. What questions are you still chasing?</p>
+                </div>
+            </section>
+
+            <section id="panel-ch9-12" class="tab-panel" role="tabpanel" aria-labelledby="tab-ch9-12" hidden>
+                <h2>Chapters 9–12: Secrets in the Cabin</h2>
+                <p class="chapter-intro">Track how new discoveries push Ben deeper into the truth about why the Silvers are hiding.</p>
+                <section class="question-section" aria-label="Reflection questions for chapters 9 to 12">
+                    <h3>Guiding questions</h3>
+                    <ol>
+                        <li>Which objects or overheard conversations give Ben new insight into Ray’s plan?</li>
+                        <li>How does Pop’s notebook influence the way Ben organises his evidence?</li>
+                        <li>What do Ben’s reactions to the hidden cash tell you about his values?</li>
+                        <li>Where does Olive challenge the silence in the family, and what impact does it have?</li>
+                        <li>How is tension building between Ben’s need for the truth and Ray’s demand for secrecy?</li>
+                    </ol>
+                </section>
+                <table class="journal-table">
+                    <caption>Collect evidence and your thinking for Chapters 9–12.</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">Evidence / Quotes (with page #)</th>
+                            <th scope="col">My Thinking</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td></td><td></td></tr>
+                        <tr><td></td><td></td></tr>
+                        <tr><td></td><td></td></tr>
+                        <tr><td></td><td></td></tr>
+                        <tr><td></td><td></td></tr>
+                        <tr><td></td><td></td></tr>
+                        <tr><td></td><td></td></tr>
+                        <tr><td></td><td></td></tr>
+                    </tbody>
+                </table>
+                <div class="panel-wrap-up">
+                    <h3>Detective wrap-up</h3>
+                    <p>List the strongest pieces of evidence you have gathered. What does Ben believe they prove at this point?</p>
+                </div>
+            </section>
+
+            <section id="panel-ch13-16" class="tab-panel" role="tabpanel" aria-labelledby="tab-ch13-16" hidden>
+                <h2>Chapters 13–16: Pressure Rising</h2>
+                <p class="chapter-intro">Look at the strain between Ben and Ray and how choices in the bush sharpen the story’s moral questions.</p>
+                <section class="question-section" aria-label="Reflection questions for chapters 13 to 16">
+                    <h3>Guiding questions</h3>
+                    <ol>
+                        <li>How do Ray’s expectations of Ben change during the hunting scenes? What does Ben think about those expectations?</li>
+                        <li>What emotions run through Ben as he studies the evidence in Pop’s notebook?</li>
+                        <li>Where does Ben attempt to protect Olive, and how effective is he?</li>
+                        <li>How does April respond to the growing pressure, and what does that add to the mystery?</li>
+                        <li>Which lines or images best show the “two wolves” battling inside Ben now?</li>
+                    </ol>
+                </section>
+                <table class="journal-table">
+                    <caption>Collect evidence and your thinking for Chapters 13–16.</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">Evidence / Quotes (with page #)</th>
+                            <th scope="col">My Thinking</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td></td><td></td></tr>
+                        <tr><td></td><td></td></tr>
+                        <tr><td></td><td></td></tr>
+                        <tr><td></td><td></td></tr>
+                        <tr><td></td><td></td></tr>
+                        <tr><td></td><td></td></tr>
+                        <tr><td></td><td></td></tr>
+                        <tr><td></td><td></td></tr>
+                    </tbody>
+                </table>
+                <div class="panel-wrap-up">
+                    <h3>Detective wrap-up</h3>
+                    <p>Capture how Ben weighs loyalty against honesty. What do you predict he will do next?</p>
+                </div>
+            </section>
+
+            <section id="panel-ch17-21" class="tab-panel" role="tabpanel" aria-labelledby="tab-ch17-21" hidden>
+                <h2>Chapters 17–21: Breaking Points</h2>
+                <p class="chapter-intro">Notice where the secrecy becomes unbearable and how each character reacts to the pressure.</p>
+                <section class="question-section" aria-label="Reflection questions for chapters 17 to 21">
+                    <h3>Guiding questions</h3>
+                    <ol>
+                        <li>What new risks make Ben rethink staying silent?</li>
+                        <li>Where do Ben and Olive find moments of courage or cleverness that surprise you?</li>
+                        <li>How does April balance protecting her children with supporting Ray?</li>
+                        <li>Which clues suggest how the law might catch up with the Silvers?</li>
+                        <li>What ethical lines feel close to being crossed in these chapters?</li>
+                    </ol>
+                </section>
+                <table class="journal-table">
+                    <caption>Collect evidence and your thinking for Chapters 17–21.</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">Evidence / Quotes (with page #)</th>
+                            <th scope="col">My Thinking</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td></td><td></td></tr>
+                        <tr><td></td><td></td></tr>
+                        <tr><td></td><td></td></tr>
+                        <tr><td></td><td></td></tr>
+                        <tr><td></td><td></td></tr>
+                        <tr><td></td><td></td></tr>
+                        <tr><td></td><td></td></tr>
+                        <tr><td></td><td></td></tr>
+                    </tbody>
+                </table>
+                <div class="panel-wrap-up">
+                    <h3>Detective wrap-up</h3>
+                    <p>Explain the biggest conflict Ben now faces. How ready is he to act on the evidence?</p>
+                </div>
+            </section>
+
+            <section id="panel-ch22-26" class="tab-panel" role="tabpanel" aria-labelledby="tab-ch22-26" hidden>
+                <h2>Chapters 22–26: Cracks in the Plan</h2>
+                <p class="chapter-intro">Examine how the family’s situation begins to unravel and who takes charge of the next move.</p>
+                <section class="question-section" aria-label="Reflection questions for chapters 22 to 26">
+                    <h3>Guiding questions</h3>
+                    <ol>
+                        <li>Where do you see Ben stepping into leadership, and what motivates him?</li>
+                        <li>How do Ray’s choices place the family in greater danger?</li>
+                        <li>What does Olive contribute to problem-solving in these chapters?</li>
+                        <li>Which pieces of evidence become urgent to share with someone else?</li>
+                        <li>How does the natural environment reflect the family’s emotional state?</li>
+                    </ol>
+                </section>
+                <table class="journal-table">
+                    <caption>Collect evidence and your thinking for Chapters 22–26.</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">Evidence / Quotes (with page #)</th>
+                            <th scope="col">My Thinking</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td></td><td></td></tr>
+                        <tr><td></td><td></td></tr>
+                        <tr><td></td><td></td></tr>
+                        <tr><td></td><td></td></tr>
+                        <tr><td></td><td></td></tr>
+                        <tr><td></td><td></td></tr>
+                        <tr><td></td><td></td></tr>
+                        <tr><td></td><td></td></tr>
+                    </tbody>
+                </table>
+                <div class="panel-wrap-up">
+                    <h3>Detective wrap-up</h3>
+                    <p>Note the choices Ben sees ahead of him. Who can he trust, and what evidence backs that up?</p>
+                </div>
+            </section>
+
+            <section id="panel-ch27-31" class="tab-panel" role="tabpanel" aria-labelledby="tab-ch27-31" hidden>
+                <h2>Chapters 27–31: Choosing a Side</h2>
+                <p class="chapter-intro">Follow how Ben weighs protecting his family against doing what is lawful and fair.</p>
+                <section class="question-section" aria-label="Reflection questions for chapters 27 to 31">
+                    <h3>Guiding questions</h3>
+                    <ol>
+                        <li>Which events force Ben to decide whether to stay loyal or tell the truth?</li>
+                        <li>How does Olive influence Ben’s choices in these chapters?</li>
+                        <li>What consequences does Ben imagine for speaking up? What about staying silent?</li>
+                        <li>How does Ray justify his actions, and how convincing is he?</li>
+                        <li>Where do you see Ben growing into the detective he wants to be?</li>
+                    </ol>
+                </section>
+                <table class="journal-table">
+                    <caption>Collect evidence and your thinking for Chapters 27–31.</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">Evidence / Quotes (with page #)</th>
+                            <th scope="col">My Thinking</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td></td><td></td></tr>
+                        <tr><td></td><td></td></tr>
+                        <tr><td></td><td></td></tr>
+                        <tr><td></td><td></td></tr>
+                        <tr><td></td><td></td></tr>
+                        <tr><td></td><td></td></tr>
+                        <tr><td></td><td></td></tr>
+                        <tr><td></td><td></td></tr>
+                    </tbody>
+                </table>
+                <div class="panel-wrap-up">
+                    <h3>Detective wrap-up</h3>
+                    <p>Outline the decision Ben is preparing to make. What evidence supports his thinking?</p>
+                </div>
+            </section>
+
+            <section id="panel-ch32-38" class="tab-panel" role="tabpanel" aria-labelledby="tab-ch32-38" hidden>
+                <h2>Chapters 32–38: Resolution</h2>
+                <p class="chapter-intro">Bring the investigation home by analysing how justice, truth, and family connections are resolved.</p>
+                <section class="question-section" aria-label="Reflection questions for chapters 32 to 38">
+                    <h3>Guiding questions</h3>
+                    <ol>
+                        <li>How does Ben finally act on the evidence he has gathered?</li>
+                        <li>What consequences do the Silvers face, and how fair do they feel?</li>
+                        <li>Which relationships change most in the closing chapters?</li>
+                        <li>How does the “two wolves” metaphor pay off by the end?</li>
+                        <li>What questions remain for you after finishing the novel?</li>
+                    </ol>
+                </section>
+                <table class="journal-table">
+                    <caption>Collect evidence and your thinking for Chapters 32–38.</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">Evidence / Quotes (with page #)</th>
+                            <th scope="col">My Thinking</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td></td><td></td></tr>
+                        <tr><td></td><td></td></tr>
+                        <tr><td></td><td></td></tr>
+                        <tr><td></td><td></td></tr>
+                        <tr><td></td><td></td></tr>
+                        <tr><td></td><td></td></tr>
+                        <tr><td></td><td></td></tr>
+                        <tr><td></td><td></td></tr>
+                    </tbody>
+                </table>
+                <div class="panel-wrap-up">
+                    <h3>Detective wrap-up</h3>
+                    <p>Write your final verdict on Ben’s investigation. How has he changed, and what evidence proves it?</p>
+                </div>
+            </section>
+
+            <section class="wrap-up" aria-labelledby="wrap-up-title">
+                <h2 id="wrap-up-title">Whole-book reflection</h2>
+                <p>Look across your notes from each chapter group. What patterns or big ideas keep returning? Which evidence best supports your view of the Silvers’ choices?</p>
+            </section>
+            <section class="sentence-starters" aria-labelledby="starters-title">
+                <h2 id="starters-title">Sentence Starters</h2>
+                <ul>
+                    <li>"This detail makes me think…"</li>
+                    <li>"The author might be suggesting…"</li>
+                    <li>"A turning point occurs when…"</li>
+                    <li>"This connects back to…"</li>
+                    <li>"I wonder if…"</li>
+                </ul>
+            </section>
+            <section class="cer-check" aria-labelledby="cer-title">
+                <h2 id="cer-title">Quick CER Check</h2>
+                <ul>
+                    <li>Claim: Have you stated a clear idea or inference?</li>
+                    <li>Evidence: Have you included precise quotes with page numbers?</li>
+                    <li>Reasoning: Have you explained how the evidence supports your claim?</li>
+                </ul>
+            </section>
+        </div>
+    </main>
+    <footer>
+        &copy; <span id="year">2024</span> Two Wolves English Unit
+    </footer>
+    <script>
+        const menuToggle = document.querySelector('.mobile-menu');
+        const siteNav = document.querySelector('.site-header nav');
+
+        if (menuToggle && siteNav) {
+            const toggleNav = () => siteNav.classList.toggle('active');
+            menuToggle.addEventListener('click', toggleNav);
+            menuToggle.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    toggleNav();
+                }
+            });
+            siteNav.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => siteNav.classList.remove('active'));
+            });
+        }
+
+        const tabButtons = Array.from(document.querySelectorAll('.tab-nav [role="tab"]'));
+        const tabPanels = Array.from(document.querySelectorAll('.tab-panel'));
+
+        const activateTab = (targetId, setFocus = false) => {
+            tabButtons.forEach((button) => {
+                const isActive = button.dataset.target === targetId;
+                button.setAttribute('aria-selected', isActive ? 'true' : 'false');
+                button.setAttribute('tabindex', isActive ? '0' : '-1');
+                if (isActive && setFocus) {
+                    button.focus();
+                }
+            });
+
+            tabPanels.forEach((panel) => {
+                const matches = panel.id === targetId;
+                panel.classList.toggle('active', matches);
+                if (matches) {
+                    panel.removeAttribute('hidden');
+                } else {
+                    panel.setAttribute('hidden', 'hidden');
+                }
+            });
+        };
+
+        tabButtons.forEach((button, index) => {
+            button.addEventListener('click', () => activateTab(button.dataset.target));
+            button.addEventListener('keydown', (event) => {
+                let newIndex = null;
+
+                if (event.key === 'ArrowRight') {
+                    newIndex = (index + 1) % tabButtons.length;
+                } else if (event.key === 'ArrowLeft') {
+                    newIndex = (index - 1 + tabButtons.length) % tabButtons.length;
+                } else if (event.key === 'Home') {
+                    newIndex = 0;
+                } else if (event.key === 'End') {
+                    newIndex = tabButtons.length - 1;
+                }
+
+                if (newIndex !== null) {
+                    event.preventDefault();
+                    const newTab = tabButtons[newIndex];
+                    activateTab(newTab.dataset.target, true);
+                }
+            });
+        });
+
+        if (tabButtons.length) {
+            activateTab(tabButtons.find((button) => button.getAttribute('aria-selected') === 'true')?.dataset.target || tabButtons[0].dataset.target);
+        }
+
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

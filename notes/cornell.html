@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Two Wolves – Cornell Notes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../styles/header.css">
+    <style>
+        :root {
+            --primary-color: #223046;
+            --secondary-color: #3498db;
+            --light-color: #f8f9fa;
+            --dark-color: #2c3e50;
+            --border-color: #dfe4ea;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            color: var(--dark-color);
+            background: var(--light-color);
+        }
+
+        main {
+            padding: 2rem 1rem 3rem;
+        }
+
+        .notes-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(34, 48, 70, 0.08);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-align: center;
+            color: var(--primary-color);
+        }
+
+        p.lead {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 1rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav li {
+            position: relative;
+        }
+
+        .dropdown-content {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #fff;
+            border: 1px solid #ddd;
+            min-width: 220px;
+            display: none;
+            z-index: 1000;
+            padding: 0.5rem 0;
+            list-style: none;
+            margin: 0;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 0.5rem 0.75rem;
+            white-space: nowrap;
+            color: var(--dark-color);
+            text-decoration: none;
+        }
+
+        .dropdown-content a:hover,
+        .dropdown-content a:focus {
+            background: var(--light-color);
+        }
+
+        .dropdown:hover .dropdown-content,
+        .dropdown:focus-within .dropdown-content {
+            display: block;
+        }
+
+        .cornell-table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid var(--border-color);
+            margin-bottom: 2rem;
+            table-layout: fixed;
+        }
+
+        .cornell-table thead th {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            text-align: left;
+            padding: 0.75rem;
+            background: var(--light-color);
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .cornell-table tbody td {
+            border-top: 1px solid var(--border-color);
+            padding: 1.25rem 0.75rem;
+            height: 80px;
+            vertical-align: top;
+        }
+
+        .cornell-table thead th:first-child,
+        .cornell-table tbody td:first-child {
+            width: 35%;
+            border-right: 1px solid var(--border-color);
+        }
+
+        .summary-box {
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            padding: 1.5rem;
+        }
+
+        .summary-box h2 {
+            margin-top: 0;
+            font-family: 'Montserrat', sans-serif;
+            margin-bottom: 0.75rem;
+        }
+
+        .summary-box p {
+            margin: 0;
+            min-height: 100px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: rgba(44, 62, 80, 0.75);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 640px) {
+            .notes-wrapper {
+                padding: 1.5rem;
+            }
+
+            .cornell-table tbody td {
+                padding: 1rem 0.5rem;
+            }
+        }
+
+        @media print {
+            body {
+                background: #ffffff;
+            }
+
+            .site-header,
+            footer {
+                display: none !important;
+            }
+
+            main {
+                padding: 0;
+            }
+
+            .notes-wrapper {
+                box-shadow: none;
+                border-radius: 0;
+                padding: 0;
+            }
+
+            .summary-box p,
+            .cornell-table tbody td {
+                height: 120px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-container">
+            <div class="header-content">
+                <a href="../index.html" class="logo">
+                    <i class="fas fa-book-open"></i>
+                    <h1>Two Wolves</h1>
+                </a>
+                <div class="mobile-menu" aria-label="Toggle navigation" role="button" tabindex="0">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="../about.html">About the Novel</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropbtn active" aria-haspopup="true">Notes ▾</a>
+                            <ul class="dropdown-content">
+                                <li><a class="active" aria-current="page" href="/notes/cornell.html">Cornell Notes</a></li>
+                                <li><a href="/notes/reflection.html">Reflection Questions</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="../portfolios.html">Portfolio Tasks</a></li>
+                        <li><a href="../secure-portfolios.html">Secure Portfolios</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="notes-wrapper">
+            <h1>Two Wolves – Cornell Notes</h1>
+            <p class="lead">Use this template to organise your thinking while reading <em>Two Wolves</em>. Jot down key questions on the left and capture detailed notes on the right.</p>
+            <table class="cornell-table">
+                <thead>
+                    <tr>
+                        <th scope="col">Cues / Questions</th>
+                        <th scope="col">Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td></td><td></td></tr>
+                    <tr><td></td><td></td></tr>
+                    <tr><td></td><td></td></tr>
+                    <tr><td></td><td></td></tr>
+                    <tr><td></td><td></td></tr>
+                    <tr><td></td><td></td></tr>
+                    <tr><td></td><td></td></tr>
+                    <tr><td></td><td></td></tr>
+                    <tr><td></td><td></td></tr>
+                    <tr><td></td><td></td></tr>
+                </tbody>
+            </table>
+            <section class="summary-box" aria-labelledby="summary-title">
+                <h2 id="summary-title">Summary</h2>
+                <p>Use this space to summarise the key ideas from your notes in 2-3 sentences.</p>
+            </section>
+        </div>
+    </main>
+    <footer>
+        &copy; <span id="year">2024</span> Two Wolves English Unit
+    </footer>
+    <script>
+        const menuToggle = document.querySelector('.mobile-menu');
+        const siteNav = document.querySelector('.site-header nav');
+
+        if (menuToggle && siteNav) {
+            const toggleNav = () => siteNav.classList.toggle('active');
+            menuToggle.addEventListener('click', toggleNav);
+            menuToggle.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    toggleNav();
+                }
+            });
+            siteNav.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => siteNav.classList.remove('active'));
+            });
+        }
+
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
