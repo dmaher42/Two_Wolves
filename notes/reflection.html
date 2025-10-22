@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Two Wolves – Reflection Questions (Detective’s Journal)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../styles/header.css">
+    <style>
+        :root {
+            --primary-color: #223046;
+            --secondary-color: #3498db;
+            --light-color: #f8f9fa;
+            --dark-color: #2c3e50;
+            --border-color: #dfe4ea;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            color: var(--dark-color);
+            background: var(--light-color);
+        }
+
+        main {
+            padding: 2rem 1rem 3rem;
+        }
+
+        .notes-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(34, 48, 70, 0.08);
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--primary-color);
+        }
+
+        h1 {
+            margin-bottom: 0.75rem;
+            text-align: center;
+        }
+
+        p.lead {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 1rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav li {
+            position: relative;
+        }
+
+        .dropdown-content {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #fff;
+            border: 1px solid #ddd;
+            min-width: 220px;
+            display: none;
+            z-index: 1000;
+            padding: 0.5rem 0;
+            list-style: none;
+            margin: 0;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 0.5rem 0.75rem;
+            white-space: nowrap;
+            color: var(--dark-color);
+            text-decoration: none;
+        }
+
+        .dropdown-content a:hover,
+        .dropdown-content a:focus {
+            background: var(--light-color);
+        }
+
+        .dropdown:hover .dropdown-content,
+        .dropdown:focus-within .dropdown-content {
+            display: block;
+        }
+
+        .how-to {
+            background: var(--light-color);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .how-to ol {
+            margin: 0;
+            padding-left: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .journal-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2rem;
+            table-layout: fixed;
+            border: 1px solid var(--border-color);
+        }
+
+        .journal-table th {
+            text-align: left;
+            padding: 0.75rem;
+            background: var(--light-color);
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .journal-table th:first-child,
+        .journal-table td:first-child {
+            border-right: 1px solid var(--border-color);
+            width: 45%;
+        }
+
+        .journal-table td {
+            padding: 1.25rem 0.75rem;
+            border-top: 1px solid var(--border-color);
+            height: 90px;
+            vertical-align: top;
+        }
+
+        .wrap-up,
+        .sentence-starters,
+        .cer-check {
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .sentence-starters ul,
+        .cer-check ul {
+            margin: 0;
+            padding-left: 1.25rem;
+            line-height: 1.7;
+        }
+
+        .cer-check ul {
+            list-style-type: square;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: rgba(44, 62, 80, 0.75);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 640px) {
+            .notes-wrapper {
+                padding: 1.75rem;
+            }
+
+            .journal-table td {
+                padding: 1rem 0.5rem;
+            }
+        }
+
+        @media print {
+            body {
+                background: #ffffff;
+            }
+
+            .site-header,
+            footer {
+                display: none !important;
+            }
+
+            main {
+                padding: 0;
+            }
+
+            .notes-wrapper {
+                box-shadow: none;
+                border-radius: 0;
+                padding: 0;
+            }
+
+            .journal-table td {
+                height: 120px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-container">
+            <div class="header-content">
+                <a href="../index.html" class="logo">
+                    <i class="fas fa-book-open"></i>
+                    <h1>Two Wolves</h1>
+                </a>
+                <div class="mobile-menu" aria-label="Toggle navigation" role="button" tabindex="0">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="../about.html">About the Novel</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropbtn active" aria-haspopup="true">Notes ▾</a>
+                            <ul class="dropdown-content">
+                                <li><a href="/notes/cornell.html">Cornell Notes</a></li>
+                                <li><a class="active" aria-current="page" href="/notes/reflection.html">Reflection Questions</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="../portfolios.html">Portfolio Tasks</a></li>
+                        <li><a href="../secure-portfolios.html">Secure Portfolios</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="notes-wrapper">
+            <h1>Two Wolves – Reflection Questions</h1>
+            <p class="lead">Become a reading detective! Collect evidence from the text and analyse your thinking using this double-entry journal.</p>
+            <section class="how-to" aria-labelledby="how-to-title">
+                <h2 id="how-to-title">How to use this journal</h2>
+                <ol>
+                    <li>Preview the chapter and note any key questions you have.</li>
+                    <li>Read actively, marking important evidence or quotes with page numbers.</li>
+                    <li>Record the evidence in the left column and explain your thinking on the right.</li>
+                    <li>Look for patterns, surprises, and shifts in character motivations.</li>
+                    <li>Use the wrap-up section to prepare for class discussion or written responses.</li>
+                </ol>
+            </section>
+            <table class="journal-table">
+                <thead>
+                    <tr>
+                        <th scope="col">Evidence / Quotes (with page #)</th>
+                        <th scope="col">My Thinking</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td></td><td></td></tr>
+                    <tr><td></td><td></td></tr>
+                    <tr><td></td><td></td></tr>
+                    <tr><td></td><td></td></tr>
+                    <tr><td></td><td></td></tr>
+                    <tr><td></td><td></td></tr>
+                    <tr><td></td><td></td></tr>
+                    <tr><td></td><td></td></tr>
+                </tbody>
+            </table>
+            <section class="wrap-up" aria-labelledby="wrap-up-title">
+                <h2 id="wrap-up-title">Wrap-Up</h2>
+                <p>What patterns or big ideas emerged from your evidence? How does this section of the novel move the story forward?</p>
+            </section>
+            <section class="sentence-starters" aria-labelledby="starters-title">
+                <h2 id="starters-title">Sentence Starters</h2>
+                <ul>
+                    <li>"This detail makes me think…"</li>
+                    <li>"The author might be suggesting…"</li>
+                    <li>"A turning point occurs when…"</li>
+                    <li>"This connects back to…"</li>
+                    <li>"I wonder if…"</li>
+                </ul>
+            </section>
+            <section class="cer-check" aria-labelledby="cer-title">
+                <h2 id="cer-title">Quick CER Check</h2>
+                <ul>
+                    <li>Claim: Have you stated a clear idea or inference?</li>
+                    <li>Evidence: Have you included precise quotes with page numbers?</li>
+                    <li>Reasoning: Have you explained how the evidence supports your claim?</li>
+                </ul>
+            </section>
+        </div>
+    </main>
+    <footer>
+        &copy; <span id="year">2024</span> Two Wolves English Unit
+    </footer>
+    <script>
+        const menuToggle = document.querySelector('.mobile-menu');
+        const siteNav = document.querySelector('.site-header nav');
+
+        if (menuToggle && siteNav) {
+            const toggleNav = () => siteNav.classList.toggle('active');
+            menuToggle.addEventListener('click', toggleNav);
+            menuToggle.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    toggleNav();
+                }
+            });
+            siteNav.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => siteNav.classList.remove('active'));
+            });
+        }
+
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
