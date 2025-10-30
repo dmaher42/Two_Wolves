@@ -1,0 +1,2461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Two Wolves Modified Activities</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --success-color: #2ecc71;
+            --warning-color: #f39c12;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.6;
+            color: var(--dark-color);
+            background-color: #f5f7fa;
+        }
+        
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1.5rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            font-size: 2rem;
+            margin-right: 10px;
+            color: var(--secondary-color);
+        }
+        
+        .logo h1 {
+            font-family: 'Merriweather', serif;
+            font-size: 1.8rem;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .chapter-nav {
+            background-color: white;
+            padding: 1rem 0;
+            border-bottom: 1px solid #e0e0e0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+        
+        .chapter-nav ul {
+            display: flex;
+            flex-wrap: wrap;
+            list-style: none;
+            justify-content: center;
+        }
+        
+        .chapter-nav ul li {
+            margin: 5px 10px;
+        }
+        
+        .chapter-nav ul li a {
+            display: block;
+            padding: 8px 15px;
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .chapter-nav ul li a:hover, .chapter-nav ul li a.active {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+        
+        main {
+            padding: 2rem 0;
+        }
+        
+        .chapter-section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .chapter-title {
+            font-family: 'Merriweather', serif;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 0.5rem;
+        }
+        
+        .question-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .question {
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        
+        .answer-space {
+            background-color: #f9f9f9;
+            border: 1px dashed #ccc;
+            padding: 0.5rem;
+            margin-top: 0.5rem;
+            min-height: 30px;
+            border-radius: 4px;
+        }
+        
+        .matching-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+        
+        .matching-table th, .matching-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        .matching-table th {
+            background-color: var(--light-color);
+        }
+        
+        .matching-table input {
+            width: 30px;
+            text-align: center;
+        }
+        
+        .multiple-choice {
+            margin: 1.5rem 0;
+        }
+        
+        .option {
+            margin: 0.5rem 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .option input {
+            margin-right: 10px;
+        }
+        
+        .cloze-activity {
+            background-color: #f9f9f9;
+            padding: 1rem;
+            border-radius: 5px;
+            margin: 1.5rem 0;
+        }
+        
+        .blank {
+            display: inline-block;
+            width: 120px;
+            border-bottom: 1px solid #333;
+            margin: 0 5px;
+        }
+        
+        .notebook-activity {
+            background-color: #fffde7;
+            border-left: 4px solid var(--warning-color);
+            padding: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .notebook-activity h4 {
+            margin-bottom: 0.5rem;
+            color: var(--warning-color);
+        }
+        
+        .true-false {
+            margin: 1.5rem 0;
+        }
+        
+        .true-false-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .true-false-options {
+            display: flex;
+        }
+        
+        .true-false-options label {
+            margin-left: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .true-false-options input {
+            margin-right: 5px;
+        }
+        
+        .word-bank {
+            background-color: #e8f5e9;
+            padding: 1rem;
+            border-radius: 5px;
+            margin: 1.5rem 0;
+        }
+        
+        .word-bank h4 {
+            margin-bottom: 0.5rem;
+            color: var(--success-color);
+        }
+        
+        .word-bank-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .word-bank-item {
+            background-color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            border: 1px solid var(--success-color);
+        }
+        
+        .definition-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+        
+        .definition-table th, .definition-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        .definition-table th {
+            background-color: var(--light-color);
+        }
+        
+        .definition-table input {
+            width: 100%;
+            padding: 5px;
+        }
+        
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 200px;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-section h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--secondary-color);
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-section ul li a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-section ul li a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #2980b9;
+        }
+        
+        .btn-success {
+            background-color: var(--success-color);
+        }
+        
+        .btn-success:hover {
+            background-color: #27ae60;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 10px;
+            }
+            
+            nav ul li {
+                margin: 0 10px;
+            }
+            
+            .chapter-nav ul {
+                justify-content: flex-start;
+                overflow-x: auto;
+                padding-bottom: 5px;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-book-open"></i>
+                    <h1>Two Wolves Modified Activities</h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
+                        <li><a href="#"><i class="fas fa-book"></i> Book</a></li>
+                        <li><a href="#"><i class="fas fa-user"></i> Author</a></li>
+                        <li><a href="#"><i class="fas fa-envelope"></i> Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+    <div class="chapter-nav">
+        <div class="container">
+            <ul>
+                <li><a href="#chapter1" class="chapter-link active">Chapter 1</a></li>
+                <li><a href="#chapter2" class="chapter-link">Chapter 2</a></li>
+                <li><a href="#chapter3" class="chapter-link">Chapter 3</a></li>
+                <li><a href="#chapter4" class="chapter-link">Chapter 4</a></li>
+                <li><a href="#chapter5" class="chapter-link">Chapter 5</a></li>
+                <li><a href="#chapter6" class="chapter-link">Chapter 6</a></li>
+                <li><a href="#chapter7" class="chapter-link">Chapter 7</a></li>
+                <li><a href="#chapter8" class="chapter-link">Chapter 8</a></li>
+                <li><a href="#chapter9" class="chapter-link">Chapter 9</a></li>
+                <li><a href="#chapter10" class="chapter-link">Chapter 10</a></li>
+                <li><a href="#chapter11" class="chapter-link">Chapter 11</a></li>
+                <li><a href="#chapter12" class="chapter-link">Chapter 12</a></li>
+                <li><a href="#chapter13" class="chapter-link">Chapter 13</a></li>
+                <li><a href="#chapter14" class="chapter-link">Chapter 14</a></li>
+                <li><a href="#chapter15" class="chapter-link">Chapter 15</a></li>
+                <li><a href="#chapter16" class="chapter-link">Chapter 16</a></li>
+                <li><a href="#chapter17" class="chapter-link">Chapter 17</a></li>
+                <li><a href="#chapter18" class="chapter-link">Chapter 18</a></li>
+                <li><a href="#chapter19" class="chapter-link">Chapter 19</a></li>
+                <li><a href="#chapter20" class="chapter-link">Chapter 20</a></li>
+                <li><a href="#chapter21" class="chapter-link">Chapter 21</a></li>
+                <li><a href="#chapter22" class="chapter-link">Chapter 22</a></li>
+                <li><a href="#chapter23" class="chapter-link">Chapter 23</a></li>
+                <li><a href="#chapter24" class="chapter-link">Chapter 24</a></li>
+                <li><a href="#chapter25" class="chapter-link">Chapter 25</a></li>
+                <li><a href="#chapter26" class="chapter-link">Chapter 26</a></li>
+                <li><a href="#chapter27" class="chapter-link">Chapter 27</a></li>
+                <li><a href="#chapter28" class="chapter-link">Chapter 28</a></li>
+                <li><a href="#chapter29" class="chapter-link">Chapter 29</a></li>
+                <li><a href="#chapter30" class="chapter-link">Chapter 30</a></li>
+                <li><a href="#chapter31" class="chapter-link">Chapter 31</a></li>
+                <li><a href="#chapter32" class="chapter-link">Chapter 32</a></li>
+                <li><a href="#chapter33" class="chapter-link">Chapter 33</a></li>
+                <li><a href="#chapter34" class="chapter-link">Chapter 34</a></li>
+                <li><a href="#chapter35" class="chapter-link">Chapter 35</a></li>
+                <li><a href="#chapter36" class="chapter-link">Chapter 36</a></li>
+                <li><a href="#chapter37" class="chapter-link">Chapter 37</a></li>
+                <li><a href="#chapter38" class="chapter-link">Chapter 38</a></li>
+            </ul>
+        </div>
+    </div>
+    
+    <main>
+        <div class="container">
+            <!-- Chapter 1 -->
+            <section id="chapter1" class="chapter-section">
+                <h2 class="chapter-title">Chapter 1 - Cops</h2>
+                <p>Ben is making a stop-motion movie when there is a knock on the door. It is the police looking for this parents. Olive tells him they're coming for him because had dipped her toothbrush into the toilet. Ben is happy to see that being overweight doesn't prevent someone from becoming a police officer because he is overweight himself. They don't tell him why they are searching for his parents.</p>
+                
+                <div class="question-group">
+                    <div class="question">What is the name of Ben's seventh stop-motion movie? P 2</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="question-group">
+                    <div class="question">How old is Ben?</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="question-group">
+                    <div class="question">How old is Olive?</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="question-group">
+                    <div class="question">Why did the police come to see the Slivers? P 5</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="question-group">
+                    <div class="question">Why do you think the police came to see the Silvers?</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="notebook-activity">
+                    <h4>Matching: For each difficult word or phrase, write the number of the matching definition and copy into your notebook.</h4>
+                    <table class="matching-table">
+                        <thead>
+                            <tr>
+                                <th>Difficult word or phrase</th>
+                                <th>Definition</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>_____vanquishing</td>
+                                <td>1: plastic wrap</td>
+                            </tr>
+                            <tr>
+                                <td>_____cellophane</td>
+                                <td>2: defeating</td>
+                            </tr>
+                            <tr>
+                                <td>_____delinquent</td>
+                                <td>3: irresponsible/unpaid</td>
+                            </tr>
+                            <tr>
+                                <td>_____overkill</td>
+                                <td>4: (way too much of something)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            
+            <!-- Chapter 2 -->
+            <section id="chapter2" class="chapter-section hidden">
+                <h2 class="chapter-title">Chapter 2 - The Holiday</h2>
+                <p>Ben's parents arrive home and tell them they are going on a holiday, but they don't pack any clothes and tell them they will buy new ones. His father is speeding and they meet his uncle Chris who hands his dad a bag.</p>
+                
+                <div class="question-group">
+                    <div class="question">Why does his father call Ben a cop?</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="question-group">
+                    <div class="question">What is the description of his father? (p 12)</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="question-group">
+                    <div class="question">Description of his mother. (P 12)</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="question-group">
+                    <div class="question">Why do you think Olive calls their father Maugrin? P 14</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="notebook-activity">
+                    <h4>Copy the following difficult words with definitions into your notebook</h4>
+                    <table class="definition-table">
+                        <thead>
+                            <tr>
+                                <th>Difficult word/phrase</th>
+                                <th>Easier replacement</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1 heaved</td>
+                                <td>lifted up/threw (something heavy)</td>
+                            </tr>
+                            <tr>
+                                <td>2 interpret</td>
+                                <td>understand/explain</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            
+            <!-- Chapter 3 -->
+            <section id="chapter3" class="chapter-section hidden">
+                <h2 class="chapter-title">Chapter three - Holiday Haircuts</h2>
+                <p>They check into a motel and his mum gives them all holiday haircuts.</p>
+                
+                <div class="question-group">
+                    <div class="question">Why is Ben's father angry that he brings his wallet?</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="question-group">
+                    <div class="question">What does 'stick your bib in' mean?</div>
+                    <div class="answer-space"></div>
+                </div>
+            </section>
+            
+            <!-- Chapter 4 -->
+            <section id="chapter4" class="chapter-section hidden">
+                <h2 class="chapter-title">Chapter 4 - Chase</h2>
+                <p>The police are following the Green Machine and want them to stop. Ben's father pulls over. When the police officers goes to check his licence his father drives off.</p>
+                
+                <div class="question-group">
+                    <div class="question">Why did the police officer pull their car over?</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="question-group">
+                    <div class="question">When Ben's father drives off the author describes Ben as "his heart pummelled in his chest" and "For the first time ever, Ben did not ask a question." Page 33. What is Ben thinking and feeling?</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="notebook-activity">
+                    <h4>Copy the following difficult words with definitions into your notebook:</h4>
+                    <table class="definition-table">
+                        <thead>
+                            <tr>
+                                <th>Difficult word/phrase</th>
+                                <th>Easier replacement</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1 adrenaline</td>
+                                <td>energy-giving body chemical</td>
+                            </tr>
+                            <tr>
+                                <td>2 veered</td>
+                                <td>changed direction</td>
+                            </tr>
+                            <tr>
+                                <td>3 surliness</td>
+                                <td>rudeness</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="multiple-choice">
+                    <div class="question">Circle which is the correct answer:</div>
+                    <div class="question">What does Ben's father call his car?</div>
+                    <div class="option">
+                        <input type="radio" name="car" id="car1">
+                        <label for="car1">The Green Machine</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="car" id="car2">
+                        <label for="car2">The Green Mackarel</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="car" id="car3">
+                        <label for="car3">The Green Hornet</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="car" id="car4">
+                        <label for="car4">The Green Monet</label>
+                    </div>
+                    
+                    <div class="question">Has Ben ever been to the family cabin before?</div>
+                    <div class="option">
+                        <input type="radio" name="cabin" id="cabin1">
+                        <label for="cabin1">His family went there on holiday</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="cabin" id="cabin2">
+                        <label for="cabin2">He has never been</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="cabin" id="cabin3">
+                        <label for="cabin3">when he was a child</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="cabin" id="cabin4">
+                        <label for="cabin4">with his grandfather</label>
+                    </div>
+                    
+                    <div class="question">Who does Olive call Maugrin?</div>
+                    <div class="option">
+                        <input type="radio" name="maugrin" id="maugrin1">
+                        <label for="maugrin1">mother</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="maugrin" id="maugrin2">
+                        <label for="maugrin2">Father</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="maugrin" id="maugrin3">
+                        <label for="maugrin3">Ben</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="maugrin" id="maugrin4">
+                        <label for="maugrin4">Nan</label>
+                    </div>
+                    
+                    <div class="question">What colour is the bag that Uncle Chris gives Ben's dad?</div>
+                    <div class="option">
+                        <input type="radio" name="bag" id="bag1">
+                        <label for="bag1">grey nylon</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="bag" id="bag2">
+                        <label for="bag2">yellow</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="bag" id="bag3">
+                        <label for="bag3">blue</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="bag" id="bag4">
+                        <label for="bag4">red</label>
+                    </div>
+                    
+                    <div class="question">Who did the notebook that Ben writes in belong to?</div>
+                    <div class="option">
+                        <input type="radio" name="notebook" id="notebook1">
+                        <label for="notebook1">Pop</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="notebook" id="notebook2">
+                        <label for="notebook2">his dad</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="notebook" id="notebook3">
+                        <label for="notebook3">Nan</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="notebook" id="notebook4">
+                        <label for="notebook4">his mum</label>
+                    </div>
+                    
+                    <div class="question">Why did the police officer pull their car over?</div>
+                    <div class="option">
+                        <input type="radio" name="pull" id="pull1">
+                        <label for="pull1">speeding</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="pull" id="pull2">
+                        <label for="pull2">accident</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="pull" id="pull3">
+                        <label for="pull3">throwing rubbish</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="pull" id="pull4">
+                        <label for="pull4">indicator on</label>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Chapter 5 -->
+            <section id="chapter5" class="chapter-section hidden">
+                <h2 class="chapter-title">Chapter 5 - Within the Woods</h2>
+                <p>Ben and his family are driving through "rainforesty woods". Ben has many questions, about what it means to be "ME" and about where they are going. They hit something on the road and finally arrive at a timber cabin.</p>
+                
+                <div class="question-group">
+                    <div class="question">Why do Ben's back and muscles ache, and his neck hurt? Give two reasons.</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="question-group">
+                    <div class="question">What kind of thoughts does Ben often find himself thinking?</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="question-group">
+                    <div class="question">Find three words that show that the story is set in Australia.</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="question-group">
+                    <div class="question">Does Ben like the cabin when he first sees it? How do you know?</div>
+                    <div class="answer-space"></div>
+                </div>
+            </section>
+            
+            <!-- Chapter 6 -->
+            <section id="chapter6" class="chapter-section hidden">
+                <h2 class="chapter-title">Chapter 6 – The dead of Night</h2>
+                <p>The Silvers arrive at the family cabin and Ben's dad breaks in. Ben doesn't like the cabin and doesn't want to sleep in it. He returns to the car and tells his mum that it's "beautiful".</p>
+                
+                <div class="notebook-activity">
+                    <h4>Matching: For each difficult word or phrase, write the number of the matching definition.</h4>
+                    <table class="matching-table">
+                        <thead>
+                            <tr>
+                                <th>Difficult word or phrase</th>
+                                <th>Definition</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>_____almighty</td>
+                                <td>1: evil</td>
+                            </tr>
+                            <tr>
+                                <td>_____scuttled</td>
+                                <td>2: monster-like</td>
+                            </tr>
+                            <tr>
+                                <td>_____stench</td>
+                                <td>3: uncertain/not definite</td>
+                            </tr>
+                            <tr>
+                                <td>_____monstrous</td>
+                                <td>4: all-powerful</td>
+                            </tr>
+                            <tr>
+                                <td>_____discarded</td>
+                                <td>5: quickly ran</td>
+                            </tr>
+                            <tr>
+                                <td>_____muttered</td>
+                                <td>6: mumbled</td>
+                            </tr>
+                            <tr>
+                                <td>_____scurried</td>
+                                <td>7: stink</td>
+                            </tr>
+                            <tr>
+                                <td>_____destined</td>
+                                <td>8: threw out/thrown out</td>
+                            </tr>
+                            <tr>
+                                <td>_____villainous</td>
+                                <td>9: ran/sank/ended</td>
+                            </tr>
+                            <tr>
+                                <td>_____tentative</td>
+                                <td>10: (already decided beforehand to happen)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            
+            <!-- Chapter 7 -->
+            <section id="chapter7" class="chapter-section hidden">
+                <h2 class="chapter-title">Chapter Seven: The bag</h2>
+                <p>Ben's Dad makes Ben help him clean the cabin. Ben finds some interesting things including a book. Ben resists asking questions.</p>
+                
+                <div class="question-group">
+                    <div class="question">How would you describe the relationship between fathers and sons?</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="question-group">
+                    <div class="question">How would you describe Ben's relationship with his father?</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="notebook-activity">
+                    <h4>Difficult words: you fill in the definitions:</h4>
+                    <table class="definition-table">
+                        <thead>
+                            <tr>
+                                <th>Difficult word/phrase</th>
+                                <th>What does it mean?</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1 stifled</td>
+                                <td><input type="text" placeholder="Enter definition"></td>
+                            </tr>
+                            <tr>
+                                <td>2 rickety</td>
+                                <td><input type="text" placeholder="Enter definition"></td>
+                            </tr>
+                            <tr>
+                                <td>3 vaguely</td>
+                                <td><input type="text" placeholder="Enter definition"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            
+            <!-- Chapter 8 -->
+            <section id="chapter8" class="chapter-section hidden">
+                <h2 class="chapter-title">Chapter 8: The Secret</h2>
+                <p>Ben is hungry. While his Dad is out, Ben finds out what his father has stashed in the roof. His dad returns.</p>
+                
+                <div class="multiple-choice">
+                    <div class="question">Circle which is the correct answer:</div>
+                    <div class="question">Ben's father calls him a:</div>
+                    <div class="option">
+                        <input type="radio" name="call" id="call1">
+                        <label for="call1">Big Boy</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="call" id="call2">
+                        <label for="call2">Big Wolf</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="call" id="call3">
+                        <label for="call3">Big Girl</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="call" id="call4">
+                        <label for="call4">Big Tiger</label>
+                    </div>
+                    
+                    <div class="question">When they arrive at the cabin Ray gets in the cabin by:</div>
+                    <div class="option">
+                        <input type="radio" name="enter" id="enter1">
+                        <label for="enter1">using a key</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="enter" id="enter2">
+                        <label for="enter2">calling Nan</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="enter" id="enter3">
+                        <label for="enter3">smashing the door</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="enter" id="enter4">
+                        <label for="enter4">smashing a window</label>
+                    </div>
+                    
+                    <div class="question">Who says 'Dad has poo in his pants again'</div>
+                    <div class="option">
+                        <input type="radio" name="say" id="say1">
+                        <label for="say1">April</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="say" id="say2">
+                        <label for="say2">Olive</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="say" id="say3">
+                        <label for="say3">Ben</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="say" id="say4">
+                        <label for="say4">Ray</label>
+                    </div>
+                    
+                    <div class="question">When Ray asks Ben to help clean the cabin Ben</div>
+                    <div class="option">
+                        <input type="radio" name="clean" id="clean1">
+                        <label for="clean1">challenges him</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="clean" id="clean2">
+                        <label for="clean2">goes to play</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="clean" id="clean3">
+                        <label for="clean3">runs away</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="clean" id="clean4">
+                        <label for="clean4">helps his father</label>
+                    </div>
+                    
+                    <div class="question">What is the title of the book that Ben found?</div>
+                    <div class="option">
+                        <input type="radio" name="book" id="book1">
+                        <label for="book1">My Side of the Door</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="book" id="book2">
+                        <label for="book2">My Side of the Sun</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="book" id="book3">
+                        <label for="book3">My Side of the Mountain</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="book" id="book4">
+                        <label for="book4">My Side of the Cabin</label>
+                    </div>
+                    
+                    <div class="question">When Ben searches the roof and gets down the plastic bag he finds</div>
+                    <div class="option">
+                        <input type="radio" name="find" id="find1">
+                        <label for="find1">a bag full of money</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="find" id="find2">
+                        <label for="find2">a bag full diamonds</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="find" id="find3">
+                        <label for="find3">a bag full of chocolate</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="find" id="find4">
+                        <label for="find4">a bag full of gold</label>
+                    </div>
+                    
+                    <div class="question">Ben thinks that there is how much money in the bag?</div>
+                    <div class="option">
+                        <input type="radio" name="amount" id="amount1">
+                        <label for="amount1">$40,000</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="amount" id="amount2">
+                        <label for="amount2">$50,000</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="amount" id="amount3">
+                        <label for="amount3">$60,000</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="amount" id="amount4">
+                        <label for="amount4">$70,000</label>
+                    </div>
+                    
+                    <div class="question">One of Dad's favourite sayings is</div>
+                    <div class="option">
+                        <input type="radio" name="saying" id="saying1">
+                        <label for="saying1">You get what you give</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="saying" id="saying2">
+                        <label for="saying2">Be the change you want</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="saying" id="saying3">
+                        <label for="saying3">Money makes the world go round</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="saying" id="saying4">
+                        <label for="saying4">No use crying over spilt milk</label>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Chapter 9 -->
+            <section id="chapter9" class="chapter-section hidden">
+                <h2 class="chapter-title">Chapter 9 – In which Ben gets caught</h2>
+                <p>Ben's Dad Ray found out that Ben knew that there were hundreds of thousands of dollars in the sports bag, hidden in the roof. Ben's Mum told Ben that they sold their family business, "The Wreckers" as the reason for the sports bag full of cash. Ben's Dad sent Ben outside to play without punishment. Ben's parents argued and then his Dad left with the sports bag to make some unknown arrangements and buy clothes for the kids.</p>
+                
+                <div class="question-group">
+                    <div class="question">Why was Ben's father angry with him? (p.60-61).</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="question-group">
+                    <div class="question">What did Ben lie about? (p.61)</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="question-group">
+                    <div class="question">What did Ben's Mum lie about? (p.63)</div>
+                    <div class="answer-space"></div>
+                </div>
+            </section>
+            
+            <!-- Chapter 10 -->
+            <section id="chapter10" class="chapter-section hidden">
+                <h2 class="chapter-title">Chapter 10 – Culpam poena premit comes</h2>
+                <p>Ben went exploring towards the creek. He was afraid of snakes and feared seeing one. Ben was so thirsty that he drank water from the creek. It was Uncle Chris that gave Ben's Dad the sports bag full of money. Uncle Chris used to baby sit Ben's Dad and he used to beat him up.</p>
+                <p>Ben took out the business card that the Police Officer gave him, which read- "Culpam Poema Premit Comes". This was the Latin moto of the NSW Police. It's translation is – Punishment follows close on guilt. The free translation is- Punishment is a companion pressing close on crime or Punishment swiftly follows crime.</p>
+                <p>He read the notes he made in his notebook-:Police, Holiday, Uncle Chris. Grey nylon bag. Lack handles. The new old car, Haircuts. He writes more notes-: Pulled over by cops. Drive off and chase. The cabin, Bag full of money, sold the wreckers. Ben knew his parents were in trouble.</p>
+                
+                <div class="question-group">
+                    <div class="question">What is Ben's biggest fear in the wilderness?</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="question-group">
+                    <div class="question">What did Ben have in his back pocket? (p.68-69) Describe it in detail.</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="question-group">
+                    <div class="question">What does the Latin Moto "Culpam Poena Premit Comes" mean?</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="notebook-activity">
+                    <h4>Matching: For each difficult word or phrase, write the number of the matching definition.</h4>
+                    <table class="matching-table">
+                        <thead>
+                            <tr>
+                                <th>Difficult word or phrase</th>
+                                <th>Definition</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>_____dodging</td>
+                                <td>1: avoiding</td>
+                            </tr>
+                            <tr>
+                                <td>_____crevice</td>
+                                <td>2: poisonous/hateful</td>
+                            </tr>
+                            <tr>
+                                <td>_____venomous</td>
+                                <td>3: crack</td>
+                            </tr>
+                            <tr>
+                                <td>_____emerged</td>
+                                <td>4: came out/became visible</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            
+            <!-- Chapter 11 -->
+            <section id="chapter11" class="chapter-section hidden">
+                <h2 class="chapter-title">Chapter 11 – My side of the creek</h2>
+                <p>Olive read some of Ben's notes in his notebook, over his shoulder and was curious to know what "bag full of money" and "sold the wreckers" meant and what Dad hid in the roof. Olive slipped on a rock and hurt herself and Ben hesitated about helping her, but took care of her. Ben and Olive decided to build a raft.</p>
+                <p>Olive asked Ben why he got into trouble. He told her not to worry about it. Ben knew his Mum lied about selling the wreckers. Their Dad then called out to them to come and get some food. Ben didn't know if his Dad would still be angry at him. Ben believed that there were two of his Dad. The nice one and the angry one. He made a promise to himself that he would find out why his parents lied about the money and where it really came from.</p>
+                
+                <div class="question-group">
+                    <div class="question">There were 2 things that Olive wanted to know. What were they? (p.74-75)</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="question-group">
+                    <div class="question">How does Ben feel about his little sister Olive? Find evidence to support your response. (p.75)</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="question-group">
+                    <div class="question">What does Ben demonstrate commitment and determination for? (p.83)</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="notebook-activity">
+                    <h4>Difficult words with definitions:</h4>
+                    <table class="definition-table">
+                        <thead>
+                            <tr>
+                                <th>Difficult word/phrase</th>
+                                <th>Easier replacement</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1 haul</td>
+                                <td>(amount caught/long, difficult trip)</td>
+                            </tr>
+                            <tr>
+                                <td>2 plundering</td>
+                                <td>stealing (and leaving behind almost nothing)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            
+            <!-- Chapter 12 -->
+            <section id="chapter12" class="chapter-section hidden">
+                <h2 class="chapter-title">Chapter 12 – Knife</h2>
+                <p>Ben told Olive not to tell their parents about the raft that they built. The whole family ate together. There was a lot of new camping gear around the cabin. Ben's Dad bought presents for everyone. A Swiss knife for Ben, a skateboard for Olive and a diamond ring for his Mum. There were more presents. Clothes for the kids, a remote lego kit and Mad magazine for Ben and shoes, a pirate outfit and a pink remote control pick up truck for Olive. Ben's Dad then tried to light the fire but couldn't. His Mum got the flame going. Ben wondered if it really mattered at all where all the money came from.</p>
+                
+                <div class="question-group">
+                    <div class="question">Predict where the money came from?</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="question-group">
+                    <div class="question">Why was Ben suspicious? (p.86)</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="question-group">
+                    <div class="question">Describe how Ben was changing his mind about the mysterious sports bag of cash. Find evidence to support your response. (p.90)</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="multiple-choice">
+                    <div class="question">Circle the correct answer:</div>
+                    <div class="question">Why was Ben's father angry with him?</div>
+                    <div class="option">
+                        <input type="radio" name="angry" id="angry1">
+                        <label for="angry1">because he broke a window</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="angry" id="angry2">
+                        <label for="angry2">because he didn't come when he was called</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="angry" id="angry3">
+                        <label for="angry3">because he found the bag</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="angry" id="angry4">
+                        <label for="angry4">because he hit Olive</label>
+                    </div>
+                    
+                    <div class="question">Where did Mum say the money came from?</div>
+                    <div class="option">
+                        <input type="radio" name="money" id="money1">
+                        <label for="money1">Sold the car</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="money" id="money2">
+                        <label for="money2">Won the lottery</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="money" id="money3">
+                        <label for="money3">Sold the cabin</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="money" id="money4">
+                        <label for="money4">Sold the wreckers</label>
+                    </div>
+                    
+                    <div class="question">Who gave Dad the sports bag full of money?</div>
+                    <div class="option">
+                        <input type="radio" name="gave" id="gave1">
+                        <label for="gave1">Uncle Chris</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="gave" id="gave2">
+                        <label for="gave2">Uncle Colin</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="gave" id="gave3">
+                        <label for="gave3">Nan</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="gave" id="gave4">
+                        <label for="gave4">Pop</label>
+                    </div>
+                    
+                    <div class="question">The Latin motto of the NSW Police translation is</div>
+                    <div class="option">
+                        <input type="radio" name="latin" id="latin1">
+                        <label for="latin1">Crime pays</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="latin" id="latin2">
+                        <label for="latin2">Punishment and crime go together</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="latin" id="latin3">
+                        <label for="latin3">Punishment swiftly follows crime</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="latin" id="latin4">
+                        <label for="latin4">Punishment sometimes follows crime</label>
+                    </div>
+                    
+                    <div class="question">When Olive slips in the rocks in the creek Ben</div>
+                    <div class="option">
+                        <input type="radio" name="slips" id="slips1">
+                        <label for="slips1">calls him Mum to help</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="slips" id="slips2">
+                        <label for="slips2">run away</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="slips" id="slips3">
+                        <label for="slips3">turns back and helps her</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="slips" id="slips4">
+                        <label for="slips4">calls Dad</label>
+                    </div>
+                    
+                    <div class="question">As Ben lies in bed he wonders</div>
+                    <div class="option">
+                        <input type="radio" name="wonder" id="wonder1">
+                        <label for="wonder1">if they can go on a holiday to Hawai</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="wonder" id="wonder2">
+                        <label for="wonder2">if he can buy a new cabin</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="wonder" id="wonder3">
+                        <label for="wonder3">if he can get a quad bike</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="wonder" id="wonder4">
+                        <label for="wonder4">it matters where the money comes from</label>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Chapter 13 -->
+            <section id="chapter13" class="chapter-section hidden">
+                <h2 class="chapter-title">Chapter 13: Detective Ben Silver (pp. 91-95)</h2>
+                <p>Ben and Olive are lying on their air mattresses, one next to the other. Olive is fast asleep. Ben is lying on the mattress and can hear his mother and father arguing outside. He attempts to eavesdrop into their conversation by crawling over his mattress and peaking through the window from inside. Ben laid in his bed and began to wonder what was happening. Why was there a bag of money, what were his parents fighting about, and why do they have to 'sit tight' at the cabin? He planned to stay awake until his mother and father came inside to listen to their conversation. He wanted to know where they were going and what they were going to do. Ben reached into his bag, grabbed a camera and placed it on the green metal trunk to record his parent's conversation. He threw clothes over the camera to hide the red recording light and prayed that there would be enough battery to record their conversation. Ben went back to his air mattress and fell asleep.</p>
+                
+                <div class="notebook-activity">
+                    <h4>Modified Task: modified students can choose to work on their own or in a group of two</h4>
+                    <p>Complete a 5 W's circle diagram in your book based on chapter 13 of Two wolves. See the example below.</p>
+                    <p>Write one prediction about what you believe Ben's mother and father said on the recorded tape. For example, where do you think they are going? How did they get the bag full of money? Why are they staying at the cabin?</p>
+                </div>
+                
+                <div class="question-group">
+                    <div class="question">When his parents were fighting, what did Ben plan to do?</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="question-group">
+                    <div class="question">How did Ben record his parent's conversation? What did he use?</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="question-group">
+                    <div class="question">What do you think will happen in the next chapter?</div>
+                    <div class="answer-space"></div>
+                </div>
+            </section>
+            
+            <!-- Chapter 14 -->
+            <section id="chapter14" class="chapter-section hidden">
+                <h2 class="chapter-title">Chapter 14: Evidence (pp. 96-102)</h2>
+                <p>Ben escaped the cabin so he could listen to the recording of his mothers and fathers conversation. Ben's father informed his mother that as soon as they get the papers they could leave the cabin. He suggests that these papers were passports and if they did not get these, they would leave for the desert. Ben wrote in his notebook to remember the conversation between his parents. After listening to the recording, Ben uncovered the raft that he had made with his sister. He wanted to test the raft but was almost pulled into a waterfall. Ben knew he could not swim, so he escaped the raft by climbing some rocks. He attempted to repair his raft. As he did so, Ben decided that he needed to interrogate his father to uncover more evidence. He heard a loud 'Bang!' and believed the sound to be a gunshot.</p>
+                
+                <div class="word-bank">
+                    <h4>Word Bank: attempted to, evidence, interrogate, suggests that.</h4>
+                    <div class="word-bank-items">
+                        <div class="word-bank-item">attempted to</div>
+                        <div class="word-bank-item">evidence</div>
+                        <div class="word-bank-item">interrogate</div>
+                        <div class="word-bank-item">suggests that</div>
+                    </div>
+                </div>
+                
+                <div class="notebook-activity">
+                    <h4>Definition Write the difficult word:</h4>
+                    <table class="definition-table">
+                        <thead>
+                            <tr>
+                                <th>Definition</th>
+                                <th>Write the difficult word:</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1 hints that</td>
+                                <td><input type="text" placeholder="Enter word"></td>
+                            </tr>
+                            <tr>
+                                <td>2 tried to</td>
+                                <td><input type="text" placeholder="Enter word"></td>
+                            </tr>
+                            <tr>
+                                <td>3 throw questions at</td>
+                                <td><input type="text" placeholder="Enter word"></td>
+                            </tr>
+                            <tr>
+                                <td>4 (event(s) or object(s) that prove something)</td>
+                                <td><input type="text" placeholder="Enter word"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="notebook-activity">
+                    <h4>Modified Task: modified students can choose to work on their own or in a group of two</h4>
+                    <p>Complete a 5 W's circle diagram in your book based on chapter 14 of Two wolves. See the example below.</p>
+                    <p>Looking back at your prediction from chapter 13, was your prediction correct? Why or why not?</p>
+                </div>
+                
+                <div class="question-group">
+                    <div class="question">What did Ben discover on the recorded tape?</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="question-group">
+                    <div class="question">Why does Ben keep a notebook?</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="question-group">
+                    <div class="question">What happened on Bens attempted rafting trip?</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="question-group">
+                    <div class="question">What does Ben plan to do next?</div>
+                    <div class="answer-space"></div>
+                </div>
+            </section>
+            
+            <!-- Chapter 15 -->
+            <section id="chapter15" class="chapter-section hidden">
+                <h2 class="chapter-title">Chapter 15: The Hunt (pp. 103-110)</h2>
+                <p>Chapter summary</p>
+                <p>Ben's dad was creeping through the hills holding a rifle from the cabin. He reached down to grab his camera to record his father lurking in the hills. He wondered what his dad was hunting. Ben's dad shot an animal in the hills. Ben called out to his dad in shock. His father turned to face him. Ben's dad has fixed the rifle that was in the cabin to kill rabbits. Ben began to interrogate his father about why he does not like the forest and why they are not going to go home. His dad informs Ben that they are not going home and he is not sure where they will go to next. Ben confronts his father about the passports and asks if he had done something wrong. Ben's father asks him if he believes they are good people, which he confirms. He then suggests that they have not done anything wrong. Ben's dad kills a grey rabbit.</p>
+                
+                <div class="notebook-activity">
+                    <h4>Matching: For each difficult word or phrase, write the number of the matching definition.</h4>
+                    <table class="matching-table">
+                        <thead>
+                            <tr>
+                                <th>Difficult word or phrase</th>
+                                <th>Definition</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>_____interrogate</td>
+                                <td>1: waiting (in a creepy way)</td>
+                            </tr>
+                            <tr>
+                                <td>_____suggests that</td>
+                                <td>2: throw questions at</td>
+                            </tr>
+                            <tr>
+                                <td>_____confronts</td>
+                                <td>3: angrily faces/stands up to</td>
+                            </tr>
+                            <tr>
+                                <td>_____lurking</td>
+                                <td>4: hints that</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="notebook-activity">
+                    <h4>Modified Task: modified students can choose to work on their own or in a group of two</h4>
+                    <p>Complete a 5 W's circle diagram in your book based on chapter 14 of Two wolves. See the example below.</p>
+                </div>
+                
+                <div class="question-group">
+                    <div class="question">What does Ben interrogate his father about and how does he do this?</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="question-group">
+                    <div class="question">Is Ben's dad lying to him or is he telling him the truth? Use quotes from the text to support your answer.</div>
+                    <div class="answer-space"></div>
+                </div>
+            </section>
+            
+            <!-- Chapter 16 -->
+            <section id="chapter16" class="chapter-section hidden">
+                <h2 class="chapter-title">Chapter 16: Notebook (pp. 111-120)</h2>
+                <p>Ben's Dad began to cut up the rabbit that he shot in the hills. Ben and his sister did not want to eat the rabbit. Olive hid in the cabin and claimed she was a vegetarian. Ben thought about why people eat meat. Ben's father asks him what he writes in the book. Ben suggests that he draws in the notebook that his Pop had given him. He believes that his father had always been jealous of his Pop as he had never had enough time to spend with him. Ben wrote in his notebook the imaginary detective scene between Ben Silver and Dario Savini. His father announces that lunch is ready. As they were eating lunch, Ben's dad snatched his notebook to look inside it. He had read the evidence that Ben had been collecting. Ben lunged at his father and tried to grab his notebook. His father took the notebook and refused to give it back to Ben.</p>
+                
+                <div class="notebook-activity">
+                    <h4>Modified Task: modified students can choose to work on their own or in a group of two</h4>
+                </div>
+                
+                <div class="question-group">
+                    <div class="question">Why do Ben, Olive and their mother not want to eat the 'charred' rabbit?</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="question-group">
+                    <div class="question">How did Ben react when his father took his notebook? Why do you think he reacted this way?</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="notebook-activity">
+                    <h4>What are some of the inferences that you made whilst reading the chapter? Complete the 'What Do I Think' table like the one below.</h4>
+                    <table class="definition-table">
+                        <thead>
+                            <tr>
+                                <th>What do I think?</th>
+                                <th>What is the evidence to support what I think? (Key quote)</th>
+                                <th>Where did I get this information? (Page numbers)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><input type="text" placeholder="Enter thought"></td>
+                                <td><input type="text" placeholder="Enter evidence"></td>
+                                <td><input type="text" placeholder="Enter page numbers"></td>
+                            </tr>
+                            <tr>
+                                <td><input type="text" placeholder="Enter thought"></td>
+                                <td><input type="text" placeholder="Enter evidence"></td>
+                                <td><input type="text" placeholder="Enter page numbers"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="true-false">
+                    <div class="question">Circle whether each line is True or False</div>
+                    <div class="true-false-item">
+                        <span>Ben and Olive are lying on an air mattress</span>
+                        <div class="true-false-options">
+                            <label><input type="radio" name="tf1" value="true"> T</label>
+                            <label><input type="radio" name="tf1" value="false"> F</label>
+                        </div>
+                    </div>
+                    <div class="true-false-item">
+                        <span>While Olive is sleeping Ben can hear his parents dancing outside the cabin</span>
+                        <div class="true-false-options">
+                            <label><input type="radio" name="tf2" value="true"> T</label>
+                            <label><input type="radio" name="tf2" value="false"> F</label>
+                        </div>
+                    </div>
+                    <div class="true-false-item">
+                        <span>Ben used his camera to record his parents conversation</span>
+                        <div class="true-false-options">
+                            <label><input type="radio" name="tf3" value="true"> T</label>
+                            <label><input type="radio" name="tf3" value="false"> F</label>
+                        </div>
+                    </div>
+                    <div class="true-false-item">
+                        <span>Ben's recording of his parent's conversation did not work</span>
+                        <div class="true-false-options">
+                            <label><input type="radio" name="tf4" value="true"> T</label>
+                            <label><input type="radio" name="tf4" value="false"> F</label>
+                        </div>
+                    </div>
+                    <div class="true-false-item">
+                        <span>Ben and Olive made a fort in the woods</span>
+                        <div class="true-false-options">
+                            <label><input type="radio" name="tf5" value="true"> T</label>
+                            <label><input type="radio" name="tf5" value="false"> F</label>
+                        </div>
+                    </div>
+                    <div class="true-false-item">
+                        <span>Ben heard a sound that he thought was a bomb</span>
+                        <div class="true-false-options">
+                            <label><input type="radio" name="tf6" value="true"> T</label>
+                            <label><input type="radio" name="tf6" value="false"> F</label>
+                        </div>
+                    </div>
+                    <div class="true-false-item">
+                        <span>Ben's father was hunting rabbits</span>
+                        <div class="true-false-options">
+                            <label><input type="radio" name="tf7" value="true"> T</label>
+                            <label><input type="radio" name="tf7" value="false"> F</label>
+                        </div>
+                    </div>
+                    <div class="true-false-item">
+                        <span>Ben confronted his father about needing passports</span>
+                        <div class="true-false-options">
+                            <label><input type="radio" name="tf8" value="true"> T</label>
+                            <label><input type="radio" name="tf8" value="false"> F</label>
+                        </div>
+                    </div>
+                    <div class="true-false-item">
+                        <span>Olive would not eat the rabbit and claimed she was vegetarian</span>
+                        <div class="true-false-options">
+                            <label><input type="radio" name="tf9" value="true"> T</label>
+                            <label><input type="radio" name="tf9" value="false"> F</label>
+                        </div>
+                    </div>
+                    <div class="true-false-item">
+                        <span>Ray's father snatched Ben's notebook</span>
+                        <div class="true-false-options">
+                            <label><input type="radio" name="tf10" value="true"> T</label>
+                            <label><input type="radio" name="tf10" value="false"> F</label>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Chapter 17 -->
+            <section id="chapter17" class="chapter-section hidden">
+                <h2 class="chapter-title">Chapter 17-Trapped</h2>
+                <p>Ben wakes from a nightmare of drowning after falling from the raft to find that his parents are gone and he and Olive are locked into the cabin. Ben thinks that his parents have taken them captive because he found out they did not sell the wreckers and that the police wanted them for some reason. Olive is angry at their Mum for leaving them behind because she is the better parent. Ben distracts Olive by telling her a story.</p>
+                
+                <div class="question-group">
+                    <div class="question">Why is Olive angry at their Mum?</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="question-group">
+                    <div class="question">Why does Ben think they are locked in?</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="question-group">
+                    <div class="question">What do we learn about Ben's family at home and the role that the TV plays in the family?</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="question-group">
+                    <div class="question">How does Ben distract Olive?</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="cloze-activity">
+                    <h4>Cloze activity-fill in the blanks and copy the summary into your notebook.</h4>
+                    <p>Ben wakes from a nightmare of <span class="blank"></span> after falling from the raft to find that his parents are gone and he and Olive are locked into the cabin. Ben thinks that his parents have taken them <span class="blank"></span> because he found out they did not sell the <span class="blank"></span> and that the police wanted them for some reason. Olive is angry at their Mum for <span class="blank"></span> them behind because she is the better parent. Ben <span class="blank"></span> Olive by telling her a story.</p>
+                </div>
+            </section>
+            
+            <!-- Chapter 18 -->
+            <section id="chapter18" class="chapter-section hidden">
+                <h2 class="chapter-title">Chapter 18 - HOLE</h2>
+                <p>Ben and Olive have spent the whole day locked in the cabin entertaining themselves by reading My Side of the Mountain. Ben starts cutting into the floorboards using his Swiss knife because he thinks he and Olive need a way out because Mum and Dad are gone for good. Ben manages to saw through the floor and create a trapdoor. He and Olive vow that this will be their secret. Ben doesn't allow Olive to go through the trapdoor first, even though he is scared because he is older and has to take care of her. Ben and Olive get out and start heading for the creek when they hear a car coming. Ben hears a voice inside him telling him to run.</p>
+                
+                <div class="question-group">
+                    <div class="question">How do Ben and Olive interact with each other while inside the cabin?</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="question-group">
+                    <div class="question">Why does Ben tell Olive that the trapdoor has to be their secret?</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="question-group">
+                    <div class="question">When Ben hesitates about going down through the trapdoor, what does Olive call him? What does this reveal about Olive?</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="notebook-activity">
+                    <h4>Difficult words: you fill in the definitions and copy into your notebook:</h4>
+                    <table class="definition-table">
+                        <thead>
+                            <tr>
+                                <th>Difficult word/phrase</th>
+                                <th>What does it mean?</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1 jagged</td>
+                                <td><input type="text" placeholder="Enter definition"></td>
+                            </tr>
+                            <tr>
+                                <td>2 darting</td>
+                                <td><input type="text" placeholder="Enter definition"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            
+            <!-- Chapter 19 -->
+            <section id="chapter19" class="chapter-section hidden">
+                <h2 class="chapter-title">Chapter 19 – The Plan</h2>
+                <p>Olive and Ben quickly run back into the cabin through the trapdoor. Ben holds a shovel as a weapon because he's unsure if it's his parents, but Olive calls out and they hear their Mum's voice. Their father tells them they need to pack and leave. Ben regrets coming back to the cabin. He's angry at their Mum for not being strong enough to stand up to their Dad. Ben confronts his Mum about leaving them, but she doesn't say anything. Ben goes to the car and finds his mother's mobile number. He records the last numbers she called and then goes to the web and finds an article and two headlines about his father.</p>
+                
+                <div class="question-group">
+                    <div class="question">How does Ben feel toward his mother?</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="question-group">
+                    <div class="question">Why do you think his mother doesn't stand up to Ray?</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="question-group">
+                    <div class="question">What do you think the headline Ben finds says?</div>
+                    <div class="answer-space"></div>
+                </div>
+            </section>
+            
+            <!-- Chapter 20 -->
+            <section id="chapter20" class="chapter-section hidden">
+                <h2 class="chapter-title">Chapter 20 – Apricots</h2>
+                <p>Ben knows that his parents had 7.2 million dollars mistakenly deposited into their bank account and they transferred the money. Ben confronts his parents and asks if they will give it back. His father physically attacks him and tells him not to ask any more questions.</p>
+                
+                <div class="question-group">
+                    <div class="question">Why do you think Ben confronts his parents?</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="question-group">
+                    <div class="question">What does Ray mean when he says that Ben should come back when he's a man?</div>
+                    <div class="answer-space"></div>
+                </div>
+            </section>
+            
+            <!-- Chapter 21 -->
+            <section id="chapter21" class="chapter-section hidden">
+                <h2 class="chapter-title">Chapter 21 – Think I better run</h2>
+                <p>Ben decides he needs to run away from his parents. He wants to ask his mother, but he knew that she would stop him. Ben urges his Mum to listen to herself and do what is right, but she doesn't know how. Ben doesn't trust his mother is telling the truth. Ben decides he will live in the forest like Sam Gribley from My Side of the Mountain. He waits for his parents to fall asleep and made it look like he was in bed by. Ben debates taking Olive with him, but he's worried he can't take care of her and he doesn't want to be the to tell her the bad thing his parents had done. As Ben is moving the trunk his mother sits up in bed.</p>
+                
+                <div class="question-group">
+                    <div class="question">Do you think Ben's parents did the right thing by taking the money? Why? Why not?</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="question-group">
+                    <div class="question">Do you think Ben is doing the right thing by running away?</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="true-false">
+                    <div class="question">Circle the correct response</div>
+                    <div class="question">Identify which statement is true or false</div>
+                    <div class="true-false-item">
+                        <span>Olive is angry at her mother because she should be a better parent</span>
+                        <div class="true-false-options">
+                            <label><input type="radio" name="tf21_1" value="true"> T</label>
+                            <label><input type="radio" name="tf21_1" value="false"> F</label>
+                        </div>
+                    </div>
+                    <div class="true-false-item">
+                        <span>Ben distracts Olive while they are locked in the cabin by juggling</span>
+                        <div class="true-false-options">
+                            <label><input type="radio" name="tf21_2" value="true"> T</label>
+                            <label><input type="radio" name="tf21_2" value="false"> F</label>
+                        </div>
+                    </div>
+                    <div class="true-false-item">
+                        <span>Ben and Olive read the book My Side of the Mountain</span>
+                        <div class="true-false-options">
+                            <label><input type="radio" name="tf21_3" value="true"> T</label>
+                            <label><input type="radio" name="tf21_3" value="false"> F</label>
+                        </div>
+                    </div>
+                    <div class="true-false-item">
+                        <span>Ben and Olive escape from the cabin through the window</span>
+                        <div class="true-false-options">
+                            <label><input type="radio" name="tf21_4" value="true"> T</label>
+                            <label><input type="radio" name="tf21_4" value="false"> F</label>
+                        </div>
+                    </div>
+                    <div class="true-false-item">
+                        <span>Ben uses the mobile phone he finds in his mother's car to call the police</span>
+                        <div class="true-false-options">
+                            <label><input type="radio" name="tf21_5" value="true"> T</label>
+                            <label><input type="radio" name="tf21_5" value="false"> F</label>
+                        </div>
+                    </div>
+                    <div class="true-false-item">
+                        <span>Ben confronts his parents about stealing money</span>
+                        <div class="true-false-options">
+                            <label><input type="radio" name="tf21_6" value="true"> T</label>
+                            <label><input type="radio" name="tf21_6" value="false"> F</label>
+                        </div>
+                    </div>
+                    <div class="true-false-item">
+                        <span>Ben decides he will run away and will take Olive with him</span>
+                        <div class="true-false-options">
+                            <label><input type="radio" name="tf21_7" value="true"> T</label>
+                            <label><input type="radio" name="tf21_7" value="false"> F</label>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Chapter 22 -->
+            <section id="chapter22" class="chapter-section hidden">
+                <h2 class="chapter-title">Chapter 22 – INTO THE WILD</h2>
+                <p>Ben lay flat on the cabin floor hiding from his mother as he regretted trying to sneak out. His mother went back to sleep. Ben wished he could wait a bit longer but he couldn't deal with not knowing what would happen. Ben sneaks out of the cabin and tries to decide which way to go with the raft. He hears a jingling sound and a radio and then shapes. Someone has found the cabin. He tries to decide whether he would run alone like the zombie thief in his movie or would he go and warn his family?</p>
+                
+                <div class="question-group">
+                    <div class="question">Why does Ben decide to run away?</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="question-group">
+                    <div class="question">What do you think he will decide-to run away or to warn his family?</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="cloze-activity">
+                    <h4>Cloze activity-fill in the blanks and copy the summary into your notebook.</h4>
+                    <p>Ben lay flat on the cabin floor hiding from his mother as he <span class="blank"></span> trying to sneak out. His mother went back to sleep. Ben wished he could wait a bit <span class="blank"></span> but he couldn't deal with not knowing what would happen. Ben <span class="blank"></span> out of the cabin and tries to decide which way to go with the raft. He hears a <span class="blank"></span> sound and a radio and then shapes. Someone has found the cabin. He tries to decide whether he would run alone like the <span class="blank"></span> thief in his movie or would he go and warn his family?</p>
+                </div>
+            </section>
+            
+            <!-- Chapter 23 -->
+            <section id="chapter23" class="chapter-section hidden">
+                <h2 class="chapter-title">Chapter 23 – FLESH AND BLOOD</h2>
+                <p>Ben decides to help his family. He returns to the cabin through the trapdoor and wakes his parents and tells them there are people outside the cabin, possibly police. He tells Olive that they are playing hide and seek to find Bonzo, her stuffed rabbit, in order to make sure she doesn't scream. His whole family is under the cabin and Ben can't believe that he is helping his family instead of abiding by the motto of truth and honesty like the NSW police motto. The police burst into the cabin. Ben hesitates. He sees the bag of money on the ground. Should he follow his parents or run away the way he planned? Should he take Olive or run away by himself? A police officer cuts them off from their parents and Ben takes Olive and runs down to the creek. He hits into a branch and falls onto the ground.</p>
+                
+                <div class="question-group">
+                    <div class="question">Why does Ben hesitate about joining his parents?</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="question-group">
+                    <div class="question">Does Ben still think he can achieve his dream of being a police officer? Why? Why not?</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="notebook-activity">
+                    <h4>Quiz: For each difficult word or phrase, circle the correct definition.</h4>
+                    <div class="question">1. seek to find:</div>
+                    <div class="option">
+                        <input type="radio" name="quiz1" id="quiz1a">
+                        <label for="quiz1a">A) why do you call</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="quiz1" id="quiz1b">
+                        <label for="quiz1b">B) (getting good at something)</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="quiz1" id="quiz1c">
+                        <label for="quiz1c">C) take control again</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="quiz1" id="quiz1d">
+                        <label for="quiz1d">D) not in a straight line/not matching up</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="quiz1" id="quiz1e">
+                        <label for="quiz1e">E) are trying to find</label>
+                    </div>
+                    
+                    <div class="question">2. abiding by:</div>
+                    <div class="option">
+                        <input type="radio" name="quiz2" id="quiz2a">
+                        <label for="quiz2a">A) had only</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="quiz2" id="quiz2b">
+                        <label for="quiz2b">B) obeying</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="quiz2" id="quiz2c">
+                        <label for="quiz2c">C) fancily decorated</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="quiz2" id="quiz2d">
+                        <label for="quiz2d">D) short-lived qualities</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="quiz2" id="quiz2e">
+                        <label for="quiz2e">E) spread out</label>
+                    </div>
+                    
+                    <div class="question">3. motto:</div>
+                    <div class="option">
+                        <input type="radio" name="quiz3" id="quiz3a">
+                        <label for="quiz3a">A) sees</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="quiz3" id="quiz3b">
+                        <label for="quiz3b">B) answers</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="quiz3" id="quiz3c">
+                        <label for="quiz3c">C) should encourage</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="quiz3" id="quiz3d">
+                        <label for="quiz3d">D) saying</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="quiz3" id="quiz3e">
+                        <label for="quiz3e">E) agreed to a lesser criminal charge</label>
+                    </div>
+                    
+                    <div class="question">4. hesitates:</div>
+                    <div class="option">
+                        <input type="radio" name="quiz4" id="quiz4a">
+                        <label for="quiz4a">A) behaves</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="quiz4" id="quiz4b">
+                        <label for="quiz4b">B) had gotten angry</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="quiz4" id="quiz4c">
+                        <label for="quiz4c">C) waits</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="quiz4" id="quiz4d">
+                        <label for="quiz4d">D) effective way to deal with problems</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="quiz4" id="quiz4e">
+                        <label for="quiz4e">E) escaped</label>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Chapter 24 -->
+            <section id="chapter24" class="chapter-section hidden">
+                <h2 class="chapter-title">Chapter 24-The Fugitive</h2>
+                <p>The police officers see Ben and Olive and start chasing them. Ben runs down to the raft and launches it, helping Olive get onto the raft. Olive holds the bag of money and Bonzo as Ben paddles the raft away from the searching lights. He hears a shot and doesn't know if the police are shooting at him and Olive? They reach a small waterfall and he's not sure if the raft will survive the fall, but he also feels it is impossible to return and give themselves up and give their parents up. The raft sinks under the water with Ben and Olive. The raft floats back to the surface and they drift down the river. Ben can still see the police officers calling torches scanning the darkness. They hear shots again. Ben prays for his family and him and Olive and hopes that they would all be okay.</p>
+                
+                <div class="question-group">
+                    <div class="question">Why does Ben not run after his parents?</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="question-group">
+                    <div class="question">Why do he and Olive launch the raft?</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="question-group">
+                    <div class="question">What happens when they reach the waterfall?</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="cloze-activity">
+                    <h4>Cloze activity-fill in the blanks and copy the summary into your notebook.</h4>
+                    <p>The police officers see Ben and Olive and start <span class="blank"></span> them. Ben runs down to the raft and <span class="blank"></span> it, helping Olive get onto the raft. Olive holds the bag of money and Bonzo as Ben <span class="blank"></span> the raft away from the searching lights. He hears a shot and doesn't know if the police are <span class="blank"></span> at him and Olive? They reach a small waterfall and he's not sure if the raft will survive the fall, but he also feels it is <span class="blank"></span> to return and give themselves up and give their parents up. The raft sinks under the water with Ben and Olive. The raft floats back to the <span class="blank"></span> and they drift down the river. Ben can still see the police officers calling torches <span class="blank"></span> the darkness. They hear shots again. Ben prays for his family and him and Olive and hopes that they would all be okay.</p>
+                </div>
+            </section>
+            
+            <!-- Chapter 25 -->
+            <section id="chapter25" class="chapter-section hidden">
+                <h2 class="chapter-title">Chapter 25 - Hope</h2>
+                <p>Ben wakes up to the sound of a police helicopter. He decides that he and Olive should hide from it instead of drawing attention to themselves. He gets Olive to cooperate by pretending that they are criminals on the run. The helicopter moves away, leaving Ben and Olive alone in the bush.</p>
+                
+                <div class="notebook-activity">
+                    <h4>Complete a 5 W's circle diagram in your book based on chapter 25 of Two wolves. See the example below.</h4>
+                    <p>Write one prediction about what you think will happen to Ben and Olive after the helicopter leaves?</p>
+                </div>
+                
+                <div class="question-group">
+                    <div class="question">How does Ben get Olive to cooperate with hiding from the police?</div>
+                    <div class="answer-space"></div>
+                </div>
+            </section>
+            
+            <!-- Chapter 26 -->
+            <section id="chapter26" class="chapter-section hidden">
+                <h2 class="chapter-title">Chapter 26 - Stuck</h2>
+                <p>After the police helicopter flies away, Ben and Olive are alone in the wilderness. Ben contemplates which way to go next, but feels stuck. He and Olive have no food to eat; they pool their resources but come up with nothing useful. After trying a hard green fig which was lying on the ground, Ben announces that they need to go and find food.</p>
+                
+                <div class="notebook-activity">
+                    <h4>Matching: For each difficult word or phrase, write the number of the matching definition and copy into your notebook:</h4>
+                    <table class="matching-table">
+                        <thead>
+                            <tr>
+                                <th>Difficult word or phrase</th>
+                                <th>Definition</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>_____array</td>
+                                <td>1: knotty and twisted-up</td>
+                            </tr>
+                            <tr>
+                                <td>_____relentless</td>
+                                <td>2: animal-like</td>
+                            </tr>
+                            <tr>
+                                <td>_____gnarled</td>
+                                <td>3: organized row</td>
+                            </tr>
+                            <tr>
+                                <td>_____savage</td>
+                                <td>4: calling (like a bird)</td>
+                            </tr>
+                            <tr>
+                                <td>_____cawing</td>
+                                <td>5: unstoppable</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            
+            <!-- Chapter 27 -->
+            <section id="chapter27" class="chapter-section hidden">
+                <h2 class="chapter-title">Chapter 27 – First night</h2>
+                <p>After a day of failing to find proper food, Ben does his best to stay awake and alert during the night. He is very afraid. He accidentally falls asleep, and is woken when he hears footsteps nearby. Terrified, he waits silently until they pass.</p>
+                
+                <div class="question-group">
+                    <div class="question">Identify at least two sentences that help to create a sense of fear in this chapter.</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="question-group">
+                    <div class="question">List at least three adjectives from p. 201 that the author has used to describe how Ben is feeling physically in this chapter.</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="question-group">
+                    <div class="question">Compare Ben's descriptions of his life:</div>
+                    <p>At home</p>
+                    <div class="answer-space"></div>
+                    <p>In the cabin</p>
+                    <div class="answer-space"></div>
+                    <p>In the wilderness</p>
+                    <div class="answer-space"></div>
+                </div>
+            </section>
+            
+            <!-- Chapter 28 -->
+            <section id="chapter28" class="chapter-section hidden">
+                <h2 class="chapter-title">Chapter 28 - Tangled</h2>
+                <p>Ben decides to head upstream, back towards the cabin. He and Olive spend an exhausting day making the journey. They still haven't eaten. Olive begins to get upset, but Ben reprimands her, trying to keep her and himself focussed on getting to their destination.</p>
+                
+                <div class="question-group">
+                    <div class="question">Why does Ben decide to go upstream instead of downstream? (p. 204)</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="question-group">
+                    <div class="question">Do Olive and Ben believe that Uncle Chris knew about their father's scheme? Give evidence from the text to support your answer.</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="question-group">
+                    <div class="question">'He had taken the money and run with it. What did that say about him?' Do you think that Ben is 'dodgy', just like his Dad and Uncle Chris?</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="notebook-activity">
+                    <h4>Quiz: For each difficult word or phrase, circle the correct definition.</h4>
+                    <div class="question">1. wilderness:</div>
+                    <div class="option">
+                        <input type="radio" name="quiz28_1" id="quiz28_1a">
+                        <label for="quiz28_1a">A) (land area that has never been changed by people)</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="quiz28_1" id="quiz28_1b">
+                        <label for="quiz28_1b">B) scared (very much)</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="quiz28_1" id="quiz28_1c">
+                        <label for="quiz28_1c">C) (without any advance planning)</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="quiz28_1" id="quiz28_1d">
+                        <label for="quiz28_1d">D) trip</label>
+                    </div>
+                    
+                    <div class="question">2. contemplates:</div>
+                    <div class="option">
+                        <input type="radio" name="quiz28_2" id="quiz28_2a">
+                        <label for="quiz28_2a">A) thinks about</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="quiz28_2" id="quiz28_2b">
+                        <label for="quiz28_2b">B) useful things/valuable supplies</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="quiz28_2" id="quiz28_2c">
+                        <label for="quiz28_2c">C) (without any advance planning)</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="quiz28_2" id="quiz28_2d">
+                        <label for="quiz28_2d">D) (land area that has never been changed by people)</label>
+                    </div>
+                    
+                    <div class="question">3. pool:</div>
+                    <div class="option">
+                        <input type="radio" name="quiz28_3" id="quiz28_3a">
+                        <label for="quiz28_3a">A) (without any advance planning)</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="quiz28_3" id="quiz28_3b">
+                        <label for="quiz28_3b">B) thinks about</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="quiz28_3" id="quiz28_3c">
+                        <label for="quiz28_3c">C) useful things/valuable supplies</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="quiz28_3" id="quiz28_3d">
+                        <label for="quiz28_3d">D) combine</label>
+                    </div>
+                    
+                    <div class="question">4. resources:</div>
+                    <div class="option">
+                        <input type="radio" name="quiz28_4" id="quiz28_4a">
+                        <label for="quiz28_4a">A) (land area that has never been changed by people)</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="quiz28_4" id="quiz28_4b">
+                        <label for="quiz28_4b">B) useful things/valuable supplies</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="quiz28_4" id="quiz28_4c">
+                        <label for="quiz28_4c">C) scared (very much)</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="quiz28_4" id="quiz28_4d">
+                        <label for="quiz28_4d">D) thinks about</label>
+                    </div>
+                    
+                    <div class="question">5. accidentally:</div>
+                    <div class="option">
+                        <input type="radio" name="quiz28_5" id="quiz28_5a">
+                        <label for="quiz28_5a">A) (without any advance planning)</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="quiz28_5" id="quiz28_5b">
+                        <label for="quiz28_5b">B) scared (very much)</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="quiz28_5" id="quiz28_5c">
+                        <label for="quiz28_5c">C) combine</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="quiz28_5" id="quiz28_5d">
+                        <label for="quiz28_5d">D) useful things/valuable supplies</label>
+                    </div>
+                    
+                    <div class="question">6. terrified:</div>
+                    <div class="option">
+                        <input type="radio" name="quiz28_6" id="quiz28_6a">
+                        <label for="quiz28_6a">A) (land area that has never been changed by people)</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="quiz28_6" id="quiz28_6b">
+                        <label for="quiz28_6b">B) (without any advance planning)</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="quiz28_6" id="quiz28_6c">
+                        <label for="quiz28_6c">C) scared (very much)</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="quiz28_6" id="quiz28_6d">
+                        <label for="quiz28_6d">D) useful things/valuable supplies</label>
+                    </div>
+                    
+                    <div class="question">7. journey:</div>
+                    <div class="option">
+                        <input type="radio" name="quiz28_7" id="quiz28_7a">
+                        <label for="quiz28_7a">A) trip</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="quiz28_7" id="quiz28_7b">
+                        <label for="quiz28_7b">B) useful things/valuable supplies</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="quiz28_7" id="quiz28_7c">
+                        <label for="quiz28_7c">C) (without any advance planning)</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="quiz28_7" id="quiz28_7d">
+                        <label for="quiz28_7d">D) thinks about</label>
+                    </div>
+                    
+                    <div class="question">8. reprimands:</div>
+                    <div class="option">
+                        <input type="radio" name="quiz28_8" id="quiz28_8a">
+                        <label for="quiz28_8a">A) scared (very much)</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="quiz28_8" id="quiz28_8b">
+                        <label for="quiz28_8b">B) (without any advance planning)</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="quiz28_8" id="quiz28_8c">
+                        <label for="quiz28_8c">C) criticizes</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="quiz28_8" id="quiz28_8d">
+                        <label for="quiz28_8d">D) thinks about</label>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Chapter 29 -->
+            <section id="chapter29" class="chapter-section hidden">
+                <h2 class="chapter-title">Chapter 29 – Tempest</h2>
+                <p>During the night, a violent storm breaks out. As he is entering the forest in an attempt to find shelter, Ben drops the money bag and loses one wad of cash (worth $50,000), but he realises that he doesn't care. He picks up Olive (who is sleeping), takes her into the forest, and makes a shelter for her.</p>
+                
+                <div class="question-group">
+                    <div class="question">What happens when Ben drops money from the bag?</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="question-group">
+                    <div class="question">How does Ben take care of Olive in this chapter?</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="question-group">
+                    <div class="question">Look at the description of Olive on p. 209. How does the way Olive looks contrast with the way Ben is feeling?</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="notebook-activity">
+                    <h4>Difficult words: you fill in the definitions and copy into your notebook:</h4>
+                    <table class="definition-table">
+                        <thead>
+                            <tr>
+                                <th>Difficult word/phrase</th>
+                                <th>What does it mean?</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1 ominous</td>
+                                <td><input type="text" placeholder="Enter definition"></td>
+                            </tr>
+                            <tr>
+                                <td>2 snarled</td>
+                                <td><input type="text" placeholder="Enter definition"></td>
+                            </tr>
+                            <tr>
+                                <td>3 quake</td>
+                                <td><input type="text" placeholder="Enter definition"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            
+            <!-- Chapter 30 -->
+            <section id="chapter30" class="chapter-section hidden">
+                <h2 class="chapter-title">Chapter 30 - The End</h2>
+                <p>Ben and Olive are on the run in the bush. They are both sick from being out in the storm and not having food to eat. They foraged in the forest for food and ate leaves, plant bulbs and a witchety grub. They hear a helicopter in the distance. Ben is struggling carrying the cash as the bag is broken. He remembers how his father had always tried to be rich like selling cleaning products. Even though he is carrying $932,300 he doesn't feel happy. Olive gets very sick and has diarrhoea, vomits, and cannot walk anymore. Ben has to carry her and he has to keep checking if she is alive. When he can't carry her any longer he starts screaming for help.</p>
+                
+                <div class="question-group">
+                    <div class="question">Why is Ben not happy even though he has so much money?</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="question-group">
+                    <div class="question">Find 10 words from Ch. 30 that describe Ben and Olive's physical state.</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="question-group">
+                    <div class="question">Find 5 words from Ch. 30 that describe Ben and Olive's mental state.</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="question-group">
+                    <div class="question">Infer: Why did Olive get very ill and Ben did not?</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="question-group">
+                    <div class="question">Use prior knowledge: What will kill a person first, thirst or hunger?</div>
+                    <div class="answer-space"></div>
+                </div>
+            </section>
+            
+            <!-- Chapter 31 -->
+            <section id="chapter31" class="chapter-section hidden">
+                <h2 class="chapter-title">Chapter 31 – The Wreckers</h2>
+                <p>Olive is unconscious and unresponsive and Ben fears that she is dead. He finds the creek that is near his Pop's cabin. Ben thought of the police helicopter and he wished he had not been so stupid, had not hidden from the police and almost killed his sister. Ben reached the cabin and vowed he would hand over the money to the police and tell them everything, but there is no one at the cabin. He lays Olive on the workbench and that night he sleeps on the floor and dreams about the wrecking yard. They ate from food they had thrown into the plastic bin and sipped water. Ben was no longer afraid of the dark or of the night noises. Ben wrote a list about what might happen when they made it back to Nan's. He knew he had to be careful and make a good choice. Ben makes a decision that he cannot write down or tell anyone. He takes a shovel and goes outside.</p>
+                
+                <div class="question-group">
+                    <div class="question">Infer: Exactly why was it such a big deal to Ben that he saw a pine tree? (p 221)</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="question-group">
+                    <div class="question">Ben says of his father 'He was a wrecker.' (p 223) What does Ben mean (a) literally and (b) inferentially?</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="question-group">
+                    <div class="question">'No more bad choices' How is Ben changing? What is he fearful of?</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="question-group">
+                    <div class="question">Predict: Ben took out a shovel. Why do you think he did that?</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="cloze-activity">
+                    <h4>Cloze activity-fill in the blanks and copy the summary into your notebook.</h4>
+                    <p>Olive is unconscious and <span class="blank"></span> and Ben fears that she is dead. He finds the creek that is near his Pop's cabin. Ben thought of the police <span class="blank"></span> and he wished he had not been so stupid, had not hidden from the police and almost killed his sister. Ben reached the cabin and <span class="blank"></span> he would hand over the money to the police and tell them everything, but there is no one at the cabin. He lays Olive on the workbench and that night he sleeps on the floor and dreams about the <span class="blank"></span> yard. They ate from food they had thrown into the plastic bin and <span class="blank"></span> water. Ben was no longer afraid of the dark or of the night noises. Ben wrote a list about what might happen when they made it back to Nan's. He knew he had to be careful and make a good choice. Ben makes a <span class="blank"></span> that he cannot write down or tell anyone. He takes a shovel and goes outside.</p>
+                </div>
+            </section>
+            
+            <!-- Chapter 32 -->
+            <section id="chapter32" class="chapter-section hidden">
+                <h2 class="chapter-title">Chapter 32 – The Road</h2>
+                <p>Ben is on the roadside trying to hitchhike while Olive lies at his feet not speaking. Ben is worried about Olive as her not speaking is out of character. Ben attracts the attention of a semitrailer. He has to carry Olive to the truck. The driver asks if they are lost and Ben says 'sort of.'</p>
+                
+                <div class="question-group">
+                    <div class="question">'Things could not rattle him so easily' (p 228) What does this quote tell the reader about Ben's character?</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="question-group">
+                    <div class="question">Would the 'old' Ben have hitchhiked? Why / Why not?</div>
+                    <div class="answer-space"></div>
+                </div>
+            </section>
+            
+            <!-- Chapter 33 -->
+            <section id="chapter33" class="chapter-section hidden">
+                <h2 class="chapter-title">Chapter 33 – Dead or Alive</h2>
+                <p>Ben called his Nan from a payphone at a bus shelter. The bus driver told him to take Olive to the hospital but Ben was worried because they would know their names. He and Olive shower at the surf club and he buys them clothes and medicine at the surf club. He has to call Nan repeatedly and she finally answers. Ben buys two tickets at the Visitor Information Centre. He is worried if he made the right decision not taking Olive to a doctor. They travel down the coast home. Olive wakes up around midnight and says she is hungry. She asks Ben where is the bag of money.</p>
+                
+                <div class="question-group">
+                    <div class="question">Locate: What two lines on page 36 show that Olive is recovering?</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="question-group">
+                    <div class="question">'Most of them looked broken in some way' (p 235). What does Ben mean? How are they 'broken'?</div>
+                    <div class="answer-space"></div>
+                </div>
+            </section>
+            
+            <!-- Chapter 34 -->
+            <section id="chapter34" class="chapter-section hidden">
+                <h2 class="chapter-title">Chapter 34 – Hide and Seek</h2>
+                <p>Ben carries Olive to their Nan's house and they find Golden at the front of their house. Ben sneaks into her house to avoid the police out the front. Nan cries when she sees them. She tells them that their parents were at her house a few days and will be back in the morning. Ben tells her that he lost the money at the bus shelter and says he is scared of what will happen when his father finds out. He asks Nan to stop Ray coming back to her house. Nan tells him that it will be all right and he wants to believe her. Nan feeds them and Ben tells her everything he knows. Nan tells Ben that his Pop had been a crook and that he'd built the cabin to have somewhere to hide. Nan asks him to promise he won't be like his grandfather. His parents arrive and Nan tells them to hide so they can surprise them.</p>
+                
+                <div class="question-group">
+                    <div class="question">Does Ben want his parents to return? Justify your response.</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="true-false">
+                    <div class="question">Circle the correct response</div>
+                    <div class="true-false-item">
+                        <span>Ben and Olive eat at McDonald's</span>
+                        <div class="true-false-options">
+                            <label><input type="radio" name="tf34_1" value="true"> T</label>
+                            <label><input type="radio" name="tf34_1" value="false"> F</label>
+                        </div>
+                    </div>
+                    <div class="true-false-item">
+                        <span>Ben waves the police helicopter to stop</span>
+                        <div class="true-false-options">
+                            <label><input type="radio" name="tf34_2" value="true"> T</label>
+                            <label><input type="radio" name="tf34_2" value="false"> F</label>
+                        </div>
+                    </div>
+                    <div class="true-false-item">
+                        <span>Ben and Olive make it safely back to the cabin</span>
+                        <div class="true-false-options">
+                            <label><input type="radio" name="tf34_3" value="true"> T</label>
+                            <label><input type="radio" name="tf34_3" value="false"> F</label>
+                        </div>
+                    </div>
+                    <div class="true-false-item">
+                        <span>Ben finds a car and drives him and Olive to town</span>
+                        <div class="true-false-options">
+                            <label><input type="radio" name="tf34_4" value="true"> T</label>
+                            <label><input type="radio" name="tf34_4" value="false"> F</label>
+                        </div>
+                    </div>
+                    <div class="true-false-item">
+                        <span>Ben calls his Nan from a mobile phone he found in the cabin</span>
+                        <div class="true-false-options">
+                            <label><input type="radio" name="tf34_5" value="true"> T</label>
+                            <label><input type="radio" name="tf34_5" value="false"> F</label>
+                        </div>
+                    </div>
+                    <div class="true-false-item">
+                        <span>Ben takes Olive to the hospital</span>
+                        <div class="true-false-options">
+                            <label><input type="radio" name="tf34_6" value="true"> T</label>
+                            <label><input type="radio" name="tf34_6" value="false"> F</label>
+                        </div>
+                    </div>
+                    <div class="true-false-item">
+                        <span>Ben tells his Nan he lost the money</span>
+                        <div class="true-false-options">
+                            <label><input type="radio" name="tf34_7" value="true"> T</label>
+                            <label><input type="radio" name="tf34_7" value="false"> F</label>
+                        </div>
+                    </div>
+                    <div class="true-false-item">
+                        <span>Ben's Nan tells him that his grandfather was a thief</span>
+                        <div class="true-false-options">
+                            <label><input type="radio" name="tf34_8" value="true"> T</label>
+                            <label><input type="radio" name="tf34_8" value="false"> F</label>
+                        </div>
+                    </div>
+                    <div class="true-false-item">
+                        <span>Ben is excited to see his parents</span>
+                        <div class="true-false-options">
+                            <label><input type="radio" name="tf34_9" value="true"> T</label>
+                            <label><input type="radio" name="tf34_9" value="false"> F</label>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Chapter 35 -->
+            <section id="chapter35" class="chapter-section hidden">
+                <h2 class="chapter-title">Chapter thirty five-Last Stand</h2>
+                <p>Ben's parents return to his Nan's. Ben is conflicted about his feelings for Mum, when she hugs him he thinks he has never loved and hated a hug so much. There is a knock at the door. Their father is urging them to go and demanding to know where the money is, while Mum wants to hug and be with Ben and Olive. Their father urges them to hide between the chook pen and the fence while police officers pass by. Ben is conflicted about whether to tell his father about the money-which wolf does he feed? Olive tells their father Ben lost the money. Ben is more afraid of his father then he is of the police. His mother stands up to Ray when they are hiding. Olive tells Ray he has wrecked everything and he is a robber man. He physically attacks Olive by grabbing her arm. Ben's Mum stands up to Ray and says it is over. She hands herself over to the police while Ray vaults over the fence and runs away.</p>
+                
+                <div class="question-group">
+                    <div class="question">Why does Ben think he has never loved and hated a hug so much when his mother hugs him?</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="question-group">
+                    <div class="question">Who is Ben more afraid of?</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="question-group">
+                    <div class="question">Why does Ben hesitate in telling his father about the money?</div>
+                    <div class="answer-space"></div>
+                </div>
+            </section>
+            
+            <!-- Chapter 36 -->
+            <section id="chapter36" class="chapter-section hidden">
+                <h2 class="chapter-title">Chapter thirty six-Life</h2>
+                <p>Ben is trying to finish the movie he had been working in chapter one. It is three months later and he, Olive and Mum are living with Nan. Mum is going to court to face the consequences of what she did, however she is expecting to come home after her appearance. Ray is still on the run. After Mum leaves Ben goes to the backyard, weighed down with guilt, and continues dismantling the shed so that he is not reminded of the day his father ran away. He prays for Mum to be all right and reveals that if the ruling goes against her, even though the lawyer said it shouldn't because the whole thing is Dad's fault, then Ben would have to reveal his secret.</p>
+                
+                <div class="question-group">
+                    <div class="question">What is the movie that Ben is working on?</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="question-group">
+                    <div class="question">Why is he dismantling the shed? What does it represent to Ben?</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="question-group">
+                    <div class="question">What secret will Ben have to reveal if things don't go Mum's way?</div>
+                    <div class="answer-space"></div>
+                </div>
+            </section>
+            
+            <!-- Chapter 37 -->
+            <section id="chapter37" class="chapter-section hidden">
+                <h2 class="chapter-title">Chapter Thirty Seven-Within the Woods</h2>
+                <p>Ben returns to the cabin a year later and remembers what he went through with Olive and his parents. He returns to where he hid the money beneath a small pyramid-shaped boulder and unearths the rusted green metal trunk. When he opens it the bag with money is inside. He and Mum agreed to return the money but as he walks back to Mum he starts thinking that maybe they should keep some of the money. He is conflicted and wonders if it is possible to escape his genes and the legacy of being a thief like his father and grandfather. He realises that he would not run. He puts the bag down and washes his face in the stream. He decides he will leave the money outside the police station in Kings Bay and never look back. He turns and sees a man who is bearded, skinny, barefoot and wild-looking holding the bag. "G'day Cop," the man says.</p>
+                
+                <div class="question-group">
+                    <div class="question">Why does Ben want to give the money back? Why does he think about keeping it?</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="question-group">
+                    <div class="question">Why is it important for him to give back the money?</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="question-group">
+                    <div class="question">Who is the man who is holding the bag? What are the clues?</div>
+                    <div class="answer-space"></div>
+                </div>
+            </section>
+            
+            <!-- Chapter 38 -->
+            <section id="chapter38" class="chapter-section hidden">
+                <h2 class="chapter-title">Chapter Thirty-Eight-One Wolf</h2>
+                <p>Ben asks his Dad to give him back the money, but his Dad refuses. His dad is angry and says he has been living like an animal a hundred metres away from his money without knowing it. Ray tells him that Ben is the same as him, and his grandfather. Ben tells Ray he will give the money back but Ray tells him that they will put him in prison for stealing the money. Ben fights off Ray and takes the money and runs to the car and Mum. He throws the money into the car, but Ray chases him. April shouts at Ray and tries to protect Ben. Ray attacks Ben, but Ben fights him off. He's taller than Ray and has been doing weights, while Ray has deteriorated from living in the forest. Ben tells him that he's not his father and physically defeats him in a fight. As they drive off Ray tries to jump on the car, but he can't hold on. They drive away leaving him and the cabin behind. Ben thinks about the story of the two wolves. He feels empty because he's released his wolves from captivity. There was no 'good' or 'bad' wolf. The battle is done.</p>
+                
+                <div class="question-group">
+                    <div class="question">How has Ben changed from a year ago? Think about the physical and mental changes.</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="question-group">
+                    <div class="question">How has his mother changed since she was with Ray?</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="question-group">
+                    <div class="question">How has Ben released the wolf within him from captivity?</div>
+                    <div class="answer-space"></div>
+                </div>
+                
+                <div class="multiple-choice">
+                    <div class="question">Circle the correct response</div>
+                    <div class="question">What type of vehicle picked up Olive and Ben from the roadside?</div>
+                    <div class="option">
+                        <input type="radio" name="vehicle" id="vehicle1">
+                        <label for="vehicle1">Car</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="vehicle" id="vehicle2">
+                        <label for="vehicle2">Motorbike</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="vehicle" id="vehicle3">
+                        <label for="vehicle3">Truck</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="vehicle" id="vehicle4">
+                        <label for="vehicle4">Bus</label>
+                    </div>
+                    
+                    <div class="question">Why did Ben choose not to go to the hospital after leaving the cabin?</div>
+                    <div class="option">
+                        <input type="radio" name="hospital" id="hospital1">
+                        <label for="hospital1">Because Olive was better</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="hospital" id="hospital2
