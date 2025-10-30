@@ -303,6 +303,67 @@
             margin-top: 3rem;
         }
 
+        /* True/False Card Layout Styles */
+        .true-false-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .tf-card {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .tf-card:hover {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+
+        .tf-statement {
+            font-weight: 500;
+            margin-bottom: 10px;
+            color: #2c3e50;
+            font-size: 16px;
+            line-height: 1.4;
+        }
+
+        .tf-options {
+            display: flex;
+            gap: 20px;
+        }
+
+        .tf-option {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .tf-option input[type="radio"] {
+            margin: 0;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .tf-option label {
+            margin: 0;
+            cursor: pointer;
+            font-weight: normal;
+            color: #555;
+            user-select: none;
+        }
+
+        .tf-option input[type="radio"]:checked + label {
+            color: #3498db;
+            font-weight: 500;
+        }
+
         @media (max-width: 768px) {
             .header-content {
                 flex-direction: column;
@@ -320,6 +381,28 @@
 
             .matching-table, .inference-table {
                 font-size: 0.9rem;
+            }
+            
+            .tf-card {
+                padding: 12px;
+            }
+            
+            .tf-statement {
+                font-size: 15px;
+            }
+            
+            .tf-options {
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .tf-options {
+                gap: 10px;
+            }
+            
+            .tf-option label {
+                font-size: 14px;
             }
         }
     </style>
@@ -374,37 +457,37 @@
             <div class="question-section">
                 <div class="question">
                     <h3>Predict where the money came from?</h3>
-                    <textarea class="text-input" rows="3" placeholder="Write your prediction here..."></textarea>
+                    <textarea id="ch12_q1" name="ch12_q1" class="text-input" rows="3" placeholder="Write your prediction here..."></textarea>
                 </div>
 
                 <div class="question">
                     <h3>Why was Ben suspicious? (p.86)</h3>
-                    <textarea class="text-input" rows="3" placeholder="Write your answer here..."></textarea>
+                    <textarea id="ch12_q2" name="ch12_q2" class="text-input" rows="3" placeholder="Write your answer here..."></textarea>
                 </div>
 
                 <div class="question">
                     <h3>Describe how Ben was changing his mind about the mysterious sports bag of cash. Find evidence to support your response. (p.90)</h3>
-                    <textarea class="text-input" rows="4" placeholder="Write your answer here..."></textarea>
+                    <textarea id="ch12_q3" name="ch12_q3" class="text-input" rows="4" placeholder="Write your answer here..."></textarea>
                 </div>
 
                 <div class="question">
                     <h3>Circle the correct answer: Why was Ben's father angry with him?</h3>
                     <div class="options">
                         <div class="option">
-                            <input type="radio" id="q4a" name="q4">
-                            <label for="q4a">because he broke a window</label>
+                            <input type="radio" id="ch12_mc1_a" name="ch12_mc1" value="a">
+                            <label for="ch12_mc1_a">because he broke a window</label>
                         </div>
                         <div class="option">
-                            <input type="radio" id="q4b" name="q4">
-                            <label for="q4b">because he didn't come when he was called</label>
+                            <input type="radio" id="ch12_mc1_b" name="ch12_mc1" value="b">
+                            <label for="ch12_mc1_b">because he didn't come when he was called</label>
                         </div>
                         <div class="option">
-                            <input type="radio" id="q4c" name="q4">
-                            <label for="q4c">because he found the bag</label>
+                            <input type="radio" id="ch12_mc1_c" name="ch12_mc1" value="c">
+                            <label for="ch12_mc1_c">because he found the bag</label>
                         </div>
                         <div class="option">
-                            <input type="radio" id="q4d" name="q4">
-                            <label for="q4d">because he hit Olive</label>
+                            <input type="radio" id="ch12_mc1_d" name="ch12_mc1" value="d">
+                            <label for="ch12_mc1_d">because he hit Olive</label>
                         </div>
                     </div>
                 </div>
@@ -413,47 +496,47 @@
                     <h3>Where did Mum say the money came from?</h3>
                     <div class="options">
                         <div class="option">
-                            <input type="radio" id="q5a" name="q5">
-                            <label for="q5a">Sold the car</label>
+                            <input type="radio" id="ch12_mc2_a" name="ch12_mc2" value="a">
+                            <label for="ch12_mc2_a">Sold the car</label>
                         </div>
                         <div class="option">
-                            <input type="radio" id="q5b" name="q5">
-                            <label for="q5b">Won the lottery</label>
+                            <input type="radio" id="ch12_mc2_b" name="ch12_mc2" value="b">
+                            <label for="ch12_mc2_b">Won the lottery</label>
                         </div>
                         <div class="option">
-                            <input type="radio" id="q5c" name="q5">
-                            <label for="q5c">Sold the cabin</label>
+                            <input type="radio" id="ch12_mc2_c" name="ch12_mc2" value="c">
+                            <label for="ch12_mc2_c">Sold the cabin</label>
                         </div>
                         <div class="option">
-                            <input type="radio" id="q5d" name="q5">
-                            <label for="q5d">Sold the wreckers</label>
+                            <input type="radio" id="ch12_mc2_d" name="ch12_mc2" value="d">
+                            <label for="ch12_mc2_d">Sold the wreckers</label>
                         </div>
                     </div>
                 </div>
 
                 <div class="question">
                     <h3>Who gave Dad the sports bag full of money?</h3>
-                    <textarea class="text-input" rows="2" placeholder="Write your answer here..."></textarea>
+                    <textarea id="ch12_q4" name="ch12_q4" class="text-input" rows="2" placeholder="Write your answer here..."></textarea>
                 </div>
 
                 <div class="question">
                     <h3>The Latin motto of the NSW Police translation is:</h3>
                     <div class="options">
                         <div class="option">
-                            <input type="radio" id="q7a" name="q7">
-                            <label for="q7a">Crime pays</label>
+                            <input type="radio" id="ch12_mc3_a" name="ch12_mc3" value="a">
+                            <label for="ch12_mc3_a">Crime pays</label>
                         </div>
                         <div class="option">
-                            <input type="radio" id="q7b" name="q7">
-                            <label for="q7b">Punishment and crime go together</label>
+                            <input type="radio" id="ch12_mc3_b" name="ch12_mc3" value="b">
+                            <label for="ch12_mc3_b">Punishment and crime go together</label>
                         </div>
                         <div class="option">
-                            <input type="radio" id="q7c" name="q7">
-                            <label for="q7c">Punishment swiftly follows crime</label>
+                            <input type="radio" id="ch12_mc3_c" name="ch12_mc3" value="c">
+                            <label for="ch12_mc3_c">Punishment swiftly follows crime</label>
                         </div>
                         <div class="option">
-                            <input type="radio" id="q7d" name="q7">
-                            <label for="q7d">Punishment sometimes follows crime</label>
+                            <input type="radio" id="ch12_mc3_d" name="ch12_mc3" value="d">
+                            <label for="ch12_mc3_d">Punishment sometimes follows crime</label>
                         </div>
                     </div>
                 </div>
@@ -462,20 +545,20 @@
                     <h3>When Olive slips in the rocks in the creek Ben:</h3>
                     <div class="options">
                         <div class="option">
-                            <input type="radio" id="q8a" name="q8">
-                            <label for="q8a">calls his Mum to help</label>
+                            <input type="radio" id="ch12_mc4_a" name="ch12_mc4" value="a">
+                            <label for="ch12_mc4_a">calls his Mum to help</label>
                         </div>
                         <div class="option">
-                            <input type="radio" id="q8b" name="q8">
-                            <label for="q8b">run away</label>
+                            <input type="radio" id="ch12_mc4_b" name="ch12_mc4" value="b">
+                            <label for="ch12_mc4_b">run away</label>
                         </div>
                         <div class="option">
-                            <input type="radio" id="q8c" name="q8">
-                            <label for="q8c">turns back and helps her</label>
+                            <input type="radio" id="ch12_mc4_c" name="ch12_mc4" value="c">
+                            <label for="ch12_mc4_c">turns back and helps her</label>
                         </div>
                         <div class="option">
-                            <input type="radio" id="q8d" name="q8">
-                            <label for="q8d">calls Dad</label>
+                            <input type="radio" id="ch12_mc4_d" name="ch12_mc4" value="d">
+                            <label for="ch12_mc4_d">calls Dad</label>
                         </div>
                     </div>
                 </div>
@@ -484,23 +567,23 @@
                     <h3>As Ben lies in bed he wonders:</h3>
                     <div class="options">
                         <div class="option">
-                            <input type="radio" id="q9a" name="q9">
-                            <label for="q9a">if they can go on a holiday to Hawaii</label>
+                            <input type="radio" id="ch12_mc5_a" name="ch12_mc5" value="a">
+                            <label for="ch12_mc5_a">if they can go on a holiday to Hawaii</label>
                         </div>
                         <div class="option">
-                            <input type="radio" id="q9b" name="q9">
-                            <label for="q9b">if he can buy a new cabin</label>
+                            <input type="radio" id="ch12_mc5_b" name="ch12_mc5" value="b">
+                            <label for="ch12_mc5_b">if he can buy a new cabin</label>
                         </div>
                         <div class="option">
-                            <input type="radio" id="q9c" name="q9">
-                            <label for="q9c">if he can get a quad bike</label>
+                            <input type="radio" id="ch12_mc5_c" name="ch12_mc5" value="c">
+                            <label for="ch12_mc5_c">if he can get a quad bike</label>
                         </div>
                     </div>
                 </div>
 
                 <button class="save-button" onclick="manualSave()">
-    <i class="fas fa-save"></i> Save Now (Ctrl+S)
-</button>
+                    <i class="fas fa-save"></i> Save Now (Ctrl+S)
+                </button>
             </div>
         </div>
 
@@ -513,34 +596,35 @@
 
             <div class="question-section">
                 <div class="question">
-                                      <p>When his parents were fighting, what did Ben plan to do?</p>
-                    <textarea class="text-input" rows="4" placeholder="Summarize your 5 W's diagram here..."></textarea>
+                    <h3>Modified Task: Complete a 5 W's circle diagram in your book based on chapter 13 of Two Wolves.</h3>
+                    <p>After completing the diagram in your book, summarize your findings below:</p>
+                    <textarea id="ch13_5w_summary" name="ch13_5w_summary" class="text-input" rows="4" placeholder="Summarize your 5 W's diagram here..."></textarea>
                 </div>
 
                 <div class="question">
                     <h3>Write one prediction about what you believe Ben's mother and father said on the recorded tape.</h3>
                     <p>For example, where do you think they are going? How did they get the bag full of money? Why are they staying at the cabin?</p>
-                    <textarea class="text-input" rows="4" placeholder="Write your prediction here..."></textarea>
+                    <textarea id="ch13_q1" name="ch13_q1" class="text-input" rows="4" placeholder="Write your prediction here..."></textarea>
                 </div>
 
                 <div class="question">
                     <h3>When his parents were fighting, what did Ben plan to do?</h3>
-                    <textarea class="text-input" rows="3" placeholder="Write your answer here..."></textarea>
+                    <textarea id="ch13_q2" name="ch13_q2" class="text-input" rows="3" placeholder="Write your answer here..."></textarea>
                 </div>
 
                 <div class="question">
                     <h3>How did Ben record his parent's conversation? What did he use?</h3>
-                    <textarea class="text-input" rows="3" placeholder="Write your answer here..."></textarea>
+                    <textarea id="ch13_q3" name="ch13_q3" class="text-input" rows="3" placeholder="Write your answer here..."></textarea>
                 </div>
 
                 <div class="question">
                     <h3>What do you think will happen in the next chapter?</h3>
-                    <textarea class="text-input" rows="3" placeholder="Write your prediction here..."></textarea>
+                    <textarea id="ch13_q4" name="ch13_q4" class="text-input" rows="3" placeholder="Write your prediction here..."></textarea>
                 </div>
 
                 <button class="save-button" onclick="manualSave()">
-    <i class="fas fa-save"></i> Save Now (Ctrl+S)
-</button>
+                    <i class="fas fa-save"></i> Save Now (Ctrl+S)
+                </button>
             </div>
         </div>
 
@@ -565,52 +649,58 @@
                         <tbody>
                             <tr>
                                 <td>hints that</td>
-                                <td><input type="text" class="text-input" placeholder="Word 1"></td>
+                                <td><input type="text" id="ch14_def1" name="ch14_def1" class="text-input" placeholder="Word 1"></td>
                             </tr>
                             <tr>
                                 <td>tried to</td>
-                                <td><input type="text" class="text-input" placeholder="Word 2"></td>
+                                <td><input type="text" id="ch14_def2" name="ch14_def2" class="text-input" placeholder="Word 2"></td>
                             </tr>
                             <tr>
                                 <td>throw questions at</td>
-                                <td><input type="text" class="text-input" placeholder="Word 3"></td>
+                                <td><input type="text" id="ch14_def3" name="ch14_def3" class="text-input" placeholder="Word 3"></td>
                             </tr>
                             <tr>
                                 <td>(event(s) or object(s) that prove something)</td>
-                                <td><input type="text" class="text-input" placeholder="Word 4"></td>
+                                <td><input type="text" id="ch14_def4" name="ch14_def4" class="text-input" placeholder="Word 4"></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
 
-                             <div class="question">
+                <div class="question">
+                    <h3>Modified Task: Complete a 5 W's circle diagram in your book based on chapter 14 of Two Wolves.</h3>
+                    <p>After completing the diagram in your book, summarize your findings below:</p>
+                    <textarea id="ch14_5w_summary" name="ch14_5w_summary" class="text-input" rows="4" placeholder="Summarize your 5 W's diagram here..."></textarea>
+                </div>
+
+                <div class="question">
                     <h3>Looking back at your prediction from chapter 13, was your prediction correct? Why or why not?</h3>
-                    <textarea class="text-input" rows="4" placeholder="Write your answer here..."></textarea>
+                    <textarea id="ch14_q1" name="ch14_q1" class="text-input" rows="4" placeholder="Write your answer here..."></textarea>
                 </div>
 
                 <div class="question">
                     <h3>What did Ben discover on the recorded tape?</h3>
-                    <textarea class="text-input" rows="3" placeholder="Write your answer here..."></textarea>
+                    <textarea id="ch14_q2" name="ch14_q2" class="text-input" rows="3" placeholder="Write your answer here..."></textarea>
                 </div>
 
                 <div class="question">
                     <h3>Why does Ben keep a notebook?</h3>
-                    <textarea class="text-input" rows="3" placeholder="Write your answer here..."></textarea>
+                    <textarea id="ch14_q3" name="ch14_q3" class="text-input" rows="3" placeholder="Write your answer here..."></textarea>
                 </div>
 
                 <div class="question">
                     <h3>What happened on Bens attempted rafting trip?</h3>
-                    <textarea class="text-input" rows="3" placeholder="Write your answer here..."></textarea>
+                    <textarea id="ch14_q4" name="ch14_q4" class="text-input" rows="3" placeholder="Write your answer here..."></textarea>
                 </div>
 
                 <div class="question">
                     <h3>What does Ben plan to do next?</h3>
-                    <textarea class="text-input" rows="3" placeholder="Write your answer here..."></textarea>
+                    <textarea id="ch14_q5" name="ch14_q5" class="text-input" rows="3" placeholder="Write your answer here..."></textarea>
                 </div>
 
                 <button class="save-button" onclick="manualSave()">
-    <i class="fas fa-save"></i> Save Now (Ctrl+S)
-</button>
+                    <i class="fas fa-save"></i> Save Now (Ctrl+S)
+                </button>
             </div>
         </div>
 
@@ -634,38 +724,43 @@
                         <tbody>
                             <tr>
                                 <td>_____interrogate</td>
-                                <td>1: waiting (in a creepy way)</td>
+                                <td><input type="text" id="ch15_match1" name="ch15_match1" class="text-input" placeholder="Number"></td>
                             </tr>
                             <tr>
                                 <td>_____suggests that</td>
-                                <td>2: throw questions at</td>
+                                <td><input type="text" id="ch15_match2" name="ch15_match2" class="text-input" placeholder="Number"></td>
                             </tr>
                             <tr>
                                 <td>_____confronts</td>
-                                <td>3: angrily faces/stands up to</td>
+                                <td><input type="text" id="ch15_match3" name="ch15_match3" class="text-input" placeholder="Number"></td>
                             </tr>
                             <tr>
                                 <td>_____lurking</td>
-                                <td>4: hints that</td>
+                                <td><input type="text" id="ch15_match4" name="ch15_match4" class="text-input" placeholder="Number"></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
 
-           
+                <div class="question">
+                    <h3>Modified Task: Complete a 5 W's circle diagram in your book based on chapter 15 of Two Wolves.</h3>
+                    <p>After completing the diagram in your book, summarize your findings below:</p>
+                    <textarea id="ch15_5w_summary" name="ch15_5w_summary" class="text-input" rows="4" placeholder="Summarize your 5 W's diagram here..."></textarea>
+                </div>
+
                 <div class="question">
                     <h3>What does Ben interrogate his father about and how does he do this?</h3>
-                    <textarea class="text-input" rows="4" placeholder="Write your answer here..."></textarea>
+                    <textarea id="ch15_q1" name="ch15_q1" class="text-input" rows="4" placeholder="Write your answer here..."></textarea>
                 </div>
 
                 <div class="question">
                     <h3>Is Ben's dad lying to him or is he telling him the truth? Use quotes from the text to support your answer.</h3>
-                    <textarea class="text-input" rows="4" placeholder="Write your answer here..."></textarea>
+                    <textarea id="ch15_q2" name="ch15_q2" class="text-input" rows="4" placeholder="Write your answer here..."></textarea>
                 </div>
 
-               <button class="save-button" onclick="manualSave()">
-    <i class="fas fa-save"></i> Save Now (Ctrl+S)
-</button>
+                <button class="save-button" onclick="manualSave()">
+                    <i class="fas fa-save"></i> Save Now (Ctrl+S)
+                </button>
             </div>
         </div>
 
@@ -679,12 +774,12 @@
             <div class="question-section">
                 <div class="question">
                     <h3>Why do Ben, Olive and their mother not want to eat the 'charred' rabbit?</h3>
-                    <textarea class="text-input" rows="3" placeholder="Write your answer here..."></textarea>
+                    <textarea id="ch16_q1" name="ch16_q1" class="text-input" rows="3" placeholder="Write your answer here..."></textarea>
                 </div>
 
                 <div class="question">
                     <h3>How did Ben react when his father took his notebook? Why do you think he reacted this way?</h3>
-                    <textarea class="text-input" rows="4" placeholder="Write your answer here..."></textarea>
+                    <textarea id="ch16_q2" name="ch16_q2" class="text-input" rows="4" placeholder="Write your answer here..."></textarea>
                 </div>
 
                 <div class="question">
@@ -699,171 +794,172 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td><textarea class="text-input" rows="2" placeholder="Your inference..."></textarea></td>
-                                <td><textarea class="text-input" rows="2" placeholder="Supporting quote..."></textarea></td>
-                                <td><textarea class="text-input" rows="2" placeholder="Page number..."></textarea></td>
+                                <td><textarea id="ch16_inf_1_a" name="ch16_inf_1_a" class="text-input" rows="2" placeholder="Your inference..."></textarea></td>
+                                <td><textarea id="ch16_inf_1_b" name="ch16_inf_1_b" class="text-input" rows="2" placeholder="Supporting quote..."></textarea></td>
+                                <td><textarea id="ch16_inf_1_c" name="ch16_inf_1_c" class="text-input" rows="2" placeholder="Page number..."></textarea></td>
                             </tr>
                             <tr>
-                                <td><textarea class="text-input" rows="2" placeholder="Your inference..."></textarea></td>
-                                <td><textarea class="text-input" rows="2" placeholder="Supporting quote..."></textarea></td>
-                                <td><textarea class="text-input" rows="2" placeholder="Page number..."></textarea></td>
+                                <td><textarea id="ch16_inf_2_a" name="ch16_inf_2_a" class="text-input" rows="2" placeholder="Your inference..."></textarea></td>
+                                <td><textarea id="ch16_inf_2_b" name="ch16_inf_2_b" class="text-input" rows="2" placeholder="Supporting quote..."></textarea></td>
+                                <td><textarea id="ch16_inf_2_c" name="ch16_inf_2_c" class="text-input" rows="2" placeholder="Page number..."></textarea></td>
                             </tr>
                             <tr>
-                                <td><textarea class="text-input" rows="2" placeholder="Your inference..."></textarea></td>
-                                <td><textarea class="text-input" rows="2" placeholder="Supporting quote..."></textarea></td>
-                                <td><textarea class="text-input" rows="2" placeholder="Page number..."></textarea></td>
+                                <td><textarea id="ch16_inf_3_a" name="ch16_inf_3_a" class="text-input" rows="2" placeholder="Your inference..."></textarea></td>
+                                <td><textarea id="ch16_inf_3_b" name="ch16_inf_3_b" class="text-input" rows="2" placeholder="Supporting quote..."></textarea></td>
+                                <td><textarea id="ch16_inf_3_c" name="ch16_inf_3_c" class="text-input" rows="2" placeholder="Page number..."></textarea></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
 
-              <div class="question">
-    <h3>Circle whether each line is True or False</h3>
-    <div class="true-false-cards">
-        <div class="tf-card">
-            <div class="tf-statement">Ben and Olive are lying on an air mattress</div>
-            <div class="tf-options">
-                <div class="tf-option">
-                    <input type="radio" id="tf1t" name="tf1">
-                    <label for="tf1t">True</label>
+                <div class="question">
+                    <h3>Circle whether each line is True or False</h3>
+                    <div class="true-false-cards">
+                        <div class="tf-card">
+                            <div class="tf-statement">Ben and Olive are lying on an air mattress</div>
+                            <div class="tf-options">
+                                <div class="tf-option">
+                                    <input type="radio" id="tf1_true" name="tf1" value="true">
+                                    <label for="tf1_true">True</label>
+                                </div>
+                                <div class="tf-option">
+                                    <input type="radio" id="tf1_false" name="tf1" value="false">
+                                    <label for="tf1_false">False</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="tf-card">
+                            <div class="tf-statement">While Olive is sleeping Ben can hear his parents dancing outside the cabin</div>
+                            <div class="tf-options">
+                                <div class="tf-option">
+                                    <input type="radio" id="tf2_true" name="tf2" value="true">
+                                    <label for="tf2_true">True</label>
+                                </div>
+                                <div class="tf-option">
+                                    <input type="radio" id="tf2_false" name="tf2" value="false">
+                                    <label for="tf2_false">False</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="tf-card">
+                            <div class="tf-statement">Ben used his camera to record his parents conversation</div>
+                            <div class="tf-options">
+                                <div class="tf-option">
+                                    <input type="radio" id="tf3_true" name="tf3" value="true">
+                                    <label for="tf3_true">True</label>
+                                </div>
+                                <div class="tf-option">
+                                    <input type="radio" id="tf3_false" name="tf3" value="false">
+                                    <label for="tf3_false">False</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="tf-card">
+                            <div class="tf-statement">Ben's recording of his parent's conversation did not work</div>
+                            <div class="tf-options">
+                                <div class="tf-option">
+                                    <input type="radio" id="tf4_true" name="tf4" value="true">
+                                    <label for="tf4_true">True</label>
+                                </div>
+                                <div class="tf-option">
+                                    <input type="radio" id="tf4_false" name="tf4" value="false">
+                                    <label for="tf4_false">False</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="tf-card">
+                            <div class="tf-statement">Ben and Olive made a fort in the woods</div>
+                            <div class="tf-options">
+                                <div class="tf-option">
+                                    <input type="radio" id="tf5_true" name="tf5" value="true">
+                                    <label for="tf5_true">True</label>
+                                </div>
+                                <div class="tf-option">
+                                    <input type="radio" id="tf5_false" name="tf5" value="false">
+                                    <label for="tf5_false">False</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="tf-card">
+                            <div class="tf-statement">Ben heard a sound that he thought was a bomb</div>
+                            <div class="tf-options">
+                                <div class="tf-option">
+                                    <input type="radio" id="tf6_true" name="tf6" value="true">
+                                    <label for="tf6_true">True</label>
+                                </div>
+                                <div class="tf-option">
+                                    <input type="radio" id="tf6_false" name="tf6" value="false">
+                                    <label for="tf6_false">False</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="tf-card">
+                            <div class="tf-statement">Ben's father was hunting rabbits</div>
+                            <div class="tf-options">
+                                <div class="tf-option">
+                                    <input type="radio" id="tf7_true" name="tf7" value="true">
+                                    <label for="tf7_true">True</label>
+                                </div>
+                                <div class="tf-option">
+                                    <input type="radio" id="tf7_false" name="tf7" value="false">
+                                    <label for="tf7_false">False</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="tf-card">
+                            <div class="tf-statement">Ben confronted his father about needing passports</div>
+                            <div class="tf-options">
+                                <div class="tf-option">
+                                    <input type="radio" id="tf8_true" name="tf8" value="true">
+                                    <label for="tf8_true">True</label>
+                                </div>
+                                <div class="tf-option">
+                                    <input type="radio" id="tf8_false" name="tf8" value="false">
+                                    <label for="tf8_false">False</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="tf-card">
+                            <div class="tf-statement">Olive would not eat the rabbit and claimed she was vegetarian</div>
+                            <div class="tf-options">
+                                <div class="tf-option">
+                                    <input type="radio" id="tf9_true" name="tf9" value="true">
+                                    <label for="tf9_true">True</label>
+                                </div>
+                                <div class="tf-option">
+                                    <input type="radio" id="tf9_false" name="tf9" value="false">
+                                    <label for="tf9_false">False</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="tf-card">
+                            <div class="tf-statement">Ray's father snatched Ben's notebook</div>
+                            <div class="tf-options">
+                                <div class="tf-option">
+                                    <input type="radio" id="tf10_true" name="tf10" value="true">
+                                    <label for="tf10_true">True</label>
+                                </div>
+                                <div class="tf-option">
+                                    <input type="radio" id="tf10_false" name="tf10" value="false">
+                                    <label for="tf10_false">False</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="tf-option">
-                    <input type="radio" id="tf1f" name="tf1">
-                    <label for="tf1f">False</label>
-                </div>
-            </div>
-        </div>
-        
-        <div class="tf-card">
-            <div class="tf-statement">While Olive is sleeping Ben can hear his parents dancing outside the cabin</div>
-            <div class="tf-options">
-                <div class="tf-option">
-                    <input type="radio" id="tf2t" name="tf2">
-                    <label for="tf2t">True</label>
-                </div>
-                <div class="tf-option">
-                    <input type="radio" id="tf2f" name="tf2">
-                    <label for="tf2f">False</label>
-                </div>
-            </div>
-        </div>
-        
-        <div class="tf-card">
-            <div class="tf-statement">Ben used his camera to record his parents conversation</div>
-            <div class="tf-options">
-                <div class="tf-option">
-                    <input type="radio" id="tf3t" name="tf3">
-                    <label for="tf3t">True</label>
-                </div>
-                <div class="tf-option">
-                    <input type="radio" id="tf3f" name="tf3">
-                    <label for="tf3f">False</label>
-                </div>
-            </div>
-        </div>
-        
-        <div class="tf-card">
-            <div class="tf-statement">Ben's recording of his parent's conversation did not work</div>
-            <div class="tf-options">
-                <div class="tf-option">
-                    <input type="radio" id="tf4t" name="tf4">
-                    <label for="tf4t">True</label>
-                </div>
-                <div class="tf-option">
-                    <input type="radio" id="tf4f" name="tf4">
-                    <label for="tf4f">False</label>
-                </div>
-            </div>
-        </div>
-        
-        <div class="tf-card">
-            <div class="tf-statement">Ben and Olive made a fort in the woods</div>
-            <div class="tf-options">
-                <div class="tf-option">
-                    <input type="radio" id="tf5t" name="tf5">
-                    <label for="tf5t">True</label>
-                </div>
-                <div class="tf-option">
-                    <input type="radio" id="tf5f" name="tf5">
-                    <label for="tf5f">False</label>
-                </div>
-            </div>
-        </div>
-        
-        <div class="tf-card">
-            <div class="tf-statement">Ben heard a sound that he thought was a bomb</div>
-            <div class="tf-options">
-                <div class="tf-option">
-                    <input type="radio" id="tf6t" name="tf6">
-                    <label for="tf6t">True</label>
-                </div>
-                <div class="tf-option">
-                    <input type="radio" id="tf6f" name="tf6">
-                    <label for="tf6f">False</label>
-                </div>
-            </div>
-        </div>
-        
-        <div class="tf-card">
-            <div class="tf-statement">Ben's father was hunting rabbits</div>
-            <div class="tf-options">
-                <div class="tf-option">
-                    <input type="radio" id="tf7t" name="tf7">
-                    <label for="tf7t">True</label>
-                </div>
-                <div class="tf-option">
-                    <input type="radio" id="tf7f" name="tf7">
-                    <label for="tf7f">False</label>
-                </div>
-            </div>
-        </div>
-        
-        <div class="tf-card">
-            <div class="tf-statement">Ben confronted his father about needing passports</div>
-            <div class="tf-options">
-                <div class="tf-option">
-                    <input type="radio" id="tf8t" name="tf8">
-                    <label for="tf8t">True</label>
-                </div>
-                <div class="tf-option">
-                    <input type="radio" id="tf8f" name="tf8">
-                    <label for="tf8f">False</label>
-                </div>
-            </div>
-        </div>
-        
-        <div class="tf-card">
-            <div class="tf-statement">Olive would not eat the rabbit and claimed she was vegetarian</div>
-            <div class="tf-options">
-                <div class="tf-option">
-                    <input type="radio" id="tf9t" name="tf9">
-                    <label for="tf9t">True</label>
-                </div>
-                <div class="tf-option">
-                    <input type="radio" id="tf9f" name="tf9">
-                    <label for="tf9f">False</label>
-                </div>
-            </div>
-        </div>
-        
-        <div class="tf-card">
-            <div class="tf-statement">Ray's father snatched Ben's notebook</div>
-            <div class="tf-options">
-                <div class="tf-option">
-                    <input type="radio" id="tf10t" name="tf10">
-                    <label for="tf10t">True</label>
-                </div>
-                <div class="tf-option">
-                    <input type="radio" id="tf10f" name="tf10">
-                    <label for="tf10f">False</label>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+
                 <button class="save-button" onclick="manualSave()">
-    <i class="fas fa-save"></i> Save Now (Ctrl+S)
-</button>
+                    <i class="fas fa-save"></i> Save Now (Ctrl+S)
+                </button>
             </div>
         </div>
 
@@ -877,35 +973,35 @@
             <div class="question-section">
                 <div class="question">
                     <h3>Why is Olive angry at their Mum?</h3>
-                    <textarea class="text-input" rows="3" placeholder="Write your answer here..."></textarea>
+                    <textarea id="ch17_q1" name="ch17_q1" class="text-input" rows="3" placeholder="Write your answer here..."></textarea>
                 </div>
 
                 <div class="question">
                     <h3>Why does Ben think they are locked in?</h3>
-                    <textarea class="text-input" rows="3" placeholder="Write your answer here..."></textarea>
+                    <textarea id="ch17_q2" name="ch17_q2" class="text-input" rows="3" placeholder="Write your answer here..."></textarea>
                 </div>
 
                 <div class="question">
                     <h3>What do we learn about Ben's family at home and the role that the TV plays in the family?</h3>
-                    <textarea class="text-input" rows="4" placeholder="Write your answer here..."></textarea>
+                    <textarea id="ch17_q3" name="ch17_q3" class="text-input" rows="4" placeholder="Write your answer here..."></textarea>
                 </div>
 
                 <div class="question">
                     <h3>How does Ben distract Olive?</h3>
-                    <textarea class="text-input" rows="3" placeholder="Write your answer here..."></textarea>
+                    <textarea id="ch17_q4" name="ch17_q4" class="text-input" rows="3" placeholder="Write your answer here..."></textarea>
                 </div>
 
                 <div class="question">
-                    <h3>Cloze activity - Fill in the blanks</h3>
+                    <h3>Cloze activity - Fill in the blanks and copy the summary into your notebook.</h3>
                     <div class="cloze-activity">
                         <p>Ben wakes from a nightmare of <span class="cloze-blank"></span> after falling from the raft to find that his parents are gone and he and Olive are locked into the cabin. Ben thinks that his parents have taken them <span class="cloze-blank"></span> because he found out they did not sell the <span class="cloze-blank"></span> and that the police wanted them for some reason. Olive is angry at their Mum for <span class="cloze-blank"></span> them behind because she is the better parent. Ben <span class="cloze-blank"></span> Olive by telling her a story.</p>
                     </div>
-                                  <textarea class="text-input" rows="2" placeholder="List the words you used to fill in the blanks, in order..."></textarea>
+                    <textarea id="ch17_cloze" name="ch17_cloze" class="text-input" rows="2" placeholder="List the words you used to fill in the blanks, in order..."></textarea>
                 </div>
 
                 <button class="save-button" onclick="manualSave()">
-    <i class="fas fa-save"></i> Save Now (Ctrl+S)
-</button>
+                    <i class="fas fa-save"></i> Save Now (Ctrl+S)
+                </button>
             </div>
         </div>
     </div>
@@ -918,278 +1014,191 @@
         <p>Your progress has been saved!</p>
     </div>
 
- <script>
-    // Global variables
-    let hasUnsavedChanges = false;
-    let saveInProgress = false;
-    let lastSaveTime = 0;
-    let isPageLoading = true;
-    
-    // Use the same storage key you're already using
-    const STORAGE_KEY = 'two-wolves-ch12-17-v1';
-    
-    // Save function
-    function saveProgress(chapterId) {
-        try {
-            // Load existing data first
-            let allData = {};
-            const existingData = localStorage.getItem(STORAGE_KEY);
-            if (existingData) {
-                allData = JSON.parse(existingData);
-            }
-            
-            // Get current chapter data
-            const chapter = document.getElementById(chapterId);
-            if (!chapter) return false;
-            
-            // Collect data from current chapter
-            const chapterData = {};
-            
-            // Get all text inputs
-            chapter.querySelectorAll('textarea, input[type="text"]').forEach(input => {
-                const key = input.id || input.name;
-                if (key) {
-                    chapterData[key] = input.value;
+    <script>
+        // Use the same storage key
+        const STORAGE_KEY = 'two-wolves-ch12-17-v1';
+        
+        // Save function
+        function saveProgress(chapterId) {
+            try {
+                // Load existing data
+                let allData = {};
+                const existingData = localStorage.getItem(STORAGE_KEY);
+                if (existingData) {
+                    allData = JSON.parse(existingData);
                 }
-            });
-            
-            // Get all radio buttons
-            chapter.querySelectorAll('input[type="radio"]:checked').forEach(radio => {
-                chapterData[radio.name] = radio.id;
-            });
-            
-            // Merge with existing data
-            Object.assign(allData, chapterData);
-            
-            // Save everything together
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(allData));
-            console.log('Saved data for', chapterId);
-            
-            return true;
-        } catch (e) {
-            console.error('Save failed:', e);
-            return false;
-        }
-    }
-    
-    // Load function
-    function loadProgress(chapterId) {
-        try {
-            const allData = localStorage.getItem(STORAGE_KEY);
-            if (!allData) {
-                console.log('No saved data found');
+                
+                const chapter = document.getElementById(chapterId);
+                if (!chapter) return false;
+                
+                // Save text inputs
+                chapter.querySelectorAll('textarea, input[type="text"]').forEach(input => {
+                    const key = input.id || input.name;
+                    if (key) {
+                        allData[key] = input.value;
+                    }
+                });
+                
+                // Save radio buttons
+                chapter.querySelectorAll('input[type="radio"]:checked').forEach(radio => {
+                    allData[radio.name] = radio.value; // Save the value, not the ID
+                });
+                
+                // Save to localStorage
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(allData));
+                console.log('Saved data for', chapterId);
+                
+                return true;
+            } catch (e) {
+                console.error('Save failed:', e);
                 return false;
             }
-            
-            const data = JSON.parse(allData);
-            const chapter = document.getElementById(chapterId);
-            if (!chapter) return false;
-            
-            let restored = 0;
-            
-            // Restore text inputs
-            chapter.querySelectorAll('textarea, input[type="text"]').forEach(input => {
-                const key = input.id || input.name;
-                if (key && data[key] !== undefined && data[key] !== null) {
-                    input.value = data[key];
-                    restored++;
-                    
-                    // Visual feedback
-                    input.style.backgroundColor = '#fff3cd';
-                    setTimeout(() => {
-                        input.style.backgroundColor = '';
-                    }, 2000);
+        }
+        
+        // Load function
+        function loadProgress(chapterId) {
+            try {
+                const allData = localStorage.getItem(STORAGE_KEY);
+                if (!allData) {
+                    console.log('No saved data found');
+                    return false;
                 }
-            });
-            
-            // Restore radio buttons
-            Object.keys(data).forEach(key => {
-                if (data[key] && typeof data[key] === 'string') {
-                    const radio = chapter.querySelector(`#${data[key]}`);
-                    if (radio && radio.type === 'radio') {
-                        radio.checked = true;
+                
+                const data = JSON.parse(allData);
+                const chapter = document.getElementById(chapterId);
+                if (!chapter) return false;
+                
+                let restored = 0;
+                
+                // Restore text inputs
+                chapter.querySelectorAll('textarea, input[type="text"]').forEach(input => {
+                    const key = input.id || input.name;
+                    if (key && data[key] !== undefined && data[key] !== null) {
+                        input.value = data[key];
                         restored++;
                         
                         // Visual feedback
-                        const label = chapter.querySelector(`label[for="${data[key]}"]`);
-                        if (label) {
-                            label.style.backgroundColor = '#fff3cd';
-                            setTimeout(() => {
-                                label.style.backgroundColor = '';
-                            }, 2000);
+                        input.style.backgroundColor = '#fff3cd';
+                        setTimeout(() => {
+                            input.style.backgroundColor = '';
+                        }, 2000);
+                    }
+                });
+                
+                // Restore radio buttons
+                Object.keys(data).forEach(key => {
+                    if (data[key] !== null && data[key] !== undefined) {
+                        // Find radio button by name and value
+                        const radio = chapter.querySelector(`input[name="${key}"][value="${data[key]}"]`);
+                        if (radio) {
+                            radio.checked = true;
+                            restored++;
+                            
+                            // Visual feedback
+                            const label = chapter.querySelector(`label[for="${radio.id}"]`);
+                            if (label) {
+                                label.style.backgroundColor = '#fff3cd';
+                                setTimeout(() => {
+                                    label.style.backgroundColor = '';
+                                }, 2000);
+                            }
                         }
                     }
+                });
+                
+                console.log(`Restored ${restored} items for ${chapterId}`);
+                return restored > 0;
+                
+            } catch (e) {
+                console.error('Load failed:', e);
+                return false;
+            }
+        }
+        
+        // Show notification
+        function showNotification(message, type = 'success') {
+            const notification = document.getElementById("notification");
+            if (!notification) return;
+            
+            const notificationText = notification.querySelector('p');
+            notificationText.textContent = message;
+            
+            notification.style.backgroundColor = type === 'error' ? '#e74c3c' : 
+                                              type === 'warning' ? '#f39c12' : '#2ecc71';
+            
+            notification.classList.add("show");
+            
+            setTimeout(() => {
+                notification.classList.remove("show");
+            }, 3000);
+        }
+        
+        // Auto-save on input
+        document.addEventListener('input', function(e) {
+            if (e.target.matches('textarea, input[type="text"], input[type="radio"]')) {
+                setTimeout(() => {
+                    const activeTab = document.querySelector('.tab-content.active');
+                    if (activeTab) {
+                        saveProgress(activeTab.id);
+                    }
+                }, 1000);
+            }
+        });
+        
+        // Load answers when page loads
+        window.addEventListener('DOMContentLoaded', function() {
+            console.log('Page loaded, restoring answers...');
+            console.log('Storage data:', localStorage.getItem(STORAGE_KEY));
+            
+            const chapters = ['chapter12', 'chapter13', 'chapter14', 'chapter15', 'chapter16', 'chapter17'];
+            let totalRestored = 0;
+            
+            chapters.forEach(chapterId => {
+                if (loadProgress(chapterId)) {
+                    totalRestored++;
                 }
             });
             
-            console.log(`Restored ${restored} items for ${chapterId}`);
-            return restored > 0;
+            if (totalRestored > 0) {
+                console.log('Restored answers from', totalRestored, 'chapters');
+                showNotification(`Restored answers from ${totalRestored} chapter(s)`, 'success');
+            } else {
+                console.log('No saved answers found');
+                showNotification('No saved answers found', 'warning');
+            }
+        });
+        
+        // Tab switching
+        function openTab(evt, tabName) {
+            const tabContents = document.getElementsByClassName("tab-content");
+            for (let i = 0; i < tabContents.length; i++) {
+                tabContents[i].classList.remove("active");
+            }
             
-        } catch (e) {
-            console.error('Load failed:', e);
-            return false;
+            const tabButtons = document.getElementsByClassName("tab-button");
+            for (let i = 0; i < tabButtons.length; i++) {
+                tabButtons[i].classList.remove("active");
+            }
+            
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
         }
-    }
-    
-    // Show notification
-    function showNotification(message, type = 'success') {
-        const notification = document.getElementById("notification");
-        if (!notification) return;
         
-        const notificationText = notification.querySelector('p');
-        notificationText.textContent = message;
-        
-        notification.style.backgroundColor = type === 'error' ? '#e74c3c' : 
-                                          type === 'warning' ? '#f39c12' : '#2ecc71';
-        
-        notification.classList.add("show");
-        
-        setTimeout(() => {
-            notification.classList.remove("show");
-        }, 3000);
-    }
-    
-    // Auto-save on input
-    document.addEventListener('input', function(e) {
-        if (e.target.matches('textarea, input[type="text"], input[type="radio"]')) {
-            setTimeout(() => {
-                const activeTab = document.querySelector('.tab-content.active');
-                if (activeTab) {
-                    saveProgress(activeTab.id);
-                }
-            }, 1000);
+        // Manual save
+        function manualSave() {
+            const activeTab = document.querySelector('.tab-content.active');
+            if (activeTab && saveProgress(activeTab.id)) {
+                showNotification('Answers saved!', 'success');
+            }
         }
-    });
-    
-    // Load answers when page loads
-    window.addEventListener('DOMContentLoaded', function() {
-        console.log('Page loaded, restoring answers...');
         
-        // FIXED: Use the correct chapters for this page
-        const chapters = ['chapter12', 'chapter13', 'chapter14', 'chapter15', 'chapter16', 'chapter17'];
-        let totalRestored = 0;
-        
-        chapters.forEach(chapterId => {
-            if (loadProgress(chapterId)) {
-                totalRestored++;
+        // Keyboard shortcut
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey && e.key === 's') {
+                e.preventDefault();
+                manualSave();
             }
         });
-        
-        if (totalRestored > 0) {
-            console.log('Restored answers from', totalRestored, 'chapters');
-            showNotification(`Restored answers from ${totalRestored} chapter(s)`, 'success');
-        } else {
-            console.log('No saved answers found');
-            showNotification('No saved answers found', 'warning');
-        }
-    });
-    
-    // Fallback: Try again after a delay
-    setTimeout(() => {
-        const chapters = ['chapter12', 'chapter13', 'chapter14', 'chapter15', 'chapter16', 'chapter17'];
-        let totalRestored = 0;
-        
-        chapters.forEach(chapterId => {
-            if (loadProgress(chapterId)) {
-                totalRestored++;
-            }
-        });
-        
-        if (totalRestored > 0) {
-            console.log('Second attempt: Restored answers from', totalRestored, 'chapters');
-        }
-    }, 500);
-    
-    // Tab switching
-    function openTab(evt, tabName) {
-        const tabContents = document.getElementsByClassName("tab-content");
-        for (let i = 0; i < tabContents.length; i++) {
-            tabContents[i].classList.remove("active");
-        }
-        
-        const tabButtons = document.getElementsByClassName("tab-button");
-        for (let i = 0; i < tabButtons.length; i++) {
-            tabButtons[i].classList.remove("active");
-        }
-        
-        document.getElementById(tabName).classList.add("active");
-        evt.currentTarget.classList.add("active");
-    }
-    
-    // Manual save
-    function manualSave() {
-        const activeTab = document.querySelector('.tab-content.active');
-        if (activeTab && saveProgress(activeTab.id)) {
-            showNotification('Answers saved!', 'success');
-        }
-    }
-    
-    // Export function
-    function exportToPortfolio() {
-        const studentName = prompt("Please enter your name for the portfolio:") || "Student";
-        const currentDate = new Date().toLocaleDateString();
-        
-        let htmlContent = `
-        <!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Two Wolves - Portfolio Evidence</title>
-            <style>
-                body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
-                .header { text-align: center; border-bottom: 2px solid #333; padding-bottom: 20px; }
-                .question { margin: 20px 0; padding: 15px; background: #f5f5f5; border-radius: 5px; }
-            </style>
-        </head>
-        <body>
-            <div class="header">
-                <h1>Two Wolves - Portfolio Evidence</h1>
-                <p>Student: ${studentName}</p>
-                <p>Date: ${currentDate}</p>
-            </div>`;
-        
-        // Load all data from storage
-        const allData = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
-        
-        const chapters = ['chapter12', 'chapter13', 'chapter14', 'chapter15', 'chapter16', 'chapter17'];
-        chapters.forEach(chapterId => {
-            const chapter = document.getElementById(chapterId);
-            if (chapter) {
-                const title = chapter.querySelector('h2').textContent;
-                htmlContent += `<h2>${title}</h2>`;
-                
-                chapter.querySelectorAll('.question').forEach((q, i) => {
-                    const questionText = q.querySelector('h3').textContent;
-                    const answer = q.querySelector('textarea')?.value || 'No answer';
-                    htmlContent += `<div class="question">
-                        <h3>Question ${i+1}: ${questionText}</h3>
-                        <p><strong>Answer:</strong> ${answer}</p>
-                    </div>`;
-                });
-            }
-        });
-        
-        htmlContent += '</body></html>';
-        
-        const blob = new Blob([htmlContent], { type: 'text/html' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `Two_Wolves_Portfolio_${studentName.replace(/\s+/g, '_')}.html`;
-        a.click();
-        URL.revokeObjectURL(url);
-        
-        showNotification('Portfolio exported successfully!', 'success');
-    }
-    
-    // Keyboard shortcut for manual save (Ctrl+S)
-    document.addEventListener('keydown', (e) => {
-        if (e.ctrlKey && e.key === 's') {
-            e.preventDefault();
-            manualSave();
-        }
-    });
-</script>
+    </script>
 </body>
 </html>
