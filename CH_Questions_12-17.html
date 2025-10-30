@@ -918,196 +918,81 @@
         <p>Your progress has been saved!</p>
     </div>
 
-  <script>
+ <script>
     // Global variables
     let hasUnsavedChanges = false;
     let saveInProgress = false;
     let lastSaveTime = 0;
     let isPageLoading = true;
     
-    // Storage management
-    const STORAGE_KEY_PREFIX = 'twowolves_';
-    const BACKUP_KEY_PREFIX = 'twowolves_backup_';
+    // Use the same storage key you're already using
+    const STORAGE_KEY = 'two-wolves-ch12-17-v1';
     
-    // Check if storage is available
-    function isStorageAvailable(type) {
+    // Save function
+    function saveProgress(chapterId) {
         try {
-            const storage = type === 'localStorage' ? localStorage : sessionStorage;
-            const test = '__test__';
-            storage.setItem(test, test);
-            storage.removeItem(test);
+            // Load existing data first
+            let allData = {};
+            const existingData = localStorage.getItem(STORAGE_KEY);
+            if (existingData) {
+                allData = JSON.parse(existingData);
+            }
+            
+            // Get current chapter data
+            const chapter = document.getElementById(chapterId);
+            if (!chapter) return false;
+            
+            // Collect data from current chapter
+            const chapterData = {};
+            
+            // Get all text inputs
+            chapter.querySelectorAll('textarea, input[type="text"]').forEach(input => {
+                const key = input.id || input.name;
+                if (key) {
+                    chapterData[key] = input.value;
+                }
+            });
+            
+            // Get all radio buttons
+            chapter.querySelectorAll('input[type="radio"]:checked').forEach(radio => {
+                chapterData[radio.name] = radio.id;
+            });
+            
+            // Merge with existing data
+            Object.assign(allData, chapterData);
+            
+            // Save everything together
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(allData));
+            console.log('Saved data for', chapterId);
+            
             return true;
         } catch (e) {
-            console.warn(`${type} not available:`, e);
+            console.error('Save failed:', e);
             return false;
         }
     }
     
-    // Get all available storage methods
-    function getAvailableStorage() {
-        const methods = [];
-        if (isStorageAvailable('localStorage')) methods.push('localStorage');
-        if (isStorageAvailable('sessionStorage')) methods.push('sessionStorage');
-        return methods;
-    }
-    
-    // Save data to multiple storage locations
-    function saveToMultipleStorages(key, data) {
-        const methods = getAvailableStorage();
-        let successCount = 0;
-        
-        methods.forEach(method => {
-            try {
-                const storage = method === 'localStorage' ? localStorage : sessionStorage;
-                storage.setItem(key, JSON.stringify(data));
-                successCount++;
-                
-                // Also create a backup
-                storage.setItem(BACKUP_KEY_PREFIX + key, JSON.stringify(data));
-            } catch (e) {
-                console.error(`Failed to save to ${method}:`, e);
-            }
-        });
-        
-        return successCount > 0;
-    }
-    
-    // Load data from multiple storage locations
-    function loadFromMultipleStorages(key) {
-        const methods = getAvailableStorage();
-        
-        // Try to load from primary locations first
-        for (const method of methods) {
-            try {
-                const storage = method === 'localStorage' ? localStorage : sessionStorage;
-                const data = storage.getItem(key);
-                if (data) {
-                    const parsed = JSON.parse(data);
-                    console.log(`Loaded ${key} from ${method}`);
-                    return parsed;
-                }
-            } catch (e) {
-                console.error(`Failed to load from ${method}:`, e);
-            }
-        }
-        
-        // Try backup locations
-        for (const method of methods) {
-            try {
-                const storage = method === 'localStorage' ? localStorage : sessionStorage;
-                const data = storage.getItem(BACKUP_KEY_PREFIX + key);
-                if (data) {
-                    const parsed = JSON.parse(data);
-                    console.log(`Loaded backup ${key} from ${method}`);
-                    return parsed;
-                }
-            } catch (e) {
-                console.error(`Failed to load backup from ${method}:`, e);
-            }
-        }
-        
-        return null;
-    }
-    
-    // Save progress for a chapter
-    function saveProgress(chapterId, showFeedback = true) {
-        if (saveInProgress) {
-            console.log('Save already in progress');
-            return false;
-        }
-        
-        saveInProgress = true;
-        
-        try {
-            const chapter = document.getElementById(chapterId);
-            if (!chapter) {
-                console.error('Chapter not found:', chapterId);
-                saveInProgress = false;
-                return false;
-            }
-            
-            // Collect all form data
-            const data = {
-                textInputs: {},
-                radioButtons: {},
-                checkboxes: {},
-                timestamp: Date.now(),
-                chapterId: chapterId
-            };
-            
-            // Save text inputs and textareas
-            const textElements = chapter.querySelectorAll('input[type="text"], textarea');
-            textElements.forEach(input => {
-                const key = input.id || input.name || `input_${Math.random().toString(36).substr(2, 9)}`;
-                data.textInputs[key] = input.value;
-            });
-            
-            // Save radio buttons
-            const radioElements = chapter.querySelectorAll('input[type="radio"]:checked');
-            radioElements.forEach(radio => {
-                data.radioButtons[radio.name] = radio.id;
-            });
-            
-            // Save checkboxes
-            const checkboxElements = chapter.querySelectorAll('input[type="checkbox"]:checked');
-            checkboxElements.forEach(checkbox => {
-                data.checkboxes[checkbox.name] = checkbox.id;
-            });
-            
-            // Save to multiple storage locations
-            const success = saveToMultipleStorages(STORAGE_KEY_PREFIX + chapterId, data);
-            
-            if (success) {
-                hasUnsavedChanges = false;
-                lastSaveTime = Date.now();
-                
-                if (showFeedback) {
-                    showNotification('Progress saved successfully!', 'success');
-                }
-                console.log('Successfully saved data for', chapterId);
-                return true;
-            } else {
-                if (showFeedback) {
-                    showNotification('Failed to save: Storage not available', 'error');
-                }
-                return false;
-            }
-            
-        } catch (error) {
-            console.error('Error saving progress:', error);
-            if (showFeedback) {
-                showNotification('Error saving progress', 'error');
-            }
-            return false;
-        } finally {
-            saveInProgress = false;
-        }
-    }
-    
-    // Load progress for a chapter
+    // Load function
     function loadProgress(chapterId) {
         try {
-            const data = loadFromMultipleStorages(STORAGE_KEY_PREFIX + chapterId);
-            
-            if (!data) {
-                console.log('No saved data found for', chapterId);
+            const allData = localStorage.getItem(STORAGE_KEY);
+            if (!allData) {
+                console.log('No saved data found');
                 return false;
             }
             
+            const data = JSON.parse(allData);
             const chapter = document.getElementById(chapterId);
-            if (!chapter) {
-                console.error('Chapter not found:', chapterId);
-                return false;
-            }
+            if (!chapter) return false;
             
-            let restoredCount = 0;
+            let restored = 0;
             
-            // Restore text inputs and textareas
-            Object.keys(data.textInputs || {}).forEach(key => {
-                const input = chapter.querySelector(`#${key}, [name="${key}"]`);
-                if (input) {
-                    input.value = data.textInputs[key];
-                    restoredCount++;
+            // Restore text inputs
+            chapter.querySelectorAll('textarea, input[type="text"]').forEach(input => {
+                const key = input.id || input.name;
+                if (key && data[key] !== undefined && data[key] !== null) {
+                    input.value = data[key];
+                    restored++;
                     
                     // Visual feedback
                     input.style.backgroundColor = '#fff3cd';
@@ -1118,39 +1003,30 @@
             });
             
             // Restore radio buttons
-            Object.keys(data.radioButtons || {}).forEach(name => {
-                const radioId = data.radioButtons[name];
-                const radio = chapter.querySelector(`#${radioId}`);
-                if (radio) {
-                    radio.checked = true;
-                    restoredCount++;
-                    
-                    // Visual feedback
-                    const label = chapter.querySelector(`label[for="${radioId}"]`);
-                    if (label) {
-                        label.style.backgroundColor = '#fff3cd';
-                        setTimeout(() => {
-                            label.style.backgroundColor = '';
-                        }, 2000);
+            Object.keys(data).forEach(key => {
+                if (data[key] && typeof data[key] === 'string') {
+                    const radio = chapter.querySelector(`#${data[key]}`);
+                    if (radio && radio.type === 'radio') {
+                        radio.checked = true;
+                        restored++;
+                        
+                        // Visual feedback
+                        const label = chapter.querySelector(`label[for="${data[key]}"]`);
+                        if (label) {
+                            label.style.backgroundColor = '#fff3cd';
+                            setTimeout(() => {
+                                label.style.backgroundColor = '';
+                            }, 2000);
+                        }
                     }
                 }
             });
             
-            // Restore checkboxes
-            Object.keys(data.checkboxes || {}).forEach(name => {
-                const checkboxId = data.checkboxes[name];
-                const checkbox = chapter.querySelector(`#${checkboxId}`);
-                if (checkbox) {
-                    checkbox.checked = true;
-                    restoredCount++;
-                }
-            });
+            console.log(`Restored ${restored} items for ${chapterId}`);
+            return restored > 0;
             
-            console.log(`Restored ${restoredCount} elements for ${chapterId}`);
-            return restoredCount > 0;
-            
-        } catch (error) {
-            console.error('Error loading progress:', error);
+        } catch (e) {
+            console.error('Load failed:', e);
             return false;
         }
     }
@@ -1173,115 +1049,80 @@
         }, 3000);
     }
     
-    // Auto-save functionality
-    function setupAutoSave() {
-        // Save on input change
-        document.addEventListener('input', (e) => {
-            if (e.target.matches('textarea, input[type="text"], input[type="radio"], input[type="checkbox"]')) {
-                hasUnsavedChanges = true;
-                
-                // Debounced save
-                setTimeout(() => {
-                    const activeTab = document.querySelector('.tab-content.active');
-                    if (activeTab) {
-                        saveProgress(activeTab.id, false);
-                    }
-                }, 1000);
+    // Auto-save on input
+    document.addEventListener('input', function(e) {
+        if (e.target.matches('textarea, input[type="text"], input[type="radio"]')) {
+            setTimeout(() => {
+                const activeTab = document.querySelector('.tab-content.active');
+                if (activeTab) {
+                    saveProgress(activeTab.id);
+                }
+            }, 1000);
+        }
+    });
+    
+    // Load answers when page loads
+    window.addEventListener('DOMContentLoaded', function() {
+        console.log('Page loaded, restoring answers...');
+        
+        // FIXED: Use the correct chapters for this page
+        const chapters = ['chapter12', 'chapter13', 'chapter14', 'chapter15', 'chapter16', 'chapter17'];
+        let totalRestored = 0;
+        
+        chapters.forEach(chapterId => {
+            if (loadProgress(chapterId)) {
+                totalRestored++;
             }
         });
         
-        // Periodic auto-save every 30 seconds
-        setInterval(() => {
-            const activeTab = document.querySelector('.tab-content.active');
-            if (activeTab) {
-                saveProgress(activeTab.id, false);
-            }
-        }, 30000);
+        if (totalRestored > 0) {
+            console.log('Restored answers from', totalRestored, 'chapters');
+            showNotification(`Restored answers from ${totalRestored} chapter(s)`, 'success');
+        } else {
+            console.log('No saved answers found');
+            showNotification('No saved answers found', 'warning');
+        }
+    });
+    
+    // Fallback: Try again after a delay
+    setTimeout(() => {
+        const chapters = ['chapter12', 'chapter13', 'chapter14', 'chapter15', 'chapter16', 'chapter17'];
+        let totalRestored = 0;
         
-        // Warn before leaving
-        window.addEventListener('beforeunload', (e) => {
-            if (hasUnsavedChanges) {
-                e.preventDefault();
-                e.returnValue = '';
-                return '';
+        chapters.forEach(chapterId => {
+            if (loadProgress(chapterId)) {
+                totalRestored++;
             }
         });
+        
+        if (totalRestored > 0) {
+            console.log('Second attempt: Restored answers from', totalRestored, 'chapters');
+        }
+    }, 500);
+    
+    // Tab switching
+    function openTab(evt, tabName) {
+        const tabContents = document.getElementsByClassName("tab-content");
+        for (let i = 0; i < tabContents.length; i++) {
+            tabContents[i].classList.remove("active");
+        }
+        
+        const tabButtons = document.getElementsByClassName("tab-button");
+        for (let i = 0; i < tabButtons.length; i++) {
+            tabButtons[i].classList.remove("active");
+        }
+        
+        document.getElementById(tabName).classList.add("active");
+        evt.currentTarget.classList.add("active");
     }
     
     // Manual save
     function manualSave() {
         const activeTab = document.querySelector('.tab-content.active');
-        if (activeTab) {
-            saveProgress(activeTab.id, true);
+        if (activeTab && saveProgress(activeTab.id)) {
+            showNotification('Answers saved!', 'success');
         }
     }
-    
-    // Tab switching
-    function openTab(evt, tabName) {
-        // Hide all tab content
-        const tabContents = document.getElementsByClassName("tab-content");
-        for (let i = 0; i < tabContents.length; i++) {
-            tabContents[i].classList.remove("active");
-        }
-
-        // Remove active class from all tab buttons
-        const tabButtons = document.getElementsByClassName("tab-button");
-        for (let i = 0; i < tabButtons.length; i++) {
-            tabButtons[i].classList.remove("active");
-        }
-
-        // Show the specific tab content
-        document.getElementById(tabName).classList.add("active");
-        evt.currentTarget.classList.add("active");
-    }
-    
-    // Initialize everything when DOM is ready
-    function initializePage() {
-        console.log('Initializing page...');
-        
-        const chapters = ['chapter18', 'chapter19', 'chapter20'];
-        let restoredCount = 0;
-        
-        // Load data for each chapter
-        chapters.forEach(chapterId => {
-            if (loadProgress(chapterId)) {
-                restoredCount++;
-            }
-        });
-        
-        // Show restore message
-        if (restoredCount > 0) {
-            showNotification(`Restored answers from ${restoredCount} chapter(s)`, 'success');
-        } else {
-            showNotification('No saved answers found', 'warning');
-        }
-        
-        // Setup auto-save
-        setupAutoSave();
-        
-        // Show welcome message
-        setTimeout(() => {
-            showNotification('Auto-save enabled! Your work will be saved automatically.', 'success');
-        }, 2000);
-        
-        isPageLoading = false;
-        console.log('Page initialization complete');
-    }
-    
-    // Wait for DOM to be fully loaded
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initializePage);
-    } else {
-        initializePage();
-    }
-    
-    // Fallback: try again after a delay if DOM wasn't ready
-    setTimeout(() => {
-        if (isPageLoading) {
-            console.log('Retrying initialization...');
-            initializePage();
-        }
-    }, 1000);
     
     // Export function
     function exportToPortfolio() {
@@ -1296,146 +1137,50 @@
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>Two Wolves - Portfolio Evidence</title>
             <style>
-                body {
-                    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-                    line-height: 1.6;
-                    color: #333;
-                    max-width: 1000px;
-                    margin: 0 auto;
-                    padding: 20px;
-                    background-color: #ffffff;
-                }
-                .header {
-                    text-align: center;
-                    border-bottom: 3px solid #3498db;
-                    padding-bottom: 20px;
-                    margin-bottom: 30px;
-                }
-                .header h1 {
-                    color: #2c3e50;
-                    margin-bottom: 10px;
-                }
-                .student-info {
-                    background-color: #f8f9fa;
-                    padding: 15px;
-                    border-radius: 8px;
-                    margin-bottom: 30px;
-                    border-left: 4px solid #3498db;
-                }
-                .chapter-section {
-                    margin-bottom: 40px;
-                    page-break-inside: avoid;
-                }
-                .chapter-title {
-                    color: #2c3e50;
-                    border-bottom: 2px solid #ecf0f1;
-                    padding-bottom: 10px;
-                    margin-bottom: 20px;
-                    font-size: 24px;
-                }
-                .question-block {
-                    margin-bottom: 20px;
-                    padding: 15px;
-                    background-color: #f9f9f9;
-                    border-radius: 8px;
-                    border-left: 3px solid #3498db;
-                }
-                .question-text {
-                    font-weight: 600;
-                    color: #2c3e50;
-                    margin-bottom: 10px;
-                }
-                .answer-text {
-                    background-color: #ffffff;
-                    padding: 10px;
-                    border-radius: 4px;
-                    border: 1px solid #ddd;
-                    min-height: 20px;
-                }
-                .footer {
-                    text-align: center;
-                    margin-top: 40px;
-                    padding-top: 20px;
-                    border-top: 1px solid #ecf0f1;
-                    color: #7f8c8d;
-                    font-size: 14px;
-                }
-                @media print {
-                    body { margin: 0.5in; }
-                    .chapter-section { page-break-inside: avoid; }
-                }
+                body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+                .header { text-align: center; border-bottom: 2px solid #333; padding-bottom: 20px; }
+                .question { margin: 20px 0; padding: 15px; background: #f5f5f5; border-radius: 5px; }
             </style>
         </head>
         <body>
             <div class="header">
-                <h1>Two Wolves - Text Response Portfolio</h1>
-                <p>Student Evidence of Learning</p>
-            </div>
-            
-            <div class="student-info">
-                <p><strong>Student Name:</strong> ${studentName}</p>
-                <p><strong>Date:</strong> ${currentDate}</p>
-                <p><strong>Book:</strong> Two Wolves by Tristan Bancks</p>
-            </div>
-        `;
-
-        const chapters = ['chapter18', 'chapter19', 'chapter20'];
+                <h1>Two Wolves - Portfolio Evidence</h1>
+                <p>Student: ${studentName}</p>
+                <p>Date: ${currentDate}</p>
+            </div>`;
         
+        // Load all data from storage
+        const allData = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+        
+        const chapters = ['chapter12', 'chapter13', 'chapter14', 'chapter15', 'chapter16', 'chapter17'];
         chapters.forEach(chapterId => {
             const chapter = document.getElementById(chapterId);
-            if (!chapter) return;
-            
-            const chapterTitle = chapter.querySelector('.chapter-header h2').textContent;
-            htmlContent += `<div class="chapter-section">
-                <h2 class="chapter-title">${chapterTitle}</h2>`;
-            
-            const questions = chapter.querySelectorAll('.question');
-            
-            questions.forEach((question, index) => {
-                const questionText = question.querySelector('h3').textContent;
-                htmlContent += `<div class="question-block">
-                    <div class="question-text">Question ${index + 1}: ${questionText}</div>`;
+            if (chapter) {
+                const title = chapter.querySelector('h2').textContent;
+                htmlContent += `<h2>${title}</h2>`;
                 
-                const textInputs = question.querySelectorAll('textarea');
-                const textFields = question.querySelectorAll('input[type="text"]');
-                
-                if (textInputs.length > 0 || textFields.length > 0) {
-                    const allTextInputs = [...textInputs, ...textFields];
-                    allTextInputs.forEach(input => {
-                        const answer = input.value.trim();
-                        if (answer) {
-                            htmlContent += `<div class="answer-text">${answer}</div>`;
-                        } else {
-                            htmlContent += `<div class="answer-text" style="color: #999; font-style: italic;">No answer provided</div>`;
-                        }
-                    });
-                }
-                
-                htmlContent += `</div>`;
-            });
-            
-            htmlContent += `</div>`;
+                chapter.querySelectorAll('.question').forEach((q, i) => {
+                    const questionText = q.querySelector('h3').textContent;
+                    const answer = q.querySelector('textarea')?.value || 'No answer';
+                    htmlContent += `<div class="question">
+                        <h3>Question ${i+1}: ${questionText}</h3>
+                        <p><strong>Answer:</strong> ${answer}</p>
+                    </div>`;
+                });
+            }
         });
         
-        htmlContent += `
-            <div class="footer">
-                <p>This portfolio evidence was generated from the Two Wolves text response activities.</p>
-                <p>Generated on ${currentDate}</p>
-            </div>
-        </body>
-        </html>`;
+        htmlContent += '</body></html>';
         
         const blob = new Blob([htmlContent], { type: 'text/html' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = `Two_Wolves_Portfolio_Ch18-20_${studentName.replace(/\s+/g, '_')}_${currentDate.replace(/\//g, '-')}.html`;
-        document.body.appendChild(a);
+        a.download = `Two_Wolves_Portfolio_${studentName.replace(/\s+/g, '_')}.html`;
         a.click();
-        document.body.removeChild(a);
         URL.revokeObjectURL(url);
         
-        showNotification('Portfolio exported successfully! Check your downloads folder.');
+        showNotification('Portfolio exported successfully!', 'success');
     }
     
     // Keyboard shortcut for manual save (Ctrl+S)
@@ -1445,24 +1190,6 @@
             manualSave();
         }
     });
-    
-    // Debug function
-    window.debugStorage = function() {
-        console.log('=== STORAGE DEBUG ===');
-        console.log('Available storage methods:', getAvailableStorage());
-        
-        ['localStorage', 'sessionStorage'].forEach(type => {
-            const storage = type === 'localStorage' ? localStorage : sessionStorage;
-            console.log(`\n${type}:`);
-            for (let i = 0; i < storage.length; i++) {
-                const key = storage.key(i);
-                if (key.includes('twowolves')) {
-                    console.log(`  ${key}:`, storage.getItem(key));
-                }
-            }
-        });
-        console.log('=== END DEBUG ===');
-    };
 </script>
 </body>
 </html>
