@@ -6,6 +6,7 @@
     <title>Two Wolves Modified Activities</title>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles/header.css">
     <style>
         :root {
             --primary-color: #2c3e50;
@@ -16,456 +17,650 @@
             --success-color: #2ecc71;
             --warning-color: #f39c12;
         }
-        
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Open Sans', sans-serif;
             line-height: 1.6;
             color: var(--dark-color);
             background-color: #f5f7fa;
         }
-        
-        header {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 1.5rem 0;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+        a {
+            color: inherit;
+            text-decoration: none;
         }
-        
+
         .container {
-            max-width: 1200px;
+            width: 100%;
+            max-width: 1100px;
             margin: 0 auto;
             padding: 0 20px;
         }
-        
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+
+        main {
+            padding: 3rem 0;
         }
-        
-        .logo {
-            display: flex;
-            align-items: center;
+
+        .page-intro {
+            background-color: #ffffff;
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: 0 18px 45px rgba(34, 48, 70, 0.12);
+            text-align: center;
         }
-        
-        .logo i {
-            font-size: 2rem;
-            margin-right: 10px;
-            color: var(--secondary-color);
-        }
-        
-        .logo h1 {
+
+        .page-intro h1 {
             font-family: 'Merriweather', serif;
-            font-size: 1.8rem;
+            font-size: clamp(2rem, 3vw, 2.6rem);
+            color: var(--primary-color);
+            margin-bottom: 1rem;
         }
-        
-        nav ul {
-            display: flex;
-            list-style: none;
+
+        .page-intro p {
+            max-width: 720px;
+            margin: 0 auto;
+            color: rgba(44, 62, 80, 0.8);
         }
-        
-        nav ul li {
-            margin-left: 20px;
-        }
-        
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.3s;
-        }
-        
-        nav ul li a:hover {
-            color: var(--secondary-color);
-        }
-        
-        .chapter-nav {
-            background-color: white;
-            padding: 1rem 0;
-            border-bottom: 1px solid #e0e0e0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-        }
-        
-        .chapter-nav ul {
+
+        .chapter-tools {
             display: flex;
             flex-wrap: wrap;
-            list-style: none;
+            gap: 1rem;
             justify-content: center;
+            margin-top: 1.75rem;
         }
-        
-        .chapter-nav ul li {
-            margin: 5px 10px;
-        }
-        
-        .chapter-nav ul li a {
-            display: block;
-            padding: 8px 15px;
+
+        .chapter-select {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
             background-color: var(--light-color);
-            color: var(--dark-color);
-            text-decoration: none;
-            border-radius: 30px;
+            padding: 0.9rem 1.25rem;
+            border-radius: 12px;
+        }
+
+        .chapter-select label {
             font-weight: 600;
-            transition: all 0.3s;
+            color: var(--primary-color);
         }
-        
-        .chapter-nav ul li a:hover, .chapter-nav ul li a.active {
+
+        .chapter-select select {
+            border: none;
+            background-color: #ffffff;
+            padding: 0.6rem 0.75rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            min-width: 180px;
+            box-shadow: inset 0 0 0 1px rgba(34, 48, 70, 0.15);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
             background-color: var(--secondary-color);
-            color: white;
-        }
-        
-        main {
-            padding: 2rem 0;
-        }
-        
-        .chapter-section {
-            background-color: white;
+            color: #ffffff;
+            padding: 0.65rem 1.4rem;
+            border: none;
             border-radius: 10px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            text-decoration: none;
         }
-        
+
+        .btn:hover,
+        .btn:focus {
+            background-color: #2980b9;
+            transform: translateY(-1px);
+        }
+
+        .btn:focus {
+            outline: 3px solid rgba(52, 152, 219, 0.4);
+            outline-offset: 2px;
+        }
+
+        .btn-success {
+            background-color: var(--success-color);
+        }
+
+        .btn-success:hover,
+        .btn-success:focus {
+            background-color: #27ae60;
+        }
+
+        .content-layout {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 2rem;
+            align-items: flex-start;
+            margin-top: 2.5rem;
+        }
+
+        .chapter-sidebar {
+            position: sticky;
+            top: 110px;
+        }
+
+        .sidebar-card {
+            background-color: #ffffff;
+            padding: 1.5rem;
+            border-radius: 16px;
+            box-shadow: 0 18px 45px rgba(34, 48, 70, 0.12);
+        }
+
+        .sidebar-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+        }
+
+        .sidebar-title {
+            font-family: 'Merriweather', serif;
+            font-size: 1.2rem;
+            color: var(--primary-color);
+        }
+
+        .sidebar-toggle {
+            display: none;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            background-color: var(--primary-color);
+            color: #ffffff;
+            border: none;
+            border-radius: 10px;
+            padding: 0.75rem 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .sidebar-toggle:hover,
+        .sidebar-toggle:focus {
+            background-color: #1b2838;
+        }
+
+        .chapter-nav {
+            margin-top: 1.25rem;
+            max-height: 70vh;
+            overflow-y: auto;
+            padding-right: 0.25rem;
+        }
+
+        .chapter-nav-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+        }
+
+        .chapter-nav-list a {
+            display: block;
+            padding: 0.65rem 0.9rem;
+            border-radius: 10px;
+            font-weight: 600;
+            color: var(--dark-color);
+            background-color: var(--light-color);
+            transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .chapter-nav-list a:hover,
+        .chapter-nav-list a:focus {
+            background-color: #dde9f4;
+            color: var(--primary-color);
+        }
+
+        .chapter-nav-list a.active {
+            background-color: var(--secondary-color);
+            color: #ffffff;
+            box-shadow: 0 8px 18px rgba(52, 152, 219, 0.25);
+        }
+
+        .chapter-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .chapter-section {
+            background-color: #ffffff;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 18px 45px rgba(34, 48, 70, 0.12);
+            scroll-margin-top: 130px;
+        }
+
         .chapter-title {
             font-family: 'Merriweather', serif;
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
+            font-size: clamp(1.6rem, 2.4vw, 1.9rem);
+            margin-bottom: 1.25rem;
             color: var(--primary-color);
-            border-bottom: 2px solid var(--secondary-color);
-            padding-bottom: 0.5rem;
+            border-bottom: 2px solid rgba(52, 152, 219, 0.25);
+            padding-bottom: 0.75rem;
         }
-        
+
         .question-group {
             margin-bottom: 1.5rem;
         }
-        
+
         .question {
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
             font-weight: 600;
         }
-        
+
         .answer-space {
             background-color: #f9f9f9;
             border: 1px dashed #ccc;
             padding: 0.5rem;
             margin-top: 0.5rem;
             min-height: 30px;
-            border-radius: 4px;
+            border-radius: 6px;
         }
-        
-        .matching-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 1.5rem 0;
-        }
-        
-        .matching-table th, .matching-table td {
-            border: 1px solid #ddd;
-            padding: 12px;
-            text-align: left;
-        }
-        
-        .matching-table th {
-            background-color: var(--light-color);
-        }
-        
-        .matching-table input {
-            width: 30px;
-            text-align: center;
-        }
-        
-        .multiple-choice {
-            margin: 1.5rem 0;
-        }
-        
-        .option {
-            margin: 0.5rem 0;
-            display: flex;
-            align-items: center;
-        }
-        
-        .option input {
-            margin-right: 10px;
-        }
-        
-        .cloze-activity {
-            background-color: #f9f9f9;
-            padding: 1rem;
-            border-radius: 5px;
-            margin: 1.5rem 0;
-        }
-        
-        .blank {
-            display: inline-block;
-            width: 120px;
-            border-bottom: 1px solid #333;
-            margin: 0 5px;
-        }
-        
-        .notebook-activity {
-            background-color: #fffde7;
-            border-left: 4px solid var(--warning-color);
-            padding: 1rem;
-            margin: 1.5rem 0;
-        }
-        
-        .notebook-activity h4 {
-            margin-bottom: 0.5rem;
-            color: var(--warning-color);
-        }
-        
-        .true-false {
-            margin: 1.5rem 0;
-        }
-        
-        .true-false-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.5rem 0;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .true-false-options {
-            display: flex;
-        }
-        
-        .true-false-options label {
-            margin-left: 15px;
-            display: flex;
-            align-items: center;
-        }
-        
-        .true-false-options input {
-            margin-right: 5px;
-        }
-        
-        .word-bank {
-            background-color: #e8f5e9;
-            padding: 1rem;
-            border-radius: 5px;
-            margin: 1.5rem 0;
-        }
-        
-        .word-bank h4 {
-            margin-bottom: 0.5rem;
-            color: var(--success-color);
-        }
-        
-        .word-bank-items {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        
-        .word-bank-item {
-            background-color: white;
-            padding: 5px 10px;
-            border-radius: 20px;
-            border: 1px solid var(--success-color);
-        }
-        
+
+        .matching-table,
         .definition-table {
             width: 100%;
             border-collapse: collapse;
             margin: 1.5rem 0;
         }
-        
-        .definition-table th, .definition-table td {
+
+        .matching-table th,
+        .matching-table td,
+        .definition-table th,
+        .definition-table td {
             border: 1px solid #ddd;
             padding: 12px;
             text-align: left;
         }
-        
+
+        .matching-table th,
         .definition-table th {
             background-color: var(--light-color);
         }
-        
+
+        .matching-table input {
+            width: 30px;
+            text-align: center;
+        }
+
+        .multiple-choice {
+            margin: 1.5rem 0;
+        }
+
+        .option {
+            margin: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .option input {
+            margin-right: 0.35rem;
+        }
+
+        .cloze-activity {
+            background-color: #f9f9f9;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+
+        .blank {
+            display: inline-block;
+            min-width: 110px;
+            border-bottom: 1px solid #333;
+            margin: 0 4px;
+        }
+
+        .notebook-activity {
+            background-color: #fffde7;
+            border-left: 4px solid var(--warning-color);
+            padding: 1rem 1.25rem;
+            margin: 1.5rem 0;
+            border-radius: 8px 12px 12px 8px;
+        }
+
+        .notebook-activity h4 {
+            margin-bottom: 0.5rem;
+            color: var(--warning-color);
+        }
+
+        .true-false {
+            margin: 1.5rem 0;
+        }
+
+        .true-false-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.65rem 0;
+            border-bottom: 1px solid #eee;
+            gap: 1rem;
+        }
+
+        .true-false-options {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .true-false-options label {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .word-bank {
+            background-color: #e8f5e9;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+
+        .word-bank h4 {
+            margin-bottom: 0.5rem;
+            color: var(--success-color);
+        }
+
+        .word-bank-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .word-bank-item {
+            background-color: #ffffff;
+            padding: 5px 10px;
+            border-radius: 20px;
+            border: 1px solid var(--success-color);
+        }
+
         .definition-table input {
             width: 100%;
             padding: 5px;
         }
-        
+
         footer {
             background-color: var(--primary-color);
-            color: white;
+            color: #ffffff;
             padding: 2rem 0;
-            margin-top: 3rem;
+            margin-top: 3.5rem;
         }
-        
+
         .footer-content {
             display: flex;
             justify-content: space-between;
             flex-wrap: wrap;
+            gap: 1.5rem;
         }
-        
+
         .footer-section {
             flex: 1;
-            min-width: 200px;
-            margin-bottom: 1rem;
+            min-width: 220px;
         }
-        
+
         .footer-section h3 {
             font-size: 1.2rem;
             margin-bottom: 1rem;
             color: var(--secondary-color);
         }
-        
+
         .footer-section ul {
             list-style: none;
+            padding: 0;
         }
-        
+
         .footer-section ul li {
             margin-bottom: 0.5rem;
         }
-        
+
         .footer-section ul li a {
-            color: white;
-            text-decoration: none;
-            transition: color 0.3s;
+            color: #ffffff;
+            transition: color 0.3s ease;
         }
-        
-        .footer-section ul li a:hover {
+
+        .footer-section ul li a:hover,
+        .footer-section ul li a:focus {
             color: var(--secondary-color);
         }
-        
+
         .copyright {
             text-align: center;
             margin-top: 2rem;
             padding-top: 1rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            font-size: 0.9rem;
         }
-        
-        .btn {
-            display: inline-block;
-            background-color: var(--secondary-color);
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: 600;
-            text-decoration: none;
-            transition: background-color 0.3s;
-        }
-        
-        .btn:hover {
-            background-color: #2980b9;
-        }
-        
-        .btn-success {
-            background-color: var(--success-color);
-        }
-        
-        .btn-success:hover {
-            background-color: #27ae60;
-        }
-        
+
         .hidden {
-            display: none;
+            display: none !important;
         }
-        
-        @media (max-width: 768px) {
-            .header-content {
+
+        @media (max-width: 1100px) {
+            .content-layout {
+                grid-template-columns: 250px 1fr;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .content-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .chapter-sidebar {
+                position: static;
+            }
+
+            .sidebar-card {
+                padding: 1.25rem;
+            }
+
+            .sidebar-toggle {
+                display: inline-flex;
+            }
+
+            .chapter-nav {
+                display: none;
+                max-height: none;
+            }
+
+            .chapter-nav.open {
+                display: block;
+            }
+
+            .chapter-nav-list {
+                max-height: 360px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .page-intro {
+                padding: 2rem 1.5rem;
+                text-align: left;
+            }
+
+            .chapter-tools {
                 flex-direction: column;
-                text-align: center;
+                align-items: stretch;
             }
-            
-            nav ul {
-                margin-top: 10px;
+
+            .chapter-select {
+                width: 100%;
+                justify-content: space-between;
             }
-            
-            nav ul li {
-                margin: 0 10px;
+
+            .chapter-select select {
+                flex: 1;
             }
-            
-            .chapter-nav ul {
-                justify-content: flex-start;
-                overflow-x: auto;
-                padding-bottom: 5px;
+
+            .btn {
+                width: 100%;
             }
-            
-            .footer-content {
-                flex-direction: column;
+
+            .chapter-nav-list {
+                max-height: none;
             }
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="container">
+    <header class="site-header">
+        <div class="header-container">
             <div class="header-content">
                 <div class="logo">
-                    <i class="fas fa-book-open"></i>
-                    <h1>Two Wolves Modified Activities</h1>
+                    <i class="fas fa-book-open" aria-hidden="true"></i>
+                    <h1>Two Wolves</h1>
+                </div>
+                <div class="mobile-menu" aria-label="Toggle navigation" role="button" tabindex="0">
+                    <i class="fas fa-bars" aria-hidden="true"></i>
                 </div>
                 <nav>
                     <ul>
-                        <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
-                        <li><a href="#"><i class="fas fa-book"></i> Book</a></li>
-                        <li><a href="#"><i class="fas fa-user"></i> Author</a></li>
-                        <li><a href="#"><i class="fas fa-envelope"></i> Contact</a></li>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About the Novel</a></li>
+                        <li><a href="notes.html">Book Notes</a></li>
+                        <li><a href="Chapter_Questions.html" class="active">Chapter Questions</a></li>
+                        <li><a href="portfolios.html">Portfolio Tasks</a></li>
+                        <li><a href="secure-portfolios.html">Secure Portfolios</a></li>
                     </ul>
                 </nav>
             </div>
         </div>
     </header>
-    
-    <div class="chapter-nav">
-        <div class="container">
-            <ul>
-                <li><a href="#chapter1" class="chapter-link active">Chapter 1</a></li>
-                <li><a href="#chapter2" class="chapter-link">Chapter 2</a></li>
-                <li><a href="#chapter3" class="chapter-link">Chapter 3</a></li>
-                <li><a href="#chapter4" class="chapter-link">Chapter 4</a></li>
-                <li><a href="#chapter5" class="chapter-link">Chapter 5</a></li>
-                <li><a href="#chapter6" class="chapter-link">Chapter 6</a></li>
-                <li><a href="#chapter7" class="chapter-link">Chapter 7</a></li>
-                <li><a href="#chapter8" class="chapter-link">Chapter 8</a></li>
-                <li><a href="#chapter9" class="chapter-link">Chapter 9</a></li>
-                <li><a href="#chapter10" class="chapter-link">Chapter 10</a></li>
-                <li><a href="#chapter11" class="chapter-link">Chapter 11</a></li>
-                <li><a href="#chapter12" class="chapter-link">Chapter 12</a></li>
-                <li><a href="#chapter13" class="chapter-link">Chapter 13</a></li>
-                <li><a href="#chapter14" class="chapter-link">Chapter 14</a></li>
-                <li><a href="#chapter15" class="chapter-link">Chapter 15</a></li>
-                <li><a href="#chapter16" class="chapter-link">Chapter 16</a></li>
-                <li><a href="#chapter17" class="chapter-link">Chapter 17</a></li>
-                <li><a href="#chapter18" class="chapter-link">Chapter 18</a></li>
-                <li><a href="#chapter19" class="chapter-link">Chapter 19</a></li>
-                <li><a href="#chapter20" class="chapter-link">Chapter 20</a></li>
-                <li><a href="#chapter21" class="chapter-link">Chapter 21</a></li>
-                <li><a href="#chapter22" class="chapter-link">Chapter 22</a></li>
-                <li><a href="#chapter23" class="chapter-link">Chapter 23</a></li>
-                <li><a href="#chapter24" class="chapter-link">Chapter 24</a></li>
-                <li><a href="#chapter25" class="chapter-link">Chapter 25</a></li>
-                <li><a href="#chapter26" class="chapter-link">Chapter 26</a></li>
-                <li><a href="#chapter27" class="chapter-link">Chapter 27</a></li>
-                <li><a href="#chapter28" class="chapter-link">Chapter 28</a></li>
-                <li><a href="#chapter29" class="chapter-link">Chapter 29</a></li>
-                <li><a href="#chapter30" class="chapter-link">Chapter 30</a></li>
-                <li><a href="#chapter31" class="chapter-link">Chapter 31</a></li>
-                <li><a href="#chapter32" class="chapter-link">Chapter 32</a></li>
-                <li><a href="#chapter33" class="chapter-link">Chapter 33</a></li>
-                <li><a href="#chapter34" class="chapter-link">Chapter 34</a></li>
-                <li><a href="#chapter35" class="chapter-link">Chapter 35</a></li>
-                <li><a href="#chapter36" class="chapter-link">Chapter 36</a></li>
-                <li><a href="#chapter37" class="chapter-link">Chapter 37</a></li>
-                <li><a href="#chapter38" class="chapter-link">Chapter 38</a></li>
-            </ul>
-        </div>
-    </div>
-    
+
     <main>
         <div class="container">
+            <section class="page-intro">
+                <h1>Chapter Questions &amp; Activities</h1>
+                <p>
+                    Explore scaffolded questions, vocabulary, and extension activities for every chapter of
+                    <em>Two Wolves</em>. Use the quick jump tools and chapter list to move between sections without
+                    losing your place.
+                </p>
+                <div class="chapter-tools">
+                    <div class="chapter-select">
+                        <label for="chapterSelect">Jump to chapter</label>
+                        <select id="chapterSelect" name="chapterSelect">
+                            <option value="chapter1">Chapter 1</option>
+                            <option value="chapter2">Chapter 2</option>
+                            <option value="chapter3">Chapter 3</option>
+                            <option value="chapter4">Chapter 4</option>
+                            <option value="chapter5">Chapter 5</option>
+                            <option value="chapter6">Chapter 6</option>
+                            <option value="chapter7">Chapter 7</option>
+                            <option value="chapter8">Chapter 8</option>
+                            <option value="chapter9">Chapter 9</option>
+                            <option value="chapter10">Chapter 10</option>
+                            <option value="chapter11">Chapter 11</option>
+                            <option value="chapter12">Chapter 12</option>
+                            <option value="chapter13">Chapter 13</option>
+                            <option value="chapter14">Chapter 14</option>
+                            <option value="chapter15">Chapter 15</option>
+                            <option value="chapter16">Chapter 16</option>
+                            <option value="chapter17">Chapter 17</option>
+                            <option value="chapter18">Chapter 18</option>
+                            <option value="chapter19">Chapter 19</option>
+                            <option value="chapter20">Chapter 20</option>
+                            <option value="chapter21">Chapter 21</option>
+                            <option value="chapter22">Chapter 22</option>
+                            <option value="chapter23">Chapter 23</option>
+                            <option value="chapter24">Chapter 24</option>
+                            <option value="chapter25">Chapter 25</option>
+                            <option value="chapter26">Chapter 26</option>
+                            <option value="chapter27">Chapter 27</option>
+                            <option value="chapter28">Chapter 28</option>
+                            <option value="chapter29">Chapter 29</option>
+                            <option value="chapter30">Chapter 30</option>
+                            <option value="chapter31">Chapter 31</option>
+                            <option value="chapter32">Chapter 32</option>
+                            <option value="chapter33">Chapter 33</option>
+                            <option value="chapter34">Chapter 34</option>
+                            <option value="chapter35">Chapter 35</option>
+                            <option value="chapter36">Chapter 36</option>
+                            <option value="chapter37">Chapter 37</option>
+                            <option value="chapter38">Chapter 38</option>
+                        </select>
+                        <button class="btn" type="button" id="chapterSelectButton">
+                            <i class="fas fa-location-arrow" aria-hidden="true"></i>
+                            <span>Go</span>
+                        </button>
+                    </div>
+                    <a class="btn btn-success" href="CH_Questions_12-17.html">
+                        <i class="fas fa-file-lines" aria-hidden="true"></i>
+                        <span>Printable Chapters 12–17</span>
+                    </a>
+                </div>
+            </section>
+
+            <div class="content-layout">
+                <aside class="chapter-sidebar" aria-label="Chapter navigation">
+                    <div class="sidebar-card">
+                        <div class="sidebar-header">
+                            <h2 class="sidebar-title">Browse chapters</h2>
+                        </div>
+                        <button class="sidebar-toggle" type="button" aria-expanded="false" aria-controls="chapterNav">
+                            <span>Show chapter list</span>
+                            <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                        </button>
+                        <nav class="chapter-nav" id="chapterNav">
+                            <ul class="chapter-nav-list">
+                                <li><a href="#chapter1" class="chapter-link active" data-chapter="chapter1">Chapter 1</a></li>
+                                <li><a href="#chapter2" class="chapter-link" data-chapter="chapter2">Chapter 2</a></li>
+                                <li><a href="#chapter3" class="chapter-link" data-chapter="chapter3">Chapter 3</a></li>
+                                <li><a href="#chapter4" class="chapter-link" data-chapter="chapter4">Chapter 4</a></li>
+                                <li><a href="#chapter5" class="chapter-link" data-chapter="chapter5">Chapter 5</a></li>
+                                <li><a href="#chapter6" class="chapter-link" data-chapter="chapter6">Chapter 6</a></li>
+                                <li><a href="#chapter7" class="chapter-link" data-chapter="chapter7">Chapter 7</a></li>
+                                <li><a href="#chapter8" class="chapter-link" data-chapter="chapter8">Chapter 8</a></li>
+                                <li><a href="#chapter9" class="chapter-link" data-chapter="chapter9">Chapter 9</a></li>
+                                <li><a href="#chapter10" class="chapter-link" data-chapter="chapter10">Chapter 10</a></li>
+                                <li><a href="#chapter11" class="chapter-link" data-chapter="chapter11">Chapter 11</a></li>
+                                <li><a href="#chapter12" class="chapter-link" data-chapter="chapter12">Chapter 12</a></li>
+                                <li><a href="#chapter13" class="chapter-link" data-chapter="chapter13">Chapter 13</a></li>
+                                <li><a href="#chapter14" class="chapter-link" data-chapter="chapter14">Chapter 14</a></li>
+                                <li><a href="#chapter15" class="chapter-link" data-chapter="chapter15">Chapter 15</a></li>
+                                <li><a href="#chapter16" class="chapter-link" data-chapter="chapter16">Chapter 16</a></li>
+                                <li><a href="#chapter17" class="chapter-link" data-chapter="chapter17">Chapter 17</a></li>
+                                <li><a href="#chapter18" class="chapter-link" data-chapter="chapter18">Chapter 18</a></li>
+                                <li><a href="#chapter19" class="chapter-link" data-chapter="chapter19">Chapter 19</a></li>
+                                <li><a href="#chapter20" class="chapter-link" data-chapter="chapter20">Chapter 20</a></li>
+                                <li><a href="#chapter21" class="chapter-link" data-chapter="chapter21">Chapter 21</a></li>
+                                <li><a href="#chapter22" class="chapter-link" data-chapter="chapter22">Chapter 22</a></li>
+                                <li><a href="#chapter23" class="chapter-link" data-chapter="chapter23">Chapter 23</a></li>
+                                <li><a href="#chapter24" class="chapter-link" data-chapter="chapter24">Chapter 24</a></li>
+                                <li><a href="#chapter25" class="chapter-link" data-chapter="chapter25">Chapter 25</a></li>
+                                <li><a href="#chapter26" class="chapter-link" data-chapter="chapter26">Chapter 26</a></li>
+                                <li><a href="#chapter27" class="chapter-link" data-chapter="chapter27">Chapter 27</a></li>
+                                <li><a href="#chapter28" class="chapter-link" data-chapter="chapter28">Chapter 28</a></li>
+                                <li><a href="#chapter29" class="chapter-link" data-chapter="chapter29">Chapter 29</a></li>
+                                <li><a href="#chapter30" class="chapter-link" data-chapter="chapter30">Chapter 30</a></li>
+                                <li><a href="#chapter31" class="chapter-link" data-chapter="chapter31">Chapter 31</a></li>
+                                <li><a href="#chapter32" class="chapter-link" data-chapter="chapter32">Chapter 32</a></li>
+                                <li><a href="#chapter33" class="chapter-link" data-chapter="chapter33">Chapter 33</a></li>
+                                <li><a href="#chapter34" class="chapter-link" data-chapter="chapter34">Chapter 34</a></li>
+                                <li><a href="#chapter35" class="chapter-link" data-chapter="chapter35">Chapter 35</a></li>
+                                <li><a href="#chapter36" class="chapter-link" data-chapter="chapter36">Chapter 36</a></li>
+                                <li><a href="#chapter37" class="chapter-link" data-chapter="chapter37">Chapter 37</a></li>
+                                <li><a href="#chapter38" class="chapter-link" data-chapter="chapter38">Chapter 38</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </aside>
+
+                <div class="chapter-content">
             <!-- Chapter 1 -->
             <section id="chapter1" class="chapter-section">
                 <h2 class="chapter-title">Chapter 1 - Cops</h2>
@@ -2458,4 +2653,198 @@
                         <label for="hospital1">Because Olive was better</label>
                     </div>
                     <div class="option">
-                        <input type="radio" name="hospital" id="hospital2
+                        <input type="radio" name="hospital" id="hospital2">
+                        <label for="hospital2">He feared the hospital would alert the police</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="hospital" id="hospital3">
+                        <label for="hospital3">Olive refused to leave the roadside</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="hospital" id="hospital4">
+                        <label for="hospital4">They could not afford medical treatment</label>
+                    </div>
+                </div>
+            </section>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Two Wolves Resources</h3>
+                    <p>Structured questions and activities to guide thoughtful reading in class and at home.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About the Novel</a></li>
+                        <li><a href="notes.html">Book Notes</a></li>
+                        <li><a href="portfolios.html">Portfolio Tasks</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>More Support</h3>
+                    <ul>
+                        <li><a href="refresh.html">Chapter Refresh</a></li>
+                        <li><a href="CH_Questions_12-17.html">Printable Questions</a></li>
+                        <li><a href="secure-portfolios.html">Secure Portfolios</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">&copy; <span id="currentYear"></span> Two Wolves Year 7 English.</div>
+        </div>
+    </footer>
+
+    <script>
+        const menuToggle = document.querySelector('.mobile-menu');
+        const siteNav = document.querySelector('.site-header nav');
+        if (menuToggle && siteNav) {
+            const toggleNav = () => siteNav.classList.toggle('active');
+            menuToggle.addEventListener('click', toggleNav);
+            menuToggle.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    toggleNav();
+                }
+            });
+            siteNav.querySelectorAll('a').forEach((link) => {
+                link.addEventListener('click', () => siteNav.classList.remove('active'));
+            });
+        }
+
+        const chapterSections = Array.from(document.querySelectorAll('.chapter-section'));
+        const chapterLinks = Array.from(document.querySelectorAll('.chapter-link'));
+        const chapterSelect = document.getElementById('chapterSelect');
+        const chapterSelectButton = document.getElementById('chapterSelectButton');
+        const sidebarToggle = document.querySelector('.sidebar-toggle');
+        const chapterNav = document.getElementById('chapterNav');
+
+        const setSidebarState = (expanded) => {
+            if (!sidebarToggle || !chapterNav) {
+                return;
+            }
+            sidebarToggle.setAttribute('aria-expanded', String(expanded));
+            chapterNav.classList.toggle('open', expanded);
+            const icon = sidebarToggle.querySelector('i');
+            if (icon) {
+                icon.classList.toggle('fa-chevron-up', expanded);
+                icon.classList.toggle('fa-chevron-down', !expanded);
+            }
+            const label = sidebarToggle.querySelector('span');
+            if (label) {
+                label.textContent = expanded ? 'Hide chapter list' : 'Show chapter list';
+            }
+            sidebarToggle.setAttribute('aria-label', expanded ? 'Hide chapter list' : 'Show chapter list');
+        };
+
+        const showChapter = (chapterId) => {
+            if (!chapterId) {
+                return;
+            }
+            const targetSection = document.getElementById(chapterId);
+            if (!targetSection) {
+                return;
+            }
+
+            chapterSections.forEach((section) => {
+                const match = section.id === chapterId;
+                section.classList.toggle('hidden', !match);
+                section.setAttribute('aria-hidden', String(!match));
+            });
+
+            chapterLinks.forEach((link) => {
+                const match = link.dataset.chapter === chapterId;
+                link.classList.toggle('active', match);
+                if (match) {
+                    link.setAttribute('aria-current', 'page');
+                } else {
+                    link.removeAttribute('aria-current');
+                }
+            });
+
+            if (chapterSelect && chapterSelect.value !== chapterId) {
+                chapterSelect.value = chapterId;
+            }
+
+            window.setTimeout(() => {
+                targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 100);
+        };
+
+        chapterSections.forEach((section) => {
+            section.setAttribute('aria-hidden', String(section.classList.contains('hidden')));
+        });
+
+        chapterLinks.forEach((link) => {
+            link.addEventListener('click', (event) => {
+                event.preventDefault();
+                showChapter(link.dataset.chapter);
+                if (window.innerWidth <= 992) {
+                    setSidebarState(false);
+                }
+            });
+        });
+
+        if (chapterSelectButton && chapterSelect) {
+            const triggerSelectNavigation = () => {
+                showChapter(chapterSelect.value);
+                if (window.innerWidth <= 992) {
+                    setSidebarState(false);
+                }
+            };
+            chapterSelectButton.addEventListener('click', triggerSelectNavigation);
+            chapterSelect.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter') {
+                    event.preventDefault();
+                    triggerSelectNavigation();
+                }
+            });
+        }
+
+        if (chapterSelect) {
+            chapterSelect.addEventListener('change', (event) => {
+                if (window.innerWidth > 992) {
+                    showChapter(event.target.value);
+                }
+            });
+        }
+
+        if (sidebarToggle && chapterNav) {
+            const handleToggle = () => {
+                const expanded = sidebarToggle.getAttribute('aria-expanded') === 'true';
+                setSidebarState(!expanded);
+            };
+
+            sidebarToggle.addEventListener('click', handleToggle);
+            sidebarToggle.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    handleToggle();
+                }
+            });
+
+            const handleResize = () => {
+                if (window.innerWidth > 992) {
+                    setSidebarState(true);
+                } else {
+                    const expanded = sidebarToggle.getAttribute('aria-expanded') === 'true';
+                    setSidebarState(expanded);
+                }
+            };
+
+            setSidebarState(window.innerWidth > 992);
+            window.addEventListener('resize', handleResize);
+        }
+
+        const yearElement = document.getElementById('currentYear');
+        if (yearElement) {
+            yearElement.textContent = new Date().getFullYear();
+        }
+    </script>
+</body>
+</html>
