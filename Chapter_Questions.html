@@ -515,13 +515,8 @@
             .chapter-nav-list {
                 max-height: none;
             }
-
-            const initialChapter = window.location.hash ? window.location.hash.substring(1) : sections[0]?.id;
-            if (initialChapter) {
-                showChapter(initialChapter, { updateHash: false, scroll: false });
-            }
-        });
-    </script>
+        }
+    </style>
 </head>
 <body>
     <header class="site-header">
@@ -2731,6 +2726,24 @@
         const sidebarToggle = document.querySelector('.sidebar-toggle');
         const chapterNav = document.getElementById('chapterNav');
 
+        const hasChapter = (chapterId) =>
+            Boolean(chapterId && chapterSections.some((section) => section.id === chapterId));
+
+        const updateLocationHash = (chapterId) => {
+            if (!chapterId) {
+                return;
+            }
+            const newHash = `#${chapterId}`;
+            if (window.location.hash === newHash) {
+                return;
+            }
+            if (typeof history !== 'undefined' && typeof history.replaceState === 'function') {
+                history.replaceState(null, '', newHash);
+            } else {
+                window.location.hash = chapterId;
+            }
+        };
+
         const setSidebarState = (expanded) => {
             if (!sidebarToggle || !chapterNav) {
                 return;
@@ -2749,7 +2762,8 @@
             sidebarToggle.setAttribute('aria-label', expanded ? 'Hide chapter list' : 'Show chapter list');
         };
 
-        const showChapter = (chapterId) => {
+        const showChapter = (chapterId, options = {}) => {
+            const { updateHash = true, scroll = true } = options;
             if (!chapterId) {
                 return;
             }
@@ -2778,9 +2792,15 @@
                 chapterSelect.value = chapterId;
             }
 
-            window.setTimeout(() => {
-                targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }, 100);
+            if (updateHash) {
+                updateLocationHash(chapterId);
+            }
+
+            if (scroll) {
+                window.requestAnimationFrame(() => {
+                    targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                });
+            }
         };
 
         chapterSections.forEach((section) => {
@@ -2847,6 +2867,18 @@
             setSidebarState(window.innerWidth > 992);
             window.addEventListener('resize', handleResize);
         }
+
+        const initialChapterId = window.location.hash ? window.location.hash.substring(1) : chapterSections[0]?.id;
+        if (hasChapter(initialChapterId)) {
+            showChapter(initialChapterId, { updateHash: false, scroll: false });
+        }
+
+        window.addEventListener('hashchange', () => {
+            const nextId = window.location.hash ? window.location.hash.substring(1) : '';
+            if (hasChapter(nextId)) {
+                showChapter(nextId, { updateHash: false });
+            }
+        });
 
         const yearElement = document.getElementById('currentYear');
         if (yearElement) {
