@@ -265,12 +265,27 @@
         }
 
         .answer-space {
+            width: 100%;
             background-color: #f9f9f9;
-            border: 1px dashed #ccc;
-            padding: 0.5rem;
+            border: 1px solid #ccd6dd;
+            padding: 0.75rem;
             margin-top: 0.5rem;
-            min-height: 30px;
-            border-radius: 6px;
+            min-height: 120px;
+            border-radius: 8px;
+            resize: vertical;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--dark-color);
+        }
+
+        .answer-space:focus {
+            outline: 3px solid rgba(52, 152, 219, 0.25);
+            border-color: var(--secondary-color);
+        }
+
+        .answer-space::placeholder {
+            color: rgba(44, 62, 80, 0.55);
         }
 
         .matching-table,
@@ -294,9 +309,53 @@
             background-color: var(--light-color);
         }
 
-        .matching-table input {
-            width: 30px;
+        .matching-input {
+            width: 70px;
+            padding: 6px 8px;
+            margin-right: 0.5rem;
+            border: 1px solid #ccd6dd;
+            border-radius: 6px;
             text-align: center;
+            font-size: 1rem;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .matching-input:focus {
+            outline: 3px solid rgba(52, 152, 219, 0.25);
+            border-color: var(--secondary-color);
+        }
+
+        .five-ws-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .five-ws-grid label {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .ws-input {
+            background-color: #f9f9f9;
+            border: 1px solid #ccd6dd;
+            border-radius: 8px;
+            padding: 0.6rem 0.75rem;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: var(--dark-color);
+            resize: vertical;
+            min-height: 70px;
+        }
+
+        .ws-input:focus {
+            outline: 3px solid rgba(52, 152, 219, 0.25);
+            border-color: var(--secondary-color);
         }
 
         .multiple-choice {
@@ -322,13 +381,26 @@
         }
 
         .blank {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
             min-width: 110px;
-            border-bottom: 1px solid #333;
+            min-height: 32px;
+            padding: 0.25rem 0.5rem;
             margin: 0 4px;
+            border-bottom: 2px dotted var(--secondary-color);
+            border-radius: 6px;
+            background-color: #ffffff;
+            cursor: text;
+            transition: box-shadow 0.2s ease;
         }
 
-        .notebook-activity {
+        .blank:focus,
+        .blank:focus-visible {
+            outline: 3px solid rgba(52, 152, 219, 0.25);
+            box-shadow: 0 0 0 1px var(--secondary-color);
+        }
+
+        .writing-activity {
             background-color: #fffde7;
             border-left: 4px solid var(--warning-color);
             padding: 1rem 1.25rem;
@@ -336,7 +408,7 @@
             border-radius: 8px 12px 12px 8px;
         }
 
-        .notebook-activity h4 {
+        .writing-activity h4 {
             margin-bottom: 0.5rem;
             color: var(--warning-color);
         }
@@ -392,7 +464,16 @@
 
         .definition-table input {
             width: 100%;
-            padding: 5px;
+            padding: 0.6rem 0.75rem;
+            border: 1px solid #ccd6dd;
+            border-radius: 6px;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 0.95rem;
+        }
+
+        .definition-table input:focus {
+            outline: 3px solid rgba(52, 152, 219, 0.25);
+            border-color: var(--secondary-color);
         }
 
         footer {
@@ -670,31 +751,31 @@
                 
                 <div class="question-group">
                     <div class="question">What is the name of Ben's seventh stop-motion movie? P 2</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
                 <div class="question-group">
                     <div class="question">How old is Ben?</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
                 <div class="question-group">
                     <div class="question">How old is Olive?</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
                 <div class="question-group">
                     <div class="question">Why did the police come to see the Slivers? P 5</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
                 <div class="question-group">
                     <div class="question">Why do you think the police came to see the Silvers?</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
-                <div class="notebook-activity">
-                    <h4>Matching: For each difficult word or phrase, write the number of the matching definition and copy into your notebook.</h4>
+                <div class="writing-activity">
+                    <h4>Matching: For each difficult word or phrase, type the number of the matching definition in the box provided.</h4>
                     <table class="matching-table">
                         <thead>
                             <tr>
@@ -704,23 +785,36 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>_____vanquishing</td>
+                                <td>
+                                    <input type="text" class="matching-input" inputmode="numeric" pattern="[0-9]*" aria-label="Match number for vanquishing">
+                                    <span>vanquishing</span>
+                                </td>
                                 <td>1: plastic wrap</td>
                             </tr>
                             <tr>
-                                <td>_____cellophane</td>
+                                <td>
+                                    <input type="text" class="matching-input" inputmode="numeric" pattern="[0-9]*" aria-label="Match number for cellophane">
+                                    <span>cellophane</span>
+                                </td>
                                 <td>2: defeating</td>
                             </tr>
                             <tr>
-                                <td>_____delinquent</td>
+                                <td>
+                                    <input type="text" class="matching-input" inputmode="numeric" pattern="[0-9]*" aria-label="Match number for delinquent">
+                                    <span>delinquent</span>
+                                </td>
                                 <td>3: irresponsible/unpaid</td>
                             </tr>
                             <tr>
-                                <td>_____overkill</td>
+                                <td>
+                                    <input type="text" class="matching-input" inputmode="numeric" pattern="[0-9]*" aria-label="Match number for overkill">
+                                    <span>overkill</span>
+                                </td>
                                 <td>4: (way too much of something)</td>
                             </tr>
                         </tbody>
                     </table>
+                    <textarea class="answer-space" rows="3" placeholder="Use this space to note your matches or any new vocabulary notes."></textarea>
                 </div>
             </section>
             
@@ -731,26 +825,26 @@
                 
                 <div class="question-group">
                     <div class="question">Why does his father call Ben a cop?</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
                 <div class="question-group">
                     <div class="question">What is the description of his father? (p 12)</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
                 <div class="question-group">
                     <div class="question">Description of his mother. (P 12)</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
                 <div class="question-group">
                     <div class="question">Why do you think Olive calls their father Maugrin? P 14</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
-                <div class="notebook-activity">
-                    <h4>Copy the following difficult words with definitions into your notebook</h4>
+                <div class="writing-activity">
+                    <h4>Review the following difficult words and use the space below to copy them with their definitions.</h4>
                     <table class="definition-table">
                         <thead>
                             <tr>
@@ -769,6 +863,7 @@
                             </tr>
                         </tbody>
                     </table>
+                    <textarea class="answer-space" rows="3" placeholder="Practise typing the words and definitions here."></textarea>
                 </div>
             </section>
             
@@ -779,12 +874,12 @@
                 
                 <div class="question-group">
                     <div class="question">Why is Ben's father angry that he brings his wallet?</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
                 <div class="question-group">
                     <div class="question">What does 'stick your bib in' mean?</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
             </section>
             
@@ -795,16 +890,16 @@
                 
                 <div class="question-group">
                     <div class="question">Why did the police officer pull their car over?</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
                 <div class="question-group">
                     <div class="question">When Ben's father drives off the author describes Ben as "his heart pummelled in his chest" and "For the first time ever, Ben did not ask a question." Page 33. What is Ben thinking and feeling?</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
-                <div class="notebook-activity">
-                    <h4>Copy the following difficult words with definitions into your notebook:</h4>
+                <div class="writing-activity">
+                    <h4>Copy the following difficult words with their definitions into the space below.</h4>
                     <table class="definition-table">
                         <thead>
                             <tr>
@@ -827,6 +922,7 @@
                             </tr>
                         </tbody>
                     </table>
+                    <textarea class="answer-space" rows="3" placeholder="Type the words and definitions here."></textarea>
                 </div>
                 
                 <div class="multiple-choice">
@@ -903,22 +999,22 @@
                         <label for="bag4">red</label>
                     </div>
                     
-                    <div class="question">Who did the notebook that Ben writes in belong to?</div>
+                    <div class="question">Who did the journal that Ben writes in belong to?</div>
                     <div class="option">
-                        <input type="radio" name="notebook" id="notebook1">
-                        <label for="notebook1">Pop</label>
+                        <input type="radio" name="journal-owner" id="journal1">
+                        <label for="journal1">Pop</label>
                     </div>
                     <div class="option">
-                        <input type="radio" name="notebook" id="notebook2">
-                        <label for="notebook2">his dad</label>
+                        <input type="radio" name="journal-owner" id="journal2">
+                        <label for="journal2">his dad</label>
                     </div>
                     <div class="option">
-                        <input type="radio" name="notebook" id="notebook3">
-                        <label for="notebook3">Nan</label>
+                        <input type="radio" name="journal-owner" id="journal3">
+                        <label for="journal3">Nan</label>
                     </div>
                     <div class="option">
-                        <input type="radio" name="notebook" id="notebook4">
-                        <label for="notebook4">his mum</label>
+                        <input type="radio" name="journal-owner" id="journal4">
+                        <label for="journal4">his mum</label>
                     </div>
                     
                     <div class="question">Why did the police officer pull their car over?</div>
@@ -948,22 +1044,22 @@
                 
                 <div class="question-group">
                     <div class="question">Why do Ben's back and muscles ache, and his neck hurt? Give two reasons.</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
                 <div class="question-group">
                     <div class="question">What kind of thoughts does Ben often find himself thinking?</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
                 <div class="question-group">
                     <div class="question">Find three words that show that the story is set in Australia.</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
                 <div class="question-group">
                     <div class="question">Does Ben like the cabin when he first sees it? How do you know?</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
             </section>
             
@@ -972,8 +1068,8 @@
                 <h2 class="chapter-title">Chapter 6 – The dead of Night</h2>
                 <p>The Silvers arrive at the family cabin and Ben's dad breaks in. Ben doesn't like the cabin and doesn't want to sleep in it. He returns to the car and tells his mum that it's "beautiful".</p>
                 
-                <div class="notebook-activity">
-                    <h4>Matching: For each difficult word or phrase, write the number of the matching definition.</h4>
+                <div class="writing-activity">
+                    <h4>Matching: For each difficult word or phrase, type the number of the matching definition in the box provided.</h4>
                     <table class="matching-table">
                         <thead>
                             <tr>
@@ -983,47 +1079,78 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>_____almighty</td>
+                                <td>
+                                    <input type="text" class="matching-input" inputmode="numeric" pattern="[0-9]*" aria-label="Match number for almighty">
+                                    <span>almighty</span>
+                                </td>
                                 <td>1: evil</td>
                             </tr>
                             <tr>
-                                <td>_____scuttled</td>
+                                <td>
+                                    <input type="text" class="matching-input" inputmode="numeric" pattern="[0-9]*" aria-label="Match number for scuttled">
+                                    <span>scuttled</span>
+                                </td>
                                 <td>2: monster-like</td>
                             </tr>
                             <tr>
-                                <td>_____stench</td>
+                                <td>
+                                    <input type="text" class="matching-input" inputmode="numeric" pattern="[0-9]*" aria-label="Match number for stench">
+                                    <span>stench</span>
+                                </td>
                                 <td>3: uncertain/not definite</td>
                             </tr>
                             <tr>
-                                <td>_____monstrous</td>
+                                <td>
+                                    <input type="text" class="matching-input" inputmode="numeric" pattern="[0-9]*" aria-label="Match number for monstrous">
+                                    <span>monstrous</span>
+                                </td>
                                 <td>4: all-powerful</td>
                             </tr>
                             <tr>
-                                <td>_____discarded</td>
+                                <td>
+                                    <input type="text" class="matching-input" inputmode="numeric" pattern="[0-9]*" aria-label="Match number for discarded">
+                                    <span>discarded</span>
+                                </td>
                                 <td>5: quickly ran</td>
                             </tr>
                             <tr>
-                                <td>_____muttered</td>
+                                <td>
+                                    <input type="text" class="matching-input" inputmode="numeric" pattern="[0-9]*" aria-label="Match number for muttered">
+                                    <span>muttered</span>
+                                </td>
                                 <td>6: mumbled</td>
                             </tr>
                             <tr>
-                                <td>_____scurried</td>
+                                <td>
+                                    <input type="text" class="matching-input" inputmode="numeric" pattern="[0-9]*" aria-label="Match number for scurried">
+                                    <span>scurried</span>
+                                </td>
                                 <td>7: stink</td>
                             </tr>
                             <tr>
-                                <td>_____destined</td>
+                                <td>
+                                    <input type="text" class="matching-input" inputmode="numeric" pattern="[0-9]*" aria-label="Match number for destined">
+                                    <span>destined</span>
+                                </td>
                                 <td>8: threw out/thrown out</td>
                             </tr>
                             <tr>
-                                <td>_____villainous</td>
+                                <td>
+                                    <input type="text" class="matching-input" inputmode="numeric" pattern="[0-9]*" aria-label="Match number for villainous">
+                                    <span>villainous</span>
+                                </td>
                                 <td>9: ran/sank/ended</td>
                             </tr>
                             <tr>
-                                <td>_____tentative</td>
+                                <td>
+                                    <input type="text" class="matching-input" inputmode="numeric" pattern="[0-9]*" aria-label="Match number for tentative">
+                                    <span>tentative</span>
+                                </td>
                                 <td>10: (already decided beforehand to happen)</td>
                             </tr>
                         </tbody>
                     </table>
+                    <textarea class="answer-space" rows="3" placeholder="Summarise the new vocabulary or sentences you create with these words."></textarea>
                 </div>
             </section>
             
@@ -1034,15 +1161,15 @@
                 
                 <div class="question-group">
                     <div class="question">How would you describe the relationship between fathers and sons?</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
                 <div class="question-group">
                     <div class="question">How would you describe Ben's relationship with his father?</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
-                <div class="notebook-activity">
+                <div class="writing-activity">
                     <h4>Difficult words: you fill in the definitions:</h4>
                     <table class="definition-table">
                         <thead>
@@ -1229,17 +1356,17 @@
                 
                 <div class="question-group">
                     <div class="question">Why was Ben's father angry with him? (p.60-61).</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
                 <div class="question-group">
                     <div class="question">What did Ben lie about? (p.61)</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
                 <div class="question-group">
                     <div class="question">What did Ben's Mum lie about? (p.63)</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
             </section>
             
@@ -1248,25 +1375,25 @@
                 <h2 class="chapter-title">Chapter 10 – Culpam poena premit comes</h2>
                 <p>Ben went exploring towards the creek. He was afraid of snakes and feared seeing one. Ben was so thirsty that he drank water from the creek. It was Uncle Chris that gave Ben's Dad the sports bag full of money. Uncle Chris used to baby sit Ben's Dad and he used to beat him up.</p>
                 <p>Ben took out the business card that the Police Officer gave him, which read- "Culpam Poema Premit Comes". This was the Latin moto of the NSW Police. It's translation is – Punishment follows close on guilt. The free translation is- Punishment is a companion pressing close on crime or Punishment swiftly follows crime.</p>
-                <p>He read the notes he made in his notebook-:Police, Holiday, Uncle Chris. Grey nylon bag. Lack handles. The new old car, Haircuts. He writes more notes-: Pulled over by cops. Drive off and chase. The cabin, Bag full of money, sold the wreckers. Ben knew his parents were in trouble.</p>
+                <p>He read the notes he made in his journal-:Police, Holiday, Uncle Chris. Grey nylon bag. Lack handles. The new old car, Haircuts. He writes more notes-: Pulled over by cops. Drive off and chase. The cabin, Bag full of money, sold the wreckers. Ben knew his parents were in trouble.</p>
                 
                 <div class="question-group">
                     <div class="question">What is Ben's biggest fear in the wilderness?</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
                 <div class="question-group">
                     <div class="question">What did Ben have in his back pocket? (p.68-69) Describe it in detail.</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
                 <div class="question-group">
                     <div class="question">What does the Latin Moto "Culpam Poena Premit Comes" mean?</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
-                <div class="notebook-activity">
-                    <h4>Matching: For each difficult word or phrase, write the number of the matching definition.</h4>
+                <div class="writing-activity">
+                    <h4>Matching: For each difficult word or phrase, type the number of the matching definition in the box provided.</h4>
                     <table class="matching-table">
                         <thead>
                             <tr>
@@ -1276,48 +1403,61 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>_____dodging</td>
+                                <td>
+                                    <input type="text" class="matching-input" inputmode="numeric" pattern="[0-9]*" aria-label="Match number for dodging">
+                                    <span>dodging</span>
+                                </td>
                                 <td>1: avoiding</td>
                             </tr>
                             <tr>
-                                <td>_____crevice</td>
+                                <td>
+                                    <input type="text" class="matching-input" inputmode="numeric" pattern="[0-9]*" aria-label="Match number for crevice">
+                                    <span>crevice</span>
+                                </td>
                                 <td>2: poisonous/hateful</td>
                             </tr>
                             <tr>
-                                <td>_____venomous</td>
+                                <td>
+                                    <input type="text" class="matching-input" inputmode="numeric" pattern="[0-9]*" aria-label="Match number for venomous">
+                                    <span>venomous</span>
+                                </td>
                                 <td>3: crack</td>
                             </tr>
                             <tr>
-                                <td>_____emerged</td>
+                                <td>
+                                    <input type="text" class="matching-input" inputmode="numeric" pattern="[0-9]*" aria-label="Match number for emerged">
+                                    <span>emerged</span>
+                                </td>
                                 <td>4: came out/became visible</td>
                             </tr>
                         </tbody>
                     </table>
+                    <textarea class="answer-space" rows="3" placeholder="Record sentences or notes using these vocabulary words."></textarea>
                 </div>
             </section>
             
             <!-- Chapter 11 -->
             <section id="chapter11" class="chapter-section hidden">
                 <h2 class="chapter-title">Chapter 11 – My side of the creek</h2>
-                <p>Olive read some of Ben's notes in his notebook, over his shoulder and was curious to know what "bag full of money" and "sold the wreckers" meant and what Dad hid in the roof. Olive slipped on a rock and hurt herself and Ben hesitated about helping her, but took care of her. Ben and Olive decided to build a raft.</p>
+                <p>Olive read some of Ben's notes in his journal, over his shoulder and was curious to know what "bag full of money" and "sold the wreckers" meant and what Dad hid in the roof. Olive slipped on a rock and hurt herself and Ben hesitated about helping her, but took care of her. Ben and Olive decided to build a raft.</p>
                 <p>Olive asked Ben why he got into trouble. He told her not to worry about it. Ben knew his Mum lied about selling the wreckers. Their Dad then called out to them to come and get some food. Ben didn't know if his Dad would still be angry at him. Ben believed that there were two of his Dad. The nice one and the angry one. He made a promise to himself that he would find out why his parents lied about the money and where it really came from.</p>
                 
                 <div class="question-group">
                     <div class="question">There were 2 things that Olive wanted to know. What were they? (p.74-75)</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
                 <div class="question-group">
                     <div class="question">How does Ben feel about his little sister Olive? Find evidence to support your response. (p.75)</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
                 <div class="question-group">
                     <div class="question">What does Ben demonstrate commitment and determination for? (p.83)</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
-                <div class="notebook-activity">
+                <div class="writing-activity">
                     <h4>Difficult words with definitions:</h4>
                     <table class="definition-table">
                         <thead>
@@ -1347,17 +1487,17 @@
                 
                 <div class="question-group">
                     <div class="question">Predict where the money came from?</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
                 <div class="question-group">
                     <div class="question">Why was Ben suspicious? (p.86)</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
                 <div class="question-group">
                     <div class="question">Describe how Ben was changing his mind about the mysterious sports bag of cash. Find evidence to support your response. (p.90)</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
                 <div class="multiple-choice">
@@ -1477,32 +1617,49 @@
                 <h2 class="chapter-title">Chapter 13: Detective Ben Silver (pp. 91-95)</h2>
                 <p>Ben and Olive are lying on their air mattresses, one next to the other. Olive is fast asleep. Ben is lying on the mattress and can hear his mother and father arguing outside. He attempts to eavesdrop into their conversation by crawling over his mattress and peaking through the window from inside. Ben laid in his bed and began to wonder what was happening. Why was there a bag of money, what were his parents fighting about, and why do they have to 'sit tight' at the cabin? He planned to stay awake until his mother and father came inside to listen to their conversation. He wanted to know where they were going and what they were going to do. Ben reached into his bag, grabbed a camera and placed it on the green metal trunk to record his parent's conversation. He threw clothes over the camera to hide the red recording light and prayed that there would be enough battery to record their conversation. Ben went back to his air mattress and fell asleep.</p>
                 
-                <div class="notebook-activity">
-                    <h4>Modified Task: modified students can choose to work on their own or in a group of two</h4>
-                    <p>Complete a 5 W's circle diagram in your book based on chapter 13 of Two wolves. See the example below.</p>
-                    <p>Write one prediction about what you believe Ben's mother and father said on the recorded tape. For example, where do you think they are going? How did they get the bag full of money? Why are they staying at the cabin?</p>
+                <div class="writing-activity">
+                    <h4>Modified Task: explore Chapter 13 with a partner or on your own.</h4>
+                    <p>Use the 5 W's organiser to capture the main details of this chapter, then predict what was said on the recording.</p>
+                    <div class="five-ws-grid">
+                        <label>Who?
+                            <textarea class="ws-input" rows="2" placeholder="Who is involved in the scene?"></textarea>
+                        </label>
+                        <label>What?
+                            <textarea class="ws-input" rows="2" placeholder="What actions or conflicts occur?"></textarea>
+                        </label>
+                        <label>Where?
+                            <textarea class="ws-input" rows="2" placeholder="Where do the events take place?"></textarea>
+                        </label>
+                        <label>When?
+                            <textarea class="ws-input" rows="2" placeholder="When is this happening?"></textarea>
+                        </label>
+                        <label>Why?
+                            <textarea class="ws-input" rows="2" placeholder="Why are the characters behaving this way?"></textarea>
+                        </label>
+                    </div>
+                    <textarea class="answer-space" rows="3" placeholder="Predict what Ben's parents might have said on the recording."></textarea>
                 </div>
                 
                 <div class="question-group">
                     <div class="question">When his parents were fighting, what did Ben plan to do?</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
                 <div class="question-group">
                     <div class="question">How did Ben record his parent's conversation? What did he use?</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
                 <div class="question-group">
                     <div class="question">What do you think will happen in the next chapter?</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
             </section>
             
             <!-- Chapter 14 -->
             <section id="chapter14" class="chapter-section hidden">
                 <h2 class="chapter-title">Chapter 14: Evidence (pp. 96-102)</h2>
-                <p>Ben escaped the cabin so he could listen to the recording of his mothers and fathers conversation. Ben's father informed his mother that as soon as they get the papers they could leave the cabin. He suggests that these papers were passports and if they did not get these, they would leave for the desert. Ben wrote in his notebook to remember the conversation between his parents. After listening to the recording, Ben uncovered the raft that he had made with his sister. He wanted to test the raft but was almost pulled into a waterfall. Ben knew he could not swim, so he escaped the raft by climbing some rocks. He attempted to repair his raft. As he did so, Ben decided that he needed to interrogate his father to uncover more evidence. He heard a loud 'Bang!' and believed the sound to be a gunshot.</p>
+                <p>Ben escaped the cabin so he could listen to the recording of his mothers and fathers conversation. Ben's father informed his mother that as soon as they get the papers they could leave the cabin. He suggests that these papers were passports and if they did not get these, they would leave for the desert. Ben wrote in his journal to remember the conversation between his parents. After listening to the recording, Ben uncovered the raft that he had made with his sister. He wanted to test the raft but was almost pulled into a waterfall. Ben knew he could not swim, so he escaped the raft by climbing some rocks. He attempted to repair his raft. As he did so, Ben decided that he needed to interrogate his father to uncover more evidence. He heard a loud 'Bang!' and believed the sound to be a gunshot.</p>
                 
                 <div class="word-bank">
                     <h4>Word Bank: attempted to, evidence, interrogate, suggests that.</h4>
@@ -1514,7 +1671,7 @@
                     </div>
                 </div>
                 
-                <div class="notebook-activity">
+                <div class="writing-activity">
                     <h4>Definition Write the difficult word:</h4>
                     <table class="definition-table">
                         <thead>
@@ -1544,30 +1701,47 @@
                     </table>
                 </div>
                 
-                <div class="notebook-activity">
-                    <h4>Modified Task: modified students can choose to work on their own or in a group of two</h4>
-                    <p>Complete a 5 W's circle diagram in your book based on chapter 14 of Two wolves. See the example below.</p>
-                    <p>Looking back at your prediction from chapter 13, was your prediction correct? Why or why not?</p>
+                <div class="writing-activity">
+                    <h4>Modified Task: work independently or with a partner.</h4>
+                    <p>Complete the 5 W's organiser for Chapter 14 of <em>Two Wolves</em> using the spaces below. Then reflect on your Chapter 13 prediction.</p>
+                    <div class="five-ws-grid">
+                        <label>Who?
+                            <textarea class="ws-input" rows="2" placeholder="Who is involved in the events?"></textarea>
+                        </label>
+                        <label>What?
+                            <textarea class="ws-input" rows="2" placeholder="What happens in this chapter?"></textarea>
+                        </label>
+                        <label>Where?
+                            <textarea class="ws-input" rows="2" placeholder="Where do the key events occur?"></textarea>
+                        </label>
+                        <label>When?
+                            <textarea class="ws-input" rows="2" placeholder="When do these events take place?"></textarea>
+                        </label>
+                        <label>Why?
+                            <textarea class="ws-input" rows="2" placeholder="Why are these events important?"></textarea>
+                        </label>
+                    </div>
+                    <textarea class="answer-space" rows="3" placeholder="Was your Chapter 13 prediction correct? Explain why or why not."></textarea>
                 </div>
                 
                 <div class="question-group">
                     <div class="question">What did Ben discover on the recorded tape?</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
                 <div class="question-group">
-                    <div class="question">Why does Ben keep a notebook?</div>
-                    <div class="answer-space"></div>
+                    <div class="question">Why does Ben keep a journal?</div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
                 <div class="question-group">
                     <div class="question">What happened on Bens attempted rafting trip?</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
                 <div class="question-group">
                     <div class="question">What does Ben plan to do next?</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
             </section>
             
@@ -1577,8 +1751,8 @@
                 <p>Chapter summary</p>
                 <p>Ben's dad was creeping through the hills holding a rifle from the cabin. He reached down to grab his camera to record his father lurking in the hills. He wondered what his dad was hunting. Ben's dad shot an animal in the hills. Ben called out to his dad in shock. His father turned to face him. Ben's dad has fixed the rifle that was in the cabin to kill rabbits. Ben began to interrogate his father about why he does not like the forest and why they are not going to go home. His dad informs Ben that they are not going home and he is not sure where they will go to next. Ben confronts his father about the passports and asks if he had done something wrong. Ben's father asks him if he believes they are good people, which he confirms. He then suggests that they have not done anything wrong. Ben's dad kills a grey rabbit.</p>
                 
-                <div class="notebook-activity">
-                    <h4>Matching: For each difficult word or phrase, write the number of the matching definition.</h4>
+                <div class="writing-activity">
+                    <h4>Matching: For each difficult word or phrase, type the number of the matching definition in the box provided.</h4>
                     <table class="matching-table">
                         <thead>
                             <tr>
@@ -1588,61 +1762,91 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>_____interrogate</td>
+                                <td>
+                                    <input type="text" class="matching-input" inputmode="numeric" pattern="[0-9]*" aria-label="Match number for interrogate">
+                                    <span>interrogate</span>
+                                </td>
                                 <td>1: waiting (in a creepy way)</td>
                             </tr>
                             <tr>
-                                <td>_____suggests that</td>
+                                <td>
+                                    <input type="text" class="matching-input" inputmode="numeric" pattern="[0-9]*" aria-label="Match number for suggests that">
+                                    <span>suggests that</span>
+                                </td>
                                 <td>2: throw questions at</td>
                             </tr>
                             <tr>
-                                <td>_____confronts</td>
+                                <td>
+                                    <input type="text" class="matching-input" inputmode="numeric" pattern="[0-9]*" aria-label="Match number for confronts">
+                                    <span>confronts</span>
+                                </td>
                                 <td>3: angrily faces/stands up to</td>
                             </tr>
                             <tr>
-                                <td>_____lurking</td>
+                                <td>
+                                    <input type="text" class="matching-input" inputmode="numeric" pattern="[0-9]*" aria-label="Match number for lurking">
+                                    <span>lurking</span>
+                                </td>
                                 <td>4: hints that</td>
                             </tr>
                         </tbody>
                     </table>
+                    <textarea class="answer-space" rows="3" placeholder="Explain how these words connect to the chapter events."></textarea>
                 </div>
                 
-                <div class="notebook-activity">
-                    <h4>Modified Task: modified students can choose to work on their own or in a group of two</h4>
-                    <p>Complete a 5 W's circle diagram in your book based on chapter 14 of Two wolves. See the example below.</p>
+                <div class="writing-activity">
+                    <h4>Modified Task: collaborate or work solo.</h4>
+                    <p>Use the organiser below to capture the key 5 W's for Chapter 14 of <em>Two Wolves</em>.</p>
+                    <div class="five-ws-grid">
+                        <label>Who?
+                            <textarea class="ws-input" rows="2" placeholder="List the people involved."></textarea>
+                        </label>
+                        <label>What?
+                            <textarea class="ws-input" rows="2" placeholder="Summarise the action."></textarea>
+                        </label>
+                        <label>Where?
+                            <textarea class="ws-input" rows="2" placeholder="Note the setting."></textarea>
+                        </label>
+                        <label>When?
+                            <textarea class="ws-input" rows="2" placeholder="Indicate the timing."></textarea>
+                        </label>
+                        <label>Why?
+                            <textarea class="ws-input" rows="2" placeholder="Explain the motivation."></textarea>
+                        </label>
+                    </div>
                 </div>
                 
                 <div class="question-group">
                     <div class="question">What does Ben interrogate his father about and how does he do this?</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
                 <div class="question-group">
                     <div class="question">Is Ben's dad lying to him or is he telling him the truth? Use quotes from the text to support your answer.</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
             </section>
             
             <!-- Chapter 16 -->
             <section id="chapter16" class="chapter-section hidden">
-                <h2 class="chapter-title">Chapter 16: Notebook (pp. 111-120)</h2>
-                <p>Ben's Dad began to cut up the rabbit that he shot in the hills. Ben and his sister did not want to eat the rabbit. Olive hid in the cabin and claimed she was a vegetarian. Ben thought about why people eat meat. Ben's father asks him what he writes in the book. Ben suggests that he draws in the notebook that his Pop had given him. He believes that his father had always been jealous of his Pop as he had never had enough time to spend with him. Ben wrote in his notebook the imaginary detective scene between Ben Silver and Dario Savini. His father announces that lunch is ready. As they were eating lunch, Ben's dad snatched his notebook to look inside it. He had read the evidence that Ben had been collecting. Ben lunged at his father and tried to grab his notebook. His father took the notebook and refused to give it back to Ben.</p>
+                <h2 class="chapter-title">Chapter 16: Journal (pp. 111-120)</h2>
+                <p>Ben's Dad began to cut up the rabbit that he shot in the hills. Ben and his sister did not want to eat the rabbit. Olive hid in the cabin and claimed she was a vegetarian. Ben thought about why people eat meat. Ben's father asks him what he writes in the book. Ben suggests that he draws in the journal that his Pop had given him. He believes that his father had always been jealous of his Pop as he had never had enough time to spend with him. Ben wrote in his journal the imaginary detective scene between Ben Silver and Dario Savini. His father announces that lunch is ready. As they were eating lunch, Ben's dad snatched his journal to look inside it. He had read the evidence that Ben had been collecting. Ben lunged at his father and tried to grab his journal. His father took the journal and refused to give it back to Ben.</p>
                 
-                <div class="notebook-activity">
+                <div class="writing-activity">
                     <h4>Modified Task: modified students can choose to work on their own or in a group of two</h4>
                 </div>
                 
                 <div class="question-group">
                     <div class="question">Why do Ben, Olive and their mother not want to eat the 'charred' rabbit?</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
                 <div class="question-group">
-                    <div class="question">How did Ben react when his father took his notebook? Why do you think he reacted this way?</div>
-                    <div class="answer-space"></div>
+                    <div class="question">How did Ben react when his father took his journal? Why do you think he reacted this way?</div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
-                <div class="notebook-activity">
+                <div class="writing-activity">
                     <h4>What are some of the inferences that you made whilst reading the chapter? Complete the 'What Do I Think' table like the one below.</h4>
                     <table class="definition-table">
                         <thead>
@@ -1733,7 +1937,7 @@
                         </div>
                     </div>
                     <div class="true-false-item">
-                        <span>Ray's father snatched Ben's notebook</span>
+                        <span>Ray's father snatched Ben's journal</span>
                         <div class="true-false-options">
                             <label><input type="radio" name="tf10" value="true"> T</label>
                             <label><input type="radio" name="tf10" value="false"> F</label>
@@ -1749,27 +1953,27 @@
                 
                 <div class="question-group">
                     <div class="question">Why is Olive angry at their Mum?</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
                 <div class="question-group">
                     <div class="question">Why does Ben think they are locked in?</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
                 <div class="question-group">
                     <div class="question">What do we learn about Ben's family at home and the role that the TV plays in the family?</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
                 <div class="question-group">
                     <div class="question">How does Ben distract Olive?</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
                 <div class="cloze-activity">
-                    <h4>Cloze activity-fill in the blanks and copy the summary into your notebook.</h4>
-                    <p>Ben wakes from a nightmare of <span class="blank"></span> after falling from the raft to find that his parents are gone and he and Olive are locked into the cabin. Ben thinks that his parents have taken them <span class="blank"></span> because he found out they did not sell the <span class="blank"></span> and that the police wanted them for some reason. Olive is angry at their Mum for <span class="blank"></span> them behind because she is the better parent. Ben <span class="blank"></span> Olive by telling her a story.</p>
+                    <h4>Cloze activity – fill in the blanks directly in this summary.</h4>
+                    <p>Ben wakes from a nightmare of <span class="blank" contenteditable="true" role="textbox" aria-label="Fill in the blank"></span> after falling from the raft to find that his parents are gone and he and Olive are locked into the cabin. Ben thinks that his parents have taken them <span class="blank" contenteditable="true" role="textbox" aria-label="Fill in the blank"></span> because he found out they did not sell the <span class="blank" contenteditable="true" role="textbox" aria-label="Fill in the blank"></span> and that the police wanted them for some reason. Olive is angry at their Mum for <span class="blank" contenteditable="true" role="textbox" aria-label="Fill in the blank"></span> them behind because she is the better parent. Ben <span class="blank" contenteditable="true" role="textbox" aria-label="Fill in the blank"></span> Olive by telling her a story.</p>
                 </div>
             </section>
             
@@ -1780,21 +1984,21 @@
                 
                 <div class="question-group">
                     <div class="question">How do Ben and Olive interact with each other while inside the cabin?</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
                 <div class="question-group">
                     <div class="question">Why does Ben tell Olive that the trapdoor has to be their secret?</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
                 <div class="question-group">
                     <div class="question">When Ben hesitates about going down through the trapdoor, what does Olive call him? What does this reveal about Olive?</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
-                <div class="notebook-activity">
-                    <h4>Difficult words: you fill in the definitions and copy into your notebook:</h4>
+                <div class="writing-activity">
+                    <h4>Difficult words: type your definitions into the spaces provided.</h4>
                     <table class="definition-table">
                         <thead>
                             <tr>
@@ -1823,17 +2027,17 @@
                 
                 <div class="question-group">
                     <div class="question">How does Ben feel toward his mother?</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
                 <div class="question-group">
                     <div class="question">Why do you think his mother doesn't stand up to Ray?</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
                 <div class="question-group">
                     <div class="question">What do you think the headline Ben finds says?</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
             </section>
             
@@ -1844,12 +2048,12 @@
                 
                 <div class="question-group">
                     <div class="question">Why do you think Ben confronts his parents?</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
                 <div class="question-group">
                     <div class="question">What does Ray mean when he says that Ben should come back when he's a man?</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
             </section>
             
@@ -1860,12 +2064,12 @@
                 
                 <div class="question-group">
                     <div class="question">Do you think Ben's parents did the right thing by taking the money? Why? Why not?</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
                 <div class="question-group">
                     <div class="question">Do you think Ben is doing the right thing by running away?</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
                 <div class="true-false">
@@ -1930,17 +2134,17 @@
                 
                 <div class="question-group">
                     <div class="question">Why does Ben decide to run away?</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
                 <div class="question-group">
                     <div class="question">What do you think he will decide-to run away or to warn his family?</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
                 <div class="cloze-activity">
-                    <h4>Cloze activity-fill in the blanks and copy the summary into your notebook.</h4>
-                    <p>Ben lay flat on the cabin floor hiding from his mother as he <span class="blank"></span> trying to sneak out. His mother went back to sleep. Ben wished he could wait a bit <span class="blank"></span> but he couldn't deal with not knowing what would happen. Ben <span class="blank"></span> out of the cabin and tries to decide which way to go with the raft. He hears a <span class="blank"></span> sound and a radio and then shapes. Someone has found the cabin. He tries to decide whether he would run alone like the <span class="blank"></span> thief in his movie or would he go and warn his family?</p>
+                    <h4>Cloze activity – fill in the blanks directly in this summary.</h4>
+                    <p>Ben lay flat on the cabin floor hiding from his mother as he <span class="blank" contenteditable="true" role="textbox" aria-label="Fill in the blank"></span> trying to sneak out. His mother went back to sleep. Ben wished he could wait a bit <span class="blank" contenteditable="true" role="textbox" aria-label="Fill in the blank"></span> but he couldn't deal with not knowing what would happen. Ben <span class="blank" contenteditable="true" role="textbox" aria-label="Fill in the blank"></span> out of the cabin and tries to decide which way to go with the raft. He hears a <span class="blank" contenteditable="true" role="textbox" aria-label="Fill in the blank"></span> sound and a radio and then shapes. Someone has found the cabin. He tries to decide whether he would run alone like the <span class="blank" contenteditable="true" role="textbox" aria-label="Fill in the blank"></span> thief in his movie or would he go and warn his family?</p>
                 </div>
             </section>
             
@@ -1951,15 +2155,15 @@
                 
                 <div class="question-group">
                     <div class="question">Why does Ben hesitate about joining his parents?</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
                 <div class="question-group">
                     <div class="question">Does Ben still think he can achieve his dream of being a police officer? Why? Why not?</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
-                <div class="notebook-activity">
+                <div class="writing-activity">
                     <h4>Quiz: For each difficult word or phrase, circle the correct definition.</h4>
                     <div class="question">1. seek to find:</div>
                     <div class="option">
@@ -2058,22 +2262,22 @@
                 
                 <div class="question-group">
                     <div class="question">Why does Ben not run after his parents?</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
                 <div class="question-group">
                     <div class="question">Why do he and Olive launch the raft?</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
                 <div class="question-group">
                     <div class="question">What happens when they reach the waterfall?</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
                 <div class="cloze-activity">
-                    <h4>Cloze activity-fill in the blanks and copy the summary into your notebook.</h4>
-                    <p>The police officers see Ben and Olive and start <span class="blank"></span> them. Ben runs down to the raft and <span class="blank"></span> it, helping Olive get onto the raft. Olive holds the bag of money and Bonzo as Ben <span class="blank"></span> the raft away from the searching lights. He hears a shot and doesn't know if the police are <span class="blank"></span> at him and Olive? They reach a small waterfall and he's not sure if the raft will survive the fall, but he also feels it is <span class="blank"></span> to return and give themselves up and give their parents up. The raft sinks under the water with Ben and Olive. The raft floats back to the <span class="blank"></span> and they drift down the river. Ben can still see the police officers calling torches <span class="blank"></span> the darkness. They hear shots again. Ben prays for his family and him and Olive and hopes that they would all be okay.</p>
+                    <h4>Cloze activity – fill in the blanks directly in this summary.</h4>
+                    <p>The police officers see Ben and Olive and start <span class="blank" contenteditable="true" role="textbox" aria-label="Fill in the blank"></span> them. Ben runs down to the raft and <span class="blank" contenteditable="true" role="textbox" aria-label="Fill in the blank"></span> it, helping Olive get onto the raft. Olive holds the bag of money and Bonzo as Ben <span class="blank" contenteditable="true" role="textbox" aria-label="Fill in the blank"></span> the raft away from the searching lights. He hears a shot and doesn't know if the police are <span class="blank" contenteditable="true" role="textbox" aria-label="Fill in the blank"></span> at him and Olive? They reach a small waterfall and he's not sure if the raft will survive the fall, but he also feels it is <span class="blank" contenteditable="true" role="textbox" aria-label="Fill in the blank"></span> to return and give themselves up and give their parents up. The raft sinks under the water with Ben and Olive. The raft floats back to the <span class="blank" contenteditable="true" role="textbox" aria-label="Fill in the blank"></span> and they drift down the river. Ben can still see the police officers calling torches <span class="blank" contenteditable="true" role="textbox" aria-label="Fill in the blank"></span> the darkness. They hear shots again. Ben prays for his family and him and Olive and hopes that they would all be okay.</p>
                 </div>
             </section>
             
@@ -2082,14 +2286,31 @@
                 <h2 class="chapter-title">Chapter 25 - Hope</h2>
                 <p>Ben wakes up to the sound of a police helicopter. He decides that he and Olive should hide from it instead of drawing attention to themselves. He gets Olive to cooperate by pretending that they are criminals on the run. The helicopter moves away, leaving Ben and Olive alone in the bush.</p>
                 
-                <div class="notebook-activity">
-                    <h4>Complete a 5 W's circle diagram in your book based on chapter 25 of Two wolves. See the example below.</h4>
-                    <p>Write one prediction about what you think will happen to Ben and Olive after the helicopter leaves?</p>
+                <div class="writing-activity">
+                    <h4>Complete the 5 W's organiser for Chapter 25 of <em>Two Wolves</em>.</h4>
+                    <div class="five-ws-grid">
+                        <label>Who?
+                            <textarea class="ws-input" rows="2" placeholder="Who is involved in this part of the story?"></textarea>
+                        </label>
+                        <label>What?
+                            <textarea class="ws-input" rows="2" placeholder="What actions take place?"></textarea>
+                        </label>
+                        <label>Where?
+                            <textarea class="ws-input" rows="2" placeholder="Where does the scene happen?"></textarea>
+                        </label>
+                        <label>When?
+                            <textarea class="ws-input" rows="2" placeholder="When do these events occur?"></textarea>
+                        </label>
+                        <label>Why?
+                            <textarea class="ws-input" rows="2" placeholder="Why are the characters making these choices?"></textarea>
+                        </label>
+                    </div>
+                    <textarea class="answer-space" rows="3" placeholder="Predict what might happen to Ben and Olive after the helicopter leaves."></textarea>
                 </div>
                 
                 <div class="question-group">
                     <div class="question">How does Ben get Olive to cooperate with hiding from the police?</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
             </section>
             
@@ -2098,8 +2319,8 @@
                 <h2 class="chapter-title">Chapter 26 - Stuck</h2>
                 <p>After the police helicopter flies away, Ben and Olive are alone in the wilderness. Ben contemplates which way to go next, but feels stuck. He and Olive have no food to eat; they pool their resources but come up with nothing useful. After trying a hard green fig which was lying on the ground, Ben announces that they need to go and find food.</p>
                 
-                <div class="notebook-activity">
-                    <h4>Matching: For each difficult word or phrase, write the number of the matching definition and copy into your notebook:</h4>
+                <div class="writing-activity">
+                    <h4>Matching: For each difficult word or phrase, type the number of the matching definition in the box provided.</h4>
                     <table class="matching-table">
                         <thead>
                             <tr>
@@ -2109,27 +2330,43 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>_____array</td>
+                                <td>
+                                    <input type="text" class="matching-input" inputmode="numeric" pattern="[0-9]*" aria-label="Match number for array">
+                                    <span>array</span>
+                                </td>
                                 <td>1: knotty and twisted-up</td>
                             </tr>
                             <tr>
-                                <td>_____relentless</td>
+                                <td>
+                                    <input type="text" class="matching-input" inputmode="numeric" pattern="[0-9]*" aria-label="Match number for relentless">
+                                    <span>relentless</span>
+                                </td>
                                 <td>2: animal-like</td>
                             </tr>
                             <tr>
-                                <td>_____gnarled</td>
+                                <td>
+                                    <input type="text" class="matching-input" inputmode="numeric" pattern="[0-9]*" aria-label="Match number for gnarled">
+                                    <span>gnarled</span>
+                                </td>
                                 <td>3: organized row</td>
                             </tr>
                             <tr>
-                                <td>_____savage</td>
+                                <td>
+                                    <input type="text" class="matching-input" inputmode="numeric" pattern="[0-9]*" aria-label="Match number for savage">
+                                    <span>savage</span>
+                                </td>
                                 <td>4: calling (like a bird)</td>
                             </tr>
                             <tr>
-                                <td>_____cawing</td>
+                                <td>
+                                    <input type="text" class="matching-input" inputmode="numeric" pattern="[0-9]*" aria-label="Match number for cawing">
+                                    <span>cawing</span>
+                                </td>
                                 <td>5: unstoppable</td>
                             </tr>
                         </tbody>
                     </table>
+                    <textarea class="answer-space" rows="3" placeholder="Use this space to create sentences with the matched words."></textarea>
                 </div>
             </section>
             
@@ -2140,22 +2377,22 @@
                 
                 <div class="question-group">
                     <div class="question">Identify at least two sentences that help to create a sense of fear in this chapter.</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
                 <div class="question-group">
                     <div class="question">List at least three adjectives from p. 201 that the author has used to describe how Ben is feeling physically in this chapter.</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
                 <div class="question-group">
                     <div class="question">Compare Ben's descriptions of his life:</div>
                     <p>At home</p>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                     <p>In the cabin</p>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                     <p>In the wilderness</p>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
             </section>
             
@@ -2166,20 +2403,20 @@
                 
                 <div class="question-group">
                     <div class="question">Why does Ben decide to go upstream instead of downstream? (p. 204)</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
                 <div class="question-group">
                     <div class="question">Do Olive and Ben believe that Uncle Chris knew about their father's scheme? Give evidence from the text to support your answer.</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
                 <div class="question-group">
                     <div class="question">'He had taken the money and run with it. What did that say about him?' Do you think that Ben is 'dodgy', just like his Dad and Uncle Chris?</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
-                <div class="notebook-activity">
+                <div class="writing-activity">
                     <h4>Quiz: For each difficult word or phrase, circle the correct definition.</h4>
                     <div class="question">1. wilderness:</div>
                     <div class="option">
@@ -2334,21 +2571,21 @@
                 
                 <div class="question-group">
                     <div class="question">What happens when Ben drops money from the bag?</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
                 <div class="question-group">
                     <div class="question">How does Ben take care of Olive in this chapter?</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
                 <div class="question-group">
                     <div class="question">Look at the description of Olive on p. 209. How does the way Olive looks contrast with the way Ben is feeling?</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
-                <div class="notebook-activity">
-                    <h4>Difficult words: you fill in the definitions and copy into your notebook:</h4>
+                <div class="writing-activity">
+                    <h4>Difficult words: type your definitions into the spaces provided.</h4>
                     <table class="definition-table">
                         <thead>
                             <tr>
@@ -2381,27 +2618,27 @@
                 
                 <div class="question-group">
                     <div class="question">Why is Ben not happy even though he has so much money?</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
                 <div class="question-group">
                     <div class="question">Find 10 words from Ch. 30 that describe Ben and Olive's physical state.</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
                 <div class="question-group">
                     <div class="question">Find 5 words from Ch. 30 that describe Ben and Olive's mental state.</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
                 <div class="question-group">
                     <div class="question">Infer: Why did Olive get very ill and Ben did not?</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
                 <div class="question-group">
                     <div class="question">Use prior knowledge: What will kill a person first, thirst or hunger?</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
             </section>
             
@@ -2412,27 +2649,27 @@
                 
                 <div class="question-group">
                     <div class="question">Infer: Exactly why was it such a big deal to Ben that he saw a pine tree? (p 221)</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
                 <div class="question-group">
                     <div class="question">Ben says of his father 'He was a wrecker.' (p 223) What does Ben mean (a) literally and (b) inferentially?</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
                 <div class="question-group">
                     <div class="question">'No more bad choices' How is Ben changing? What is he fearful of?</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
                 <div class="question-group">
                     <div class="question">Predict: Ben took out a shovel. Why do you think he did that?</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
                 <div class="cloze-activity">
-                    <h4>Cloze activity-fill in the blanks and copy the summary into your notebook.</h4>
-                    <p>Olive is unconscious and <span class="blank"></span> and Ben fears that she is dead. He finds the creek that is near his Pop's cabin. Ben thought of the police <span class="blank"></span> and he wished he had not been so stupid, had not hidden from the police and almost killed his sister. Ben reached the cabin and <span class="blank"></span> he would hand over the money to the police and tell them everything, but there is no one at the cabin. He lays Olive on the workbench and that night he sleeps on the floor and dreams about the <span class="blank"></span> yard. They ate from food they had thrown into the plastic bin and <span class="blank"></span> water. Ben was no longer afraid of the dark or of the night noises. Ben wrote a list about what might happen when they made it back to Nan's. He knew he had to be careful and make a good choice. Ben makes a <span class="blank"></span> that he cannot write down or tell anyone. He takes a shovel and goes outside.</p>
+                    <h4>Cloze activity – fill in the blanks directly in this summary.</h4>
+                    <p>Olive is unconscious and <span class="blank" contenteditable="true" role="textbox" aria-label="Fill in the blank"></span> and Ben fears that she is dead. He finds the creek that is near his Pop's cabin. Ben thought of the police <span class="blank" contenteditable="true" role="textbox" aria-label="Fill in the blank"></span> and he wished he had not been so stupid, had not hidden from the police and almost killed his sister. Ben reached the cabin and <span class="blank" contenteditable="true" role="textbox" aria-label="Fill in the blank"></span> he would hand over the money to the police and tell them everything, but there is no one at the cabin. He lays Olive on the workbench and that night he sleeps on the floor and dreams about the <span class="blank" contenteditable="true" role="textbox" aria-label="Fill in the blank"></span> yard. They ate from food they had thrown into the plastic bin and <span class="blank" contenteditable="true" role="textbox" aria-label="Fill in the blank"></span> water. Ben was no longer afraid of the dark or of the night noises. Ben wrote a list about what might happen when they made it back to Nan's. He knew he had to be careful and make a good choice. Ben makes a <span class="blank" contenteditable="true" role="textbox" aria-label="Fill in the blank"></span> that he cannot write down or tell anyone. He takes a shovel and goes outside.</p>
                 </div>
             </section>
             
@@ -2443,12 +2680,12 @@
                 
                 <div class="question-group">
                     <div class="question">'Things could not rattle him so easily' (p 228) What does this quote tell the reader about Ben's character?</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
                 <div class="question-group">
                     <div class="question">Would the 'old' Ben have hitchhiked? Why / Why not?</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
             </section>
             
@@ -2459,12 +2696,12 @@
                 
                 <div class="question-group">
                     <div class="question">Locate: What two lines on page 36 show that Olive is recovering?</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
                 <div class="question-group">
                     <div class="question">'Most of them looked broken in some way' (p 235). What does Ben mean? How are they 'broken'?</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
             </section>
             
@@ -2475,7 +2712,7 @@
                 
                 <div class="question-group">
                     <div class="question">Does Ben want his parents to return? Justify your response.</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
                 <div class="true-false">
@@ -2553,17 +2790,17 @@
                 
                 <div class="question-group">
                     <div class="question">Why does Ben think he has never loved and hated a hug so much when his mother hugs him?</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
                 <div class="question-group">
                     <div class="question">Who is Ben more afraid of?</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
                 <div class="question-group">
                     <div class="question">Why does Ben hesitate in telling his father about the money?</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
             </section>
             
@@ -2574,17 +2811,17 @@
                 
                 <div class="question-group">
                     <div class="question">What is the movie that Ben is working on?</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
                 <div class="question-group">
                     <div class="question">Why is he dismantling the shed? What does it represent to Ben?</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
                 <div class="question-group">
                     <div class="question">What secret will Ben have to reveal if things don't go Mum's way?</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
             </section>
             
@@ -2595,17 +2832,17 @@
                 
                 <div class="question-group">
                     <div class="question">Why does Ben want to give the money back? Why does he think about keeping it?</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
                 <div class="question-group">
                     <div class="question">Why is it important for him to give back the money?</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
                 <div class="question-group">
                     <div class="question">Who is the man who is holding the bag? What are the clues?</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
             </section>
             
@@ -2616,17 +2853,17 @@
                 
                 <div class="question-group">
                     <div class="question">How has Ben changed from a year ago? Think about the physical and mental changes.</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
                 <div class="question-group">
                     <div class="question">How has his mother changed since she was with Ray?</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
                 <div class="question-group">
                     <div class="question">How has Ben released the wolf within him from captivity?</div>
-                    <div class="answer-space"></div>
+                    <textarea class="answer-space" rows="4" placeholder="Type your response here..."></textarea>
                 </div>
                 
                 <div class="multiple-choice">
