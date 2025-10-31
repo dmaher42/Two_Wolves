@@ -142,6 +142,53 @@
             background-color: #27ae60;
         }
 
+        .save-notification {
+            position: fixed;
+            right: 24px;
+            bottom: 24px;
+            padding: 0.85rem 1.25rem;
+            border-radius: 12px;
+            background-color: var(--success-color);
+            color: #ffffff;
+            box-shadow: 0 12px 30px rgba(34, 48, 70, 0.18);
+            font-weight: 600;
+            opacity: 0;
+            transform: translateY(12px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            pointer-events: none;
+            z-index: 2000;
+        }
+
+        .save-notification.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .save-notification.warning {
+            background-color: var(--warning-color);
+        }
+
+        .save-notification.error {
+            background-color: var(--accent-color);
+        }
+
+        .save-notification.success {
+            background-color: var(--success-color);
+        }
+
+        .restored-highlight {
+            animation: restoreFlash 2s ease-out;
+        }
+
+        @keyframes restoreFlash {
+            from {
+                background-color: #fff3cd;
+            }
+            to {
+                background-color: transparent;
+            }
+        }
+
         .content-layout {
             display: grid;
             grid-template-columns: 280px 1fr;
@@ -2939,7 +2986,247 @@
         </div>
     </footer>
 
+    <div id="saveNotification" class="save-notification" role="status" aria-live="polite" aria-atomic="true">
+        Answers saved!
+    </div>
+
     <script>
+        const STORAGE_KEY = 'two-wolves-chapter-answers-v1';
+        const saveNotification = document.getElementById('saveNotification');
+        const textInputSelector = 'textarea, input[type="text"], input[type="number"], input[type="email"], input[type="tel"], input[type="url"]';
+        const radioSelector = 'input[type="radio"]';
+        let saveTimer;
+        let notificationTimer;
+        let storageWarningShown = false;
+
+        const storageEnabled = (() => {
+            try {
+                const testKey = '__tw-storage-test__';
+                localStorage.setItem(testKey, '1');
+                localStorage.removeItem(testKey);
+                return true;
+            } catch (error) {
+                console.warn('Local storage is unavailable', error);
+                return false;
+            }
+        })();
+
+        const ensureInputIdentifiers = () => {
+            document.querySelectorAll('.chapter-section').forEach((section) => {
+                section.querySelectorAll('textarea').forEach((textarea, index) => {
+                    if (!textarea.id) {
+                        textarea.id = `${section.id}-textarea-${index + 1}`;
+                    }
+                    if (!textarea.name) {
+                        textarea.name = textarea.id;
+                    }
+                    textarea.dataset.storageKey = textarea.id;
+                });
+
+                section
+                    .querySelectorAll('input[type="text"], input[type="number"], input[type="email"], input[type="tel"], input[type="url"]')
+                    .forEach((input, index) => {
+                        if (!input.id) {
+                            input.id = `${section.id}-input-${index + 1}`;
+                        }
+                        if (!input.name) {
+                            input.name = input.id;
+                        }
+                        input.dataset.storageKey = input.id;
+                    });
+
+                section.querySelectorAll('input[type="radio"]').forEach((radio, index) => {
+                    if (!radio.id) {
+                        radio.id = `${section.id}-${radio.name || 'choice'}-${index + 1}`;
+                    }
+                    if (!radio.value || radio.value === 'on') {
+                        radio.value = radio.id;
+                    }
+                });
+            });
+        };
+
+        const applyRestoreEffect = (element) => {
+            if (!element) {
+                return;
+            }
+            element.classList.add('restored-highlight');
+            window.setTimeout(() => element.classList.remove('restored-highlight'), 2000);
+        };
+
+        const showSaveNotification = (message, type = 'success') => {
+            if (!saveNotification) {
+                return;
+            }
+
+            saveNotification.textContent = message;
+            saveNotification.classList.remove('success', 'warning', 'error');
+            saveNotification.classList.add(type);
+            saveNotification.classList.add('show');
+
+            if (notificationTimer) {
+                window.clearTimeout(notificationTimer);
+            }
+            notificationTimer = window.setTimeout(() => {
+                saveNotification.classList.remove('show');
+            }, 3000);
+        };
+
+        const saveProgress = (contextElement) => {
+            if (!storageEnabled) {
+                return false;
+            }
+            try {
+                const existingData = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+                let sections = contextElement
+                    ? [contextElement.closest('.chapter-section')].filter(Boolean)
+                    : Array.from(document.querySelectorAll('.chapter-section'));
+                if (!sections.length) {
+                    sections = Array.from(document.querySelectorAll('.chapter-section'));
+                }
+
+                sections.forEach((section) => {
+                    section.querySelectorAll(textInputSelector).forEach((input) => {
+                        const key = input.dataset.storageKey || input.id || input.name;
+                        if (key) {
+                            existingData[key] = input.value;
+                        }
+                    });
+
+                    const radioNames = new Set();
+                    section.querySelectorAll(radioSelector).forEach((radio) => {
+                        if (radio.name) {
+                            radioNames.add(radio.name);
+                        }
+                    });
+                    radioNames.forEach((name) => {
+                        const checked = section.querySelector(`input[type="radio"][name="${name}"]:checked`);
+                        existingData[`radio:${name}`] = checked ? checked.value : '';
+                    });
+                });
+
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(existingData));
+                return true;
+            } catch (error) {
+                console.error('Failed to save answers', error);
+                return false;
+            }
+        };
+
+        const loadProgress = () => {
+            if (!storageEnabled) {
+                return 0;
+            }
+            try {
+                const raw = localStorage.getItem(STORAGE_KEY);
+                if (!raw) {
+                    return 0;
+                }
+                const data = JSON.parse(raw);
+                let restored = 0;
+
+                Object.entries(data).forEach(([key, value]) => {
+                    if (key.startsWith('radio:')) {
+                        const name = key.slice(6);
+                        const radios = Array.from(document.getElementsByName(name)).filter((element) =>
+                            element instanceof HTMLInputElement && element.type === 'radio'
+                        );
+                        let matched = false;
+                        radios.forEach((radio) => {
+                            if (value && radio.value === value) {
+                                radio.checked = true;
+                                applyRestoreEffect(radio.closest('label') || radio);
+                                matched = true;
+                            } else if (!value) {
+                                radio.checked = false;
+                            }
+                        });
+                        if (matched) {
+                            restored += 1;
+                        }
+                    } else {
+                        const input = document.getElementById(key);
+                        if (input) {
+                            input.value = value;
+                            applyRestoreEffect(input);
+                            restored += 1;
+                        }
+                    }
+                });
+
+                return restored;
+            } catch (error) {
+                console.error('Failed to load saved answers', error);
+                return 0;
+            }
+        };
+
+        const scheduleSave = (contextElement) => {
+            if (!storageEnabled) {
+                if (!storageWarningShown) {
+                    showSaveNotification('Saving is unavailable in this browser.', 'error');
+                    storageWarningShown = true;
+                }
+                return;
+            }
+
+            if (saveTimer) {
+                window.clearTimeout(saveTimer);
+            }
+
+            saveTimer = window.setTimeout(() => {
+                const success = saveProgress(contextElement);
+                if (success) {
+                    showSaveNotification('Progress saved!');
+                } else {
+                    showSaveNotification('Unable to save your answers.', 'error');
+                }
+            }, 800);
+        };
+
+        ensureInputIdentifiers();
+
+        if (!storageEnabled && !storageWarningShown) {
+            showSaveNotification('Saving is unavailable in this browser.', 'error');
+            storageWarningShown = true;
+        }
+
+        document.addEventListener('input', (event) => {
+            if (event.target.matches(textInputSelector) && event.target.closest('.chapter-section')) {
+                scheduleSave(event.target);
+            }
+        });
+
+        document.addEventListener('change', (event) => {
+            if (event.target.matches(radioSelector) && event.target.closest('.chapter-section')) {
+                scheduleSave(event.target);
+            }
+        });
+
+        document.addEventListener('keydown', (event) => {
+            const key = typeof event.key === 'string' ? event.key.toLowerCase() : '';
+            if ((event.ctrlKey || event.metaKey) && key === 's') {
+                event.preventDefault();
+                if (storageEnabled) {
+                    const success = saveProgress(document.activeElement);
+                    if (success) {
+                        showSaveNotification('Progress saved!');
+                    } else {
+                        showSaveNotification('Unable to save your answers.', 'error');
+                    }
+                } else if (!storageWarningShown) {
+                    showSaveNotification('Saving is unavailable in this browser.', 'error');
+                    storageWarningShown = true;
+                }
+            }
+        });
+
+        window.addEventListener('beforeunload', () => {
+            if (storageEnabled) {
+                saveProgress();
+            }
+        });
+
         const menuToggle = document.querySelector('.mobile-menu');
         const siteNav = document.querySelector('.site-header nav');
         if (menuToggle && siteNav) {
@@ -2962,6 +3249,12 @@
         const chapterSelectButton = document.getElementById('chapterSelectButton');
         const sidebarToggle = document.querySelector('.sidebar-toggle');
         const chapterNav = document.getElementById('chapterNav');
+
+        const restoredCount = loadProgress();
+        if (restoredCount > 0) {
+            const message = `Restored ${restoredCount} saved answer${restoredCount === 1 ? '' : 's'}.`;
+            showSaveNotification(message);
+        }
 
         const hasChapter = (chapterId) =>
             Boolean(chapterId && chapterSections.some((section) => section.id === chapterId));
